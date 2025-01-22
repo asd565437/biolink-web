@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    overflow: hidden;
+}
+
+#container {
+    width: 100%;
+    margin: 0 auto;
+    background-image: url("../world/world_bg.svg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.logos {
+    width: 10%;
+    position: absolute;
+    top: 5%;
+    left: 4%;
+    cursor: pointer;
+}
+
+.symbiosis {
+    width: 8.5%;
+    position: absolute;
+    top: 4.5%;
+    left: 64.2%;
+}
+
+.show {
+    width: 4.5%;
+    position: absolute;
+    top: 4.9%;
+    left: 74.5%;
+}
+
+.game {
+    width: 7.5%;
+    position: absolute;
+    top: 4.9%;
+    left: 81%;
+}
+
+/* .strain {
+    width: 31%;
+    position: absolute;
+    top: 20%;
+    left: 43%;
+} */

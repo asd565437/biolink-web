@@ -1,0 +1,78 @@
+/* 背景设置 */
+.showcase {
+  background-image: url("../showcase/showcase_bg.svg");
+  /* 使用相对路径 */
+  background-size: cover;
+  background-position: center;
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+}
+
+/* 内容容器 */
+.showcase-content {
+  position: relative;
+  padding-top: 60px;
+  /* 确保内容在 Header 下方 */
+  /* max-height: calc(100vh); */
+  /* 保证内容区域不会超出页面 */
+  box-sizing: border-box;
+  /* 包括内边距 */
+  left: 20%;
+  bottom: 5%;
+}
+
+.overlay-image img {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  scale: 1.4;
+  z-index: 400;
+}
+
+.overlay-image2 img {
+  position: absolute;
+  top: 14.3%;
+  left: 7.3%;
+  transform: scale3d(0.72, 0.77, 1);
+  z-index: 500;
+}
+
+/* 标题样式 */
+.title {
+  font-size: 72px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+/* 按钮样式 */
+.footer {
+  position: absolute;
+  width: 100%;
+  /* 图片宽度 */
+  height: 100;
+  /* 图片高度 */
+  z-index: 5;
+}
+
+@media (min-width: 1025px) {
+  .showcase {
+    height: 100vh;
+  }
+
+  .showcase-content {
+    max-height: calc(100vh);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow-y: scroll;
+  }
+}

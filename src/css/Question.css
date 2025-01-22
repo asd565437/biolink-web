@@ -1,0 +1,92 @@
+.question {
+    background-image: url("../question/question_bg.svg");
+    /* 背景图片 */
+    background-size: cover;
+    /* 背景填充模式 */
+    background-color: #0F0F1A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    /* 确保子元素的 absolute 生效 */
+    z-index: 0;
+    height: 100vh;
+    /* 确保页面高度与视口一致 */
+    width: 100%;
+    /* 父容器寬度 */
+}
+
+.back {
+    position: fixed;
+    top: 100px;
+    left: 30px;
+    z-index: 5;
+}
+
+.backQuestion {
+    position: fixed;
+    bottom: 50px;
+    z-index: 5;
+}
+
+.progress-bar {
+    position: fixed;
+    top: 100px;
+}
+
+.row {
+    display: flex;
+    justify-content: center; /* 使 A 和 B 選項分佈在兩側 */
+    width: 60%;
+    margin: 75px 0; 
+    align-items: center; /* 保證選項圖片在父容器中垂直居中 */
+}
+
+.col-6 {
+    flex: 1; /* 使 A 和 B 在每一列中有相同的寬度 */
+    max-width: 100%; /* 限制最大寬度 */
+    padding: 5px; /* 使內部內容不會粘邊 */
+    display: flex; /* 使用 flexbox 來確保垂直居中 */
+    justify-content: center; /* 保證圖片在水平方向居中 */
+    min-height: 100px; /* 保證每個選項區域的高度一致，這裡可以根據需要調整 */
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    top: -50px;
+}
+
+.content h1 {
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+button{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 320px;
+    height: 100px;
+    border: 0;
+    color: #ffffff;
+    font-weight: bold;   
+    font-size: 24px;
+    text-align: center;
+}
+
+button:disabled {
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+}
+
+.button-default {
+    background-image: url('../question/question_no\ push_btn.svg');
+}
+
+.button-selected {
+    background-image: url('../question/question_push _btn.svg');
+}

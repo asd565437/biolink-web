@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    overflow: hidden;
+}
+
+#container{
+    width: 100%;
+    margin: 0 auto;
+    background-image: url("../home/home_bg.svg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+/* .bg {
+    width: 100vw;
+    height: 100vh;
+} */
+
+
+.logo {
+    width: 25%;
+    position: absolute;
+    top: 53%;
+    left: 6%;
+}
+
+.text {
+    width: 35%;
+    position: absolute;
+    top: 66%;
+    left: 6%;
+}
+
+.login {
+    width: 6%;
+    position: absolute;
+    top: 5%;
+    left: 91%;
+}
+
+.go {
+    width: 10%;
+    position: absolute;
+    top: 91%;
+    left: 86%;
+    cursor: pointer;
+}
+
+/*不知道為甚麼辦但目前失敗的RWD*/
+/* .bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -999;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+    .bg {
+        background-position: center top;
+    }
+}
+
+@media (min-width: 1025px) {
+    .bg {
+        background-position: center;
+    }
+} */

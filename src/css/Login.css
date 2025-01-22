@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 背景樣式 */
+.login-container {
+    background-image: url("/src/assets/bg\(登入\).png");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+}
+
+/* Logo */
+.login-logo {
+    position: absolute;
+    top: 5vh;
+    left: 5vh;
+}
+
+.login-logo img {
+    width: 150px;
+}
+
+/* 白色遮罩 */
+.login-box-login {
+    background-image: url("/src/assets/bg\（透明框\）.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: contain;
+
+    height: 750px;
+    width: 700px;
+    scale: 0.75;
+}
+
+.login-box-login img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.login_text{
+    position: absolute;
+    top: 5vh;
+}
+
+/* 輸入框 */
+.input-container-login {
+    position: relative;
+    top: 80px;
+}
+
+.input-container-login img {
+    position: absolute;
+    top: 27.5%;
+    left: 17.5%;
+    transform: translateY(-50%);
+    width: 150px;
+    scale: 0.45;
+    width: 100px;
+    height: 100px;
+    margin-right: 10px; /* Icon 和文字之間的距離 */
+} 
+
+#LoginPasswordEye{
+    transform: translateX(800px) translateY(-50px) scale(0.75); 
+}
+
+.input-container-login input{
+    border: none !important;
+    outline: none;
+    font-size: 32px !important;
+    height: 109.5px;
+    width: 100%;
+    scale: 0.68;
+    background-image: url("/src/assets/訊息的框.png") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: #ffffff00 !important;
+    text-indent: 20%;
+    color: #ffffff !important;
+}
+
+input::placeholder{
+    color: #ffffff;
+    text-indent: 20%;
+}
+
+/* 記住帳號 和 忘記密碼 */
+.rememberOforgot {
+    display: flex;
+    position: relative;
+    /* margin-top: 30px; */
+    /* font-size: 14px; */
+    top: 45px;
+}
+
+#remember {
+    position: relative;
+    scale: 0.18;
+    left: -130px;
+}
+
+/* #forgot {
+    position: relative;
+    scale: 0.25;
+    left: -30px;
+    margin-top: -5px;
+} */
+
+/* 登入/註冊按鈕 */
+.button-login {
+    width: 100%;
+    scale: 0.7;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* 其他登入方式 */
+.other-login-login {
+    scale: 0.8;
+}
+
+.other-login-icons-login {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.other-login-icons-login img {
+    width: 70px;
+    cursor: pointer;
+    margin: 0px 25px;
+}
+
+/*登入*/
+.register{
+    scale: 0.25;
+    margin-top: -20px;
+}
+
+

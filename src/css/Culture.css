@@ -1,0 +1,35 @@
+.culture {
+  background-image: url("../culture/culture_bg01.svg"); /* 背景图片 */
+  background-size: cover; /* 背景填充模式 */
+  background-color: #0F0F1A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative; /* 确保子元素的 absolute 生效 */
+  z-index: 0;
+  height: 100vh; /* 确保页面高度与视口一致 */
+  width: 100%; /* 父容器寬度 */
+}
+
+
+.bg2 {
+  position: absolute;
+  bottom: 0; /* 紧贴底部 */
+  left: 50%; /* 水平居中 */
+  transform: translate(-50%,20%) ; /* 修正水平居中的偏移 */
+  width: 100%;
+  z-index: 0;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* 占滿父容器寬度 */
+  height: 100%; /* 占滿父容器高度 */
+  position: relative;
+}

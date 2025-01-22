@@ -1,0 +1,44 @@
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { DataProvider } from './DataContext'; // 引入 DataProvider
+import Showcase from './js/Showcase';
+import Friend from './js/Friend';
+import Culture from './js/Culture';
+import Question from './js/Question';
+import Reward from './js/Reward';
+import Home from './pages/Home';
+import World from './pages/World';
+import Login from './Login';
+import Register from './Register';
+
+function App() {
+    const [headerImages, setHeaderImages] = useState([
+        'world_btn.png', 
+        'wall_ul_btn.png', 
+        'culture_btn.png'
+    ]); // 默认图片数组
+    const [title, setTitle] = useState('展示牆');
+
+    useEffect(() => {
+        document.title = title;
+    }, [title]);
+    return (
+        <DataProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/wall" element={<Showcase setHeaderImages={setHeaderImages}/>} />
+                    <Route path="/friend" element={<Friend setHeaderImages={setHeaderImages}/>} />
+                    <Route path="/culture" element={<Culture setHeaderImages={setHeaderImages}/>} />
+                    <Route path="/question" element={<Question setHeaderImages={setHeaderImages}/>} />
+                    <Route path="/reward" element={<Reward />} />
+                    <Route path="/world" element={<World setHeaderImages={setHeaderImages}/>} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                </Routes>
+            </Router>
+        </DataProvider>
+    );
+}
+
+export default App;
