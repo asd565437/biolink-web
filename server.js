@@ -1,18 +1,20 @@
 const express = require('express');
-const cors = require('cors'); // 引入 cors 中间件
+const cors = require('cors');
 const { initDb } = require('./db');
 const routes = require('./routes');
 const { Server } = require('socket.io');
 const http = require('http');
-const path = require('path'); // 引入 path 模块
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
-const server = http.createServer(app); // 使用 https 创建服务器
-const io = new Server(server); // 创建 Socket.IO 服务器
 const PORT = process.env.PORT || 5000;
 
-// 使用 cors 中间件
-app.use(cors());
+// CORS 配置
+app.use(cors({
+  origin: 'https://biolink-app.onrender.com', // 替换为前端域名
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 
 // 中间件
 app.use(express.json());
@@ -20,18 +22,25 @@ app.use(express.json());
 // 初始化数据库
 initDb();
 
-// 加载路由
+// 路由配置
 app.use('/api', routes);
 
-// 配置 React 应用的静态文件
-app.use(express.static(path.join(__dirname, 'client/build')));
+// React 静态文件
+const staticPath = path.join(__dirname, 'client/build');
+if (fs.existsSync(staticPath)) {
+  app.use(express.static(staticPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(staticPath, 'index.html'));
+  });
+} else {
+  console.error('Static files not found. Ensure React app is built.');
+}
 
-// 当访问未匹配的路由时，返回 React 应用的 index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
+// 启用 HTTP 或 HTTPS
+const server = http.createServer(app); // 如果需要 HTTPS，改为 https.createServer
 
-// Socket.IO 事件处理
+// Socket.IO 配置
+const io = new Server(server);
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
 
