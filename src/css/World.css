@@ -4,7 +4,7 @@
 }
 
 #container {
-    width: 100%;
+    width: 100vw;
     margin: 0 auto;
     background-image: url("../world/world_bg.svg");
     background-size: cover;
@@ -16,6 +16,7 @@
     align-items: center;
     text-align: center;
     position: relative;
+    overflow: visible;
 }
 
 .logos {
@@ -47,9 +48,8 @@
     left: 81%;
 }
 
-/* .strain {
-    width: 31%;
-    position: absolute;
-    top: 20%;
-    left: 43%;
-} */
+.bio{
+    position: relative;  /* 確保可以相對定位圖片 */
+    width: 100vw;
+    height: 100vh;
+}

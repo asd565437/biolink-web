@@ -1,6 +1,6 @@
-import React from "react";
 import "../css/Header.css";
 import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
 import Login from "../header/login.svg";
 
 const Header = ({ images }) => {
@@ -15,6 +15,15 @@ const Header = ({ images }) => {
   const handleNavigate = (index) => {
     navigate(urls[index]);
   };
+
+  const logImages = ["/login.svg","/logout.svg"];
+  const [currentImage, setCurrentImage] = useState(0);
+  const handleLog = () => {
+    // 切換圖片 (0 -> 1 或 1 -> 0)
+    setCurrentImage((prev) => (prev === 0 ? 1 : 0));
+  };
+
+
   const positionAdjustments = [
     {
       width: '7.5%',
@@ -48,7 +57,15 @@ const Header = ({ images }) => {
             />
           );
         })}
-        <img src={Login} className="header-login" onClick={() => handleNavigate(4)} alt="登入"/>
+        <img 
+          src={logImages[currentImage]}
+          className="header-login"
+          onClick={() => {
+            handleNavigate(4);
+            handleLog();
+            }}
+          alt={currentImage === 0 ? "登入" : "登出"}
+        />
       </div>
     </header>
   );
