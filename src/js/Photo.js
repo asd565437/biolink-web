@@ -1,0 +1,89 @@
+import "../css/Photo.css";
+import React, { useState } from 'react';
+import { Link, useNavigate,useLocation } from 'react-router-dom';
+import photo_title from '../photo/photo_title.svg';
+
+function Photo() {
+    const navigate = useNavigate();
+    const [selectedPhoto, setSelectedPhoto] = useState(null);
+    const location = useLocation();
+    const username = location.state?.id || "未知用户"; // 避免 state 为空时报错
+    const photoImage = (index) => {
+        return require(`../photo/photo_${index}.svg`);
+    };
+
+    const handleNavigate = () => {
+        navigate('/world');
+    };
+
+    const handlePhotoClick = (index) => {
+        setSelectedPhoto((prevSelected) => (prevSelected === index ? null : index));
+    };
+
+    const handlePhoto = async () => {
+        try {
+            // 將Google登錄信息保存到Firebase Authentication
+            const response = await fetch("http://localhost:5000/api/photo", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    account: username,
+                    photoURL: `../photo/photo_${selectedPhoto}.svg`
+                }),
+            });
+
+            if (response.ok) {
+                alert("註冊成功!");
+                handleNavigate();
+            } else {
+                const errorData = await response.json();
+                alert("註冊失敗：" + errorData.error);
+            }
+        } catch (error) {
+            alert("網路錯誤，請稍後再試！");
+            console.error(error);
+        }
+    };
+
+    return (
+        <div className="login-container">
+            <Link to="/"><div className="login-logo">
+                <img src="/logo_small.svg" alt="Logo" />
+            </div></Link>
+
+            <div className="login_text">
+                <img src={photo_title} alt="Logo" />
+            </div>
+
+            <div className="photo-box-register">
+            {[0, 1].map((rowIndex) => (
+                    <div className='row mt-4 mb-1 pt-1 pb-1 mx-auto' key={rowIndex}>
+                        {Array(3).fill(null).map((_, colIndex) => {
+                            const photoIndex = rowIndex * 3 + colIndex + 1;
+                            return (
+                                <div
+                                    className={`col-4 photo_box ${selectedPhoto === photoIndex ? 'selected' : ''}`}
+                                    key={photoIndex}
+                                    onClick={() => handlePhotoClick(photoIndex)} // 點擊事件
+                                >
+                                    <img src={photoImage(photoIndex)} alt={`${photoIndex}號`} />
+                                </div>
+                            );
+                        })}
+                    </div>
+                ))}
+                <div className='row mt-1 mb-1 pt-1 pb-1 mx-auto'>
+                    <div
+                        className='col-12 mt-1 mb-1 pt-1 pb-1 checkPhoto'
+                        onClick={handlePhoto}
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Photo;

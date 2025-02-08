@@ -26,9 +26,6 @@
   max-width: 100%; /* 确保图片不超出容器 */
 }
 
-
-
-
 /* 内容容器 */
 .content {
   position: relative;
@@ -46,7 +43,6 @@
   margin: 0;
 }
 
-
 /* 按钮样式 */
 .footer {
   position: absolute;
@@ -55,5 +51,17 @@
   width: 93px; /* 图片宽度 */
   height: 93px; /* 图片高度 */
   z-index: 5;
+  cursor: pointer;
 }
 
+@media (max-width: 1920px) { 
+  .friend_wall{
+    height: 100vh;
+  }
+
+  .friend_wall .content{
+    max-height: calc(150vh);
+    zoom: 75%;
+    top: 1vh;
+  }
+}

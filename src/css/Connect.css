@@ -1,0 +1,72 @@
+.connect {
+  background-image: url("../showcase/bg.png");
+  /* 背景图片 */
+  background-size: cover;
+  /* 背景填充模式 */
+  background-color: #0F0F1A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  /* 确保子元素的 absolute 生效 */
+  z-index: 0;
+  height: 100vh;
+  /* 确保页面高度与视口一致 */
+  width: 100%;
+  /* 父容器寬度 */
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* 占滿父容器寬度 */
+  height: 100%;
+  /* 占滿父容器高度 */
+  position: relative;
+}
+
+.connect_title {
+  scale: 0.5;
+  position: absolute;
+  top: 15%;
+}
+
+.friend-input {
+  width: 30%;
+  font-size: 30px;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: center;
+  /* padding: 10px; */
+
+  /* 設定底線 */
+  border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+
+  /* 發光效果 */
+  /* box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3); */
+
+  /* padding: 0.5rem;
+    width: 60%;
+    max-width: 400px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 1rem; */
+}
+
+/* 當使用者點擊時，加強底線發光 */
+.friend-input:focus {
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
+  /* box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5); */
+}
+
+.connect_finish {
+  scale: 0.3;
+  position: absolute;
+  bottom: 1%;
+  cursor: pointer;
+}

@@ -1,220 +1,143 @@
-const bcrypt = require('bcrypt');
-const { Midjourney } = require('midjourney');
-const fs = require('fs');
-const axios = require('axios');
-const { getDb } = require('./db');
-const express = require('express');
+const express = require("express");
+const bcrypt = require("bcrypt");
+const { getFirestore,getCountFromServer, collection, query, where, getDocs, doc, setDoc, getDoc } = require("firebase/firestore");
+const { db, firebaseConfig } = require("./src/firebase.js"); // 确保路径正确
+const { initializeApp } = require("firebase/app");
+
 const router = express.Router();
+const app = initializeApp(firebaseConfig);
+const firestoreInstance = getFirestore(app);
 
 
-const client = new Midjourney({
-  ServerId: '1319896292025045052', // 替换为你的 ServerId
-  ChannelId: '1319896292624826441', // 替换为你的 ChannelId
-  SalaiToken: 'MTMxOTg5NDk5NjI1MzY3MTQ4Nw.GTfQ_h.pLPTNYwakfRwk4-38LbMJfag1wz7PRVxNt2mDI', // 替换为你的 SalaiToken
-  Debug: true,
-  Ws: true,
-});
-
-// 下载图像到服务器
-const downloadImage = async (url, filepath) => {
-  const response = await axios({
-    url,
-    method: 'GET',
-    responseType: 'stream',
-  });
-
-  return new Promise((resolve, reject) => {
-    const writer = fs.createWriteStream(filepath);
-    response.data.pipe(writer);
-    writer.on('finish', resolve);
-    writer.on('error', reject);
-  });
-};
-
-// 生图 API
-router.post('/generate-image', async (req, res) => {
-  const { prompt } = req.body;
-
-  // 验证输入
-  if (!prompt || typeof prompt !== 'string') {
-    return res.status(400).json({ error: '請提供有效的 prompt 文本' });
-  }
-
-  try {
-    // 连接 Midjourney 客户端
-    await client.Connect();
-
-    // 调用 Imagine 方法生成图像
-    const Imagine = await client.Imagine(prompt, (uri, progress) => {
-      console.log(`生成進度：${progress}`);
-    });
-
-    if (Imagine?.uri) {
-      // 下载图片到本地
-      const outputDir = './output';
-      const outputPath = `${outputDir}/${Date.now()}_image.jpg`;
-
-      if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir);
-      }
-
-      await downloadImage(Imagine.uri, outputPath);
-
-      // 返回图像 URL
-      return res.status(200).json({
-        message: '圖片生成成功',
-        prompt,
-        imageUrl: Imagine.uri, // MidJourney 的图像 URL
-        localPath: outputPath, // 本地存储路径
-      });
-    } else {
-      return res.status(500).json({ error: '生成圖片失敗' });
-    }
-  } catch (error) {
-    console.error('生成圖片時出錯:', error);
-    res.status(500).json({ error: '生成圖片時出錯', details: error.message });
-  }
-});
-
-router.get('/data', async (req, res) => {
-  const db = getDb();
-  try {
-    const bios = await db.query('SELECT * FROM bios');
-    const players = await db.query('SELECT * FROM player');
-    const questions = await db.query('SELECT * FROM question');
-
-    res.json({
-      players: players.rows,
-      bios: bios.rows,
-      questions: questions.rows
-    });
-
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.status(500).json({ error: 'Failed to fetch data' });
-  }
-});
-router.get('/bios', async (req, res) => {
-  const db = getDb();
-  try {
-    const bios = await db.query('SELECT * FROM bios');
-    res.json({
-      bios: bios.rows
-    });
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.status(500).json({ error: 'Failed to fetch data' });
-  }
-});
-
-router.get('/friend', async (req, res) => {
-  const db = getDb();
-  try {
-    const friends = await db.query('SELECT * FROM friend');
-    res.json({
-      friend: friends.rows
-    });
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.status(500).json({ error: 'Failed to fetch data' });
-  }
-});
-// 注册新用户
 router.post('/register', async (req, res) => {
-  const { email, password, nickName } = req.body;
+  const { account, password, nickName, googleLogin, photoUrl } = req.body;
 
-  // 输入验证
-  if (!email || !password || !nickName) {
-    return res.status(400).json({ error: '請填寫所有必填欄位' });
+  if (!googleLogin) {
+    if (!account || !password || !nickName) {
+      return res.status(400).json({ error: '請填寫所有必填欄位' });
+    }
   }
 
-  const db = getDb();
   try {
     // 检查用户是否存在
-    const existingUser = await db.query('SELECT * FROM player WHERE account = $1', [email]);
-    if (existingUser.rows.length > 0) {
+    const userSnap = await getDocs(query(collection(firestoreInstance, "player"), where("account", "==", account)));
+
+    if (!userSnap.empty) {
       return res.status(400).json({ error: '帳號已存在' });
     }
-
+    const q = query(collection(firestoreInstance, "player")); // 建立查詢
+    const snapshot = await getCountFromServer(q); // 只取得數量
     // 加密密码
     const hashedPassword = await bcrypt.hash(password, 10);
+    const user_id='biolink'+(snapshot.data().count+1);
+    // ✅ 使用 `setDoc()` 让 email 作为文档 ID
+    const userRef = doc(firestoreInstance, "player", user_id);
+    await setDoc(userRef, {
+      id: user_id,
+      account: account,
+      nickname: nickName,
+      password: hashedPassword,
+      bio_count: 0,
+      photoURL: photoUrl || null,
+    });
 
-    // 插入用户数据
-    const query = `
-      INSERT INTO player (account, nickname, password)
-      VALUES ($1, $2, $3);
-    `;
-    await db.query(query, [email, nickName, hashedPassword]);
-    res.status(201).json({ message: '註冊成功' });
+    res.status(201).json({ message: '註冊成功',
+      user: {
+        id: user_id
+    }});
   } catch (error) {
     console.error('Error during registration:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-// 用户登录
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+router.post("/login", async (req, res) => {
+  const { account, password, googleLogin } = req.body;
 
-  // 输入验证
-  if (!email || !password) {
-    return res.status(400).json({ error: '請輸入帳號密碼' });
+  if (!googleLogin) {
+    if (!account || !password) {
+      return res.status(400).json({ error: "請輸入帳號密碼" });
+    }
   }
 
-  const db = getDb();
   try {
-    // 查询用户数据
-    const result = await db.query('SELECT * FROM player WHERE account = $1', [email]);
-    const user = result.rows[0];
+    const usersRef = collection(firestoreInstance, "player");
+    const usersQuery = query(usersRef, where("account", "==", account));
+    const usersSnap = await getDocs(usersQuery);
 
-    if (!user) {
-      return res.status(404).json({ error: '帳號不存在' });
+    if (usersSnap.empty) {
+      return res.status(404).json({ error: "帳號不存在" });
     }
 
-    // 验证密码
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ error: '密碼錯誤' });
+    const user = usersSnap.docs[0].data();
+    if (!googleLogin) {
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        return res.status(401).json({ error: "密碼錯誤" });
+      }
     }
 
-    // 返回成功消息
     res.status(200).json({
-      message: '登入成功',
+      message: "登入成功",
       user: {
         account: user.account,
-        nickname: user.nickname
-      }
+        nickname: user.nickname,
+      },
     });
+
   } catch (error) {
-    console.error('Error during login:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error during login:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
-
 router.post('/question', async (req, res) => {
   const { question_id } = req.body;
 
-  const db = getDb();
+  if (!question_id) {
+    return res.status(400).json({ error: '請提供 question_id' });
+  }
+
   try {
-    // 查询用户数据
-    const result = await db.query('SELECT * FROM questions WHERE question_id = $1', [question_id]);
-    const question = result.rows[0];
-    if (!question) {
+    const questionRef = doc(firestoreInstance, 'question', question_id);
+    const questionSnap = await getDoc(questionRef);
+
+    if (!questionSnap.exists()) {
       return res.status(404).json({ error: '問題不存在' });
     }
 
-    // 返回成功消息
+    const questionData = questionSnap.data();
+
     res.status(200).json({
-      message: '登入成功',
+      message: '獲取成功',
       question_list: {
-        question: question.question,
-        answers: question.answers
+        question: questionData.question,
+        answers: questionData.options[0] + ", " + questionData.options[1]
       }
     });
   } catch (error) {
-    console.error('Error during login:', error);
+    console.error('Error fetching question:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+router.post('/photo', async (req, res) => {
+  const { account, photoURL } = req.body;
 
+  if (!photoURL) {
+    return res.status(400).json({ error: '請選擇圖片' });
+  }
+
+  try {
+    const photoRef = doc(firestoreInstance, 'player', account);
+    await setDoc(photoRef, {
+      photoURL: photoURL,
+    }, { merge: true });
+
+    res.status(200).json({
+      message: '設定圖片成功',
+    });
+  } catch (error) {
+    console.error('Error fetching question:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 module.exports = router;

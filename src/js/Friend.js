@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../css/Friend.css"; // 引入样式文件
 import Header from "./Header.js";
-import wall_icon from '../friend_list/wall_icon.png';
+import AddFriend from "./AddFriend.js";
+import addFriend_icon from '../friend_list/addFriend_icon.svg';
 import friend_list from '../friend_list/friend_list.svg';
 import axios from 'axios';
 
 const Friend = () => {
   const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
   const friend_images = Array.from({ length: 6 }, (_, index) => `/friend_${index + 1}.png`);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     // 预加载图片
@@ -71,9 +73,8 @@ const Friend = () => {
 
   const navigate = useNavigate();
 
-  // 点击按钮时跳转到 '/' 页面
   const handleNavigate = () => {
-    navigate('/wall');
+    setShowPopup(true); // 點擊圖片時顯示彈窗
   };
 
   return (
@@ -104,8 +105,10 @@ const Friend = () => {
 
       {/* Footer */}
       <div className="footer">
-        <img src={wall_icon} alt="菌种的世界" onClick={handleNavigate} />
+        <img src={addFriend_icon} alt="加入好友" onClick={handleNavigate} />
       </div>
+
+      {showPopup && <AddFriend onClose={() => setShowPopup(false)} />}
     </div>
   );
 };

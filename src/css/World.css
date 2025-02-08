@@ -48,7 +48,7 @@
     left: 81%;
 }
 
-.bio{
+.world-bio{
     position: relative;  /* 確保可以相對定位圖片 */
     width: 100vw;
     height: 100vh;

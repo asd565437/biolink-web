@@ -1,0 +1,20 @@
+.confirmFriend_back {
+    scale: 0.03;
+    position: absolute;
+    bottom: -15%;
+    right: 45%;
+    cursor: pointer;
+}
+
+.confirmFriend_test {
+    scale: 0.15;
+    position: absolute;
+    top: -62%;
+}
+
+.confirmFriend_add {
+    scale: 0.2;
+    position: absolute;
+    top: 62%;
+    cursor: pointer;
+}

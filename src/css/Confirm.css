@@ -1,0 +1,48 @@
+.confirm {
+    background-image: url("../showcase/bg.png"); /* 背景图片 ../culture/bg.png */
+    background-size: cover; /* 背景填充模式 */
+    background-color: #0F0F1A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative; /* 确保子元素的 absolute 生效 */
+    z-index: 0;
+    height: 100vh; /* 确保页面高度与视口一致 */
+    width: 100%; /* 父容器寬度 */
+  }
+  
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* 占滿父容器寬度 */
+    height: 100%; /* 占滿父容器高度 */
+    position: relative;
+  }
+
+  .confirm_title {
+    scale: 0.4;
+    position: absolute;
+    top: 10%;
+  }
+
+  .confirm_back {
+    scale: 0.03;
+    position: absolute;
+    bottom: -26%;
+    right: 45.5%;
+    cursor: pointer;
+  }
+
+  .confirm_test {
+    scale: 0.4;
+  }
+
+  .confirm_start {
+    scale: 0.3;
+    position: absolute;
+    top: 65%;
+    cursor: pointer;
+  }
+  

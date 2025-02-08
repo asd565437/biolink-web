@@ -7,31 +7,34 @@
   display: flex;
   align-items: center;
   justify-content: space-between; /* 确保左右两边对齐 */
-  padding: 20px 40px;
+  padding: 2vh 4vw; /*20 40px*/
   z-index: 1000;
   box-sizing: border-box; /* 确保 padding 不会影响宽度 */
-  
 }
 
 /* Logo */
 .header-logo {
-  width: 180px;
-  height:44px;
+  width: 12vw;
+  height: auto;
+  aspect-ratio: 180 / 44;
   background: url('../header/logo_small.svg') no-repeat;
   background-size: contain;
+  position: relative;
+  top: 10px; 
 }
 
 /* Navigation Menu */
 .nav-menu {
   display: flex;
-  gap: 20px; /* 每个导航项之间的间距 */
+  gap: 2vw; /* 每个导航项之间的间距 */
   flex-grow: 1; /* 占据剩余空间 */
   justify-content: center; /* 菜单居中 */
 }
 
 .nav-item {
-  width: 100px;
-  height: 40px;
+  width: 7vw;
+  height: auto;
+  aspect-ratio: 100 / 40;
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
@@ -40,8 +43,11 @@
 
 /* Login */
 .header-login {
-  width: 96px;
-  height: 22px;
+  position: absolute;
+  width: 6vw;
+  height: auto;
+  aspect-ratio: 96 / 22;
+  right: 3vw;
   cursor: pointer;
   transition: opacity 0.3s ease; /* 添加交互效果 */
 }

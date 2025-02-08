@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
-import last from "../question/back_to_frount_btn.svg";
+import check from "../question/check_answer.svg";
 
-const question_ids = ["10", "15", "20", "25", "30"];
+const question_ids = ["10", "15", "20", "25", "29"];
 
 const Question = () => {
   const navigate = useNavigate();
@@ -19,6 +19,8 @@ const Question = () => {
   const [progress, setProgress] = useState(0);
   const [question, setQuestion] = useState("");
   const [splitSentence, setSplitSentence] = useState([]);
+  const [isMaskVisible, setIsMaskVisible] = useState(true);
+
   const bar_images = [
     "progress_bar_1.svg",
     "progress_bar_2.svg",
@@ -29,7 +31,7 @@ const Question = () => {
 
   useEffect(() => {
     // 初始化加载第一题
-    loadQuestion(0);
+     loadQuestion(0);
   }, []);
 
   const loadQuestion = async (currentProgress) => {
@@ -59,17 +61,52 @@ const Question = () => {
     }
   };
 
-  const handleClick = async(question, option) => {
-    setButtonStates((prevState) => ({
-      ...prevState,
-      [`${question}_${option}`]: !prevState[`${question}_${option}`],
-    }));
+  const handleClick = async (question, option) => {
+    setButtonStates((prevState) => {
+      const newState = { ...prevState };
+
+      // 确保P1_A和P1_B互斥
+      if (question === "P1") {
+        if (option === "A") {
+          newState.P1_A = !prevState.P1_A;  // 切换P1_A的状态
+          newState.P1_B = false;  // 如果P1_A被选中，P1_B设为默认
+        } else if (option === "B") {
+          newState.P1_B = !prevState.P1_B;  // 切换P1_B的状态
+          newState.P1_A = false;  // 如果P1_B被选中，P1_A设为默认
+        }
+      }
+
+      if (question === "P2") {
+        if (option === "A") {
+          newState.P2_A = !prevState.P2_A;  // 切换P2_A的状态
+          newState.P2_B = false;  // 如果P2_A被选中，P2_B设为默认
+        } else if (option === "B") {
+          newState.P2_B = !prevState.P2_B;  // 切换P2_B的状态
+          newState.P2_A = false;  // 如果P2_B被选中，P2_A设为默认
+        }
+      }
+
+      return newState;
+    });
+
+    if (!(buttonStates.P1_A || buttonStates.P1_B)) {
+      setButtonStates((prevState) => ({
+        ...prevState,
+        P2_A: false,
+        P2_B: false,
+      }));
+    }
+
+    if (!(buttonStates.P2_A || buttonStates.P2_B)) {
+      setIsMaskVisible(true);
+    }
+
     if (question === "P2") {
-      await handleNextQuestion();
+      setIsMaskVisible(false);
     }
   };
 
-  const handleNextQuestion = async () => {
+  const handleNextQuestion = () => {
     if (progress >= question_ids.length - 1) {
       navigate("/reward");
       return;
@@ -87,14 +124,20 @@ const Question = () => {
       P2_A: false,
       P2_B: false,
     });
+
+    setIsMaskVisible(true);
   };
 
   const handleBack = () => {
-    navigate("/culture");
+    navigate("/connect");
   };
 
   const handleBackQuestion = () => {
-    if (progress === 0) return;
+    if (progress === 0) {
+      handleBack();
+      return;
+    }
+
     setProgress((prevProgress) => {
       loadQuestion(prevProgress - 1);
       return Math.max(prevProgress - 1, 0);
@@ -106,6 +149,8 @@ const Question = () => {
       P2_A: false,
       P2_B: false,
     });
+
+    setIsMaskVisible(true);
   };
 
   return (
@@ -113,19 +158,38 @@ const Question = () => {
       <Header images={["world_btn.svg", "wall_btn.svg", "culture_ul_btn.svg"]} />
 
       <div className="progress-bar">
-        { <img src={bar_images[progress]} alt="目前进度" />}
+        {<img src={bar_images[progress]} alt="目前进度" />}
       </div>
 
       <div className="back">
-        <img src={back_icon} alt="回上一页" onClick={handleBack} />
+        <img
+          src={back_icon}
+          alt="回上一題"
+          onClick={handleBackQuestion}
+        />
       </div>
 
-      <div className="backQuestion">
+      <div className="checkAnswer">
+        {isMaskVisible && (
+          <div
+            className="mask"
+            style={{
+              backgroundColor:
+                (buttonStates.P1_A || buttonStates.P1_B) && (buttonStates.P2_A || buttonStates.P2_B)
+                  ? "rgba(0, 0, 0, 0)"
+                  : "rgba(0, 0, 0, 0.5)",
+              cursor:
+                (buttonStates.P1_A || buttonStates.P1_B) && (buttonStates.P2_A || buttonStates.P2_B)
+                  ? "pointer" : "not-allowed",
+              borderRadius: "60px",
+            }}
+          ></div>
+        )}
+
         <img
-          src={last}
-          alt="回上一题"
-          onClick={handleBackQuestion}
-          style={{ cursor: progress === 0 ? "not-allowed" : "pointer" }}
+          src={check}
+          alt="確認答案"
+          onClick={handleNextQuestion}
         />
       </div>
 

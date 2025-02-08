@@ -5,7 +5,7 @@ import Login from "../header/login.svg";
 
 const Header = ({ images }) => {
   const navigate = useNavigate();
-  const urls = ['/world', '/wall', '/culture','/','/login'];
+  const urls = ['/world', '/wall', '/connect','/','/login'];
 
   if (!Array.isArray(images)) {
     images = ['world_btn.svg', 

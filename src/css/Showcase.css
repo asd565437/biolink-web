@@ -31,7 +31,9 @@
   position: absolute;
   top: 40%;
   left: 30%;
-  scale: 1.4;
+  transform: scale(1.4);
+  transform-origin: center;
+  clip-path: inset(0 0 0 0); 
   z-index: 400;
 }
 
@@ -59,9 +61,20 @@
   height: 100;
   /* 图片高度 */
   z-index: 5;
+  cursor: pointer;
 }
 
-@media (min-width: 1025px) {
+@media (max-width: 1920px){ 
+  .showcase{
+    height: 100vh;
+  }
+  .showcase-content {
+    max-height: calc(150vh);
+    zoom: 75%;
+  }
+}
+
+@media (max-width: 1200px) {
   .showcase {
     height: 100vh;
   }
@@ -71,8 +84,8 @@
   }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   body {
     overflow-y: scroll;
   }
-}
+} */

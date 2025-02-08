@@ -1,0 +1,49 @@
+.addFriend {
+  position: fixed;
+  /* 固定位置 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  /* 黑色半透明遮罩 */
+  backdrop-filter: blur(3px);
+  /* 模糊背景 */
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  z-index: 1000;
+  /* 確保遮罩在最上層 */
+}
+
+.addFriend_title {
+  scale: 0.1;
+  position: absolute;
+}
+
+.addFriend_input {
+  width: 30%;
+  font-size: 30px;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 35%;
+
+  /* 設定底線 */
+  border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+}
+
+.addFriend_input:focus {
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
+}
+
+.addFriend_finish {
+  scale: 0.3;
+  position: absolute;
+  top: 60%;
+  cursor: pointer;
+}

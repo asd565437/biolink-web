@@ -78,18 +78,20 @@ const Showcase = () => {
     },
     card: {
       position: 'relative',
-      width: '250px',
+      width: '100%',
+      minWidth: '250px',
       height: '350px',
       marginTop: '10px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       cursor: 'pointer',
+      borderRadius: "15px",
     },
     cardImage: {
       width: '100%',
       height: '100%',
-      objectFit: 'cover',
+      objectFit: 'contain',
       zIndex: 1,
     },
     bio: {

@@ -6,150 +6,138 @@ import React, { useState } from 'react';
 
 function Login() {
     const navigate = useNavigate();
-    let [email, setEmail] = useState("");
-    let [password, setPassword] = useState("");
+    const [account, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [isVisible, setIsVisible] = useState(false);
-    const [eyeIcon, setEyeIcon] = useState("/remove_red_eye.svg"); // 控制圖像切換
+    const [eyeIcon, setEyeIcon] = useState("/remove_red_eye.svg");
 
+    // 切换密码显示/隐藏
     const toggleVisibility = () => {
-        setIsVisible((prev) => !prev); // 不需要嵌套 `prev => !prev`
-        setEyeIcon((prevIcon) =>
-            prevIcon === "/remove_red_eye.svg"
-              ? "/remove red eye_not.svg"
-              : "/remove_red_eye.svg"
-          ); // 切換圖像
+        setIsVisible(prev => !prev);
+        setEyeIcon(prevIcon => prevIcon === "/remove_red_eye.svg"
+            ? "/remove red eye_not.svg"
+            : "/remove_red_eye.svg");
     };
 
-    const handleNavigate = () => {
-        navigate('/world');
-    };
-
-    // 處理Google登入
+    // 处理 Google 登录
     const handleGoogleLogin = async () => {
         try {
-            // 使用 Google 登录
             const result = await signInWithPopup(auth, googleProvider);
-
-            // 获取 Google 用户信息
             const user = result.user;
-            console.log("Google 登录成功:", user);
-
-            // 可以将用户的 email、nickname 等信息设置到 state
-            setEmail(user.email);
-            setPassword("google-auth-pass");  // 这可以是任意密码，具体需求视项目而定
-
-            // 调用后端接口进行注册或登录
+            
             const response = await fetch("http://localhost:5000/api/login", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    email: user.email,
-                    password: "google_generated_password",  // 这里的密码不重要，实际项目可替换
+                    account: user.email,
+                    password: "google_generated_password",
+                    googleLogin: true
                 }),
             });
 
             if (response.ok) {
                 const data = await response.json();
-                console.log("登入成功", data);
-                alert("登入成功!");
-                handleNavigate();  // 跳转到主页
+                alert("登录成功!");
+                await fetch('http://localhost:5000/set-cookie', {
+                    method: 'POST',
+                    credentials: 'include', // 必須加上這行，確保攜帶 Cookie
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        account: user.email,
+                    }),
+                  })
+                    .then(response => response.json())
+                    .then(data => console.log(data));
+                navigate('/world');
             } else {
                 const errorData = await response.json();
-                console.error("登入失敗：", errorData.error);
-                alert("登入失敗：" + errorData.error);
+                console.error("登录失败：", errorData.error);
+                alert("登录失败：" + errorData.error);
             }
-
         } catch (error) {
-            console.error("Google 登入錯誤：", error);
-            alert("Google 登入失敗，請稍後再試！");
+            console.error("Google 登录错误：", error);
+            alert("Google 登录失败，请稍后再试！");
         }
     };
 
-
+    // 处理邮箱密码登录
     const handleLogin = async () => {
-        if (!email || !password) {
-            alert("登入失敗：請輸入帳號密碼");
+        if (!account || !password) {
+            alert("请输入邮箱和密码");
             return;
         }
+
         try {
             const response = await fetch("http://localhost:5000/api/login", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email,
-                    password,
-                }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ account, password }),
             });
 
             if (response.ok) {
                 const data = await response.json();
-                console.log("登入成功", data);
-                handleNavigate();
+                console.log("登录成功", data);
+                alert("登录成功!");
+                await fetch('http://localhost:5000/set-cookie', {
+                    method: 'POST',
+                    credentials: 'include', // 必須加上這行，確保攜帶 Cookie
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        account: account,
+                    }),
+                  })
+                    .then(response => response.json())
+                    .then(data => console.log(data));
+                navigate('/world');
             } else {
                 const errorData = await response.json();
-                console.error("登入失敗：", errorData.error);
-                alert("登入失敗：" + errorData.error);
+                console.error("登录失败：", errorData.error);
+                alert("登录失败：" + errorData.error);
             }
         } catch (error) {
-            console.error("網路錯誤：", error);
-            alert("網路錯誤，請稍後再試！");
+            console.error("网络错误：", error);
+            alert("网络错误，请稍后再试！");
         }
     };
-
 
     return (
         <div className="login-container">
-            {/* Logo */}
-            <Link to="/"><div className="login-logo">
-                <img src="/logo_small.svg" alt="Logo" />
-            </div></Link>
+            <Link to="/">
+                <div className="login-logo">
+                    <img src="/logo_small.svg" alt="Logo" />
+                </div>
+            </Link>
 
             <div className="login_text">
                 <img src="/login_title.svg" alt="login" />
             </div>
 
-            {/* 白色遮罩 */}
             <div className="login-box-login">
-
-                {/* Email 輸入框 */}
                 <div className="input-container-login">
                     <input
                         type="email"
-                        placeholder="Email"
-                        value={email}
+                        placeholder="電子郵件"
+                        value={account}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <img src="/mail_icon.svg" alt="" className="icon" />
                 </div>
 
-                {/* 密碼輸入框 */}
                 <div className="input-container-login">
                     <input
                         type={isVisible ? 'text' : 'password'}
-                        placeholder="Password"
+                        placeholder="密碼"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <img src="key_icon.svg" alt="" className="icon" />
+                    <img src="/key_icon.svg" alt="" className="icon" />
                     <img src={eyeIcon} alt="Check Password" id="LoginPasswordEye" onClick={toggleVisibility} />
                 </div>
 
-                {/* 記住帳號 和 忘記密碼 */}
-                <div className="rememberOforgot">
-                    <img src="/remember.svg" alt="" id="remember" />
-                    {/* <img src="/忘記密碼？.png" alt="" id="forgot" /> */}
-                </div>
-
-                {/* 登入按鈕 */}
                 <div className="button-login" onClick={handleLogin}>
                     <img src="/login_btn.svg" alt="" />
                 </div>
 
-                {/* 其他登入方式 */}
                 <div className="other-login-login">
                     <img src="/other_way_login.svg" alt="" />
                     <div className="other-login-icons-login">
@@ -157,11 +145,11 @@ function Login() {
                     </div>
                 </div>
 
-                {/* 註冊 */}
                 <div className="register">
-                    <Link to="/register"><img src="/never.svg" alt="" id="register" /></Link>
+                    <Link to="/register">
+                        <img src="/never.svg" alt="" id="register" />
+                    </Link>
                 </div>
-
             </div>
         </div>
     );

@@ -1,68 +1,131 @@
 import React, { useState, useEffect } from "react";
-import '../css/World.css';
+import "../css/World.css";
 import Header from "../js/Header";
-import { useData } from '../DataContext';
-
+let cookie = null;
+function getNumber(number) {
+  return Math.random() < 0.5 ? -number : number; // 50% 機率為負數
+}
+async function getCookie() {
+  try {
+    const response = await fetch('http://localhost:5000/get-cookie', {
+      method: 'GET',
+      credentials: 'include'
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("獲取 Cookie 失敗:", error);
+  }
+} getCookie().then(cookies => {
+  cookie = cookies;
+});
 function World() {
-  const [images, setImages] = useState([
-    { id: 'bio001', src: "bio_1.svg", x: -100, y: -500, scale: 0.05, speed: 1 },
-    { id: 'bio002', src: "bio_2.svg", x: -100, y: -500, scale: 0.05, speed: 1 },
-    { id: 'bio003', src: "bio_3.svg", x: -100, y: -500, scale: 0.05, speed: 1 },
-    { id: 'bio004', src: "bio_4.svg", x: -100, y: -500, scale: 0.05, speed: 1 },
-    { id: 'bio005', src: "bio_5.svg", x: -100, y: -500, scale: 0.05, speed: 1 },
-  ]);
-
-  // 設置每個圖片的初始位置為畫面中心
-  const getCenterPosition = () => ({
-    x: -100,
-    y: -500,
+  const [images, setImages] = useState(() => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    getCookie();
+    return Array.from({ length: 5 }, (_, index) => ({
+      id: `bio00${index + 1}`,
+      src: `bio_${index + 1}.svg`,
+      x: Math.random() * screenWidth - screenWidth / 2,
+      y: Math.random() * screenHeight - screenHeight,
+      scale: Math.random() * (0.1 - 0.05) + 0.05,
+      speed: Math.random() * 2 + 0.5, // 調整速度
+      directionX: getNumber(1),
+      directionY: 1,
+      rotation: Math.random() * 360,
+      rotationSpeed: Math.random() * 2 + 0.5,
+    }));
   });
+  const [hoveredImage, setHoveredImage] = useState(null);
 
   useEffect(() => {
-    // 初始化所有圖片的起始位置為畫面中心
-    setImages(prevImages =>
-      prevImages.map(image => ({
-        ...image,
-        ...getCenterPosition(),
-      }))
-    );
 
-    // 每秒隨機更新圖片位置
-    const interval = setInterval(() => {
-      setImages(prevImages =>
-        prevImages.map(image => ({
-          ...image,
-          x: Math.random() * (window.innerWidth + 2000) - 1500,  // 隨機 x 座標，保持圖片不會超出範圍
-          y: Math.random() * (window.innerHeight + 1000) - 1000, // 隨機 y 座標，保持圖片不會超出範圍
-          scale: Math.random() * (0.1 - 0.05) + 0.1, // 隨機 scale，範圍 0.5 - 1.5
-          speed: Math.random() * 2 + 1,  // 隨機速度，範圍 1 - 3
-        }))
+    let animationFrameId;
+
+    const updatePositions = () => {
+      setImages((prevImages) =>
+        prevImages.map((image) => {
+          let newX = image.x + image.speed * image.directionX;
+          let newY = image.y + image.speed * image.directionY;
+          let newRotation = (image.rotation + image.rotationSpeed) % 360;
+
+          const screenWidth = window.innerWidth;
+          const screenHeight = window.innerHeight;
+
+          // 邊界檢測，超出範圍則反彈
+          if (newX < -screenWidth / 2 || newX > screenWidth / 2) {
+            image.directionX = -image.directionX;
+          }
+          if (newY < -screenHeight || newY > 0) {
+            image.directionY = -image.directionY;
+          }
+
+          return { ...image, x: newX, y: newY, rotation: newRotation };
+        })
       );
-    }, 1500);
 
-    return () => clearInterval(interval); // 清除定時器
+      animationFrameId = requestAnimationFrame(updatePositions);
+    };
+
+    animationFrameId = requestAnimationFrame(updatePositions);
+
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
   return (
     <div id="container">
-      <Header images={['world_ul_btn.svg', 'wall_btn.svg', 'culture_btn.svg']} />
-      <div className="bio">
+      <Header images={["world_ul_btn.svg", "wall_btn.svg", "culture_btn.svg"]} />
+      <div className="world_bio">
         {images.map((image) => (
           <img
             key={image.id}
             src={image.src}
             alt="菌種"
-            className={image.id} // 添加 bio-image 類名
+            className={image.id}
             style={{
-              position: 'absolute',
+              position: "absolute",
               left: `${image.x}px`,
               top: `${image.y}px`,
-              transform: `scale(${image.scale})`,
-              transition: `all ${image.speed}s ease-in-out`,
-              zIndex: Math.floor(Math.random() * 1000),  // 隨機 z-index
+              transform: `scale(${image.scale}) rotate(${image.rotation}deg)`,
+              transition: "none",
+              zIndex: Math.floor(image.scale * 10000),
+            }}
+            onMouseEnter={(e) => {
+              setHoveredImage({
+                src: "information.svg",
+                x: e.clientX + 15, // 避免鼠標擋住圖片
+                y: e.clientY + 15,
+                scale: 5, // 改為 2 倍放大，避免太誇張
+              });
+            }}
+            onMouseMove={(e) => {
+              setHoveredImage((prev) => prev && { ...prev, x: e.clientX + 15, y: e.clientY + 15 });
+            }}
+            onMouseLeave={() => {
+              setHoveredImage(null);
             }}
           />
         ))}
+
+        {/* 滑鼠懸浮時顯示的圖片 */}
+        {hoveredImage && (
+          <img
+            src={hoveredImage.src}
+            alt="hover"
+            style={{
+              position: "absolute",
+              left: `${hoveredImage.x}px`,
+              top: `${hoveredImage.y}px`,
+              transform: `scale(${hoveredImage.scale})`,
+              width: "50px",
+              height: "50px",
+              pointerEvents: "none",
+              transition: "transform 0.1s ease-out", // 添加平滑效果
+              zIndex: 10000,
+            }}
+          />
+        )}
       </div>
     </div>
   );

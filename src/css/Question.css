@@ -24,9 +24,23 @@
     z-index: 5;
 }
 
-.backQuestion {
+.checkAnswer {
     position: fixed;
     bottom: 50px;
+    z-index: 5;
+}
+
+.checkAnswer img{
+    z-index: 10;
+}
+
+.mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    scale: 0.98;
     z-index: 5;
 }
 
@@ -76,6 +90,7 @@ button{
     font-weight: bold;   
     font-size: 24px;
     text-align: center;
+    
 }
 
 button:disabled {
@@ -85,6 +100,8 @@ button:disabled {
 
 .button-default {
     background-image: url('../question/question_no\ push_btn.svg');
+    background-color: #ffffff10;
+    border-radius: 35px;
 }
 
 .button-selected {

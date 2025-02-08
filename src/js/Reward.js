@@ -6,16 +6,17 @@ import check from '../reward/check.svg';
 
 const Reward = () => {
     const navigate = useNavigate();
+
     const handleBack = () => {
-        navigate('/culture');
+        navigate('/connect');
       };
 
     return(
         <div className="reward">
             <main className="content">
-                <img src={reward_title} alt="標題" className="title"/>
-                <img src={strain} alt="新菌種" className="strain"/>
-                <img src={check} alt="確認按鈕" className="check" onClick={handleBack}/>
+                <img src={reward_title} alt="標題" className="reward_title" />
+                <img src={strain} alt="新菌種" className="strain" />
+                <img src={check} alt="確認按鈕" className="check" onClick={handleBack} />
             </main>
         </div>
     );
