@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { DataProvider } from './DataContext'; // 引入 DataProvider
 import Showcase from './js/Showcase';
 import Friend from './js/Friend';
 import AddFriend from './js/AddFriend';
@@ -28,7 +27,6 @@ function App() {
         document.title = title;
     }, [title]);
     return (
-        <DataProvider>
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -47,7 +45,6 @@ function App() {
                     <Route path="/photo" element={<Photo />}/>
                 </Routes>
             </Router>
-        </DataProvider>
     );
 }
 
