@@ -38,7 +38,7 @@ function Login() {
             if (response.ok) {
                 const data = await response.json();
                 alert("登录成功!");
-                await fetch(`${apiUrl}/api/set-cookie`, {
+                await fetch(`${apiUrl}/set-cookie`, {
                     method: 'POST',
                     credentials: 'include', // 必須加上這行，確保攜帶 Cookie
                     headers: { "Content-Type": "application/json" },
@@ -78,7 +78,7 @@ function Login() {
                 const data = await response.json();
                 console.log("登录成功", data);
                 alert("登录成功!");
-                await fetch(`${apiUrl}/api/set-cookie`, {
+                await fetch(`${apiUrl}/set-cookie`, {
                     method: 'POST',
                     credentials: 'include', // 必須加上這行，確保攜帶 Cookie
                     headers: { "Content-Type": "application/json" },
