@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import "../css/World.css";
 import Header from "../js/Header";
 let cookie = null;
+const apiUrl = process.env.REACT_APP_API_URL;
 function getNumber(number) {
   return Math.random() < 0.5 ? -number : number; // 50% 機率為負數
 }
 async function getCookie() {
   try {
-    const response = await fetch('http://localhost:5000/get-cookie', {
+    const response = await fetch(`${apiUrl}/api/get-cookie`, {
       method: 'GET',
       credentials: 'include'
     });
