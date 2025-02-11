@@ -9,7 +9,6 @@ export const firebaseConfig = {
   apiKey: "AIzaSyBEBOvR5IsLUspq0AGF12wQWXA69-XpBxI",//你的API金鑰
   authDomain: "biolink-auth.firebaseapp.com",//你的專案ID.firebaseapp.com
   projectId: "biolink-auth",//你的專案ID
-  storageBucket: "biolink-auth.firebasestorage.app",//你的專案ID.appspot.com
   messagingSenderId: "507593072695",//你的訊息發送者ID
   appId: "1:507593072695:web:d6e8d53729083bc7d91fb2"//你的應用程式ID
 };

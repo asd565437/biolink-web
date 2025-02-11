@@ -98,7 +98,7 @@ router.post('/question', async (req, res) => {
   }
 
   try {
-    const questionRef = doc(firestoreInstance, 'question', question_id);
+    const questionRef = doc(firestoreInstance, 'question', String(question_id));
     const questionSnap = await getDoc(questionRef);
 
     if (!questionSnap.exists()) {

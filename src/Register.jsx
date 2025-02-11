@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { auth, googleProvider } from './firebase'; // 從firebase.js中導入初始化的auth和googleProvider
 import { signInWithPopup } from 'firebase/auth'; // 導入Firebase的認證方法
 import { Link, useNavigate } from 'react-router-dom';
+const apiUrl = process.env.REACT_APP_API_URL;
 function Register() {
     const navigate = useNavigate();
     const [account, setEmail] = useState("");
@@ -46,7 +47,7 @@ function Register() {
             const tempNickName = user.displayName;
             const photoUrl = user.photoURL;
             // 將Google登錄信息保存到Firebase Authentication
-            const response = await fetch("http://localhost:5000/api/register", {
+            const response = await fetch(`${apiUrl}/api/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -87,7 +88,7 @@ function Register() {
 
         try {
             // 將Google登錄信息保存到Firebase Authentication
-            const response = await fetch("http://localhost:5000/api/register", {
+            const response = await fetch(`${apiUrl}/api/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -3,7 +3,7 @@ import { auth, googleProvider } from './firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
-
+const apiUrl = process.env.REACT_APP_API_URL;
 function Login() {
     const navigate = useNavigate();
     const [account, setEmail] = useState("");
@@ -25,7 +25,7 @@ function Login() {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
             
-            const response = await fetch("http://localhost:5000/api/login", {
+            const response = await fetch(`${apiUrl}/api/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -38,7 +38,7 @@ function Login() {
             if (response.ok) {
                 const data = await response.json();
                 alert("登录成功!");
-                await fetch('http://localhost:5000/set-cookie', {
+                await fetch(`${apiUrl}/api/set-cookie`, {
                     method: 'POST',
                     credentials: 'include', // 必須加上這行，確保攜帶 Cookie
                     headers: { "Content-Type": "application/json" },
@@ -68,7 +68,7 @@ function Login() {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/api/login", {
+            const response = await fetch(`${apiUrl}/api/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ account, password }),
@@ -78,7 +78,7 @@ function Login() {
                 const data = await response.json();
                 console.log("登录成功", data);
                 alert("登录成功!");
-                await fetch('http://localhost:5000/set-cookie', {
+                await fetch(`${apiUrl}/api/set-cookie`, {
                     method: 'POST',
                     credentials: 'include', // 必須加上這行，確保攜帶 Cookie
                     headers: { "Content-Type": "application/json" },

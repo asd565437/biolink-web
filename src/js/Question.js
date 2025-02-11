@@ -4,9 +4,13 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
 import check from "../question/check_answer.svg";
-
-const question_ids = ["10", "15", "20", "25", "29"];
-
+const apiUrl = process.env.REACT_APP_API_URL;
+const numbers = Array.from({ length: 30 }, (_, i) => i + 1); // 生成 1~30 的数组
+for (let i = numbers.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [numbers[i], numbers[j]] = [numbers[j], numbers[i]]; // 交换
+}
+const question_ids = numbers.slice(0, 5); // 取前 5 个
 const Question = () => {
   const navigate = useNavigate();
   const [buttonStates, setButtonStates] = useState({
@@ -36,7 +40,7 @@ const Question = () => {
 
   const loadQuestion = async (currentProgress) => {
     try {
-      const response = await fetch("http://localhost:5000/api/question", {
+      const response = await fetch(`${apiUrl}/api/question`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
