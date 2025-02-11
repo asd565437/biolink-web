@@ -2,7 +2,7 @@ import "../css/Photo.css";
 import React, { useState } from 'react';
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import photo_title from '../photo/photo_title.svg';
-
+const apiUrl = process.env.REACT_APP_API_URL;
 function Photo() {
     const navigate = useNavigate();
     const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -23,7 +23,7 @@ function Photo() {
     const handlePhoto = async () => {
         try {
             // 將Google登錄信息保存到Firebase Authentication
-            const response = await fetch("http://localhost:5000/api/photo", {
+            const response = await fetch(`${apiUrl}/api/photo`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

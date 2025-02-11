@@ -8,7 +8,7 @@ function getNumber(number) {
 }
 async function getCookie() {
   try {
-    const response = await fetch(`${apiUrl}/api/get-cookie`, {
+    const response = await fetch(`${apiUrl}/get-cookie`, {
       method: 'GET',
       credentials: 'include'
     });
