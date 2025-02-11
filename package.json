@@ -2,6 +2,7 @@
   "name": "biolink-app",
   "version": "0.3.0",
   "private": true,
+  "proxy": "https://biolink-zsl3.onrender.com",
   "dependencies": {
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",

@@ -1,8 +1,0 @@
-{
-  "projects": {
-    "default": "biolink-auth",
-    "staging": "biolink-auth"
-  },
-  "targets": {},
-  "etags": {}
-}
