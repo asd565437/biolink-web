@@ -11,8 +11,6 @@
     "cra-template": "1.2.0",
     "express": "^4.21.2",
     "firebase": "^11.2.0",
-    "firebase-admin": "^11.11.1",
-    "firebase-functions": "^3.24.1",
     "https": "^1.0.0",
     "midjourney": "^4.3.17",
     "nodemon": "^3.1.9",

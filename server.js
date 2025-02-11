@@ -80,16 +80,6 @@ initDb();
 // 路由配置
 app.use('/api', routes);
 
-// React 静态文件
-const staticPath = path.join(__dirname, 'client/build');
-if (fs.existsSync(staticPath)) {
-  app.use(express.static(staticPath));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(staticPath, 'index.html'));
-  });
-} else {
-  console.error('Static files not found. Ensure React app is built.');
-}
 
 // 启用 HTTP 或 HTTPS
 const server = http.createServer(app); // 如果需要 HTTPS，改为 https.createServer
