@@ -29,7 +29,7 @@ const AddFriend = ({ onClose }) => {
     };
 
     return (
-        <div className="addFriend" onClick={onClose}>
+        <div className="addFriend">
             <div className="popup-content" onClick={(e) => e.stopPropagation()}>
                 {/* <img src={addFriend_title} alt="好友標題" className="addFriend_title" />
                 <input type="text" placeholder="" className="addFriend_input" onChange={handleInputChange} />
