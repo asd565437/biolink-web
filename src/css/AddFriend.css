@@ -16,6 +16,14 @@
   /* 確保遮罩在最上層 */
 }
 
+.addFriend_back {
+  scale: 0.03;
+  position: absolute;
+  bottom: -10%;
+  right: 45%;
+  cursor: pointer;
+}
+
 .addFriend_title {
   scale: 0.1;
   position: absolute;

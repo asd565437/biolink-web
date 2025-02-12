@@ -2,6 +2,7 @@ import "../css/AddFriend.css"; // 引入样式文件
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import ConfirmFriend from "./ConfirmFriend.js";
+import addFriend_back from '../addFriend/addFriend_back.svg';
 import addFriend_title from '../addFriend/addFriend_title.svg';
 import addFriend_finish from '../addFriend/addFriend_finish.svg';
 
@@ -37,6 +38,7 @@ const AddFriend = ({ onClose }) => {
 
                 {!showConfirmFriend ? (
                     <>
+                        <img src={addFriend_back} alt="addFriend_back" className="addFriend_back" onClick={onClose} />
                         <img src={addFriend_title} alt="好友標題" className="addFriend_title" />
                         <input
                             type="text"
