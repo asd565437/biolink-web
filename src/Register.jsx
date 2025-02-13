@@ -34,9 +34,6 @@ function Register() {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
-
-            console.log("Google 用户信息:", user);
-
             const response = await axios.post(`${apiUrl}/api/register`, {
                 account: user.email,
                 nickName: user.displayName,
