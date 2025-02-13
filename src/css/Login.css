@@ -98,28 +98,6 @@ input::placeholder{
     transform: translateX(60vw) translateY(-50%) scale(0.75); 
 }
 
-/* 記住帳號 和 忘記密碼 */
-/* .rememberOforgot {
-    display: flex;
-    position: relative;
-    margin-top: 30px;
-    font-size: 14px;
-    top: 45px;
-}
-
-#remember {
-    position: relative;
-    scale: 0.18;
-    left: -130px;
-} */
-
-/* #forgot {
-    position: relative;
-    scale: 0.25;
-    left: -30px;
-    margin-top: -5px;
-} */
-
 /* 登入/註冊按鈕 */
 .button-login {
     /* width: 100%; */
@@ -137,7 +115,7 @@ input::placeholder{
 .other-login-icons-login {
     display: flex;
     justify-content: center;
-    margin: 3.5vw 0 0 0; /*40px*/ /*google和字的距離*/
+    margin: 3.5vw 0; /*40px*/ /*google和字的距離*/
 }
 
 .other-login-icons-login img {
@@ -148,10 +126,7 @@ input::placeholder{
 /*註冊*/
 .register{
     scale: 0.25; 
-    margin: 1vw 0 0 0;
-    /* padding: 1vw 0; */
-    position: relative;
-    bottom: 2.5vh;
+    margin: -4.5vw 0 0 0;
 }
 
 

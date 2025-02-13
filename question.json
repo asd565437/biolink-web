@@ -1,21 +1,4 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore, writeBatch, doc } from "firebase/firestore";
-
-// Firebase 配置
-export const firebaseConfig = {
-    apiKey: "AIzaSyBEBOvR5IsLUspq0AGF12wQWXA69-XpBxI",//你的API金鑰
-    authDomain: "biolink-auth.firebaseapp.com",//你的專案ID.firebaseapp.com
-    projectId: "biolink-auth",//你的專案ID
-    storageBucket: "biolink-auth.firebasestorage.app",//你的專案ID.appspot.com
-    messagingSenderId: "507593072695",//你的訊息發送者ID
-    appId: "1:507593072695:web:d6e8d53729083bc7d91fb2"//你的應用程式ID
-  };
-// 初始化 Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// 批量插入問答數據
-const questions =[
+[
     {
         "question": "假如美食店家出現爭議，您會？",
         "options": [
@@ -1774,13 +1757,3 @@ const questions =[
         ]
     }
 ]
-const batch = writeBatch(db);
-
-questions.forEach((item, index) => {
-  const questionRef = doc(db, "question", `${index + 1}`);
-  batch.set(questionRef, item);
-});
-
-batch.commit()
-  .then(() => console.log("Batch insert successful!"))
-  .catch(error => console.error("Batch insert failed:", error));

@@ -22,8 +22,7 @@
 .input-container-register {
     position: relative;
     width: 100%; 
-    top: 5vh; /*第一個和邊框的間距*/
-    /* overflow: visible; */
+    top: 2.5vw; /*第一個和邊框的間距*/
 }
 
 .input-container-register img {
@@ -32,9 +31,9 @@
     left: 17.5%;
     transform: translateY(-50%);
     scale: 0.45;
-    width: 7vw;
+    width: 7vw; 
     height: auto;
-    margin: 0 10px 0 0; /* Icon 和文字之間的距離 */
+    margin: -4px 10px 0 0; /* Icon 和文字之間的距離 */
 }
 
 .input-container-register input {
@@ -43,7 +42,7 @@
     font-size: 2vw;
     height: 5.5vw; /*109.5px*/
     width: 34vw; /*100%*/
-    margin: 0.75vw; /*25px 輸入框的間隔 */
+    margin: 0.7vw; /*25px 輸入框的間隔 */
     background-image: url("/src/assets/訊息的框.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -63,18 +62,19 @@
     scale: 0.7;
     padding: 1vw 1vw;
     cursor: pointer;
-    margin-top: 30px; /*和input的間距*/
+    margin-top: 15px; /*和input的間距*/
 }
 
 /* 其他登入方式 */
 .other-login-register {
     scale: 0.8;
+    margin: -40px 0 0 0; /*和下一步的間距*/
 }
 
 .other-login-icons-register {
     display: flex;
     justify-content: center;
-    margin: 1.5vw 0; /*google和字的距離*/
+    margin: 1.5vw 0 5vw 0; /*google和字的距離*/
 }
 
 .other-login-icons-register img {
@@ -85,8 +85,5 @@
 /*登入*/
 .register-login{
     scale: 0.25;
-    margin: -1vw 0 0 0;
-    /* padding: 1vw 0 0 0; */
-    position: relative;
-    bottom: 5vh;
+    margin: -7vw 0 0 0;
 }

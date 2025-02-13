@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import friend_icon from '../showcase/friend_icon.png';
 import score_bar from '../showcase/full_score_bar.svg';
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const Showcase = () => {
   const [isOriginal, setIsOriginal] = useState(Array(8).fill(true));
@@ -43,7 +44,7 @@ const Showcase = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/bios');
+        const response = await axios.post(`${apiUrl}/api/bio`);
         console.log('Fetched data:', response.data);
         return response.data;
       } catch (error) {

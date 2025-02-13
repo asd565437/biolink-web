@@ -6,7 +6,7 @@ import AddFriend from "./AddFriend.js";
 import addFriend_icon from '../friend_list/addFriend_icon.svg';
 import friend_list from '../friend_list/friend_list.svg';
 import axios from 'axios';
-
+const apiUrl = process.env.REACT_APP_API_URL;
 const Friend = () => {
   const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
   const friend_images = Array.from({ length: 6 }, (_, index) => `/friend_${index + 1}.png`);
@@ -35,7 +35,7 @@ const Friend = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/friend');
+        const response = await axios.post(`${apiUrl}/api/friend`);
         console.log('Fetched data:', response.data);
         return response.data;
       } catch (error) {

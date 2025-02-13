@@ -5,7 +5,7 @@ import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
 import check from "../question/check_answer.svg";
 const apiUrl = process.env.REACT_APP_API_URL;
-const numbers = Array.from({ length: 30 }, (_, i) => i + 1); // 生成 1~30 的数组
+const numbers = Array.from({ length: 251 }, (_, i) => i + 1); // 生成 1~30 的数组
 for (let i = numbers.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [numbers[i], numbers[j]] = [numbers[j], numbers[i]]; // 交换

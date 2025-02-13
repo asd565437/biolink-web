@@ -3,10 +3,13 @@ import { auth, googleProvider } from './firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import axios from "axios";
+
 const apiUrl = process.env.REACT_APP_API_URL;
+
 function Login() {
     const navigate = useNavigate();
-    const [account, setEmail] = useState("");
+    const [account, setAccount] = useState("");  // 修正变量名
     const [password, setPassword] = useState("");
     const [isVisible, setIsVisible] = useState(false);
     const [eyeIcon, setEyeIcon] = useState("/remove_red_eye.svg");
@@ -15,7 +18,7 @@ function Login() {
     const toggleVisibility = () => {
         setIsVisible(prev => !prev);
         setEyeIcon(prevIcon => prevIcon === "/remove_red_eye.svg"
-            ? "/remove red eye_not.svg"
+            ? "/remove_red_eye_not.svg"
             : "/remove_red_eye.svg");
     };
 
@@ -25,34 +28,24 @@ function Login() {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
             
-            const response = await fetch(`${apiUrl}/api/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    account: user.email,
-                    password: "google_generated_password",
-                    googleLogin: true
-                }),
+            const response = await axios.post(`${apiUrl}/api/login`, {
+                account: user.email,
+                password: "google_generated_password",
+                googleLogin: true
             });
 
-            if (response.ok) {
-                const data = await response.json();
+            if (response.status === 200) {
                 alert("登录成功!");
-                await fetch(`${apiUrl}/set-cookie`, {
-                    method: 'POST',
-                    credentials: 'include', // 必須加上這行，確保攜帶 Cookie
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        account: user.email,
-                    }),
-                  })
-                    .then(response => response.json())
-                    .then(data => console.log(data));
+                
+                // 设置 Cookie
+                await axios.post(`${apiUrl}/set-cookie`, {
+                    account: user.email
+                }, { withCredentials: true });
+
                 navigate('/world');
             } else {
-                const errorData = await response.json();
-                console.error("登录失败：", errorData.error);
-                alert("登录失败：" + errorData.error);
+                console.error("登录失败：", response.data.error);
+                alert("登录失败：" + response.data.error);
             }
         } catch (error) {
             console.error("Google 登录错误：", error);
@@ -68,31 +61,23 @@ function Login() {
         }
 
         try {
-            const response = await fetch(`${apiUrl}/api/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ account, password }),
+            const response = await axios.post(`${apiUrl}/api/login`, {
+                account,
+                password
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log("登录成功", data);
+            if (response.status === 200) {
                 alert("登录成功!");
-                await fetch(`${apiUrl}/set-cookie`, {
-                    method: 'POST',
-                    credentials: 'include', // 必須加上這行，確保攜帶 Cookie
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        account: account,
-                    }),
-                  })
-                    .then(response => response.json())
-                    .then(data => console.log(data));
+
+                // 设置 Cookie
+                await axios.post(`${apiUrl}/set-cookie`, {
+                    account: account
+                }, { withCredentials: true });
+
                 navigate('/world');
             } else {
-                const errorData = await response.json();
-                console.error("登录失败：", errorData.error);
-                alert("登录失败：" + errorData.error);
+                console.error("登录失败：", response.data.error);
+                alert("登录失败：" + response.data.error);
             }
         } catch (error) {
             console.error("网络错误：", error);
@@ -116,9 +101,9 @@ function Login() {
                 <div className="input-container-login">
                     <input
                         type="email"
-                        placeholder="電子郵件"
+                        placeholder="电子邮件"
                         value={account}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setAccount(e.target.value)} // 修正 setAccount
                     />
                     <img src="/mail_icon.svg" alt="" className="icon" />
                 </div>
@@ -126,7 +111,7 @@ function Login() {
                 <div className="input-container-login">
                     <input
                         type={isVisible ? 'text' : 'password'}
-                        placeholder="密碼"
+                        placeholder="密码"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
