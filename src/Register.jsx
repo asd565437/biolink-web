@@ -5,7 +5,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // 確保 URL 不為 undefined
 
 function Register() {
     const navigate = useNavigate();
@@ -15,12 +15,12 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [isVisible, setIsVisible] = useState([false, false]);
 
-    // 切换密码可见性
+    // 切換密碼可見性
     const toggleVisibility = (index) => {
         setIsVisible(prev => prev.map((item, i) => (i === index ? !item : item)));
     };
 
-    // 处理注册成功的跳转
+    // 註冊成功後導向
     const handleNavigate = (id) => {
         navigate('/photo', { state: { id } });
     };
@@ -29,72 +29,85 @@ function Register() {
         navigate('/world');
     };
 
-    // 处理 Google 注册
+    // **處理 Google 註冊**
     const handleGoogleLogin = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
-            const response = await axios.post(`${apiUrl}/api/register`, {
+
+            if (!user.email) {
+                alert("Google 登入失敗，未獲取 Email");
+                return;
+            }
+
+            const requestData = {
                 account: user.email,
-                nickName: user.displayName,
+                nickName: user.displayName || "GoogleUser",  // 防止 undefined
                 password: "google_generated_password",
                 googleLogin: true,
-                photoUrl: user.photoURL
-            }, {
+                photoUrl: user.photoURL || ""
+            };
+
+            console.log("Google 註冊請求數據:", requestData);
+
+            const response = await axios.post(`${apiUrl}/api/register`, requestData, {
                 headers: { "Content-Type": "application/json" }
             });
 
-            console.log("服务器响应:", response.data);
+            console.log("伺服器回應:", response.data);
 
             if (response.status === 200) {
-                alert("注册成功!");
+                alert("註冊成功!");
                 handleSuccess();
             } else {
-                console.error("注册失败：", response.data.error);
-                alert("注册失败：" + response.data.error);
+                alert("註冊失敗：" + (response.data.error || "未知錯誤"));
             }
         } catch (error) {
-            console.error("Google 注册错误：", error.response?.data || error.message);
-            alert("Google 注册失败，请稍后再试！");
+            console.error("Google 註冊錯誤：", error.response?.data || error.message);
+            alert("Google 註冊錯誤：" + (error.response?.data?.error || "請稍後再試"));
         }
     };
 
-    // 处理普通注册
+    // **處理一般註冊**
     const handleRegister = async () => {
-        if (!account || !password || !nickName || !confirmPassword) {
-            alert("请填写所有必填项！");
+        // **前端驗證**
+        if (!account.trim() || !password || !nickName.trim() || !confirmPassword) {
+            alert("請填寫所有必填欄位！");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("密碼長度至少為 6 個字元！");
             return;
         }
 
         if (password !== confirmPassword) {
-            alert("密码和确认密码不一致！");
+            alert("密碼與確認密碼不一致！");
             return;
         }
 
-        try {
-            console.log("发送注册请求", { account, nickName, password, googleLogin: false });
+        const requestData = {
+            account: account.trim(), // 確保去除空白
+            nickName: nickName.trim(),
+            password,
+            googleLogin: false
+        };
 
-            const response = await axios.post(`${apiUrl}/api/register`, {
-                account,
-                nickName,
-                password,
-                googleLogin: false
-            }, {
+        try {
+            console.log("發送註冊請求:", requestData);
+
+            const response = await axios.post(`${apiUrl}/api/register`, requestData, {
                 headers: { "Content-Type": "application/json" }
             });
 
-            console.log("服务器响应:", response.data);
-
             if (response.status === 200) {
-                alert("注册成功!");
+                alert("註冊成功!");
                 handleNavigate(response.data.user.id);
             } else {
-                console.error("注册失败：", response.data.error);
-                alert("注册失败：" + response.data.error);
+                alert("註冊失敗：" + (response.data.error || "未知錯誤"));
             }
         } catch (error) {
-            console.error("网络错误：", error.response?.data || error.message);
-            alert("网络错误，请稍后再试！");
+            alert("註冊失敗：" + (error.response?.data?.error || "請稍後再試！"));
         }
     };
 
@@ -114,7 +127,7 @@ function Register() {
                 <div className="input-container-register">
                     <input
                         type="text"
-                        placeholder="昵称"
+                        placeholder="暱稱"
                         value={nickName}
                         onChange={(e) => setNickName(e.target.value)}
                     />
@@ -124,7 +137,7 @@ function Register() {
                 <div className="input-container-register">
                     <input
                         type="email"
-                        placeholder="电子邮件"
+                        placeholder="電子郵件"
                         value={account}
                         onChange={(e) => setAccount(e.target.value)}
                     />
@@ -134,15 +147,14 @@ function Register() {
                 <div className="input-container-register">
                     <input
                         type={isVisible[0] ? 'text' : 'password'}
-                        placeholder="密码"
+                        placeholder="密碼 (至少6字元)"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <img src="/key_icon.svg" alt="Password Icon" />
                     <img
                         src={isVisible[0] ? "/remove_red_eye_not.svg" : "/remove_red_eye.svg"}
-                        alt="Check Password"
-                        id="RegisterPasswordEye"
+                        alt="檢視密碼"
                         onClick={() => toggleVisibility(0)}
                     />
                 </div>
@@ -150,15 +162,14 @@ function Register() {
                 <div className="input-container-register">
                     <input
                         type={isVisible[1] ? 'text' : 'password'}
-                        placeholder="确认密码"
+                        placeholder="確認密碼"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     <img src="/key_icon.svg" alt="Password Icon" />
                     <img
                         src={isVisible[1] ? "/remove_red_eye_not.svg" : "/remove_red_eye.svg"}
-                        alt="Check Password"
-                        id="RegisterPasswordEye2"
+                        alt="檢視密碼"
                         onClick={() => toggleVisibility(1)}
                     />
                 </div>
@@ -170,12 +181,12 @@ function Register() {
                 <div className="other-login-register">
                     <img src="/other_way_login.svg" alt="" />
                     <div className="other-login-icons-register">
-                        <img src="/google_btn.svg" alt="Google Login" onClick={handleGoogleLogin} />
+                        <img src="/google_btn.svg" alt="Google 註冊" onClick={handleGoogleLogin} />
                     </div>
                 </div>
 
                 <div className="register-login">
-                    <Link to="/login"><img src="/have.svg" alt="" id="register" /></Link>
+                    <Link to="/login"><img src="/have.svg" alt="" /></Link>
                 </div>
             </div>
         </div>

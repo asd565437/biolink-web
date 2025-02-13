@@ -9,12 +9,12 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 function Login() {
     const navigate = useNavigate();
-    const [account, setAccount] = useState("");  // 修正变量名
+    const [account, setAccount] = useState("");  // 修正變數名稱
     const [password, setPassword] = useState("");
     const [isVisible, setIsVisible] = useState(false);
     const [eyeIcon, setEyeIcon] = useState("/remove_red_eye.svg");
 
-    // 切换密码显示/隐藏
+    // 切換密碼顯示/隱藏
     const toggleVisibility = () => {
         setIsVisible(prev => !prev);
         setEyeIcon(prevIcon => prevIcon === "/remove_red_eye.svg"
@@ -22,7 +22,7 @@ function Login() {
             : "/remove_red_eye.svg");
     };
 
-    // 处理 Google 登录
+    // 處理 Google 登入
     const handleGoogleLogin = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
@@ -35,28 +35,28 @@ function Login() {
             });
 
             if (response.status === 200) {
-                alert("登录成功!");
+                alert("登入成功!");
                 
-                // 设置 Cookie
+                // 設置 Cookie
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: user.email
                 }, { withCredentials: true });
 
                 navigate('/world');
             } else {
-                console.error("登录失败：", response.data.error);
-                alert("登录失败：" + response.data.error);
+                console.error("登入失敗：", response.data.error);
+                alert("登入失敗：" + response.data.error);
             }
         } catch (error) {
-            console.error("Google 登录错误：", error);
-            alert("Google 登录失败，请稍后再试！");
+            console.error("Google 登入錯誤：", error);
+            alert("Google 登入失敗，請稍後再試！");
         }
     };
 
-    // 处理邮箱密码登录
+    // 處理電子郵件密碼登入
     const handleLogin = async () => {
         if (!account || !password) {
-            alert("请输入邮箱和密码");
+            alert("請輸入電子郵件與密碼");
             return;
         }
 
@@ -67,21 +67,21 @@ function Login() {
             });
 
             if (response.status === 200) {
-                alert("登录成功!");
+                alert("登入成功!");
 
-                // 设置 Cookie
+                // 設置 Cookie
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: account
                 }, { withCredentials: true });
 
                 navigate('/world');
             } else {
-                console.error("登录失败：", response.data.error);
-                alert("登录失败：" + response.data.error);
+                console.error("登入失敗：", response.data.error);
+                alert("登入失敗：" + response.data.error);
             }
         } catch (error) {
-            console.error("网络错误：", error);
-            alert("网络错误，请稍后再试！");
+            console.error("網路錯誤：", error);
+            alert("網路錯誤，請稍後再試！");
         }
     };
 
@@ -94,14 +94,14 @@ function Login() {
             </Link>
 
             <div className="login_text">
-                <img src="/login_title.svg" alt="login" />
+                <img src="/login_title.svg" alt="登入" />
             </div>
 
             <div className="login-box-login">
                 <div className="input-container-login">
                     <input
                         type="email"
-                        placeholder="电子邮件"
+                        placeholder="電子郵件"
                         value={account}
                         onChange={(e) => setAccount(e.target.value)} // 修正 setAccount
                     />
@@ -111,12 +111,12 @@ function Login() {
                 <div className="input-container-login">
                     <input
                         type={isVisible ? 'text' : 'password'}
-                        placeholder="密码"
+                        placeholder="密碼"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <img src="/key_icon.svg" alt="" className="icon" />
-                    <img src={eyeIcon} alt="Check Password" id="LoginPasswordEye" onClick={toggleVisibility} />
+                    <img src={eyeIcon} alt="檢視密碼" id="LoginPasswordEye" onClick={toggleVisibility} />
                 </div>
 
                 <div className="button-login" onClick={handleLogin}>
@@ -126,7 +126,7 @@ function Login() {
                 <div className="other-login-login">
                     <img src="/other_way_login.svg" alt="" />
                     <div className="other-login-icons-login">
-                        <img src="/google_btn.svg" alt="Google Login" onClick={handleGoogleLogin} />
+                        <img src="/google_btn.svg" alt="Google 登入" onClick={handleGoogleLogin} />
                     </div>
                 </div>
 
