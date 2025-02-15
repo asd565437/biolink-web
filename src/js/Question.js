@@ -52,8 +52,8 @@ const Question = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setQuestion(data.question_list.question);
-        setSplitSentence(data.question_list.answers.split(", "));
+        setQuestion(data.question.question);
+        setSplitSentence(data.question.answers.split(", "));
       } else {
         const errorData = await response.json();
         console.error("请求失败：", errorData.error);

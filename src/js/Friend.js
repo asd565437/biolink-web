@@ -35,7 +35,7 @@ const Friend = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.post(`${apiUrl}/api/friend`);
+        const response = await axios.post(`${apiUrl}/api/friend`,{});
         console.log('Fetched data:', response.data);
         return response.data;
       } catch (error) {

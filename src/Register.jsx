@@ -47,14 +47,9 @@ function Register() {
                 googleLogin: true,
                 photoUrl: user.photoURL || ""
             };
-
-            console.log("Google 註冊請求數據:", requestData);
-
             const response = await axios.post(`${apiUrl}/api/register`, requestData, {
                 headers: { "Content-Type": "application/json" }
             });
-
-            console.log("伺服器回應:", response.data);
 
             if (response.status === 200) {
                 alert("註冊成功!");
@@ -94,7 +89,6 @@ function Register() {
         };
 
         try {
-            console.log("發送註冊請求:", requestData);
 
             const response = await axios.post(`${apiUrl}/api/register`, requestData, {
                 headers: { "Content-Type": "application/json" }

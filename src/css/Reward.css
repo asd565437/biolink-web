@@ -11,6 +11,7 @@
     /* background-color: #0F0F1A; */
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
     position: relative;
@@ -28,7 +29,8 @@
 }
 
 .strain{
-    scale: 0.4;
+    /* width: 37.5%; */
+    scale: 0.6;
 }
 
 .check{
