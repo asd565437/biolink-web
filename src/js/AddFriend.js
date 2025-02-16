@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import ConfirmFriend from "./ConfirmFriend.js";
 import addFriend_back from '../addFriend/addFriend_back.svg';
-import addFriend_title from '../addFriend/addFriend_title.svg';
-import addFriend_finish from '../addFriend/addFriend_finish.svg';
+import addFriend_box from '../addFriend/addFriend_box.png';
+import addFriend_finish from '../addFriend/addFriend_finish.png';
 
 
 const AddFriend = ({ onClose }) => {
@@ -32,14 +32,10 @@ const AddFriend = ({ onClose }) => {
     return (
         <div className="addFriend">
             <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-                {/* <img src={addFriend_title} alt="好友標題" className="addFriend_title" />
-                <input type="text" placeholder="" className="addFriend_input" onChange={handleInputChange} />
-                <img src={addFriend_finish} alt="輸入完成" className="addFriend_finish" onClick={handleSubmit} /> */}
-
                 {!showConfirmFriend ? (
                     <>
                         <img src={addFriend_back} alt="addFriend_back" className="addFriend_back" onClick={onClose} />
-                        <img src={addFriend_title} alt="好友標題" className="addFriend_title" />
+                        <img src={addFriend_box} alt="addFriend_box" className="addFriend_box" />
                         <input
                             type="text"
                             placeholder=""

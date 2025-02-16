@@ -7,10 +7,9 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   /* 黑色半透明遮罩 */
-  background-image: url(../addFriend/addFriend_dot.png);
+  /* background-image: url(../addFriend/addFriend_dot.png); */
   background-size: contain; /* 控制圖片大小 */
-  backdrop-filter: blur(3px);
-  /* 模糊背景 */
+  /* backdrop-filter: blur(3px); 模糊背景 */
   display: flex;
   z-index: 1000;
   /* 確保遮罩在最上層 */
@@ -19,14 +18,17 @@
 .addFriend_back {
   scale: 0.03;
   position: absolute;
-  bottom: -10%;
+  bottom: -20%;
   right: 45%;
   cursor: pointer;
 }
 
-.addFriend_title {
-  scale: 0.1;
-  position: absolute;
+.addFriend_box {
+  position: fixed;
+  top: 18%;
+  left: 27%;
+  width: 45%;
+  height: auto;
 }
 
 .addFriend_input {
@@ -38,7 +40,7 @@
   outline: none;
   text-align: center;
   position: absolute;
-  top: 40%;
+  top: 42%;
   left: 35%;
 
   /* 設定底線 */
@@ -50,8 +52,10 @@
 }
 
 .addFriend_finish {
-  scale: 0.3;
-  position: absolute;
-  top: 60%;
+  position: fixed;
+  top: 65%;
+  left: 42.5%;
+  width: 15%;
+  height: auto;
   cursor: pointer;
 }

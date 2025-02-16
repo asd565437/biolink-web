@@ -4,13 +4,15 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
 import check from "../question/check_answer.svg";
+
 const apiUrl = process.env.REACT_APP_API_URL;
-const numbers = Array.from({ length: 251 }, (_, i) => i + 1); // 生成 1~30 的数组
+const numbers = Array.from({ length: 251 }, (_, i) => i + 1);
 for (let i = numbers.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [numbers[i], numbers[j]] = [numbers[j], numbers[i]]; // 交换
+    [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
 }
-const question_ids = numbers.slice(0, 5); // 取前 5 个
+const question_ids = numbers.slice(0, 5);
+
 const Question = () => {
   const navigate = useNavigate();
   const [buttonStates, setButtonStates] = useState({
@@ -34,8 +36,7 @@ const Question = () => {
   ];
 
   useEffect(() => {
-    // 初始化加载第一题
-     loadQuestion(0);
+    loadQuestion(0);
   }, []);
 
   const loadQuestion = async (currentProgress) => {
@@ -65,62 +66,37 @@ const Question = () => {
     }
   };
 
-  const handleClick = async (question, option) => {
+  const handleClick = (question, option) => {
     setButtonStates((prevState) => {
       const newState = { ...prevState };
 
-      // 确保P1_A和P1_B互斥
       if (question === "P1") {
-        if (option === "A") {
-          newState.P1_A = !prevState.P1_A;  // 切换P1_A的状态
-          newState.P1_B = false;  // 如果P1_A被选中，P1_B设为默认
-        } else if (option === "B") {
-          newState.P1_B = !prevState.P1_B;  // 切换P1_B的状态
-          newState.P1_A = false;  // 如果P1_B被选中，P1_A设为默认
-        }
+        newState.P1_A = option === "A" ? !prevState.P1_A : false;
+        newState.P1_B = option === "B" ? !prevState.P1_B : false;
       }
 
       if (question === "P2") {
-        if (option === "A") {
-          newState.P2_A = !prevState.P2_A;  // 切换P2_A的状态
-          newState.P2_B = false;  // 如果P2_A被选中，P2_B设为默认
-        } else if (option === "B") {
-          newState.P2_B = !prevState.P2_B;  // 切换P2_B的状态
-          newState.P2_A = false;  // 如果P2_B被选中，P2_A设为默认
-        }
+        newState.P2_A = option === "A" ? !prevState.P2_A : false;
+        newState.P2_B = option === "B" ? !prevState.P2_B : false;
       }
 
       return newState;
     });
-
-    if (!(buttonStates.P1_A || buttonStates.P1_B)) {
-      setButtonStates((prevState) => ({
-        ...prevState,
-        P2_A: false,
-        P2_B: false,
-      }));
-    }
-
-    if (!(buttonStates.P2_A || buttonStates.P2_B)) {
-      setIsMaskVisible(true);
-    }
 
     if (question === "P2") {
       setIsMaskVisible(false);
     }
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     if (progress >= question_ids.length - 1) {
       navigate("/reward");
       return;
     }
 
-    setProgress((prevProgress) => {
-      const newProgress = prevProgress + 1;
-      loadQuestion(newProgress);
-      return newProgress;
-    });
+    const newProgress = progress + 1;
+    await loadQuestion(newProgress);
+    setProgress(newProgress);
 
     setButtonStates({
       P1_A: false,
@@ -132,20 +108,15 @@ const Question = () => {
     setIsMaskVisible(true);
   };
 
-  const handleBack = () => {
-    navigate("/connect");
-  };
-
-  const handleBackQuestion = () => {
+  const handleBackQuestion = async () => {
     if (progress === 0) {
-      handleBack();
+      navigate("/connect");
       return;
     }
 
-    setProgress((prevProgress) => {
-      loadQuestion(prevProgress - 1);
-      return Math.max(prevProgress - 1, 0);
-    });
+    const newProgress = progress - 1;
+    await loadQuestion(newProgress);
+    setProgress(newProgress);
 
     setButtonStates({
       P1_A: false,
@@ -162,7 +133,7 @@ const Question = () => {
       <Header images={["world_btn.svg", "wall_btn.svg", "culture_ul_btn.svg"]} />
 
       <div className="progress-bar">
-        {<img src={bar_images[progress]} alt="目前进度" />}
+        <img src={bar_images[progress]} alt="目前進度" />
       </div>
 
       <div className="back">
@@ -225,7 +196,7 @@ const Question = () => {
               color: buttonStates.P1_A || buttonStates.P1_B ? "#ffffff" : "rgba(255, 255, 255, 0.4)",
             }}
           >
-            Q{progress + 1}: 呈上題，您認為另一玩家會如何選擇？
+            Q{progress + 1}: 承上題，您認為另一玩家會如何選擇？
           </h1>
           <div className="col-6 P2_A">
             <button

@@ -48,8 +48,53 @@
     left: 81%;
 }
 
-.world-bio{
-    position: relative;  /* 確保可以相對定位圖片 */
+.world-bio {
+    position: relative;
+    /* 確保可以相對定位圖片 */
     width: 100vw;
     height: 100vh;
+}
+
+/* ID視窗 */
+.id-popup {
+    position: fixed;
+    /* 固定位置 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* 黑色半透明遮罩 */
+    /* backdrop-filter: blur(1px);模糊背景 */
+    display: flex;
+    z-index: 1000;
+    /* 確保遮罩在最上層 */
+}
+
+.id_notice {
+    position: fixed;
+    top: 25%;
+    left: 30%;
+    width: 40%;
+    height: auto;
+}
+
+.popup-content strong {
+    font-size: 1.9vw;
+    color: rgba(216, 165, 223, 1.0);
+    position: absolute;
+    top: 37%;
+    left: 40.5%;
+    z-index: 1000;
+}
+
+.id_close {
+    position: absolute;
+    top: 23%;
+    left: 71%;
+    width: 2.5%;
+    height: auto;
+
+    /* width: 60%;
+    height: auto; */
 }

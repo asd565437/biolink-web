@@ -6,6 +6,7 @@ import AddFriend from './js/AddFriend';
 import ConfirmFriend from './js/ConfirmFriend';
 import Connect from './js/Connect';
 import Confirm from './js/Confirm';
+import Invite from './js/Invite';
 import Culture from './js/Culture';
 import Question from './js/Question';
 import Reward from './js/Reward';
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/confirmFriend" element={<ConfirmFriend />} />
                     <Route path="/connect" element={<Connect setHeaderImages={setHeaderImages}/>} />
                     <Route path="/confirm" element={<Confirm setHeaderImages={setHeaderImages}/>} />
+                    <Route path="/invite" element={<Invite setHeaderImages={setHeaderImages}/>} />
                     <Route path="/culture" element={<Culture setHeaderImages={setHeaderImages}/>} />
                     <Route path="/question" element={<Question setHeaderImages={setHeaderImages}/>} />
                     <Route path="/reward" element={<Reward />} />

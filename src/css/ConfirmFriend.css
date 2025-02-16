@@ -1,20 +1,49 @@
 .confirmFriend_back {
     scale: 0.03;
     position: absolute;
-    bottom: -10%;
+    bottom: -20%;
     right: 45%;
     cursor: pointer;
 }
 
-.confirmFriend_test {
-    scale: 0.15;
-    position: absolute;
-    top: -62%;
+.confirmFriend_box {
+    position: fixed;
+    top: 18%;
+    left: 27%;
+    width: 45%;
+    height: auto;
 }
 
-.confirmFriend_add {
-    scale: 0.2;
+.confirmFriend_title{
+    font-size: 1.7vw;
+    font-weight: bold;
+    color: white;
     position: absolute;
-    top: 62%;
+    top: 35%;
+    left: 37%;
+    z-index: 1000;
+}
+
+.confirmFriend_test {
+    scale: 0.08;
+    position: absolute;
+    top: -65%;
+}
+
+.confirmFriend_yes {
+    position: fixed;
+    top: 70%;
+    left: 51%;
+    width: 13%;
+    height: auto;
+    cursor: pointer;
+}
+
+.confirmFriend_no {
+    position: fixed;
+    top: 70%;
+    left: 36%;
+    width: 13%;
+    height: auto;
     cursor: pointer;
 }

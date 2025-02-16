@@ -33,15 +33,14 @@ function Login() {
                 password: "google_generated_password",
                 googleLogin: true
             });
-
             if (response.status === 200) {
+                console.log("?")
                 alert("登入成功!");
                 
                 // 設置 Cookie
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: user.email
                 }, { withCredentials: true });
-
                 navigate('/world');
             } else {
                 console.error("登入失敗：", response.data.error);

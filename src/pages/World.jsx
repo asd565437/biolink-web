@@ -2,48 +2,57 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/World.css";
 import Header from "../js/Header";
+import id_close from "../world/id_close.svg";
+import id_notice from "../world/id_notice.png";
 
-let cookie = null;
 const apiUrl = process.env.REACT_APP_API_URL;
 
-function getNumber(number) {
-  return Math.random() < 0.5 ? -number : number; // 50% 概率为负数
+// 取得隨機方向
+function getRandomDirection() {
+  return Math.random() < 0.5 ? -1 : 1; // 50% 機率為負數
 }
 
-async function getCookie() {
-  try {
-    const response = await axios.get(`${apiUrl}/get-cookie`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    console.error("获取 Cookie 失败:", error);
-  }
-}
+const World = () => {
+  const [cookie, setCookie] = useState(null);
+  const [hoveredImage, setHoveredImage] = useState(null);
+  const [showIdPopup, setShowIdPopup] = useState(false);
+  const userId = "#0507"; // 這裡可以替換為動態 ID
 
-getCookie().then((cookies) => {
-  cookie = cookies;
-});
+  useEffect(() => {
+    const fetchCookie = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/get-cookie`, {
+          withCredentials: true,
+        });
+        setCookie(response.data.account);
+        console.log(response.data.account)
+        if(cookie)
+          setShowIdPopup(true); // 只有在取得 cookie 成功後才顯示
+      } catch (error) {
+        console.error("獲取 Cookie 失敗:", error);
+      }
+    };
+    fetchCookie();
+  }, []);
 
-function World() {
+  // 初始化圖片狀態
   const [images, setImages] = useState(() => {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    getCookie();
+
     return Array.from({ length: 5 }, (_, index) => ({
       id: `bio00${index + 1}`,
       src: `bio_${index + 1}.svg`,
-      x: Math.random() * screenWidth - screenWidth / 2,
-      y: Math.random() * screenHeight - screenHeight,
+      x: Math.random() * screenWidth * 0.8, // 確保圖片不會超出邊界
+      y: Math.random() * screenHeight * 0.8, 
       scale: Math.random() * (0.1 - 0.05) + 0.05,
-      speed: Math.random() * 2 + 0.5, // 调整速度
-      directionX: getNumber(1),
-      directionY: 1,
+      speed: Math.random() * 2 + 0.5,
+      directionX: getRandomDirection(),
+      directionY: getRandomDirection(),
       rotation: Math.random() * 360,
       rotationSpeed: Math.random() * 2 + 0.5,
     }));
   });
-  const [hoveredImage, setHoveredImage] = useState(null);
 
   useEffect(() => {
     let animationFrameId;
@@ -58,11 +67,11 @@ function World() {
           const screenWidth = window.innerWidth;
           const screenHeight = window.innerHeight;
 
-          // 边界检测，超出范围则反弹
-          if (newX < -screenWidth / 2 || newX > screenWidth / 2) {
+          // 邊界檢測，避免圖片超出視窗範圍
+          if (newX < 0 || newX > screenWidth - 50) {
             image.directionX = -image.directionX;
           }
-          if (newY < -screenHeight || newY > 0) {
+          if (newY < 0 || newY > screenHeight - 50) {
             image.directionY = -image.directionY;
           }
 
@@ -86,7 +95,7 @@ function World() {
           <img
             key={image.id}
             src={image.src}
-            alt="菌种"
+            alt="菌種"
             className={image.id}
             style={{
               position: "absolute",
@@ -99,9 +108,9 @@ function World() {
             onMouseEnter={(e) => {
               setHoveredImage({
                 src: "information.svg",
-                x: e.clientX + 15, // 避免鼠标挡住图片
+                x: e.clientX + 15,
                 y: e.clientY + 15,
-                scale: 5, // 改为 2 倍放大，避免太夸张
+                scale: 2, // 調整放大倍數
               });
             }}
             onMouseMove={(e) => {
@@ -113,7 +122,7 @@ function World() {
           />
         ))}
 
-        {/* 鼠标悬浮时显示的图片 */}
+        {/* 滑鼠懸停時顯示的圖片 */}
         {hoveredImage && (
           <img
             src={hoveredImage.src}
@@ -126,14 +135,25 @@ function World() {
               width: "50px",
               height: "50px",
               pointerEvents: "none",
-              transition: "transform 0.1s ease-out", // 添加平滑效果
+              transition: "transform 0.1s ease-out",
               zIndex: 10000,
             }}
           />
         )}
+
+        {/* ID 提示視窗 */}
+        {showIdPopup && (
+          <div className="id-popup">
+            <div className="popup-content">
+              <strong>您的專屬 ID：{userId}</strong>
+              <img src={id_notice} alt="id_notice" className="id_notice" />
+              <img src={id_close} alt="id_close" className="id_close" onClick={() => setShowIdPopup(false)} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default World;
