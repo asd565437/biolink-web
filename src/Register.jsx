@@ -21,12 +21,12 @@ function Register() {
     };
 
     // 註冊成功後導向
-    const handleNavigate = (id) => {
-        navigate('/photo', { state: { id } });
+    const handleNavigate = (id,account) => {
+        navigate('/photo', { state: { id,account } });
     };
 
     const handleSuccess = () => {
-        navigate('/world');
+        navigate('/world' ,{ state: { popup: true } });
     };
 
     // **處理 Google 註冊**
@@ -96,7 +96,8 @@ function Register() {
 
             if (response.status === 200) {
                 alert("註冊成功!");
-                handleNavigate(response.data.user.id);
+                handleNavigate(response.data.user.id,account.trim());
+                console.log(response.data.user.id)
             } else {
                 alert("註冊失敗：" + (response.data.error || "未知錯誤"));
             }

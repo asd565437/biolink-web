@@ -39,9 +39,9 @@ function Login() {
                 
                 // 設置 Cookie
                 await axios.post(`${apiUrl}/set-cookie`, {
-                    account: user.email
+                    account: user.email,
                 }, { withCredentials: true });
-                navigate('/world');
+                navigate('/world', { state: { popup: true } });
             } else {
                 console.error("登入失敗：", response.data.error);
                 alert("登入失敗：" + response.data.error);
@@ -72,7 +72,7 @@ function Login() {
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: account
                 }, { withCredentials: true });
-                navigate('/world');
+                navigate('/world',{ state: { popup: true } });
             } else {
                 console.error("登入失敗：", response.data.error);
                 alert("登入失敗：" + response.data.error);

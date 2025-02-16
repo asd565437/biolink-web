@@ -4,19 +4,21 @@ import "../css/World.css";
 import Header from "../js/Header";
 import id_close from "../world/id_close.svg";
 import id_notice from "../world/id_notice.png";
+import { useLocation } from "react-router-dom";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 // 取得隨機方向
-function getRandomDirection() {
-  return Math.random() < 0.5 ? -1 : 1; // 50% 機率為負數
+function getNumber(number) {
+  return Math.random() < 0.5 ? -number : number; // 50% 概率为负数
 }
 
 const World = () => {
+  const [userId, setUserId] = useState("0507"); // 初始化 userId
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showIdPopup, setShowIdPopup] = useState(false);
-  const userId = "#0507"; // 這裡可以替換為動態 ID
-
+  const location = useLocation();
+  const popup = location.state?.popup || false ; // 如果沒有數據則給預設值
   useEffect(() => {
     const fetchCookie = async () => {
       try {
@@ -24,7 +26,9 @@ const World = () => {
           withCredentials: true,
         });
         console.log(response.data.account)
-        if(response.data.account)
+        console.log(response.data.id)
+        setUserId(response.data.id)
+        if(response.data.account && popup)
           setShowIdPopup(true); // 只有在取得 cookie 成功後才顯示
       } catch (error) {
         console.error("獲取 Cookie 失敗:", error);
@@ -41,12 +45,12 @@ const World = () => {
     return Array.from({ length: 5 }, (_, index) => ({
       id: `bio00${index + 1}`,
       src: `bio_${index + 1}.svg`,
-      x: Math.random() * screenWidth * 0.8, // 確保圖片不會超出邊界
-      y: Math.random() * screenHeight * 0.8, 
+      x: Math.random() * screenWidth - screenWidth / 2,
+      y: Math.random() * screenHeight - screenHeight,
       scale: Math.random() * (0.1 - 0.05) + 0.05,
       speed: Math.random() * 2 + 0.5,
-      directionX: getRandomDirection(),
-      directionY: getRandomDirection(),
+      directionX: getNumber(1),
+      directionY: getNumber(1),
       rotation: Math.random() * 360,
       rotationSpeed: Math.random() * 2 + 0.5,
     }));
@@ -66,10 +70,10 @@ const World = () => {
           const screenHeight = window.innerHeight;
 
           // 邊界檢測，避免圖片超出視窗範圍
-          if (newX < 0 || newX > screenWidth - 50) {
+          if (newX < -screenWidth / 2 || newX > screenWidth / 2) {
             image.directionX = -image.directionX;
           }
-          if (newY < 0 || newY > screenHeight - 50) {
+          if (newY < -screenHeight || newY > 0) {
             image.directionY = -image.directionY;
           }
 

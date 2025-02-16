@@ -2,18 +2,20 @@ import "../css/Photo.css";
 import React, { useState } from 'react';
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import photo_title from '../photo/photo_title.svg';
+import axios from "axios";
+
 const apiUrl = process.env.REACT_APP_API_URL;
 function Photo() {
     const navigate = useNavigate();
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const location = useLocation();
-    const username = location.state?.id || "未知用户"; // 避免 state 为空时报错
+    const account = location.state?.account || "未知用户"; // 避免 state 为空时报错
     const photoImage = (index) => {
         return require(`../photo/photo_${index}.svg`);
     };
 
     const handleNavigate = () => {
-        navigate('/world');
+        navigate('/world', { state: { popup: true } });
     };
 
     const handlePhotoClick = (index) => {
@@ -29,13 +31,16 @@ function Photo() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    account: username,
+                    account: account,
                     photoURL: `../photo/photo_${selectedPhoto}.svg`
                 }),
             });
 
             if (response.ok) {
                 alert("註冊成功!");
+                await axios.post(`${apiUrl}/set-cookie`, {
+                    account: account,
+                }, { withCredentials: true });
                 handleNavigate();
             } else {
                 const errorData = await response.json();
