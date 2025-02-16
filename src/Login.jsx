@@ -63,7 +63,7 @@ function Login() {
             const response = await axios.post(`${apiUrl}/api/login`, {
                 account,
                 password
-            }, { withCredentials: true });
+            }, { withCredentials: true ,validateStatus: status => status < 500});
 
             if (response.status === 200) {
                 alert("登入成功!");

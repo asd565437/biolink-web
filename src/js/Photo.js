@@ -10,6 +10,7 @@ function Photo() {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const location = useLocation();
     const account = location.state?.account || "未知用户"; // 避免 state 为空时报错
+    const id = location.state?.id || "未知用户"; // 避免 state 为空时报错
     const photoImage = (index) => {
         return require(`../photo/photo_${index}.svg`);
     };
@@ -31,7 +32,7 @@ function Photo() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    account: account,
+                    account: id,
                     photoURL: `../photo/photo_${selectedPhoto}.svg`
                 }),
             });
