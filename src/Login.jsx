@@ -63,7 +63,7 @@ function Login() {
             const response = await axios.post(`${apiUrl}/api/login`, {
                 account,
                 password
-            });
+            }, { withCredentials: true });
 
             if (response.status === 200) {
                 alert("登入成功!");
@@ -72,7 +72,6 @@ function Login() {
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: account
                 }, { withCredentials: true });
-
                 navigate('/world');
             } else {
                 console.error("登入失敗：", response.data.error);
