@@ -67,7 +67,6 @@ function Login() {
 
             if (response.status === 200) {
                 alert("登入成功!");
-
                 // 設置 Cookie
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: account
@@ -78,6 +77,7 @@ function Login() {
                 alert("登入失敗：" + response.data.error);
             }
         } catch (error) {
+            console.log(":(")
             console.error("網路錯誤：", error);
             alert("網路錯誤，請稍後再試！");
         }
