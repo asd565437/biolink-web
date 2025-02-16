@@ -13,7 +13,6 @@ function getRandomDirection() {
 }
 
 const World = () => {
-  const [cookie, setCookie] = useState(null);
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showIdPopup, setShowIdPopup] = useState(false);
   const userId = "#0507"; // 這裡可以替換為動態 ID
@@ -24,9 +23,8 @@ const World = () => {
         const response = await axios.get(`${apiUrl}/get-cookie`, {
           withCredentials: true,
         });
-        setCookie(response.data.account);
         console.log(response.data.account)
-        if(cookie)
+        if(response.data.account)
           setShowIdPopup(true); // 只有在取得 cookie 成功後才顯示
       } catch (error) {
         console.error("獲取 Cookie 失敗:", error);
