@@ -5,12 +5,19 @@ import Header from "./Header.js";
 import AddFriend from "./AddFriend.js";
 import addFriend_icon from '../friend_list/addFriend_icon.svg';
 import friend_list from '../friend_list/friend_list.svg';
+import friiend_test from '../friend_list/joguman.svg';
 import axios from 'axios';
 const apiUrl = process.env.REACT_APP_API_URL;
 const Friend = () => {
   const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
-  const friend_images = Array.from({ length: 6 }, (_, index) => `/friend_${index + 1}.png`);
+  const friend_images = Array.from({ length: 6 }, (_, index) => `/friend_box.png`);
+  // const friend_images = Array.from({ length: 6 }, (_, index) => `/friend_${index + 1}.png`);
   const [showPopup, setShowPopup] = useState(false);
+
+  // 好友資料測試
+  const [userName1, setUserName1] = useState("蔡第一"); // 初始化 userName
+  const [bioNumber1, setBioNumber1] = useState("2"); // 初始化 userName
+  const [friendDate1, setFriendDate1] = useState("02.17.25"); // 初始化 userName
 
   useEffect(() => {
     // 预加载图片
@@ -35,7 +42,7 @@ const Friend = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.post(`${apiUrl}/api/friend`,{});
+        const response = await axios.post(`${apiUrl}/api/friend`, {});
         console.log('Fetched data:', response.data);
         return response.data;
       } catch (error) {
@@ -101,6 +108,13 @@ const Friend = () => {
         ) : (
           <p>加载中...</p> // 显示加载提示
         )}
+
+        <div className='friend-info'>
+          <img src={friiend_test} alt="friend_photo" className='friiend_test'/>
+          <h3 className='friend-info-name'>{userName1}</h3> 
+          <p className='friend-info-numabr'>菌種數量：{bioNumber1}</p>
+          <p className='friend-info-date'>交友日期：{friendDate1}</p>
+        </div>
       </main>
 
       {/* Footer */}

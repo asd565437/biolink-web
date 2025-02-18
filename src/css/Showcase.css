@@ -27,11 +27,49 @@
   bottom: 5%;
 }
 
+/* 卡片資訊 */
+.card-info {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  color: rgba(191, 173, 255, 1);
+  z-index: 100;
+}
+
+.card-info-id {
+  position: absolute;
+  top: 1%;
+  left: 20%;
+  font-size: 17px;
+}
+
+.name_box {
+  position: absolute;
+  top: 75%;
+  left: 15%;
+  width: 70%;
+}
+
+.card-info-owner {
+  position: absolute;
+  top: 83%;
+  left: 19%;
+  font-size: 16px;
+}
+
+.card-info-date {
+  position: absolute;
+  top: 90%;
+  left: 63%;
+  font-size: 16px;
+}
+
 .overlay-image img {
   position: absolute;
   top: 40%;
   left: 30%;
-  transform: scale(1.4);
+  /* transform: scale(1.4); */
   transform-origin: center;
   clip-path: inset(0 0 0 0); 
   z-index: 400;
@@ -39,9 +77,9 @@
 
 .overlay-image2 img {
   position: absolute;
-  top: 14.3%;
-  left: 7.3%;
-  transform: scale3d(0.72, 0.77, 1);
+  top: 15.4%;
+  left: 8.3%;
+  transform: scale3d(0.4, 0.66, 1);
   z-index: 500;
 }
 

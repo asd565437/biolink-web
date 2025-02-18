@@ -17,7 +17,6 @@ const Connect = () => {
   const handleSubmit = () => {
     if (friendId.trim()) {
       navigate('/confirm', { state: { friendId }});
-      // alert(`好友 ID 為：${friendId}`);
     } else {
       alert('請輸入好友 ID！');
     }

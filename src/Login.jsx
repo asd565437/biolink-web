@@ -12,6 +12,7 @@ function Login() {
     const [account, setAccount] = useState("");  // 修正變數名稱
     const [password, setPassword] = useState("");
     const [isVisible, setIsVisible] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
     const [eyeIcon, setEyeIcon] = useState("/remove_red_eye.svg");
 
     // 切換密碼顯示/隱藏
@@ -36,7 +37,7 @@ function Login() {
             if (response.status === 200) {
                 console.log("?")
                 alert("登入成功!");
-                
+                setIsLogin(true);
                 // 設置 Cookie
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: user.email,
@@ -67,6 +68,7 @@ function Login() {
 
             if (response.status === 200) {
                 alert("登入成功!");
+                setIsLogin(true);
                 // 設置 Cookie
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: account

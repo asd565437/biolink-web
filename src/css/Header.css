@@ -1,7 +1,7 @@
 /* Header */
 .header {
   position: fixed;
-  top: 0;
+  top: 10px;
   left: 0;
   width: 100%; /* 去掉引号 */
   display: flex;
@@ -16,19 +16,27 @@
 .header-logo {
   width: 12vw;
   height: auto;
-  aspect-ratio: 180 / 44;
+  aspect-ratio: 180 / 45;
   background: url('../header/logo_small.svg') no-repeat;
   background-size: contain;
-  position: relative;
-  top: 10px; 
+  background-position: center;
+}
+
+.navList{
+  width: 50vw;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Navigation Menu */
 .nav-menu {
   display: flex;
   gap: 2vw; /* 每个导航项之间的间距 */
-  flex-grow: 1; /* 占据剩余空间 */
-  justify-content: center; /* 菜单居中 */
+  justify-content: flex-end;
+  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 60%; 
 }
 
 .nav-item {
@@ -43,15 +51,26 @@
 
 /* Login */
 .header-login {
-  position: absolute;
-  width: 6vw;
-  height: auto;
-  aspect-ratio: 96 / 22;
-  right: 3vw;
+  height: auto;  /* aspect-ratio: 100 / 40; */
   cursor: pointer;
-  transition: opacity 0.3s ease; /* 添加交互效果 */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-align: center;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  font-size: 2vw; /* 文字大小根據畫面縮放 */
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 文字超出時變成 ... */
+  width: 10vw; /* 限制最大寬度 */
+  line-height: 35px;
 }
 
-.login:hover {
+h2{
+  margin: 0 0 0 2vw;
+}
+
+.header-login:hover {
   opacity: 0.8; /* 鼠标悬停时改变透明度 */
 }

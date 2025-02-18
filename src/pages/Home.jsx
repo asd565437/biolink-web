@@ -11,7 +11,7 @@ function Home() {
     const navigate = useNavigate();
     return (
 
-        <div id="container">
+        <div id="home_container">
             {/* <img src={Bg} alt="" className="bg" /> */}
             <img src={Logo} alt="" className="logo" />
             <img src={Text} alt="" className="text" />

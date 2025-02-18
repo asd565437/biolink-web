@@ -35,6 +35,49 @@
   z-index: 1; /* 在 friend_list_lab 之下 */
 }
 
+.friend-info {
+  position: absolute;
+  top: 19%;
+  left: 24%;
+  height: 19%;
+  width: 24%;
+  z-index: 100;
+}
+
+.friiend_test {
+  position: absolute;
+  top: 6%;
+  right: 61%;
+  width: 182px;
+  border-radius: 100%;
+}
+
+.friend-info-name {
+  position: absolute;
+  top: 15%;
+  left: 45%;
+  color: rgba(216, 165, 223, 1.0);
+  font-weight: bold;
+}
+
+.friend-info-numabr {
+  position: absolute;
+  top: 44%;
+  left: 45.5%;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.friend-info-date {
+  position: absolute;
+  top: 70%;
+  left: 45.5%;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
 /* 标题样式 */
 .title {
   font-size: 72px;

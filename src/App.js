@@ -22,7 +22,7 @@ function App() {
         'wall_ul_btn.png', 
         'culture_btn.png'
     ]); // 默认图片数组
-    const [title, setTitle] = useState('展示牆');
+    const [title, setTitle] = useState('Biolink');
 
     useEffect(() => {
         document.title = title;

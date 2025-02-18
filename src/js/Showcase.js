@@ -1,18 +1,18 @@
 import axios from 'axios';
 import '../css/Showcase.css';
 import Header from './Header.js';
-import Card from '../showcase/card.svg';
+import Card from '../showcase/card.png';
 import Card_bg from '../showcase/card_bg.png';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import friend_icon from '../showcase/friend_icon.png';
-import score_bar from '../showcase/full_score_bar.svg';
+import score_bar from '../showcase/full_score_bar.png';
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Showcase = () => {
   const [isOriginal, setIsOriginal] = useState(Array(8).fill(true));
   const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
-
+  const [userId, setUserId] = useState("0507"); // 初始化 userId
   // 图片数组
   const images = Array.from({ length: 8 }, () => Card);
   const bg_images = Array.from({ length: 8 }, () => Card_bg);
@@ -39,19 +39,32 @@ const Showcase = () => {
       console.log('所有图片预加载完成');
     });
   }, []);
-
+  useEffect(() => {
+    const fetchCookie = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/get-cookie`, {
+          withCredentials: true,
+        });
+        console.log(response.data.account)
+        console.log(response.data.id)
+        setUserId(response.data.id)
+      } catch (error) {
+        console.error("獲取 Cookie 失敗:", error);
+      }
+    };
+    fetchCookie();
+  }, []);
   // 加载数据
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.post(`${apiUrl}/api/bio`,{});
+        const response = await axios.post(`${apiUrl}/api/bio`, {userId});
         console.log('Fetched data:', response.data);
         return response.data;
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-    };
-
+    }
     loadData();
   }, []);
 
@@ -67,6 +80,10 @@ const Showcase = () => {
   // 跳转到 Friend 页面
   const handleFriend = () => navigate('/friend');
 
+  // 卡片用戶名稱測試
+  const [userName1, setUserName1] = useState("蕭安安"); // 初始化 userName
+  const [userName2, setUserName2] = useState("袁駱駝"); // 初始化 userName
+
   // 样式保持不变
   const pair_styles = {
     container: {
@@ -80,7 +97,7 @@ const Showcase = () => {
     card: {
       position: 'relative',
       width: '100%',
-      minWidth: '250px',
+      minWidth: '350px',
       height: '350px',
       marginTop: '10px',
       display: 'flex',
@@ -150,6 +167,17 @@ const Showcase = () => {
                     onClick={() => handleToggle(index)}
                     style={pair_styles.card}
                   >
+                    {/* 卡片資訊 */}
+                    {isOriginal[index] && (
+                      <div className="card-info">
+                        <p className='card-info-id'>#0001</p>
+                        <div className='name_box'>
+                          <h6 className='card-info-name'>輸不起工作室</h6>
+                        </div>
+                        <p className='card-info-owner'>培養員:{userName1} / {userName2}</p>
+                        <p className='card-info-date'>02.17.25</p>
+                      </div>
+                    )}
                     {/* Card 或背景图片 */}
                     <img
                       src={isOriginal[index] ? cardImage : bg_images[index]}
@@ -186,12 +214,12 @@ const Showcase = () => {
                           alt={`Bar ${index + 1}`}
                           className="img-fluid"
                         />
-                        <img
+                        {/* <img
                           src={bar_images[index]}
                           alt={`Bar ${index + 1}`}
                           className="img-fluid"
                           style={{ marginTop: '11%' }}
-                        />
+                        /> */}
                       </div>
                     )}
                   </div>

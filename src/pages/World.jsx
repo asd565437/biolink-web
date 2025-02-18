@@ -42,9 +42,10 @@ const World = () => {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
 
-    return Array.from({ length: 5 }, (_, index) => ({
+    return Array.from({ length: 7 }, (_, index) => ({
       id: `bio00${index + 1}`,
-      src: `bio_${index + 1}.svg`,
+      src: `bio_0${index + 1}.png`,
+      // src: `bio_${index + 1}.svg`,
       x: Math.random() * screenWidth - screenWidth / 2,
       y: Math.random() * screenHeight - screenHeight,
       scale: Math.random() * (0.1 - 0.05) + 0.05,
@@ -90,7 +91,7 @@ const World = () => {
   }, []);
 
   return (
-    <div id="container">
+    <div id="world_container">
       <Header images={["world_ul_btn.svg", "wall_btn.svg", "culture_btn.svg"]} />
       <div className="world_bio">
         {images.map((image) => (

@@ -3,7 +3,7 @@
     overflow: hidden;
 }
 
-#container {
+#world_container {
     width: 100vw;
     margin: 0 auto;
     background-image: url("../world/world_bg.svg");

@@ -3,7 +3,7 @@
     overflow: hidden;
 }
 
-#container{
+#home_container{
     width: 100%;
     margin: 0 auto;
     background-image: url("../home/home_bg.svg");
