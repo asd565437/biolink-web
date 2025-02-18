@@ -24,8 +24,6 @@ const Confirm = () => {
                 const response = await axios.post(`${apiUrl}/api/get-friend-info`, {
                     id: friendId,
                 });
-    
-                console.log("收到的好友信息:", response.data); // ✅ 先打印数据看看
                 const photoURL = response.data.player?.photoURL;
     
                 if (photoURL) {
@@ -47,16 +45,14 @@ const Confirm = () => {
     useEffect(() => {
         if (!socket || !userId.userId) return;
     
-        console.log("注册 Socket.IO 用户:", userId.userId);
-        socket.emit("invite-friend", userId.userId,friendId);
-    
         const handleInvite = (data) => {
             console.log(`收到邀请: ${data.from} -> ${data.to}`);
             setInvitations((prev) => [...prev, data.from]);
         };
     
-        socket.on("invited", handleInvite);
-    
+        socket.on("invite", handleInvite);
+        console.log("注册 Socket.IO 用户:", userId.userId);
+        socket.emit("invite", userId.userId,friendId);
         return () => {
             console.log("卸载组件，移除 Socket 监听");
             socket.off("invite", handleInvite);
