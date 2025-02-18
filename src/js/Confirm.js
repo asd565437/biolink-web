@@ -7,17 +7,18 @@ import confirm_title from "../confirm/confirm_title.svg";
 import confirm_back from "../confirm/confirm_back.svg";
 import confirm_test from "../confirm/confirm_test.svg";
 import confirm_start from "../confirm/confirm_start.svg";
-import { SocketContext, UserContext } from "../App"; // 引入全局 Socket 上下文
+import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Confirm = () => {
     const location = useLocation();
-    const friendId = location.state?.friendId || "未知用户";
+    const friendId = location.state?.friendId || "未知用戶";
     const [invitations, setInvitations] = useState([]);
     const [photo, setPhoto] = useState(confirm_test);
     const navigate = useNavigate();
-    const socket = useContext(SocketContext); // 使用全局 socket
+    const socket = useContext(SocketContext); // 使用全域 socket
     const userId = useContext(UserContext);
+
     useEffect(() => {
         const handleFriend = async () => {
             try {
@@ -28,40 +29,40 @@ const Confirm = () => {
     
                 if (photoURL) {
                     setPhoto(photoURL);
-                    console.log("设置图片 URL:", photoURL);
+                    console.log("設定圖片 URL:", photoURL);
                 } else {
-                    console.warn("没有找到好友图片，使用默认图片");
+                    console.warn("未找到好友圖片，使用預設圖片");
                     setPhoto(confirm_test);
                 }
             } catch (error) {
-                console.error("获取好友信息失败:", error);
-                alert("请求失败：" + (error.response?.data?.error || error.message));
+                console.error("取得好友資訊失敗:", error);
+                alert("請求失敗：" + (error.response?.data?.error || error.message));
             }
         };
     
         handleFriend();
-    }, [friendId]); // ✅ 只有 friendId 变化时才请求 API
+    }, [friendId]); // ✅ 只有 friendId 變更時才請求 API
     
     useEffect(() => {
         if (!socket || !userId.userId) return;
     
         const handleInvite = (data) => {
             console.log(data)
-            console.log(`收到邀请: ${data.from} -> ${data.to}`);
+            console.log(`收到邀請: ${data.from} -> ${data.to}`);
             setInvitations((prev) => [...prev, data.from]);
         };
     
         socket.on("invite", handleInvite);
         const sendInvite = (toUserId) => {
             if (!socket) {
-                console.error("Socket.IO 未连接，无法发送邀请");
+                console.error("Socket.IO 未連線，無法發送邀請");
                 return;
             }
             console.log(`發送邀請給 ${toUserId}`);
             socket.emit("invite", { from: userId.userId, to: toUserId });
         };
         sendInvite(friendId)
-    }, [socket, userId.userId]); // ✅ 只有 socket 连接成功后才监听事件
+    }, [socket, userId.userId]); // ✅ 只有 socket 連線成功後才監聽事件
     
 
     return (
