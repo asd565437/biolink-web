@@ -1,41 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext} from "react";
 import axios from "axios";
 import "../css/World.css";
 import Header from "../js/Header";
 import id_close from "../world/id_close.svg";
 import id_notice from "../world/id_notice.png";
 import { useLocation } from "react-router-dom";
-
+import { UserContext } from "../App"; // 引入全局 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
-
 // 取得隨機方向
 function getNumber(number) {
   return Math.random() < 0.5 ? -number : number; // 50% 概率为负数
 }
 
 const World = () => {
-  const [userId, setUserId] = useState("0507"); // 初始化 userId
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showIdPopup, setShowIdPopup] = useState(false);
+  const { userId, setUserId } = useContext(UserContext);
   const location = useLocation();
   const popup = location.state?.popup || false ; // 如果沒有數據則給預設值
   useEffect(() => {
-    const fetchCookie = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/get-cookie`, {
-          withCredentials: true,
-        });
-        console.log(response.data.account)
-        console.log(response.data.id)
-        setUserId(response.data.id)
-        if(response.data.account && popup)
-          setShowIdPopup(true); // 只有在取得 cookie 成功後才顯示
-      } catch (error) {
-        console.error("獲取 Cookie 失敗:", error);
-      }
+    const fetchUserData = async () => {
+        try {
+            const response = await axios.get(`${apiUrl}/get-cookie`, {
+                withCredentials: true,
+            });
+            console.log("获取到的用户 ID:", response.data.id);
+            setUserId(response.data.id);
+        } catch (error) {
+            console.error("获取 Cookie 失败:", error);
+        }
     };
-    fetchCookie();
-  }, []);
+    fetchUserData();
+}, []);
 
   // 初始化圖片狀態
   const [images, setImages] = useState(() => {

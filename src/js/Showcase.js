@@ -4,15 +4,17 @@ import Header from './Header.js';
 import Card from '../showcase/card.png';
 import Card_bg from '../showcase/card_bg.png';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import friend_icon from '../showcase/friend_icon.png';
 import score_bar from '../showcase/full_score_bar.png';
+import { UserContext } from "../App"; // 引入全局 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Showcase = () => {
   const [isOriginal, setIsOriginal] = useState(Array(8).fill(true));
   const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
-  const [userId, setUserId] = useState("0507"); // 初始化 userId
+  const userId = useContext(UserContext); // 使用全局 socket
+
   // 图片数组
   const images = Array.from({ length: 8 }, () => Card);
   const bg_images = Array.from({ length: 8 }, () => Card_bg);
@@ -39,26 +41,12 @@ const Showcase = () => {
       console.log('所有图片预加载完成');
     });
   }, []);
-  useEffect(() => {
-    const fetchCookie = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/get-cookie`, {
-          withCredentials: true,
-        });
-        console.log(response.data.account)
-        console.log(response.data.id)
-        setUserId(response.data.id)
-      } catch (error) {
-        console.error("獲取 Cookie 失敗:", error);
-      }
-    };
-    fetchCookie();
-  }, []);
+
   // 加载数据
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.post(`${apiUrl}/api/bio`, {userId});
+        const response = await axios.post(`${apiUrl}/api/bio`, { userId });
         console.log('Fetched data:', response.data);
         return response.data;
       } catch (error) {

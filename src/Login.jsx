@@ -35,7 +35,6 @@ function Login() {
                 googleLogin: true
             });
             if (response.status === 200) {
-                console.log("?")
                 alert("登入成功!");
                 setIsLogin(true);
                 // 設置 Cookie
