@@ -74,7 +74,7 @@ function App() {
 
         newSocket.on("invite", (data) => {
             console.log(data)
-            console.log(`收到邀請: ${data.from} -> ${data.to}`);
+            console.log(`收到邀請: ${data.from}`);
         });
         setSocket(newSocket); // 存储全局 socket 实例
 

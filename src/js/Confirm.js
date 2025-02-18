@@ -25,9 +25,18 @@ const Confirm = () => {
                 const response = await axios.post(`${apiUrl}/api/get-friend-info`, {
                     id: friendId,
                 });
-                const photoURL = response.data.player?.photoURL;
-    
+
+                let photoURL = response.data.player?.photoURL;
+
                 if (photoURL) {
+                    // ✅ 移除 `../`，確保相對路徑正確
+                    photoURL = photoURL.replace(/^(\.\.\/)+/, "");
+    
+                    if (!photoURL.startsWith("http")) {
+                        // ✅ 將相對路徑轉換為 Public 資料夾的完整路徑
+                        photoURL = `${process.env.PUBLIC_URL}/${photoURL}`;
+                    }
+    
                     setPhoto(photoURL);
                     console.log("設定圖片 URL:", photoURL);
                 } else {
@@ -46,13 +55,6 @@ const Confirm = () => {
     useEffect(() => {
         if (!socket || !userId.userId) return;
     
-        const handleInvite = (data) => {
-            console.log(data)
-            console.log(`收到邀請: ${data.from} -> ${data.to}`);
-            setInvitations((prev) => [...prev, data.from]);
-        };
-    
-        socket.on("invite", handleInvite);
         const sendInvite = (toUserId) => {
             if (!socket) {
                 console.error("Socket.IO 未連線，無法發送邀請");
