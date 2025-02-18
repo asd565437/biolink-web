@@ -72,7 +72,7 @@ function App() {
             console.log("Socket.IO 断开连接");
         });
 
-        newSocket.on("invite", () => {
+        newSocket.on("invite", (data) => {
             console.log(data)
             console.log(`收到邀請: ${data.from} -> ${data.to}`);
         });
