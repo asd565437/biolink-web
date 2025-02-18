@@ -45,17 +45,17 @@ const Confirm = () => {
     }, [friendId]); // ✅ 只有 friendId 变化时才请求 API
     
     useEffect(() => {
-        if (!socket || !userId) return;
+        if (!socket || !userId.userId) return;
     
         console.log("注册 Socket.IO 用户:", userId.userId);
-        socket.emit("register", userId.userId);
+        socket.emit("invite-friend", userId.userId,friendId);
     
         const handleInvite = (data) => {
             console.log(`收到邀请: ${data.from} -> ${data.to}`);
             setInvitations((prev) => [...prev, data.from]);
         };
     
-        socket.on("invite", handleInvite);
+        socket.on("invited", handleInvite);
     
         return () => {
             console.log("卸载组件，移除 Socket 监听");
