@@ -71,7 +71,7 @@ function App() {
         newSocket.on("disconnect", () => {
             console.log("Socket.IO 断开连接");
         });
-        socket.on("invite", handleInvite);
+        newSocket.on("invite", handleInvite);
         const handleInvite = (data) => {
             console.log(data)
             console.log(`收到邀請: ${data.from} -> ${data.to}`);
