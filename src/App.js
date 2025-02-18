@@ -71,11 +71,11 @@ function App() {
         newSocket.on("disconnect", () => {
             console.log("Socket.IO 断开连接");
         });
-        newSocket.on("invite", handleInvite);
         const handleInvite = (data) => {
             console.log(data)
             console.log(`收到邀請: ${data.from} -> ${data.to}`);
         };
+        newSocket.on("invite", handleInvite);
         setSocket(newSocket); // 存储全局 socket 实例
 
         return () => {
