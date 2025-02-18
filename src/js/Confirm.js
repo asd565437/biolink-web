@@ -37,7 +37,7 @@ const Confirm = () => {
     useEffect(() => {
         if (!userId) return; // 只有当 userId 不为空时才建立连接
         console.log("创建 Socket.IO 连接...");
-        const newSocket = io("https://biolink-zsl3.onrender.com", {
+        const newSocket = io("https://biolink-service.onrender.com", {
             transports: ["websocket"], // 强制 WebSocket 连接，避免 CORS 问题
             withCredentials: true, // 允许携带 Cookie（如果服务器允许）
         });
