@@ -47,8 +47,8 @@ const Confirm = () => {
     useEffect(() => {
         if (!socket || !userId) return;
     
-        console.log("注册 Socket.IO 用户:", userId);
-        socket.emit("register", userId);
+        console.log("注册 Socket.IO 用户:", userId.userId);
+        socket.emit("register", userId.userId);
     
         const handleInvite = (data) => {
             console.log(`收到邀请: ${data.from} -> ${data.to}`);
@@ -61,7 +61,7 @@ const Confirm = () => {
             console.log("卸载组件，移除 Socket 监听");
             socket.off("invite", handleInvite);
         };
-    }, [socket, userId]); // ✅ 只有 socket 连接成功后才监听事件
+    }, [socket, userId.userId]); // ✅ 只有 socket 连接成功后才监听事件
     
 
     return (
