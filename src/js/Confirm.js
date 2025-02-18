@@ -7,6 +7,7 @@ import confirm_back from "../confirm/confirm_back.svg";
 import confirm_test from "../confirm/confirm_test.svg";
 import confirm_start from "../confirm/confirm_start.svg";
 import { SocketContext, UserContext } from "../App"; // 引入全局 Socket 上下文
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const Confirm = () => {
     const location = useLocation();
@@ -15,6 +16,32 @@ const Confirm = () => {
     const navigate = useNavigate();
     const socket = useContext(SocketContext); // 使用全局 socket
     const userId = useContext(UserContext);
+    useEffect(()=>{
+        const handleFriend = async () => {
+            try {
+                const response = await fetch(`${apiUrl}/api/get-friend-info`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        id: userId,
+                    }),
+                });
+                if (response.ok) {
+                    alert("註冊成功!");
+                    console.log(response.data);
+                } else {
+                    const errorData = await response.json();
+                    alert("註冊失敗：" + errorData.error);
+                }
+            } catch (error) {
+                alert("網路錯誤，請稍後再試！");
+                console.error(error);
+            }
+        };
+        handleFriend();
+    })
     useEffect(() => {
         if (!socket) return;
         socket.on("invite", (data) => {
