@@ -51,12 +51,15 @@ const Confirm = () => {
         };
     
         socket.on("invite", handleInvite);
-        console.log("注册 Socket.IO 用户:", userId.userId);
-        socket.emit("invite", userId.userId,friendId);
-        return () => {
-            console.log("卸载组件，移除 Socket 监听");
-            socket.off("invite", handleInvite);
+        const sendInvite = (toUserId) => {
+            if (!socket) {
+                console.error("Socket.IO 未连接，无法发送邀请");
+                return;
+            }
+            console.log(`发送邀请给 ${toUserId}`);
+            socket.emit("invite", { from: userId.userId, to: toUserId });
         };
+        sendInvite(friendId)
     }, [socket, userId.userId]); // ✅ 只有 socket 连接成功后才监听事件
     
 
