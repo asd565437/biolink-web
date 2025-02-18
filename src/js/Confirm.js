@@ -18,52 +18,51 @@ const Confirm = () => {
     const navigate = useNavigate();
     const socket = useContext(SocketContext); // 使用全局 socket
     const userId = useContext(UserContext);
-    useEffect(()=>{
+    useEffect(() => {
         const handleFriend = async () => {
             try {
                 const response = await axios.post(`${apiUrl}/api/get-friend-info`, {
                     id: friendId,
                 });
-                setPhoto(response.data.player.photoURL)
-                console.log(photo);
-            } catch (error) {
-                if (error.response) {
-                    // 服务器返回错误
-                    alert("邀請失敗：" + error.response.data.error);
-                    console.error("响应错误:", error.response.data);
+    
+                console.log("收到的好友信息:", response.data); // ✅ 先打印数据看看
+                const photoURL = response.data.player?.photoURL;
+    
+                if (photoURL) {
+                    setPhoto(photoURL);
+                    console.log("设置图片 URL:", photoURL);
                 } else {
-                    // 网络错误或其他问题
-                    alert("请求失败：" + error.message);
-                    console.error("请求失败:", error);
+                    console.warn("没有找到好友图片，使用默认图片");
+                    setPhoto(confirm_test);
                 }
-            }            
+            } catch (error) {
+                console.error("获取好友信息失败:", error);
+                alert("请求失败：" + (error.response?.data?.error || error.message));
+            }
         };
+    
         handleFriend();
-    })
+    }, [friendId]); // ✅ 只有 friendId 变化时才请求 API
+    
     useEffect(() => {
-        if (!socket) return;
-        socket.on("invite", (data) => {
+        if (!socket || !userId) return;
+    
+        console.log("注册 Socket.IO 用户:", userId);
+        socket.emit("register", userId);
+    
+        const handleInvite = (data) => {
             console.log(`收到邀请: ${data.from} -> ${data.to}`);
             setInvitations((prev) => [...prev, data.from]);
-        });
-
-        return () => {
-            socket.off("invite");
         };
-    }, [socket]);
-
-    useEffect(() => {
-        sendInvite(friendId);
-    }, [socket]);
-
-    const sendInvite = (toUserId) => {
-        if (!socket) {
-            console.error("Socket.IO 未连接，无法发送邀请");
-            return;
-        }
-        console.log(`发送邀请给 ${toUserId}`);
-        socket.emit("invite", { from: userId.userId, to: toUserId });
-    };
+    
+        socket.on("invite", handleInvite);
+    
+        return () => {
+            console.log("卸载组件，移除 Socket 监听");
+            socket.off("invite", handleInvite);
+        };
+    }, [socket, userId]); // ✅ 只有 socket 连接成功后才监听事件
+    
 
     return (
         <div className="confirm">
@@ -73,10 +72,6 @@ const Confirm = () => {
                 <img src={confirm_title} alt="confirm_title" className="confirm_title" />
                 <img src={photo} alt="confirm_test" className="confirm_test" />
                 <img src={confirm_start} alt="confirm_start" className="confirm_start"  />
-                <h3>收到的好友邀请：</h3>
-                {invitations.length > 0 ? invitations.map((invite, index) => (
-                    <p key={index}>{invite} 邀請了你</p>
-                )) : <p>邀请</p>}
             </main>
         </div>
     );
