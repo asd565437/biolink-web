@@ -55,7 +55,7 @@ const Confirm = () => {
     const sendInvite = (toUserId) => {
         console.log(`发送邀请给 ${toUserId}`);
         const socket = io("https://biolink-zsl3.onrender.com");
-        socket.emit("invite", { from: friendId, to: toUserId });
+        socket.emit("invite", { from: userId, to: toUserId });
     };
 
     return (
@@ -65,7 +65,7 @@ const Confirm = () => {
                 <img src={confirm_back} alt="confirm_back" className="confirm_back" onClick={() => navigate(-1)} />
                 <img src={confirm_title} alt="confirm_title" className="confirm_title" />
                 <img src={confirm_test} alt="confirm_test" className="confirm_test" />
-                <img src={confirm_start} alt="confirm_start" className="confirm_start" onClick={() => sendInvite(userId)} />
+                <img src={confirm_start} alt="confirm_start" className="confirm_start" onClick={() => sendInvite(friendId)} />
                 <h3>收到的好友邀请：</h3>
                 {invitations.length > 0 ? invitations.map((invite, index) => (
                     <p key={index}>{invite} 邀请了你</p>
