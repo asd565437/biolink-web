@@ -6,7 +6,9 @@ import confirm_title from '../confirm/confirm_title.svg';
 import confirm_back from '../confirm/confirm_back.svg';
 import confirm_test from '../confirm/confirm_test.svg';
 import confirm_start from '../confirm/confirm_start.svg';
+import axios from "axios";
 import { io } from "socket.io-client";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const Confirm = () => {
     const [userId, setUserId] = useState("0507"); // 初始化 userId
@@ -23,8 +25,6 @@ const Confirm = () => {
             console.log(response.data.account)
             console.log(response.data.id)
             setUserId(response.data.id)
-            if(response.data.account && popup)
-              setShowIdPopup(true); // 只有在取得 cookie 成功後才顯示
           } catch (error) {
             console.error("獲取 Cookie 失敗:", error);
           }
