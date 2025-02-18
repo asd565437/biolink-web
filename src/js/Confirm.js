@@ -9,18 +9,35 @@ import confirm_start from '../confirm/confirm_start.svg';
 import { io } from "socket.io-client";
 
 const Confirm = () => {
+    const [userId, setUserId] = useState("0507"); // 初始化 userId
     const location = useLocation();
     const friendId = location.state?.friendId || "未知用户"; // 避免 state 为空时报错
     const [invitations, setInvitations] = useState([]);
     const navigate = useNavigate();
-
+    useEffect(() => {
+        const fetchCookie = async () => {
+          try {
+            const response = await axios.get(`${apiUrl}/get-cookie`, {
+              withCredentials: true,
+            });
+            console.log(response.data.account)
+            console.log(response.data.id)
+            setUserId(response.data.id)
+            if(response.data.account && popup)
+              setShowIdPopup(true); // 只有在取得 cookie 成功後才顯示
+          } catch (error) {
+            console.error("獲取 Cookie 失敗:", error);
+          }
+        };
+        fetchCookie();
+      }, []);
     useEffect(() => {
         console.log("创建 Socket.IO 连接...");
         const socket = io("https://biolink-zsl3.onrender.com");
 
         socket.on("connect", () => {
             console.log("Socket.IO 连接成功");
-            socket.emit("register", friendId);
+            socket.emit("register", userId);
         });
 
         socket.on("invite", (data) => {
@@ -48,7 +65,7 @@ const Confirm = () => {
                 <img src={confirm_back} alt="confirm_back" className="confirm_back" onClick={() => navigate(-1)} />
                 <img src={confirm_title} alt="confirm_title" className="confirm_title" />
                 <img src={confirm_test} alt="confirm_test" className="confirm_test" />
-                <img src={confirm_start} alt="confirm_start" className="confirm_start" onClick={() => sendInvite("user456")} />
+                <img src={confirm_start} alt="confirm_start" className="confirm_start" onClick={() => sendInvite(userId)} />
                 <h3>收到的好友邀请：</h3>
                 {invitations.length > 0 ? invitations.map((invite, index) => (
                     <p key={index}>{invite} 邀请了你</p>
