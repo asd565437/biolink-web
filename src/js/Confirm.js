@@ -46,6 +46,7 @@ const Confirm = () => {
         if (!socket || !userId.userId) return;
     
         const handleInvite = (data) => {
+            console.log(data)
             console.log(`收到邀请: ${data.from} -> ${data.to}`);
             setInvitations((prev) => [...prev, data.from]);
         };
@@ -56,7 +57,7 @@ const Confirm = () => {
                 console.error("Socket.IO 未连接，无法发送邀请");
                 return;
             }
-            console.log(`发送邀请给 ${toUserId}`);
+            console.log(`發送邀請給 ${toUserId}`);
             socket.emit("invite", { from: userId.userId, to: toUserId });
         };
         sendInvite(friendId)
