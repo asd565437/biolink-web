@@ -8,53 +8,65 @@ import confirm_test from '../confirm/confirm_test.svg';
 import confirm_start from '../confirm/confirm_start.svg';
 import axios from "axios";
 import { io } from "socket.io-client";
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Confirm = () => {
-    const [userId, setUserId] = useState("0507"); // 初始化 userId
+    const [userId, setUserId] = useState(null); // 先设为空，等获取 Cookie 后再赋值
     const location = useLocation();
     const friendId = location.state?.friendId || "未知用户"; // 避免 state 为空时报错
     const [invitations, setInvitations] = useState([]);
     const navigate = useNavigate();
+    const [socket, setSocket] = useState(null); // 保存 socket 连接实例
+
     useEffect(() => {
         const fetchCookie = async () => {
-          try {
-            const response = await axios.get(`${apiUrl}/get-cookie`, {
-              withCredentials: true,
-            });
-            console.log(response.data.account)
-            console.log(response.data.id)
-            setUserId(response.data.id)
-          } catch (error) {
-            console.error("獲取 Cookie 失敗:", error);
-          }
+            try {
+                const response = await axios.get(`${apiUrl}/get-cookie`, {
+                    withCredentials: true,
+                });
+                console.log("用户 ID:", response.data.id);
+                setUserId(response.data.id);
+            } catch (error) {
+                console.error("获取 Cookie 失败:", error);
+            }
         };
         fetchCookie();
-      }, []);
-    useEffect(() => {
-        console.log("创建 Socket.IO 连接...");
-        const socket = io("https://biolink-zsl3.onrender.com");
+    }, []);
 
-        socket.on("connect", () => {
-            console.log("Socket.IO 连接成功");
-            socket.emit("register", userId);
+    useEffect(() => {
+        if (!userId) return; // 只有当 userId 不为空时才建立连接
+        console.log("创建 Socket.IO 连接...");
+        const newSocket = io("https://biolink-zsl3.onrender.com", {
+            transports: ["websocket"], // 强制 WebSocket 连接，避免 CORS 问题
+            withCredentials: true, // 允许携带 Cookie（如果服务器允许）
         });
 
-        socket.on("invite", (data) => {
+        newSocket.on("connect", () => {
+            console.log("Socket.IO 连接成功:", newSocket.id);
+            newSocket.emit("register", userId);
+        });
+
+        newSocket.on("invite", (data) => {
             console.log(`收到邀请: ${data.from} -> ${data.to}`);
             setInvitations((prev) => [...prev, data.from]);
         });
 
+        setSocket(newSocket); // 存储 socket 实例，方便后续使用
+
         return () => {
             console.log("断开 Socket.IO 连接");
-            socket.disconnect();
+            newSocket.disconnect();
         };
-    }, [friendId]); 
+    }, [userId]); // 监听 userId，确保获取到后再连接
 
     // 发送好友邀请
     const sendInvite = (toUserId) => {
+        if (!socket) {
+            console.error("Socket.IO 未连接，无法发送邀请");
+            return;
+        }
         console.log(`发送邀请给 ${toUserId}`);
-        const socket = io("https://biolink-zsl3.onrender.com");
         socket.emit("invite", { from: userId, to: toUserId });
     };
 
