@@ -30,7 +30,7 @@ export const UserContext = createContext(null);
 export const ModalContext = createContext(null);
 
 
-const GlobalModal = ({ content, onClose, handleStart, handleReturn, userId }) => {
+const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) => {
     const [nickName, setNickName] = useState();
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, userId }) =>
         const handleFriend = async () => {
             try {
                 const response = await axios.post(`${apiUrl}/api/get-friend-info`, {
-                    id: userId,
+                    id: friendId,
                 });
                 setNickName(response.data.player?.nickName);
             } catch (error) {
@@ -49,7 +49,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, userId }) =>
         };
 
         handleFriend();
-    }, [userId]);
+    }, [friendId]);
 
     if (!content) return null;
 
@@ -134,7 +134,8 @@ function App() {
     );
 }
 
-const ModalWrapper = ({ userId, onClose, roomId }) => {
+const ModalWrapper = ({ friendId, onClose, roomId }) => {
+    const userId = useContext(UserContext);
     const navigate = useNavigate();
     const socket = useContext(SocketContext); // ✅ 在组件最顶层调用 useContext
 
@@ -142,7 +143,7 @@ const ModalWrapper = ({ userId, onClose, roomId }) => {
         navigate("/question");
         onClose();
         if (socket) {
-            socket.emit("accept-invite", { userId, roomId });
+            socket.emit("accept-invite", { friendId, roomId , userId});
         }
     };
 
