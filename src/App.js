@@ -35,13 +35,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
 
     useEffect(() => {
         if (nickName) return;
-        const socket = useContext(SocketContext);
-        socket.on("joined-room", ({ users, roomId }) => {
-            console.log("以下用戶已加入房間:", users);
-            if (users.includes(userId)) {
-                navigate(`/question/${roomId}`);
-            }
-        });
+
         const handleFriend = async () => {
             try {
                 const response = await axios.post(`${apiUrl}/api/get-friend-info`, {
