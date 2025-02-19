@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useContext} from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import axios from "axios";
@@ -28,6 +28,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 export const SocketContext = createContext(null);
 export const UserContext = createContext(null);
 export const ModalContext = createContext(null);
+
 
 const GlobalModal = ({ content, onClose, handleStart, handleReturn, userId }) => {
     const [nickName, setNickName] = useState();
@@ -95,7 +96,7 @@ function App() {
         newSocket.on("invite", (data) => {
             setUserName(data.from);
             setModalContent(() => (
-                <ModalWrapper userId={data.from} onClose={() => setModalContent(null)} />
+                <ModalWrapper userId={data.from} roomId={data.roomId} onClose={() => setModalContent(null)} />
             ));
         });
 
@@ -133,17 +134,28 @@ function App() {
     );
 }
 
-const ModalWrapper = ({ userId, onClose }) => {
+const ModalWrapper = ({ userId, onClose, roomId }) => {
     const navigate = useNavigate();
+    const socket = useContext(SocketContext); // ✅ 在组件最顶层调用 useContext
+
+    const handleStart = () => {
+        navigate("/question");
+        onClose();
+        if (socket) {
+            socket.emit("accept-invite", { userId, roomId });
+        }
+    };
+
     return (
         <GlobalModal
             content={userId}
             onClose={onClose}
-            handleStart={() => { navigate("/question"); onClose(); }}
+            handleStart={handleStart}
             handleReturn={onClose}
             userId={userId}
         />
     );
 };
+
 
 export default App;
