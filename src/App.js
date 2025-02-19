@@ -137,16 +137,16 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
     const { userId } = useContext(UserContext); // 确保正确获取 userId
     const navigate = useNavigate();
     const socket = useContext(SocketContext);
+    socket.once("joined-room", ({ users, roomId }) => {
+        console.log("以下用戶已加入房間:", users);
+        if (users.includes(userId)) {
+            navigate(`/question/${roomId}`);
+        }
+    });
     const handleStart = () => {
         onClose();
         if (socket) {
             socket.emit("accept-invite", { userId, friendId, roomId });
-
-            // 使用 once 以防止多次监听
-            socket.once("joined-room", ({ users, roomId }) => {
-                console.log("房间内的用户:", users);
-                navigate(`/question/${roomId}`);
-            });
         }
     };
 
