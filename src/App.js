@@ -128,6 +128,7 @@ function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/photo" element={<Photo />} />
+                            <Route path="/question/:roomId" element={<Question />} />
                         </Routes>
                         {modalContent}
                     </Router>

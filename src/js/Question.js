@@ -1,6 +1,7 @@
 import "../css/Question.css";
-import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useNavigate,useParams } from "react-router-dom";
+import React, { useEffect, useState,useContext } from "react";
+import { SocketContext, UserContext } from "../App";
 import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
 import check from "../question/check_answer.svg";
@@ -14,6 +15,8 @@ for (let i = numbers.length - 1; i > 0; i--) {
 const question_ids = numbers.slice(0, 5);
 
 const Question = () => {
+  const { roomId } = useParams();
+  const socket = useContext(SocketContext);
   const navigate = useNavigate();
   const [buttonStates, setButtonStates] = useState({
     P1_A: false,
@@ -34,7 +37,18 @@ const Question = () => {
     "progress_bar_4.svg",
     "progress_bar_5.svg",
   ];
+  useEffect(() => {
+    if (!socket || !roomId) return;
 
+    socket.on("joined-room", ({ userId }) => {
+        console.log(`${userId} 加入了房间 ${roomId}`);
+    });
+
+    return () => {
+        socket.off("joined-room");
+    };
+
+}, [socket, roomId]);
   useEffect(() => {
     loadQuestion(0);
   }, []);
