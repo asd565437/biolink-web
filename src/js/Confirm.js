@@ -64,6 +64,12 @@ const Confirm = () => {
                 return;
             }
             console.log(`發送邀請給 ${toUserId}`);
+            socket.on("joined-room", ({ users, roomId }) => {
+                console.log("以下用戶已加入房間:", users);
+                if (users.includes(userId)) {
+                    navigate(`/question/${roomId}`);
+                }
+            });
             socket.emit("invite", { from: userId.userId, to: toUserId });
         };
         sendInvite(friendId)
