@@ -16,6 +16,7 @@ const question_ids = numbers.slice(0, 5);
 
 const Question = () => {
   const { roomId } = useParams();
+  console.log(roomId)
   const socket = useContext(SocketContext);
   const navigate = useNavigate();
   const [buttonStates, setButtonStates] = useState({

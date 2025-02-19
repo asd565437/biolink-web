@@ -146,8 +146,11 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
     const handleStart = () => {
         onClose();
         if (socket) {
-            socket.emit("accept-invite", { friendId, roomId , userId});
-            navigate(`/question/${roomId}`);
+            socket.emit("accept-invite", { userId, friendId, roomId });
+            socket.on("joined-room", ({ users }) => {
+                console.log("房间内的用户:", users);
+                navigate(`/question/${roomId}`);
+            });
         }
     };
 
