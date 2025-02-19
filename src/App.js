@@ -30,19 +30,41 @@ export const UserContext = createContext(null);
 export const ModalContext = createContext(null);
 
 const GlobalModal = ({ content, onClose, handleStart, handleReturn, userName }) => {
+    const [nickName, setNickName] = useState(userName);
+
+    useEffect(() => {
+        if (!userName) return;
+
+        const handleFriend = async () => {
+            try {
+                const response = await axios.post(`${apiUrl}/api/get-friend-info`, {
+                    id: userName,
+                });
+                setNickName(response.data.player?.nickName || userName);
+            } catch (error) {
+                console.error("取得好友資訊失敗:", error);
+                alert("請求失敗：" + (error.response?.data?.error || error.message));
+            }
+        };
+
+        handleFriend();
+    }, [userName]);
+
     if (!content) return null;
+
     return (
         <div className="invite">
             <div className="invite-content">
                 <img src={invite_box} alt="invite_box" className="invite_box" />
-                <p className="invite_title">{userName}&emsp;邀請您一起進行培養菌種</p>
+                <p className="invite_title">{nickName}&emsp;邀請您一起進行培養菌種</p>
                 <img src={invite_test} alt="invite_test" className="invite_test" />
-                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleStart(); setTimeout(onClose, 0); }} />
-                <img src={invite_no} alt="invite_no" className="invite_no" onClick={() => setTimeout(onClose, 0)} />
+                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleStart(); onClose(); }} />
+                <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
             </div>
         </div>
     );
 };
+
 
 function App() {
     const [userId, setUserId] = useState(null);
@@ -117,8 +139,8 @@ const ModalWrapper = ({ userName, onClose }) => {
         <GlobalModal
             content={userName}
             onClose={onClose}
-            handleStart={() => { navigate("/question"); setTimeout(onClose, 0); }}
-            handleReturn={() => setTimeout(onClose, 0)}
+            handleStart={() => { navigate("/question"); onClose(); }}
+            handleReturn={onClose}
             userName={userName}
         />
     );
