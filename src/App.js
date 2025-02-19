@@ -143,7 +143,6 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
     const socket = useContext(SocketContext); // ✅ 在组件最顶层调用 useContext
 
     const handleStart = () => {
-        navigate("/question");
         onClose();
         if (socket) {
             socket.emit("accept-invite", { friendId, roomId , userId});
