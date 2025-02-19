@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext, useContext} from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import axios from "axios";
@@ -29,128 +29,9 @@ export const SocketContext = createContext(null);
 export const UserContext = createContext(null);
 export const ModalContext = createContext(null);
 
-function App() {
-    return (
-        <Router>
-            <MainApp />
-        </Router>
-    );
-}
 
-function MainApp() {
-    const navigate = useNavigate(); // ✅ 现在 useNavigate() 在 Router 内部调用
-    const [userId, setUserId] = useState(null);
-    const [socket, setSocket] = useState(null);
-    const [showModal, setShowModal] = useState(false);
-    const [modalData, setModalData] = useState(null);
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get(`${apiUrl}/get-cookie`, {
-                    withCredentials: true,
-                });
-                setUserId(response.data.id);
-            } catch (error) {
-                console.error("获取 Cookie 失败:", error);
-            }
-        };
-        fetchUserData();
-    }, []);
-
-    useEffect(() => {
-        if (!userId) return;
-
-        const newSocket = io(apiUrl, { transports: ["websocket"], withCredentials: true });
-
-        newSocket.on("invite", (data) => {
-            console.log("收到邀请:", data);
-            setModalData({ friendId: data.from, roomId: data.roomId });
-            setShowModal(true);
-        });
-
-        newSocket.on("joined-room", ({ users, roomId }) => {
-            console.log("房间内的用户:", users);
-            if (users.includes(userId)) {
-                navigate(`/question/${roomId}`);
-            }
-        });
-
-        setSocket(newSocket);
-
-        return () => {
-            newSocket.off("invite");
-            newSocket.off("joined-room");
-            newSocket.disconnect();
-        };
-    }, [userId, navigate]);
-
-    return (
-        <UserContext.Provider value={{ userId, setUserId }}>
-            <SocketContext.Provider value={socket}>
-                <ModalContext.Provider value={{ setShowModal, setModalData }}>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/wall" element={<Showcase />} />
-                        <Route path="/friend" element={<Friend />} />
-                        <Route path="/addFriend" element={<AddFriend />} />
-                        <Route path="/confirmFriend" element={<ConfirmFriend />} />
-                        <Route path="/connect" element={<Connect />} />
-                        <Route path="/confirm" element={<Confirm />} />
-                        <Route path="/invite" element={<Invite />} />
-                        <Route path="/culture" element={<Culture />} />
-                        <Route path="/question" element={<Question />} />
-                        <Route path="/reward" element={<Reward />} />
-                        <Route path="/world" element={<World />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/photo" element={<Photo />} />
-                        <Route path="/question/:roomId" element={<Question />} />
-                    </Routes>
-
-                    {/* ✅ 确保 modalContent 正确渲染 */}
-                    {showModal && modalData && (
-                        <ModalWrapper
-                            friendId={modalData.friendId}
-                            roomId={modalData.roomId}
-                            onClose={() => setShowModal(false)}
-                        />
-                    )}
-                </ModalContext.Provider>
-            </SocketContext.Provider>
-        </UserContext.Provider>
-    );
-}
-
-const ModalWrapper = ({ friendId, onClose, roomId }) => {
-    const { userId } = useContext(UserContext);
-    const socket = useContext(SocketContext);
-    const navigate = useNavigate();
-
-    const handleStart = () => {
-        onClose();
-        if (socket) {
-            socket.emit("accept-invite", { userId, friendId, roomId });
-
-            socket.once("joined-room", ({ users }) => {
-                console.log("房间内的用户:", users);
-                navigate(`/question/${roomId}`);
-            });
-        }
-    };
-
-    return (
-        <GlobalModal
-            content={userId}
-            onClose={onClose}
-            handleStart={handleStart}
-            friendId={friendId}
-        />
-    );
-};
-
-const GlobalModal = ({ content, onClose, handleStart, friendId }) => {
-    const [nickName, setNickName] = useState("");
+const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) => {
+    const [nickName, setNickName] = useState();
 
     useEffect(() => {
         if (nickName) return;
@@ -184,5 +65,108 @@ const GlobalModal = ({ content, onClose, handleStart, friendId }) => {
         </div>
     );
 };
+
+
+function App() {
+    const [userId, setUserId] = useState(null);
+    const [socket, setSocket] = useState(null);
+    const [modalContent, setModalContent] = useState(null);
+    const [userName, setUserName] = useState(null);
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get(`${apiUrl}/get-cookie`, {
+                    withCredentials: true,
+                });
+                setUserId(response.data.id);
+            } catch (error) {
+                console.error("获取 Cookie 失败:", error);
+            }
+        };
+        fetchUserData();
+    }, []);
+
+    useEffect(() => {
+        if (!userId) return;
+
+        const newSocket = io(apiUrl, { transports: ["websocket"], withCredentials: true });
+        newSocket.on("connect", () => newSocket.emit("register", userId));
+        newSocket.on("disconnect", () => console.log("Socket.IO 断开连接"));
+        newSocket.on("invite", (data) => {
+            setUserName(data.from);
+            setModalContent(() => (
+                <ModalWrapper friendId={data.from} roomId={data.roomId} onClose={() => setModalContent(null)} />
+            ));
+        });
+        setSocket(newSocket);
+        return () => newSocket.disconnect();
+    }, [userId]);
+
+    return (
+        <UserContext.Provider value={{ userId, setUserId }}>
+            <SocketContext.Provider value={socket}>
+                <ModalContext.Provider value={{ setModalContent }}>
+                    <Router>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/wall" element={<Showcase />} />
+                            <Route path="/friend" element={<Friend />} />
+                            <Route path="/addFriend" element={<AddFriend />} />
+                            <Route path="/confirmFriend" element={<ConfirmFriend />} />
+                            <Route path="/connect" element={<Connect />} />
+                            <Route path="/confirm" element={<Confirm />} />
+                            <Route path="/invite" element={<Invite />} />
+                            <Route path="/culture" element={<Culture />} />
+                            <Route path="/question" element={<Question />} />
+                            <Route path="/reward" element={<Reward />} />
+                            <Route path="/world" element={<World />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/photo" element={<Photo />} />
+                            <Route path="/question/:roomId" element={<Question />} />
+                        </Routes>
+                        {modalContent}
+                    </Router>
+                </ModalContext.Provider>
+            </SocketContext.Provider>
+        </UserContext.Provider>
+    );
+}
+
+const ModalWrapper = ({ friendId, onClose, roomId }) => {
+    const { userId } = useContext(UserContext); // 确保正确获取 userId
+    const navigate = useNavigate();
+    const socket = useContext(SocketContext);
+    socket.on("joined-room", ({ users, roomId }) => {
+        console.log("以下用戶已加入房間:", users);
+        if (users.includes(userId)) {
+            navigate(`/question/${roomId}`);
+        }
+    });
+    const handleStart = () => {
+        onClose();
+        if (socket) {
+            socket.emit("accept-invite", { userId, friendId, roomId });
+
+            // 使用 once 以防止多次监听
+            socket.once("joined-room", ({ users }) => {
+                console.log("房间内的用户:", users);
+                navigate(`/question/${roomId}`);
+            });
+        }
+    };
+
+    return (
+        <GlobalModal
+            content={userId}
+            onClose={onClose}
+            handleStart={handleStart}
+            handleReturn={onClose}
+            friendId={friendId}
+        />
+    );
+};
+
+
 
 export default App;
