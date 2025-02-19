@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext, useContext} from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import axios from "axios";
@@ -136,15 +136,14 @@ function App() {
 const ModalWrapper = ({ friendId, onClose, roomId }) => {
     const { userId } = useContext(UserContext); // 确保正确获取 userId
     const navigate = useNavigate();
-    const { socket,setSocket} = useContext(SocketContext);
-    const newSocket = socket;
-    newSocket.once("joined-room", ({ users, roomId }) => {
+    const socket = useContext(SocketContext);
+    console.log("?");
+    socket.on("joined-room", ({ users, roomId }) => {
         console.log("以下用戶已加入房間:", users);
-        if (users.includes(userId.userId)) {
+        if (users.includes(userId)) {
             navigate(`/question/${roomId}`);
         }
     });
-    setSocket(newSocket);
     const handleStart = () => {
         onClose();
         if (socket) {
