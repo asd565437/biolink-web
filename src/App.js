@@ -72,7 +72,7 @@ function App() {
     const [socket, setSocket] = useState(null);
     const [modalContent, setModalContent] = useState(null);
     const [userName, setUserName] = useState(null);
-    
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -99,10 +99,12 @@ function App() {
                 <ModalWrapper friendId={data.from} roomId={data.roomId} onClose={() => setModalContent(null)} />
             ));
         });
-        newSocket.on("joined-room", ({ users }) => {
+        newSocket.on("joined-room", ({ users, roomId }) => {
             console.log("以下用戶已加入房間:", users);
-            // 更新 UI 或執行相應的邏輯
-          });
+            if (users.includes(userId)) {
+                navigate(`/question/${roomId}`);
+            }
+        });
         setSocket(newSocket);
         return () => newSocket.disconnect();
     }, [userId]);
@@ -139,15 +141,17 @@ function App() {
 }
 
 const ModalWrapper = ({ friendId, onClose, roomId }) => {
-    const userId = useContext(UserContext);
+    const { userId } = useContext(UserContext); // 确保正确获取 userId
     const navigate = useNavigate();
-    const socket = useContext(SocketContext); // ✅ 在组件最顶层调用 useContext
+    const socket = useContext(SocketContext);
 
     const handleStart = () => {
         onClose();
         if (socket) {
             socket.emit("accept-invite", { userId, friendId, roomId });
-            socket.on("joined-room", ({ users }) => {
+
+            // 使用 `once` 以防止多次监听
+            socket.once("joined-room", ({ users }) => {
                 console.log("房间内的用户:", users);
                 navigate(`/question/${roomId}`);
             });
@@ -164,6 +168,7 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
         />
     );
 };
+
 
 
 export default App;
