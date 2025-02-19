@@ -29,18 +29,18 @@ export const SocketContext = createContext(null);
 export const UserContext = createContext(null);
 export const ModalContext = createContext(null);
 
-const GlobalModal = ({ content, onClose, handleStart, handleReturn, userName }) => {
-    const [nickName, setNickName] = useState(userName);
+const GlobalModal = ({ content, onClose, handleStart, handleReturn, userId }) => {
+    const [nickName, setNickName] = useState();
 
     useEffect(() => {
-        if (!userName) return;
+        if (nickName) return;
 
         const handleFriend = async () => {
             try {
                 const response = await axios.post(`${apiUrl}/api/get-friend-info`, {
-                    id: userName,
+                    id: userId,
                 });
-                setNickName(response.data.player?.nickName || userName);
+                setNickName(response.data.player?.nickName);
             } catch (error) {
                 console.error("取得好友資訊失敗:", error);
                 alert("請求失敗：" + (error.response?.data?.error || error.message));
@@ -95,7 +95,7 @@ function App() {
         newSocket.on("invite", (data) => {
             setUserName(data.from);
             setModalContent(() => (
-                <ModalWrapper userName={data.from} onClose={() => setModalContent(null)} />
+                <ModalWrapper userId={data.from} onClose={() => setModalContent(null)} />
             ));
         });
 
@@ -133,15 +133,15 @@ function App() {
     );
 }
 
-const ModalWrapper = ({ userName, onClose }) => {
+const ModalWrapper = ({ userId, onClose }) => {
     const navigate = useNavigate();
     return (
         <GlobalModal
-            content={userName}
+            content={userId}
             onClose={onClose}
             handleStart={() => { navigate("/question"); onClose(); }}
             handleReturn={onClose}
-            userName={userName}
+            userId={userId}
         />
     );
 };
