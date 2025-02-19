@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext} from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import axios from "axios";
@@ -28,10 +28,10 @@ const apiUrl = process.env.REACT_APP_API_URL;
 export const SocketContext = createContext(null);
 export const UserContext = createContext(null);
 export const ModalContext = createContext(null);
+export const NavigationContext = createContext(null);
 
-
-const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) => {
-    const [nickName, setNickName] = useState();
+const GlobalModal = ({ content, onClose, handleStart, friendId }) => {
+    const [nickName, setNickName] = useState("");
 
     useEffect(() => {
         if (nickName) return;
@@ -66,13 +66,38 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
     );
 };
 
+const AppRouter = () => {
+    const navigate = useNavigate();
+
+    return (
+        <NavigationContext.Provider value={navigate}>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/wall" element={<Showcase />} />
+                <Route path="/friend" element={<Friend />} />
+                <Route path="/addFriend" element={<AddFriend />} />
+                <Route path="/confirmFriend" element={<ConfirmFriend />} />
+                <Route path="/connect" element={<Connect />} />
+                <Route path="/confirm" element={<Confirm />} />
+                <Route path="/invite" element={<Invite />} />
+                <Route path="/culture" element={<Culture />} />
+                <Route path="/question" element={<Question />} />
+                <Route path="/reward" element={<Reward />} />
+                <Route path="/world" element={<World />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/photo" element={<Photo />} />
+                <Route path="/question/:roomId" element={<Question />} />
+            </Routes>
+        </NavigationContext.Provider>
+    );
+};
 
 function App() {
     const [userId, setUserId] = useState(null);
     const [socket, setSocket] = useState(null);
     const [modalContent, setModalContent] = useState(null);
-    const [userName, setUserName] = useState(null);
-    const navigate = useNavigate();
+    const navigate = useContext(NavigationContext);
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -94,7 +119,6 @@ function App() {
         newSocket.on("connect", () => newSocket.emit("register", userId));
         newSocket.on("disconnect", () => console.log("Socket.IO 断开连接"));
         newSocket.on("invite", (data) => {
-            setUserName(data.from);
             setModalContent(() => (
                 <ModalWrapper friendId={data.from} roomId={data.roomId} onClose={() => setModalContent(null)} />
             ));
@@ -114,24 +138,7 @@ function App() {
             <SocketContext.Provider value={socket}>
                 <ModalContext.Provider value={{ setModalContent }}>
                     <Router>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/wall" element={<Showcase />} />
-                            <Route path="/friend" element={<Friend />} />
-                            <Route path="/addFriend" element={<AddFriend />} />
-                            <Route path="/confirmFriend" element={<ConfirmFriend />} />
-                            <Route path="/connect" element={<Connect />} />
-                            <Route path="/confirm" element={<Confirm />} />
-                            <Route path="/invite" element={<Invite />} />
-                            <Route path="/culture" element={<Culture />} />
-                            <Route path="/question" element={<Question />} />
-                            <Route path="/reward" element={<Reward />} />
-                            <Route path="/world" element={<World />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/photo" element={<Photo />} />
-                            <Route path="/question/:roomId" element={<Question />} />
-                        </Routes>
+                        <AppRouter />
                         {modalContent}
                     </Router>
                 </ModalContext.Provider>
@@ -141,16 +148,15 @@ function App() {
 }
 
 const ModalWrapper = ({ friendId, onClose, roomId }) => {
-    const { userId } = useContext(UserContext); // 确保正确获取 userId
-    const navigate = useNavigate();
+    const { userId } = useContext(UserContext);
     const socket = useContext(SocketContext);
+    const navigate = useContext(NavigationContext);
 
     const handleStart = () => {
         onClose();
         if (socket) {
             socket.emit("accept-invite", { userId, friendId, roomId });
 
-            // 使用 `once` 以防止多次监听
             socket.once("joined-room", ({ users }) => {
                 console.log("房间内的用户:", users);
                 navigate(`/question/${roomId}`);
@@ -163,12 +169,9 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
             content={userId}
             onClose={onClose}
             handleStart={handleStart}
-            handleReturn={onClose}
             friendId={friendId}
         />
     );
 };
-
-
 
 export default App;
