@@ -21,8 +21,6 @@ const Invite = () => {
 
     return (
         <div className="invite">
-            {/* Header 组件 */}
-            <Header images={['world_btn.svg', 'wall_btn.svg', 'culture_ul_btn.svg']} />
             {/* Content 部分 */}
             <div className="invite-content">
                 <img src={invite_box} alt="invite_box" className="invite_box" />

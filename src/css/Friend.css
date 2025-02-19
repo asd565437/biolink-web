@@ -37,33 +37,33 @@
 
 .friend-info {
   position: absolute;
-  top: 19%;
-  left: 24%;
-  height: 19%;
-  width: 24%;
+  top: 12%;
+  left: 17.5%;
+  height: 27.5%;
+  width: 38%;
   z-index: 100;
 }
 
 .friiend_test {
   position: absolute;
-  top: 6%;
-  right: 61%;
+  top: 5%;
+  right: 61.5%;
   width: 182px;
   border-radius: 100%;
 }
 
 .friend-info-name {
   position: absolute;
-  top: 15%;
-  left: 45%;
+  top: 13%;
+  left: 42%;
   color: rgba(216, 165, 223, 1.0);
   font-weight: bold;
 }
 
 .friend-info-numabr {
   position: absolute;
-  top: 44%;
-  left: 45.5%;
+  top: 39%;
+  left: 42.5%;
   font-size: 18px;
   color: #ffffff;
   font-weight: bold;
@@ -71,8 +71,8 @@
 
 .friend-info-date {
   position: absolute;
-  top: 70%;
-  left: 45.5%;
+  top: 61.5%;
+  left: 42.5%;
   font-size: 18px;
   color: #ffffff;
   font-weight: bold;

@@ -22,9 +22,9 @@
   }
 
   .confirm_title {
-    scale: 0.4;
     position: absolute;
-    top: 10%;
+    top: 15%;
+    color: #ffffff;
   }
 
   .confirm_back {
@@ -35,9 +35,23 @@
     cursor: pointer;
   }
 
-  .confirm_test {
-    scale: 0.4;
+  .confirm_photo_area {
+    position: relative;
+    display: inline-block;
   }
+  
+  .confirm_photo_box {
+    width: 100%; /* 根據需求調整 */
+  }
+  
+  .confirm_photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 讓圖片正好置中 */
+    width: 80%; /* 根據需求調整 */
+  }
+  
 
   .confirm_start {
     scale: 0.3;

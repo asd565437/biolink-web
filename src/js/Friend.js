@@ -110,8 +110,8 @@ const Friend = () => {
         )}
 
         <div className='friend-info'>
-          <img src={friiend_test} alt="friend_photo" className='friiend_test'/>
-          <h3 className='friend-info-name'>{userName1}</h3> 
+          <img src={friiend_test} alt="friend_photo" className='friiend_test' />
+          <h3 className='friend-info-name'>{userName1}</h3>
           <p className='friend-info-numabr'>菌種數量：{bioNumber1}</p>
           <p className='friend-info-date'>交友日期：{friendDate1}</p>
         </div>
