@@ -31,17 +31,18 @@ export const ModalContext = createContext(null);
 
 function App() {
     return (
-        <Router> {/* ✅ 在这里包裹 <MainApp> 确保 useNavigate() 在 Router 内部 */}
-            <MainApp/>
+        <Router>
+            <MainApp />
         </Router>
     );
 }
 
 function MainApp() {
-    const navigate = useNavigate(); // ✅ 现在 useNavigate() 是在 <Router> 内部调用的
+    const navigate = useNavigate(); // ✅ 现在 useNavigate() 在 Router 内部调用
     const [userId, setUserId] = useState(null);
     const [socket, setSocket] = useState(null);
-    const [modalContent, setModalContent] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [modalData, setModalData] = useState(null);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -62,16 +63,23 @@ function MainApp() {
 
         const newSocket = io(apiUrl, { transports: ["websocket"], withCredentials: true });
 
+        newSocket.on("invite", (data) => {
+            console.log("收到邀请:", data);
+            setModalData({ friendId: data.from, roomId: data.roomId });
+            setShowModal(true);
+        });
+
         newSocket.on("joined-room", ({ users, roomId }) => {
             console.log("房间内的用户:", users);
             if (users.includes(userId)) {
-                navigate(`/question/${roomId}`); // ✅ 确保 navigate 是在 Router 内部调用的
+                navigate(`/question/${roomId}`);
             }
         });
 
         setSocket(newSocket);
 
         return () => {
+            newSocket.off("invite");
             newSocket.off("joined-room");
             newSocket.disconnect();
         };
@@ -80,7 +88,7 @@ function MainApp() {
     return (
         <UserContext.Provider value={{ userId, setUserId }}>
             <SocketContext.Provider value={socket}>
-                <ModalContext.Provider value={{ setModalContent }}>
+                <ModalContext.Provider value={{ setShowModal, setModalData }}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/wall" element={<Showcase />} />
@@ -99,11 +107,82 @@ function MainApp() {
                         <Route path="/photo" element={<Photo />} />
                         <Route path="/question/:roomId" element={<Question />} />
                     </Routes>
-                    {modalContent}
+
+                    {/* ✅ 确保 modalContent 正确渲染 */}
+                    {showModal && modalData && (
+                        <ModalWrapper
+                            friendId={modalData.friendId}
+                            roomId={modalData.roomId}
+                            onClose={() => setShowModal(false)}
+                        />
+                    )}
                 </ModalContext.Provider>
             </SocketContext.Provider>
         </UserContext.Provider>
     );
 }
+
+const ModalWrapper = ({ friendId, onClose, roomId }) => {
+    const { userId } = useContext(UserContext);
+    const socket = useContext(SocketContext);
+    const navigate = useNavigate();
+
+    const handleStart = () => {
+        onClose();
+        if (socket) {
+            socket.emit("accept-invite", { userId, friendId, roomId });
+
+            socket.once("joined-room", ({ users }) => {
+                console.log("房间内的用户:", users);
+                navigate(`/question/${roomId}`);
+            });
+        }
+    };
+
+    return (
+        <GlobalModal
+            content={userId}
+            onClose={onClose}
+            handleStart={handleStart}
+            friendId={friendId}
+        />
+    );
+};
+
+const GlobalModal = ({ content, onClose, handleStart, friendId }) => {
+    const [nickName, setNickName] = useState("");
+
+    useEffect(() => {
+        if (nickName) return;
+
+        const handleFriend = async () => {
+            try {
+                const response = await axios.post(`${apiUrl}/api/get-friend-info`, {
+                    id: friendId,
+                });
+                setNickName(response.data.player?.nickName);
+            } catch (error) {
+                console.error("取得好友資訊失敗:", error);
+                alert("請求失敗：" + (error.response?.data?.error || error.message));
+            }
+        };
+
+        handleFriend();
+    }, [friendId]);
+
+    if (!content) return null;
+
+    return (
+        <div className="invite">
+            <div className="invite-content">
+                <img src={invite_box} alt="invite_box" className="invite_box" />
+                <p className="invite_title">{nickName}&emsp;邀請您一起進行培養菌種</p>
+                <img src={invite_test} alt="invite_test" className="invite_test" />
+                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleStart(); onClose(); }} />
+                <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
+            </div>
+        </div>
+    );
+};
 
 export default App;
