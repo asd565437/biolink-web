@@ -96,7 +96,7 @@ function App() {
         newSocket.on("invite", (data) => {
             setUserName(data.from);
             setModalContent(() => (
-                <ModalWrapper userId={data.from} roomId={data.roomId} onClose={() => setModalContent(null)} />
+                <ModalWrapper friendId={data.from} roomId={data.roomId} onClose={() => setModalContent(null)} />
             ));
         });
 
