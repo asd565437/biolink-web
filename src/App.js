@@ -48,7 +48,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, userId }) =>
         };
 
         handleFriend();
-    }, [userName]);
+    }, [userId]);
 
     if (!content) return null;
 
