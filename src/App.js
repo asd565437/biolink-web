@@ -37,8 +37,8 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, userName }) 
                 <img src={invite_box} alt="invite_box" className="invite_box" />
                 <p className="invite_title">{userName}&emsp;邀請您一起進行培養菌種</p>
                 <img src={invite_test} alt="invite_test" className="invite_test" />
-                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={handleStart} />
-                <img src={invite_no} alt="invite_no" className="invite_no" onClick={handleReturn} />
+                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleStart(); setTimeout(onClose, 0); }} />
+                <img src={invite_no} alt="invite_no" className="invite_no" onClick={() => setTimeout(onClose, 0)} />
             </div>
         </div>
     );
@@ -117,8 +117,8 @@ const ModalWrapper = ({ userName, onClose }) => {
         <GlobalModal
             content={userName}
             onClose={onClose}
-            handleStart={() => navigate("/question")}
-            handleReturn={() => onClose}
+            handleStart={() => { navigate("/question"); setTimeout(onClose, 0); }}
+            handleReturn={() => setTimeout(onClose, 0)}
             userName={userName}
         />
     );
