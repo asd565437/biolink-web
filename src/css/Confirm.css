@@ -29,9 +29,9 @@
 
   .confirm_back {
     scale: 0.03;
-    position: absolute;
+    /* position: absolute;
     bottom: -26%;
-    right: 45.5%;
+    right: 45.5%; */
     cursor: pointer;
   }
 

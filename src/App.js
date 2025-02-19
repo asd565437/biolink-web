@@ -153,7 +153,7 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
             onClose={onClose}
             handleStart={handleStart}
             handleReturn={onClose}
-            userId={userId}
+            friendId={friendId}
         />
     );
 };
