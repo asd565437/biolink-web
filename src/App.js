@@ -147,6 +147,7 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
         onClose();
         if (socket) {
             socket.emit("accept-invite", { friendId, roomId , userId});
+            navigate(`/question/${roomId}`);
         }
     };
 
