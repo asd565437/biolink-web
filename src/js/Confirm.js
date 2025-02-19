@@ -5,8 +5,8 @@ import Header from "./Header.js";
 import axios from "axios";
 import confirm_back from "../confirm/confirm_back.svg";
 import confirm_test from "../confirm/confirm_test.svg";
-import confirm_photo from "../confirm/confirm_photo.svg";
-// import confirm_photo from "../confirm/joguman.svg";
+//import confirm_photo from "../confirm/confirm_photo.svg";
+import confirm_photo from "../confirm/joguman.svg";
 import confirm_photo_box from "../confirm/confirm_photo_box.svg";
 import confirm_start from "../confirm/confirm_start.svg";
 import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
