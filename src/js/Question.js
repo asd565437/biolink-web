@@ -40,10 +40,6 @@ const Question = () => {
   useEffect(() => {
     if (!socket || !roomId) return;
 
-    socket.on("joined-room", ({ userId }) => {
-        console.log(`${userId} 加入了房间 ${roomId}`);
-    });
-
     return () => {
         socket.off("joined-room");
     };
