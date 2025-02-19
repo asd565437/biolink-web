@@ -44,9 +44,10 @@
   }
 
   .invite_test {
-    scale: 0.09;
     position: absolute;
-    top: -66%;
+    width: 7%;
+    top: 46%;
+    left: 46%;
   }
 
   .invite_yes {

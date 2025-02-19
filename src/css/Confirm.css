@@ -28,10 +28,12 @@
   }
 
   .confirm_back {
-    scale: 0.8;
     position: absolute;
-
+    top: 15%;
+    left: 10%;
+    width: 3%;
     cursor: pointer;
+    z-index: 1000;
   }
 
   .confirm_photo_area {
@@ -55,7 +57,7 @@
   .confirm_start {
     scale: 0.3;
     position: absolute;
-    top: 65%;
+    top: 68%;
     cursor: pointer;
   }
   

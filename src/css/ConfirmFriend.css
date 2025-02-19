@@ -1,8 +1,8 @@
 .confirmFriend_back {
-    scale: 0.03;
     position: absolute;
-    bottom: -20%;
-    right: 45%;
+    top: 22%;
+    left: 9%;
+    width: 3%;
     cursor: pointer;
 }
 
@@ -25,14 +25,15 @@
 }
 
 .confirmFriend_test {
-    scale: 0.08;
     position: absolute;
-    top: -65%;
+    top: 46%;
+    left: 46%;
+    width: 7%;
 }
 
 .confirmFriend_yes {
     position: fixed;
-    top: 70%;
+    top: 72%;
     left: 51%;
     width: 13%;
     height: auto;
@@ -41,7 +42,7 @@
 
 .confirmFriend_no {
     position: fixed;
-    top: 70%;
+    top: 72%;
     left: 36%;
     width: 13%;
     height: auto;

@@ -99,7 +99,10 @@ function App() {
                 <ModalWrapper friendId={data.from} roomId={data.roomId} onClose={() => setModalContent(null)} />
             ));
         });
-
+        newSocket.on("joined-room", ({ users }) => {
+            console.log("以下用戶已加入房間:", users);
+            // 更新 UI 或執行相應的邏輯
+          });
         setSocket(newSocket);
         return () => newSocket.disconnect();
     }, [userId]);
