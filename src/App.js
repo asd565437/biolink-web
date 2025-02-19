@@ -149,7 +149,7 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
             socket.emit("accept-invite", { userId, friendId, roomId });
 
             // 使用 once 以防止多次监听
-            socket.once("joined-room", ({ users }) => {
+            socket.once("joined-room", ({ users, roomId }) => {
                 console.log("房间内的用户:", users);
                 navigate(`/question/${roomId}`);
             });
