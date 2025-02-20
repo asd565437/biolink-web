@@ -5,7 +5,7 @@ import { SocketContext, UserContext } from "../App";
 import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
 import check from "../question/check_answer.svg";
-
+import axios from 'axios';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
