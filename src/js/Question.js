@@ -46,7 +46,7 @@ useEffect(() => {
 
   socket.on("question-ids", (ids) => {
     setQuestionIds(ids);
-    loadQuestion(0);
+    loadQuestion(0 ,ids);
   });
 
   socket.emit("get-question-ids", roomId);
@@ -56,10 +56,10 @@ useEffect(() => {
   };
 }, [socket, roomId]);
   useEffect(() => {
-    loadQuestion(0);
+    loadQuestion(0,questionIds);
   }, []);
 
-  const loadQuestion = async (currentProgress) => {
+  const loadQuestion = async (currentProgress ,questionIds) => {
     console.log(questionIds)
     if (!questionIds || questionIds.length === 0) return;
   
@@ -67,7 +67,6 @@ useEffect(() => {
       const response = await axios.post(`${apiUrl}/api/question`, {
         question_id: questionIds[currentProgress],
       });
-  
       setQuestion(response.data.question.question);
       setSplitSentence(response.data.question.answers.split(", "));
     } catch (error) {
