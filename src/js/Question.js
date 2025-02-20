@@ -45,8 +45,8 @@ useEffect(() => {
   if (!socket || !roomId) return;
 
   socket.on("question-ids", (ids) => {
-    console.log("??")
     setQuestionIds(ids);
+    console.log(ids)
     loadQuestion(0);
   });
 
