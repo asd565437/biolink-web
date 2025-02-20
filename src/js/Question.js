@@ -44,13 +44,13 @@ const Question = () => {
 useEffect(() => {
   if (!socket || !roomId) return;
 
-  socket.emit("get-question-ids", roomId);
-  console.log("?")
   socket.on("question-ids", (ids) => {
     setQuestionIds(ids);
     loadQuestion(0);
   });
 
+  socket.emit("get-question-ids", roomId);
+  
   return () => {
     socket.off("question-ids");
   };
