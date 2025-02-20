@@ -1,11 +1,11 @@
 import "../css/Question.css";
-import { useNavigate,useParams } from "react-router-dom";
-import React, { useEffect, useState,useContext } from "react";
-import { SocketContext, UserContext } from "../App";
+import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { SocketContext } from "../App";
 import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
 import check from "../question/check_answer.svg";
-import axios from 'axios';
+import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -13,6 +13,7 @@ const Question = () => {
   const { roomId } = useParams();
   const socket = useContext(SocketContext);
   const navigate = useNavigate();
+
   const [buttonStates, setButtonStates] = useState({
     P1_A: false,
     P1_B: false,
@@ -33,53 +34,46 @@ const Question = () => {
     "progress_bar_4.svg",
     "progress_bar_5.svg",
   ];
+
+  // 监听 socket 事件，获取题目 ID
   useEffect(() => {
     if (!socket || !roomId) return;
 
+    // 监听服务器返回的题目
+    socket.on("question-ids", (ids) => {
+      setQuestionIds(ids);
+    });
+
+    // 发送请求获取题目 ID
+    socket.emit("get-question-ids", roomId);
+
     return () => {
-        socket.off("joined-room");
+      socket.off("question-ids");
     };
+  }, [socket, roomId]);
 
-}, [socket, roomId]);
-useEffect(() => {
-  if (!socket || !roomId) return;
-
-  socket.on("question-ids", (ids) => {
-    setQuestionIds(ids);
-    loadQuestion(0 ,ids);
-  });
-
-  socket.emit("get-question-ids", roomId);
-
-  return () => {
-    socket.off("question-ids");
-  };
-}, [socket, roomId]);
+  // ✅ 当 questionIds 更新后，再加载第一道题
   useEffect(() => {
-    loadQuestion(0,questionIds);
-  }, []);
+    if (questionIds.length > 0) {
+      loadQuestion(0);
+    }
+  }, [questionIds]);
 
-  const loadQuestion = async (currentProgress ,questionIds) => {
-    console.log(questionIds)
-    if (!questionIds || questionIds.length === 0) return;
-  
+  const loadQuestion = async (currentProgress) => {
+    if (questionIds.length === 0 || currentProgress >= questionIds.length) return;
+
     try {
       const response = await axios.post(`${apiUrl}/api/question`, {
         question_id: questionIds[currentProgress],
       });
+
       setQuestion(response.data.question.question);
       setSplitSentence(response.data.question.answers.split(", "));
     } catch (error) {
-      if (error.response) {
-        console.error("请求失败：", error.response.data.error);
-        alert("请求失败：" + error.response.data.error);
-      } else {
-        console.error("网络错误：", error.message);
-        alert("网络错误，请稍后再试！");
-      }
+      console.error("获取问题失败：", error);
+      alert("获取问题失败，请稍后再试！");
     }
   };
-
 
   const handleClick = (question, option) => {
     setButtonStates((prevState) => {
@@ -110,7 +104,7 @@ useEffect(() => {
     }
 
     const newProgress = progress + 1;
-    await loadQuestion(newProgress ,questionIds);
+    await loadQuestion(newProgress);
     setProgress(newProgress);
 
     setButtonStates({
@@ -152,11 +146,7 @@ useEffect(() => {
       </div>
 
       <div className="back">
-        <img
-          src={back_icon}
-          alt="回上一題"
-          onClick={handleBackQuestion}
-        />
+        <img src={back_icon} alt="回上一題" onClick={handleBackQuestion} />
       </div>
 
       <div className="checkAnswer">
@@ -165,22 +155,21 @@ useEffect(() => {
             className="mask"
             style={{
               backgroundColor:
-                (buttonStates.P1_A || buttonStates.P1_B) && (buttonStates.P2_A || buttonStates.P2_B)
+                (buttonStates.P1_A || buttonStates.P1_B) &&
+                (buttonStates.P2_A || buttonStates.P2_B)
                   ? "rgba(0, 0, 0, 0)"
                   : "rgba(0, 0, 0, 0.5)",
               cursor:
-                (buttonStates.P1_A || buttonStates.P1_B) && (buttonStates.P2_A || buttonStates.P2_B)
-                  ? "pointer" : "not-allowed",
+                (buttonStates.P1_A || buttonStates.P1_B) &&
+                (buttonStates.P2_A || buttonStates.P2_B)
+                  ? "pointer"
+                  : "not-allowed",
               borderRadius: "60px",
             }}
           ></div>
         )}
 
-        <img
-          src={check}
-          alt="確認答案"
-          onClick={handleNextQuestion}
-        />
+        <img src={check} alt="確認答案" onClick={handleNextQuestion} />
       </div>
 
       <main className="content">
