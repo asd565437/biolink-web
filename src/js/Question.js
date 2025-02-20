@@ -7,12 +7,6 @@ import back_icon from "../question/back_btn.svg";
 import check from "../question/check_answer.svg";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-const numbers = Array.from({ length: 251 }, (_, i) => i + 1);
-for (let i = numbers.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
-}
-const question_ids = numbers.slice(0, 5);
 
 const Question = () => {
   const { roomId } = useParams();
@@ -29,6 +23,7 @@ const Question = () => {
   const [question, setQuestion] = useState("");
   const [splitSentence, setSplitSentence] = useState([]);
   const [isMaskVisible, setIsMaskVisible] = useState(true);
+  const [questionIds, setQuestionIds] = useState([]);
 
   const bar_images = [
     "progress_bar_1.svg",
@@ -45,6 +40,20 @@ const Question = () => {
     };
 
 }, [socket, roomId]);
+useEffect(() => {
+  if (!socket || !roomId) return;
+
+  socket.on("question-ids", (ids) => {
+    setQuestionIds(ids);
+    loadQuestion(0);
+  });
+  socket.emit("get-question-ids", roomId);
+  
+
+  return () => {
+    socket.off("question-ids");
+  };
+}, [socket, roomId]);
   useEffect(() => {
     loadQuestion(0);
   }, []);
@@ -57,7 +66,7 @@ const Question = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          question_id: question_ids[currentProgress],
+          question_id: questionIds[currentProgress],
         }),
       });
 
@@ -74,7 +83,8 @@ const Question = () => {
       console.error("网络错误：", error);
       alert("网络错误，请稍后再试！");
     }
-  };
+};
+
 
   const handleClick = (question, option) => {
     setButtonStates((prevState) => {
@@ -99,7 +109,7 @@ const Question = () => {
   };
 
   const handleNextQuestion = async () => {
-    if (progress >= question_ids.length - 1) {
+    if (progress >= questionIds.length - 1) {
       navigate("/reward");
       return;
     }

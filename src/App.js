@@ -19,7 +19,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Photo from "./js/Photo";
 import invite_box from "./invite/invite_box.png";
-import invite_test from "./invite/invite_test.svg";
+import invite_photo from './confirm/confirm_photo.svg';
 import invite_yes from "./invite/invite_yes.png";
 import invite_no from "./invite/invite_no.png";
 
@@ -58,7 +58,9 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
             <div className="invite-content">
                 <img src={invite_box} alt="invite_box" className="invite_box" />
                 <p className="invite_title">{nickName}&emsp;邀請您一起進行培養菌種</p>
-                <img src={invite_test} alt="invite_test" className="invite_test" />
+                <div className="invite_photo_area">
+                    <img src={invite_photo} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
+                </div>
                 <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleStart(); onClose(); }} />
                 <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
             </div>

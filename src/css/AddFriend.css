@@ -16,9 +16,9 @@
 }
 
 .addFriend_back {
-  position: absolute;
-  top: 22%;
-  left: 9%;
+  position: fixed;
+  top: 140px;
+  left: 54px;
   width: 3%;
   cursor: pointer;
 }
@@ -53,9 +53,9 @@
 
 .addFriend_finish {
   position: fixed;
-  top: 70%;
-  left: 42.5%;
-  width: 15%;
+  top: 68%;
+  left: 43.5%;
+  width: 13%;
   height: auto;
   cursor: pointer;
 }

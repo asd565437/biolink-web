@@ -20,7 +20,9 @@
 .back {
     position: fixed;
     top: 100px;
-    left: 30px;
+    left: 50px;
+    width: 3%;
+    cursor: pointer;
     z-index: 5;
 }
 

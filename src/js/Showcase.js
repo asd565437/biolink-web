@@ -85,8 +85,8 @@ const Showcase = () => {
     card: {
       position: 'relative',
       width: '100%',
-      minWidth: '350px',
-      height: '350px',
+      minWidth: '400px',
+      height: '400px',
       marginTop: '10px',
       display: 'flex',
       justifyContent: 'center',

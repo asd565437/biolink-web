@@ -13,7 +13,7 @@
 }
 .friend_list_lab {
   position: absolute; /* 使用绝对定位 */
-  top: 7%; /* 靠近页面顶部 */
+  top: 3%; /* 靠近页面顶部 */
   left: 5%; /* 靠近页面左侧 */
   z-index: 2; /* 确保图片在其他元素之上 */
 }
