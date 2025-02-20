@@ -46,7 +46,6 @@ useEffect(() => {
 
   socket.on("question-ids", (ids) => {
     setQuestionIds(ids);
-    console.log(ids)
     loadQuestion(0);
   });
 
@@ -61,6 +60,7 @@ useEffect(() => {
   }, []);
 
   const loadQuestion = async (currentProgress) => {
+    console.log(questionIds)
     if (!questionIds || questionIds.length === 0) return;
   
     try {
