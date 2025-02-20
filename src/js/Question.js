@@ -5,6 +5,7 @@ import { SocketContext, UserContext } from "../App";
 import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
 import check from "../question/check_answer.svg";
+import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -59,31 +60,25 @@ useEffect(() => {
   }, []);
 
   const loadQuestion = async (currentProgress) => {
+    if (!questionIds || questionIds.length === 0) return;
+  
     try {
-      const response = await fetch(`${apiUrl}/api/question`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          question_id: questionIds[currentProgress],
-        }),
+      const response = await axios.post(`${apiUrl}/api/question`, {
+        question_id: questionIds[currentProgress],
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        setQuestion(data.question.question);
-        setSplitSentence(data.question.answers.split(", "));
-      } else {
-        const errorData = await response.json();
-        console.error("请求失败：", errorData.error);
-        alert("请求失败：" + errorData.error);
-      }
+  
+      setQuestion(response.data.question.question);
+      setSplitSentence(response.data.question.answers.split(", "));
     } catch (error) {
-      console.error("网络错误：", error);
-      alert("网络错误，请稍后再试！");
+      if (error.response) {
+        console.error("请求失败：", error.response.data.error);
+        alert("请求失败：" + error.response.data.error);
+      } else {
+        console.error("网络错误：", error.message);
+        alert("网络错误，请稍后再试！");
+      }
     }
-};
+  };
 
 
   const handleClick = (question, option) => {
