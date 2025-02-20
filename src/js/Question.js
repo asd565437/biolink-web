@@ -110,7 +110,7 @@ useEffect(() => {
     }
 
     const newProgress = progress + 1;
-    await loadQuestion(newProgress);
+    await loadQuestion(newProgress ,questionIds);
     setProgress(newProgress);
 
     setButtonStates({
