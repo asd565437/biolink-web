@@ -45,12 +45,13 @@ useEffect(() => {
   if (!socket || !roomId) return;
 
   socket.on("question-ids", (ids) => {
+    console.log("??")
     setQuestionIds(ids);
     loadQuestion(0);
   });
 
   socket.emit("get-question-ids", roomId);
-  
+
   return () => {
     socket.off("question-ids");
   };

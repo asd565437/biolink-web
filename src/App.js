@@ -139,7 +139,6 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
     const { userId } = useContext(UserContext); // 确保正确获取 userId
     const navigate = useNavigate();
     const socket = useContext(SocketContext);
-    console.log("?");
     socket.on("joined-room", ({ users, roomId }) => {
         console.log("以下用戶已加入房間:", users);
         if (users.includes(userId)) {
