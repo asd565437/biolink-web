@@ -25,7 +25,10 @@ const World = () => {
                 withCredentials: true,
             });
             console.log("获取到的用户 ID:", response.data.id);
-            setUserId(response.data.id);
+            if(response.data.id)
+              setUserId(response.data.id);
+            else
+              setUserId(null);
             if(popup)
               setShowIdPopup(true);
         } catch (error) {
