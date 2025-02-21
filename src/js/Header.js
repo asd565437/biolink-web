@@ -63,7 +63,18 @@ const Header = ({ images }) => {
   const handleNavigate = (index) => {
     navigate(urls[index]);
   };
-
+  const positionAdjustments = [
+    {
+      width: '27.5%',
+    },
+    {
+      width: '17.5%',
+    },
+    {
+      width: '27.5%',
+    },
+  ];
+  
   return (
     <header className="header">
       <div className="header-logo" onClick={() => handleNavigate(3)}></div>
@@ -74,6 +85,7 @@ const Header = ({ images }) => {
               key={index}
               src={`/${image}`}
               alt={`Header Image ${index + 1}`}
+              style={{...positionAdjustments[index]}}
               onClick={() => handleNavigate(index)}
               className="nav-item"
             />
