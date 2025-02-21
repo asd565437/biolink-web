@@ -55,7 +55,7 @@ const Header = ({ images }) => {
     const interval = setInterval(async () => {
       const authStatus = await checkAuthStatus();
       setIsLoggedIn(authStatus);
-    }, 10000); // 每 10 秒檢查一次
+    }, 5000); // 每 10 秒檢查一次
 
     return () => clearInterval(interval); // 清理計時器
   }, []);
