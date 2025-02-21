@@ -1,7 +1,7 @@
 import "../css/Question.css";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
-import { SocketContext } from "../App";
+import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
 import check from "../question/check_answer.svg";
@@ -12,6 +12,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 const Question = () => {
   const { roomId } = useParams();
   const socket = useContext(SocketContext);
+  const userId = useContext(UserContext);
   const navigate = useNavigate();
 
   const [buttonStates, setButtonStates] = useState({
@@ -43,7 +44,9 @@ const Question = () => {
     socket.on("question-ids", (ids) => {
       setQuestionIds(ids);
     });
-
+    socket.on("disconnect", () => {
+      socket.emit("leave-room", roomId ,userId);
+    });
     // 发送请求获取题目 ID
     socket.emit("get-question-ids", roomId);
 
@@ -156,12 +159,12 @@ const Question = () => {
             style={{
               backgroundColor:
                 (buttonStates.P1_A || buttonStates.P1_B) &&
-                (buttonStates.P2_A || buttonStates.P2_B)
+                  (buttonStates.P2_A || buttonStates.P2_B)
                   ? "rgba(0, 0, 0, 0)"
                   : "rgba(0, 0, 0, 0.5)",
               cursor:
                 (buttonStates.P1_A || buttonStates.P1_B) &&
-                (buttonStates.P2_A || buttonStates.P2_B)
+                  (buttonStates.P2_A || buttonStates.P2_B)
                   ? "pointer"
                   : "not-allowed",
               borderRadius: "60px",

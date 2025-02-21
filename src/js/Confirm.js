@@ -82,6 +82,7 @@ const Confirm = () => {
             <main className="content">
                 <img src={confirm_back} alt="confirm_back" className="confirm_back" onClick={() => navigate(-1)} />
                 <h1 className="confirm_title">您將與&nbsp;{userName}&nbsp;進行闖關</h1>
+                
                 <div className="confirm_photo_area">
                     <img src={confirm_photo_box} alt="confirm_photo_box" className="confirm_photo_box" />
                     <img src={photo} alt="confirm_photo" className="confirm_photo" /> {/* 存取玩家的頭像 */}
