@@ -44,9 +44,9 @@ const Question = () => {
     socket.on("question-ids", (ids) => {
       setQuestionIds(ids);
     });
-    
+
     window.addEventListener("beforeunload", () => {
-      socket.emit("leave-room", roomId ,userId);
+      socket.emit("leave-room", roomId ,userId.userId);
   });
     // 发送请求获取题目 ID
     socket.emit("get-question-ids", roomId);
