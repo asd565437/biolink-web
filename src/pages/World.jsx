@@ -26,6 +26,8 @@ const World = () => {
             });
             console.log("获取到的用户 ID:", response.data.id);
             setUserId(response.data.id);
+            if(popup)
+              setShowIdPopup(true);
         } catch (error) {
             console.error("获取 Cookie 失败:", error);
         }

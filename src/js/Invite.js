@@ -37,6 +37,8 @@ const Invite = () => {
                 <img src={invite_no} alt="invite_no" className="invite_no" onClick={handleReturn} />
             </div>
         </div>
+
+        
     );
 };
 

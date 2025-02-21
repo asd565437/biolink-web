@@ -1,7 +1,9 @@
 import "../css/Header.css";
-import { useNavigate} from 'react-router-dom';
-import React, { useState ,useEffect, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../App"; // 引入全域 Socket 上下文
+import axios from "axios";
+const apiUrl = process.env.REACT_APP_API_URL;
 const Header = ({ images }) => {
   const userId = useContext(UserContext);
   const navigate = useNavigate();
@@ -15,15 +17,23 @@ const Header = ({ images }) => {
   const handleNavigate = (index) => {
     navigate(urls[index]);
   };
-
+  const clearCookie = async () => {
+    try {
+      await axios.get(`${apiUrl}/clear-cookie`, { withCredentials: true });
+      console.log("Cookie 清除成功");
+    } catch (error) {
+      console.error("清空 Cookie 失敗：", error);
+    }
+  };
+  
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
   const handleLog = () => {
-    if(userId)
-      setIsLoggedIn(true);   
+    if (userId)
+      setIsLoggedIn(true);
     else
-      setIsLoggedIn(false);   
+      setIsLoggedIn(false);
   };
 
   const positionAdjustments = [
@@ -60,6 +70,8 @@ const Header = ({ images }) => {
         <h2
           className="header-login"
           onClick={() => {
+            if (isLoggedIn)
+              clearCookie();
             handleNavigate(4);
             handleLog();
           }}
