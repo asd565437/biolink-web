@@ -1,8 +1,9 @@
 import "../css/Header.css";
-import { useNavigate } from 'react-router-dom';
-import React, { useState } from "react";
-
+import { useNavigate} from 'react-router-dom';
+import React, { useState ,useEffect, useContext } from "react";
+import { UserContext } from "../App"; // 引入全域 Socket 上下文
 const Header = ({ images }) => {
+  const userId = useContext(UserContext);
   const navigate = useNavigate();
   const urls = ['/world', '/wall', '/connect', '/', '/login'];
 
@@ -19,9 +20,10 @@ const Header = ({ images }) => {
     localStorage.getItem("isLoggedIn") === "true"
   );
   const handleLog = () => {
-    const newStatus = !isLoggedIn;
-    setIsLoggedIn(newStatus);
-    localStorage.setItem("isLoggedIn", newStatus); // 存入 localStorage
+    if(userId)
+      setIsLoggedIn(true);   
+    else
+      setIsLoggedIn(false);   
   };
 
   const positionAdjustments = [

@@ -40,7 +40,7 @@ const Connect = () => {
           type="text"
           value={friendId}
           onChange={handleInputChange}
-          // placeholder="輸入好友 ID"
+          // placeholder="輸入好友ID"
           className="friend-input"
         />
 

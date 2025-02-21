@@ -38,7 +38,7 @@ const AddFriend = ({ onClose }) => {
                         <img src={addFriend_box} alt="addFriend_box" className="addFriend_box" />
                         <input
                             type="text"
-                            placeholder=""
+                            placeholder="輸入好友ID"
                             className="addFriend_input"
                             onChange={handleInputChange}
                         />

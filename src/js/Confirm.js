@@ -5,10 +5,10 @@ import Header from "./Header.js";
 import axios from "axios";
 import confirm_back from "../confirm/confirm_back.svg";
 import confirm_test from "../confirm/confirm_photo.svg";
-// import confirm_photo from "../confirm/confirm_photo.svg";
+import confirm_photo from "../confirm/confirm_photo.svg";
 // import confirm_photo from "../confirm/joguman.svg";
-import confirm_photo_box from "../confirm/confirm_photo_box.svg";
-import confirm_start from "../confirm/confirm_start.svg";
+import confirm_photo_box from "../confirm/confirm_photo_box.png";
+import confirm_wait from "../confirm/confirm_wait.svg";
 import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -83,15 +83,18 @@ const Confirm = () => {
                 <img src={confirm_back} alt="confirm_back" className="confirm_back" onClick={() => navigate(-1)} />
                 <h1 className="confirm_title">您將與&nbsp;{userName}&nbsp;進行闖關</h1>
                 <div className="confirm_photo_area">
+                    <img src={confirm_photo_box} alt="confirm_photo_box" className="confirm_photo_box" />
                     <img src={photo} alt="confirm_photo" className="confirm_photo" /> {/* 存取玩家的頭像 */}
+                    {/* <img src={confirm_photo} alt="confirm_photo" className="confirm_photo" /> */}
                 </div>
 
                 {/* <div className="confirm_photo_area">
                     <img src={confirm_photo_box} alt="confirm_photo_box" className="confirm_photo_box" />
-                    <img src={photo} alt="confirm_photo" className="confirm_photo" /> 
+                    <img src={photo} alt="confirm_photo" className="confirm_photo" />
                     <img src={confirm_photo} alt="confirm_photo" className="confirm_photo" />
                 </div> */}
-                <img src={confirm_start} alt="confirm_start" className="confirm_start" />
+
+                <img src={confirm_wait} alt="confirm_wait" className="confirm_wait" />
             </main>
         </div>
     );

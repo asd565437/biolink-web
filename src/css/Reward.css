@@ -52,35 +52,44 @@
     align-items: center;
 }
 
-.strainName-popup-content {
-    position: absolute;
-    top: 24%;
-    height: 36%;
-}
-
 .strain_name_box {
     position: fixed;
     top: 18%;
     left: 30%;
     width: 40%;
     height: auto;
+    z-index: 1;
+    /* 設定較低層級 */
 }
 
-
-.name-popup-content input {
-    width: 80%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.name-popup-content button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #6c5ce7;
+.strainName-input {
+    position: absolute;
+    top: 43%;
+    /* 根據需要微調 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 28%;
+    font-size: 24px;
     color: white;
+    background: transparent;
     border: none;
-    border-radius: 5px;
+    outline: none;
+    text-align: center;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+}
+
+.strainName-input:focus {
+    border-bottom: 4px solid rgba(255, 255, 255, 1);
+    /* box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5); */
+}
+
+.strain_name_finish {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 12%;
+    z-index: 3;
     cursor: pointer;
 }

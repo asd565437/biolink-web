@@ -43,7 +43,7 @@ const Reward = () => {
                             onChange={(e) => setStrainName(e.target.value)}
                             className="strainName-input"
                         />
-                        <button onClick={handleNameSubmit}>輸入完成</button>
+                        <img src={strain_name_finish} alt="strain_name_finish" className="strain_name_finish" onClick={handleNameSubmit} />
                     </div>
                 </div>
             )}
