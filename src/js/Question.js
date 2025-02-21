@@ -46,8 +46,11 @@ const Question = () => {
     });
 
     window.addEventListener("beforeunload", () => {
-      socket.emit("leave-room", roomId ,userId.userId);
+      socket.emit("leave-room", roomId , userId.userId);
   });
+  socket.on("room-left", (roomId) => {
+    console.log(`Successfully left room: ${roomId}`);
+});
     // 发送请求获取题目 ID
     socket.emit("get-question-ids", roomId);
 
