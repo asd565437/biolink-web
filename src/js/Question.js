@@ -6,8 +6,8 @@ import Header from "./Header.js";
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-let answerP1 = []
-let answerP2 = []
+let answerP1 = new Array();
+let answerP2 = new Array();
 const Question = () => {
   const { roomId } = useParams();
   const socket = useContext(SocketContext);

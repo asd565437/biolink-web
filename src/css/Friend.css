@@ -107,8 +107,8 @@
   }
 
   .friend_wall .content{
-    max-height: calc(150vh);
-    zoom: 75%;
+    max-height: calc(120vh);
+    zoom: 80%;
     top: 1vh;
   }
 }
