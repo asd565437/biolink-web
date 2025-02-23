@@ -16,11 +16,10 @@ const Friend = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
 
-
   // 好友資料測試
-  const [userName1, setUserName1] = useState("蔡第一"); // 初始化 userName
-  const [bioNumber1, setBioNumber1] = useState("2"); // 初始化 userName
-  const [friendDate1, setFriendDate1] = useState("02.17.25"); // 初始化 userName
+  const [userName1, setUserName1] = useState(["蔡第一"]); // 初始化 userName
+  const [bioNumber1, setBioNumber1] = useState(["2"]); // 初始化 userName
+  const [friendDate1, setFriendDate1] = useState(["02.17.25"]); // 初始化 userName
   useEffect(() => {
     const fetchUserData = async () => {
         try {
@@ -54,7 +53,6 @@ const Friend = () => {
 
     preloadImages(friend_images).then(() => {
       setIsImagesLoaded(true); // 标记图片已加载
-      console.log('Friend 页面图片预加载完成');
     });
   }, [friend_images]);
 

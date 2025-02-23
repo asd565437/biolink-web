@@ -3,6 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
 import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 import Header from "./Header.js";
+import progress_bar_1 from "../question/progress_bar_1.svg";
+import progress_bar_2 from "../question/progress_bar_2.svg";
+import progress_bar_3 from "../question/progress_bar_3.svg";
+import progress_bar_4 from "../question/progress_bar_4.svg";
+import progress_bar_5 from "../question/progress_bar_5.svg";
 import back_icon from "../question/back_btn.svg";
 import check from "../reward/check.png";
 import axios from "axios";
@@ -29,11 +34,11 @@ const Question = () => {
   const [questionIds, setQuestionIds] = useState([]);
 
   const bar_images = [
-    "progress_bar_1.svg",
-    "progress_bar_2.svg",
-    "progress_bar_3.svg",
-    "progress_bar_4.svg",
-    "progress_bar_5.svg",
+    progress_bar_1,
+    progress_bar_2,
+    progress_bar_3,
+    progress_bar_4,
+    progress_bar_5,
   ];
 
   // 监听 socket 事件，获取题目 ID
