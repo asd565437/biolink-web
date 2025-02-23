@@ -49,6 +49,10 @@
   transition: transform 0.3s ease; /* 添加交互效果 */
 }
 
+.header-login-container {
+  position: relative;
+}
+
 /* Login */
 .header-login {
   height: auto;  /* aspect-ratio: 100 / 40; */
@@ -73,13 +77,28 @@ h2{
 
 .header-login:hover {
   opacity: 0.8; /* 鼠标悬停时改变透明度 */
-  text-decoration: underline;
 }
 
 .login-dropdown{
   color: white;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  /* background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px; */
+  min-width: 120px;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+  z-index: 100;
 }
 
 .login-dropdown h3:hover {
   opacity: 0.8; /* 鼠标悬停时改变透明度 */
+}
+
+.login-dropdown h3 {
+  margin: 0;
+  padding: 10px;
+  /* font-size: 16px; */
+  cursor: pointer;
 }
