@@ -10,6 +10,7 @@ const Header = ({ images }) => {
   const userId = useContext(UserContext);
   const navigate = useNavigate();
   const urls = ['/world', '/wall', '/connect', '/', '/login'];
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   if (!Array.isArray(images)) {
     images = ['world_btn.svg', 'wall_btn.svg', 'culture_btn.svg'];
@@ -78,7 +79,7 @@ const Header = ({ images }) => {
   return (
     <header className="header">
       <div className="header-logo" onClick={() => handleNavigate(0)}></div>
-      <div className="navList">
+      <nav className="navList">
         <nav className="nav-menu">
           {images.map((image, index) => (
             <img
@@ -100,10 +101,19 @@ const Header = ({ images }) => {
             }
             handleNavigate(4);
           }}
+          onMouseEnter={() => setIsDropdownOpen(true)}
+          onMouseLeave={() => setIsDropdownOpen(false)}
         >
           {isLoggedIn ? "LOGOUT" : "LOGIN"}
+          {/* 垂直下拉選單 */}
+          {isDropdownOpen && (
+            <div className="dropdown-menu">
+              <h3 className="dropdown-item"># 1234</h3>
+              <a href="#" className="dropdown-item">LOGOUT</a>
+            </div>
+          )}
         </h2>
-      </div>
+      </nav>
     </header>
   );
 };

@@ -29,13 +29,13 @@
 }
 
 .strain-box {
-    width: 70%;  /* 設定菌種框的寬度 */
-    height: 70%; /* 設定菌種框的高度 */
+    width: 50%;  /* 設定菌種框的寬度 */
+    height: 50%; /* 設定菌種框的高度 */
     background-size: contain; /* 讓圖片適應框 */
     background-position: center;
     background-repeat: no-repeat;
     position: absolute;
-    top: 12%;
+    top: 22%;
 }
 
 .check {
