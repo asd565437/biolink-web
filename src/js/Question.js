@@ -6,7 +6,7 @@ import Header from "./Header.js";
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-let ans={}
+let answer={}
 const Question = () => {
   const { roomId } = useParams();
   const socket = useContext(SocketContext);
@@ -25,6 +25,7 @@ const Question = () => {
   const [splitSentence, setSplitSentence] = useState([]);
   const [isMaskVisible, setIsMaskVisible] = useState(true);
   const [questionIds, setQuestionIds] = useState([]);
+  const [bothAnswered, setBothAnswered] = useState(false);
 
   const bar_images = [
     "/question/progress_bar_1.svg",
@@ -42,6 +43,20 @@ const Question = () => {
     socket.on("question-ids", (ids) => {
       setQuestionIds(ids);
     });
+
+    socket.on("both-answered", (status) => {
+      if (status) {
+          setBothAnswered(true);
+      }
+      return () => {
+        socket.off("both-answered");
+    };
+  });
+  useEffect(() => {
+    if (bothAnswered) {
+        navigate("/reward");
+    }
+}, [bothAnswered, navigate]);
 
     window.addEventListener("beforeunload", () => {
       socket.emit("leave-room", roomId , userId.userId);
@@ -104,11 +119,11 @@ const Question = () => {
 
   const handleNextQuestion = async () => {
     console.log(progress);
-    ans[(progress) * 2] = buttonStates.P1_A ? "A" : "B";
-    ans[(progress) * 2 + 1] = buttonStates.P2_A ? "A" : "B";
-    console.log(ans)
+    answer[(progress) * 2] = buttonStates.P1_A ? "A" : "B";
+    answer[(progress) * 2 + 1] = buttonStates.P2_A ? "A" : "B";
+    console.log(answer)
     if (progress >= questionIds.length - 1) {
-      navigate("/reward");
+      socket.emit("submit_question", roomId , userId.userId ,answer);
       return;
     }
     const newProgress = progress + 1;

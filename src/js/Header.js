@@ -98,7 +98,7 @@ const Header = ({ images }) => {
         <div
           className="header-login-container"
           onMouseEnter={() => setIsDropdownOpen(true)}
-          onMouseLeave={() => setIsDropdownOpen(false)}
+          // onMouseLeave={() => setIsDropdownOpen(false)}
         >
           <h2
             className="header-login"
@@ -109,12 +109,12 @@ const Header = ({ images }) => {
               handleNavigate(4);
             }}
           >
-            {isLoggedIn ? "LOGOUT" : "LOGIN"}
+            {isLoggedIn ? "蕭安安" : "LOGIN"}
           </h2>
 
           {isDropdownOpen && (
             <div className="login-dropdown">
-              <h3># 1234</h3>
+              <h3 className="logID"># 1234</h3>
               <h3
                 onClick={async () => {
                   if (isLoggedIn) {

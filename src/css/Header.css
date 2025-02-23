@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: space-between; /* 确保左右两边对齐 */
   padding: 2vh 4vw; /*20 40px*/
-  z-index: 1000;
+  z-index: 100;
   box-sizing: border-box; /* 确保 padding 不会影响宽度 */
 }
 
@@ -37,6 +37,7 @@
   flex-grow: 0;
   flex-shrink: 0;
   width: 60%; 
+  margin: 0 2vw 0 0;
 }
 
 .nav-item {
@@ -49,13 +50,14 @@
   transition: transform 0.3s ease; /* 添加交互效果 */
 }
 
-.header-login-container {
-  position: relative;
-}
+/* h2{
+  margin: 0 0 0 2vw;
+} */
 
 /* Login */
 .header-login {
-  height: auto;  /* aspect-ratio: 100 / 40; */
+  height: auto;
+  color: white;
   cursor: pointer;
   transition: opacity 0.3s ease, transform 0.3s ease;
   text-align: center;
@@ -63,42 +65,27 @@
   align-items: center;
   justify-content: center;
   font-size: 2vw; /* 文字大小根據畫面縮放 */
-  color: white;
   white-space: nowrap;
   overflow: hidden;
-  /*text-overflow: ellipsis;  文字超出時變成 ... */
   max-width: 20vw; /* 限制最大寬度 */
-  /* line-height: 35px; */
+  position: relative;
 }
 
-h2{
-  margin: 0 0 0 2vw;
-}
 
-.header-login:hover {
+.header-login:hover, .login-dropdown h3:hover {
   opacity: 0.8; /* 鼠标悬停时改变透明度 */
 }
 
 .login-dropdown{
-  color: white;
   position: absolute;
-  top: 100%;
-  right: 0;
-  /* background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px; */
-  min-width: 120px;
-  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
-  z-index: 100;
-}
-
-.login-dropdown h3:hover {
-  opacity: 0.8; /* 鼠标悬停时改变透明度 */
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 200; 
 }
 
 .login-dropdown h3 {
   margin: 0;
   padding: 10px;
-  /* font-size: 16px; */
+  font-size: 2vw;
   cursor: pointer;
 }

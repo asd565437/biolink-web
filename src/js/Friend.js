@@ -7,7 +7,7 @@ import addFriend_icon from '../friend_list/addFriend_icon.svg';
 import friend_list from '../friend_list/friend_list.svg';
 import friend_test from '../friend_list/joguman.svg';
 import axios from 'axios';
-import {  UserContext } from "../App"; // 引入全域 Socket 上下文
+import { UserContext } from "../App"; // 引入全域 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
 const Friend = () => {
   const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
@@ -16,6 +16,9 @@ const Friend = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
 
+  const [friendList, setFriendList] = useState([]); // 存放所有好友資訊
+
+
   // 好友資料測試
   const [userName1, setUserName1] = useState(["蔡第一"]); // 初始化 userName
   const [bioNumber1, setBioNumber1] = useState(["2"]); // 初始化 userName
@@ -23,19 +26,19 @@ const Friend = () => {
   const [photoURL, setphotoURL] = useState([friend_test]); // 初始化 userName
   useEffect(() => {
     const fetchUserData = async () => {
-        try {
-            const response = await axios.get(`${apiUrl}/get-cookie`, { withCredentials: true });
-            if (response.data?.id) {
-                setUserId(response.data.id);
-            } else {
-                console.error("未获取到用户 ID");
-            }
-        } catch (error) {
-            console.error("获取 Cookie 失败:", error);
+      try {
+        const response = await axios.get(`${apiUrl}/get-cookie`, { withCredentials: true });
+        if (response.data?.id) {
+          setUserId(response.data.id);
+        } else {
+          console.error("未获取到用户 ID");
         }
+      } catch (error) {
+        console.error("获取 Cookie 失败:", error);
+      }
     };
     fetchUserData();
-}, []);
+  }, []);
 
 
   useEffect(() => {
@@ -61,20 +64,32 @@ const Friend = () => {
     if (!userId) return; // 🔥 确保 userId 存在才执行 API 请求
 
     const loadData = async () => {
-        try {
-            console.log("Fetching friends for userId:", userId);
-            const response = await axios.post(`${apiUrl}/api/friend`, { userId });
-            setUserName1(response.data.userInfo[0].nickname);
-            setBioNumber1(response.data.userInfo[0].bio_count);
-            setFriendDate1(response.data.friendInfo[0].createdAt);
-            setphotoURL(response.data.userInfo[0].photoURL)
-            console.log("Fetched data:", response.data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
+      try {
+        console.log("Fetching friends for userId:", userId);
+        const response = await axios.post(`${apiUrl}/api/friend`, { userId });
+
+        // 假設 response.data.userInfo 是一個包含多個好友資訊的陣列
+        const friendData = response.data.userInfo.map((friend, index) => ({
+          nickname: friend.nickname,
+          bio_count: friend.bio_count,
+          createdAt: response.data.friendInfo[index]?.createdAt || "未知日期",
+          photoURL: friend.photoURL || friend_test, // 頭像
+        }));
+
+        setFriendList(friendData); // 更新好友列表
+        console.log("Fetched friends:", friendData);
+
+        // setUserName1(response.data.userInfo[0].nickname);
+        // setBioNumber1(response.data.userInfo[0].bio_count);
+        // setFriendDate1(response.data.friendInfo[0].createdAt);
+        // setphotoURL(response.data.userInfo[0].photoURL)
+        // console.log("Fetched data:", response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
     loadData();
-}, [userId]); // 🔥 确保 userId 有值后再执行
+  }, [userId]); // 🔥 确保 userId 有值后再执行
 
 
   const friend_styles = {
@@ -121,6 +136,28 @@ const Friend = () => {
       </div>
 
       {/* Content 部分 */}
+      <main className="content">
+        {isImagesLoaded ? (
+          <div className="friend" style={friend_styles.gridContainer}>
+            {friendList.map((friend, index) => (
+              <div className="friend" key={index} style={friend_styles.gridItem}>
+                <img src={friend_images[index % friend_images.length]} alt={`Friend ${index + 1}`} style={friend_styles.image} />
+
+                {/* 顯示每個好友的資訊 */}
+                <div className="friend-info">
+                  <img src={friend.photoURL} alt={`Friend ${index + 1}`} className="friend_test" />
+                  <h3 className="friend-info-name">{friend.nickname}</h3>
+                  <p className="friend-info-numabr">菌種數量：{friend.bio_count}</p>
+                  <p className="friend-info-date">交友日期：{friend.createdAt}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>加载中...</p>
+        )}
+      </main>
+
       {/* <main className="content">
         {isImagesLoaded ? ( // 检查图片是否预加载完成
           <div className="friend" style={friend_styles.gridContainer}>
