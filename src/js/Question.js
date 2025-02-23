@@ -123,8 +123,8 @@ const Question = () => {
 
   const handleNextQuestion = async () => {
 
-    answerP1[(progress)] = buttonStates.P1_A ? "A" : "B";
-    answerP2[(progress)] = buttonStates.P2_A ? "A" : "B";
+    answerP1[progress] = buttonStates.P1_A ? "A" : "B";
+    answerP2[progress] = buttonStates.P2_A ? "A" : "B";
     if (progress >= questionIds.length - 1) {
       console.log(userId.userId)
       socket.emit("submit_question", { roomId, userId: userId.userId, answers:{answerP1,answerP2} });
