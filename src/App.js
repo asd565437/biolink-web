@@ -218,6 +218,7 @@ const FriendModalWrapper = ({ friendId, onClose }) => {
     const { userId } = useContext(UserContext); // 确保正确获取 userId
     const socket = useContext(SocketContext);
     const handleAgree = () => {
+        console.log("確認好友")
         if (socket) {
             socket.emit("agree_friend", { userId, friendId});
         }
