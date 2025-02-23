@@ -42,8 +42,9 @@ const Friend = () => {
   }, [friend_images]);
 
   useEffect(() => {
-    const loadData = async () => {
+    const loadData = async (userId) => {
       try {
+        console.log(userId)
         const response = await axios.post(`${apiUrl}/api/friend`, {userId});
         console.log('Fetched data:', response.data);
         return response.data;
@@ -51,7 +52,7 @@ const Friend = () => {
         console.error('Error fetching data:', error);
       }
     };
-    loadData();
+    loadData(userId.userId);
   }, []);
 
   const friend_styles = {
