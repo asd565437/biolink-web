@@ -11,6 +11,7 @@ const Header = ({ images }) => {
   const navigate = useNavigate();
   const urls = ['/world', '/wall', '/connect', '/', '/login'];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [userName, setUserName] = useState("");
 
   if (!Array.isArray(images)) {
     images = ['world_btn.svg', 'wall_btn.svg', 'culture_btn.svg'];
@@ -46,6 +47,23 @@ const Header = ({ images }) => {
     const updateLoginStatus = async () => {
       const authStatus = await checkAuthStatus();
       setIsLoggedIn(authStatus);
+      if (isLoggedIn) {
+        const fetchUserData = async () => {
+          try {
+            const response = await axios.get(`${apiUrl}/get-cookie`, {
+              withCredentials: true,
+            });
+            console.log("获取到的用户名:", response.data.userName);
+            if (response.data.userName)
+              setUserName(response.data.userName)
+            else
+              setUserName(null);
+          } catch (error) {
+            console.error("获取 Cookie 失败:", error);
+          }
+        };
+        fetchUserData();
+      }
     };
 
     updateLoginStatus();
@@ -101,7 +119,7 @@ const Header = ({ images }) => {
           onMouseLeave={() => setIsDropdownOpen(false)}
         >
           <h2 className="header-login">
-            {isLoggedIn ? "蕭安安安安安" : "LOGIN"}
+            {isLoggedIn ? userName : "LOGIN"}
           </h2>
 
           {isDropdownOpen && (
