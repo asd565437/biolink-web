@@ -148,6 +148,9 @@ function App() {
                 <FriendModalWrapper friendId={data.from} onClose={() => setFriendModalContent(null)} />
             ));
         });
+        newSocket.on("success_add_friend", () => {
+            alert("添加好友成功")
+        });
         setSocket(newSocket);
         return () => newSocket.disconnect();
     }, [userId]);
