@@ -144,7 +144,7 @@ function App() {
         });
         newSocket.on("add_friend", (data) => {
             setUserName(data.from);
-            setModalContent(() => (
+            setFriendModalContent(() => (
                 <FriendModalWrapper friendId={data.from} onClose={() => setFriendModalContent(null)} />
             ));
         });
