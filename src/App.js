@@ -102,7 +102,7 @@ const FriendModal = ({ content, onClose, handleAgree, handleReturn, friendId }) 
                     <img src={invite_photo_box} alt="invite_photo_box" className="invite_photo_box" />
                     <img src={invite_photo} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
                 </div>
-                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleAgree(); onClose }} />
+                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleAgree(); onClose(); }} />
                 <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
             </div>
         </div>
