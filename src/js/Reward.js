@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import reward_title from '../reward/reward_title.svg';
 import strain from '../reward/strain.svg';
+import test_pic from '../reward/test.jpg';
 import check from '../reward/check.png';
 import strain_name_box from '../reward/strain_name_box.png';
 import strain_name_finish from '../reward/strain_name_finish.png';
@@ -11,7 +12,7 @@ const Reward = () => {
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
     const [strainName, setStrainName] = useState("");
-    const [strainImage, setStrainImage] = useState(strain); // 初始圖片
+    const [strainImage, setStrainImage] = useState(test_pic); // 初始圖片
 
     const handleBack = () => {
         setShowPopup(true);

@@ -105,6 +105,7 @@ const Question = () => {
   const handleNextQuestion = async () => {
     ans[(progress) * 2 - 2] = buttonStates.P1_A ? "A" : "B";
     ans[(progress) * 2 - 1] = buttonStates.P2_A ? "A" : "B";
+    console.log(ans)
     if (progress >= questionIds.length - 1) {
       navigate("/reward");
       return;
