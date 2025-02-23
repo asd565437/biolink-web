@@ -49,7 +49,6 @@ const Friend = () => {
         console.error('Error fetching data:', error);
       }
     };
-
     loadData();
   }, []);
 
