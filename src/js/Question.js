@@ -51,6 +51,7 @@ const Question = () => {
         console.log("生成日期："+data.createdAt)
         console.log("bioId："+data.bio_id)
         console.log("培養員名字："+data.nicknames[data.players[0]]+"/"+data.nicknames[data.players[1]])
+        console.log("playerIds："+data.players[0]+"/"+data.players[1])
       return () => {
         socket.off("both-answered");
       };
