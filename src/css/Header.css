@@ -73,4 +73,13 @@ h2{
 
 .header-login:hover {
   opacity: 0.8; /* 鼠标悬停时改变透明度 */
+  text-decoration: underline;
+}
+
+.login-dropdown{
+  color: white;
+}
+
+.login-dropdown h3:hover {
+  opacity: 0.8; /* 鼠标悬停时改变透明度 */
 }

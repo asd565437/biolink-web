@@ -121,7 +121,7 @@ const Friend = () => {
       </div>
 
       {/* Content 部分 */}
-      <main className="content">
+      {/* <main className="content">
         {isImagesLoaded ? ( // 检查图片是否预加载完成
           <div className="friend" style={friend_styles.gridContainer}>
             {friend_images.map((image, index) => (
@@ -142,14 +142,7 @@ const Friend = () => {
         ) : (
           <p>加载中...</p> // 显示加载提示
         )}
-
-        {/* <div className='friend-info'>
-          <img src={friiend_test} alt="friend_photo" className='friiend_test' />
-          <h3 className='friend-info-name'>{userName1}</h3>
-          <p className='friend-info-numabr'>菌種數量：{bioNumber1}</p>
-          <p className='friend-info-date'>交友日期：{friendDate1}</p>
-        </div> */}
-      </main>
+      </main> */}
 
       {/* Footer */}
       <div className="footer">

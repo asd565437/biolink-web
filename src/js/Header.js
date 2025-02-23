@@ -75,45 +75,61 @@ const Header = ({ images }) => {
       width: '27.5%',
     },
   ];
-  
+
   return (
     <header className="header">
       <div className="header-logo" onClick={() => handleNavigate(0)}></div>
-      <nav className="navList">
+      <div className="navList">
+        {/* 水平導覽列 */}
         <nav className="nav-menu">
           {images.map((image, index) => (
             <img
               key={index}
               src={`/${image}`}
               alt={`Header Image ${index + 1}`}
-              style={{...positionAdjustments[index]}}
+              style={{ ...positionAdjustments[index] }}
               onClick={() => handleNavigate(index)}
               className="nav-item"
             />
           ))}
         </nav>
 
-        <h2
-          className="header-login"
-          onClick={async () => {
-            if (isLoggedIn) {
-              await clearCookie();
-            }
-            handleNavigate(4);
-          }}
+        {/* 垂直導覽列 */}
+        <div
+          className="header-login-container"
           onMouseEnter={() => setIsDropdownOpen(true)}
           onMouseLeave={() => setIsDropdownOpen(false)}
         >
-          {isLoggedIn ? "LOGOUT" : "LOGIN"}
-          {/* 垂直下拉選單 */}
+          <h2
+            className="header-login"
+            onClick={async () => {
+              if (isLoggedIn) {
+                await clearCookie();
+              }
+              handleNavigate(4);
+            }}
+          >
+            {isLoggedIn ? "LOGOUT" : "LOGIN"}
+          </h2>
+
           {isDropdownOpen && (
-            <div className="dropdown-menu">
-              <h3 className="dropdown-item"># 1234</h3>
-              <a href="#" className="dropdown-item">LOGOUT</a>
+            <div className="login-dropdown">
+              <h3># 1234</h3>
+              <h3
+                onClick={async () => {
+                  if (isLoggedIn) {
+                    await clearCookie();
+                    handleNavigate(4);
+                  }
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                LOGOUT
+              </h3>
             </div>
           )}
-        </h2>
-      </nav>
+        </div>
+      </div>
     </header>
   );
 };
