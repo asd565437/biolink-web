@@ -6,7 +6,7 @@ import Header from "./Header.js";
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-
+let ans={}
 const Question = () => {
   const { roomId } = useParams();
   const socket = useContext(SocketContext);
@@ -103,11 +103,12 @@ const Question = () => {
   };
 
   const handleNextQuestion = async () => {
+    ans[(progress) * 2 - 2] = buttonStates.P1_A ? "A" : "B";
+    ans[(progress) * 2 - 1] = buttonStates.P2_A ? "A" : "B";
     if (progress >= questionIds.length - 1) {
       navigate("/reward");
       return;
     }
-
     const newProgress = progress + 1;
     await loadQuestion(newProgress);
     setProgress(newProgress);
