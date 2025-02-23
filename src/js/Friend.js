@@ -96,7 +96,7 @@ const Friend = () => {
       display: 'grid',
       gridTemplateColumns: 'repeat(2, 1fr)', // 每行两列
       rowGap: '30px',
-      columnGap: '00px',
+      columnGap: '100px',
       justifyContent: 'center', // 水平居中
       alignItems: 'center', // 垂直居中
       position: 'relative',

@@ -16,7 +16,8 @@
 .header-logo {
   width: 12vw;
   height: auto;
-  aspect-ratio: 180 / 45;
+  /* aspect-ratio: 180 / 45; */
+  height: 45px;
   background: url('../header/logo_small.svg') no-repeat;
   background-size: contain;
   background-position: center;

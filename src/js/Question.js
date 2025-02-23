@@ -6,8 +6,8 @@ import Header from "./Header.js";
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-let answerP1 = {}
-let answerP2 = {}
+let answerP1 = []
+let answerP2 = []
 const Question = () => {
   const { roomId } = useParams();
   const socket = useContext(SocketContext);
@@ -123,7 +123,7 @@ const Question = () => {
 
   const handleNextQuestion = async () => {
 
-    answerP1[progress] = buttonStates.P1_A ? "A" : "B";
+    answerP1 = buttonStates.P1_A ? "A" : "B";
     answerP2[progress] = buttonStates.P2_A ? "A" : "B";
     if (progress >= questionIds.length - 1) {
       console.log(userId.userId)
