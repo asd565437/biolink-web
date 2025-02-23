@@ -34,11 +34,11 @@ const Question = () => {
   const [questionIds, setQuestionIds] = useState([]);
 
   const bar_images = [
-    progress_bar_1,
-    progress_bar_2,
-    progress_bar_3,
-    progress_bar_4,
-    progress_bar_5,
+    "/question/progress_bar_1.svg",
+    "/question/progress_bar_2.svg",
+    "/question/progress_bar_3.svg",
+    "/question/progress_bar_4.svg",
+    "/question/progress_bar_5.svg",
   ];
 
   // 监听 socket 事件，获取题目 ID
