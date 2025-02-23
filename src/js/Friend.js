@@ -20,6 +20,7 @@ const Friend = () => {
   const [userName1, setUserName1] = useState(["蔡第一"]); // 初始化 userName
   const [bioNumber1, setBioNumber1] = useState(["2"]); // 初始化 userName
   const [friendDate1, setFriendDate1] = useState(["02.17.25"]); // 初始化 userName
+  const [photoURL, setphotoURL] = useState([friend_test]); // 初始化 userName
   useEffect(() => {
     const fetchUserData = async () => {
         try {
@@ -66,6 +67,7 @@ const Friend = () => {
             setUserName1(response.data.userInfo[0].nickname);
             setBioNumber1(response.data.userInfo[0].bio_count);
             setFriendDate1(response.data.friendInfo[0].createdAt);
+            setphotoURL(response.data.userInfo[0].photoURL)
             console.log("Fetched data:", response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -128,7 +130,7 @@ const Friend = () => {
 
                 {index === 0 && ( // 只在第一個 friend 上顯示 friend-info
                   <div className="friend-info">
-                    <img src={friend_test} alt="friend_test" className="friend_test" />
+                    <img src={photoURL} alt="friend_test" className="friend_test" />
                     <h3 className="friend-info-name">{userName1}</h3>
                     <p className="friend-info-numabr">菌種數量：{bioNumber1}</p>
                     <p className="friend-info-date">交友日期：{friendDate1}</p>
