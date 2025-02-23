@@ -3,13 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
 import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 import Header from "./Header.js";
-import progress_bar_1 from "../question/progress_bar_1.svg";
-import progress_bar_2 from "../question/progress_bar_2.svg";
-import progress_bar_3 from "../question/progress_bar_3.svg";
-import progress_bar_4 from "../question/progress_bar_4.svg";
-import progress_bar_5 from "../question/progress_bar_5.svg";
-import back_icon from "../question/back_btn.svg";
-import check from "../reward/check.png";
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -158,7 +151,7 @@ const Question = () => {
       </div>
 
       <div className="back">
-        <img src={back_icon} alt="回上一題" onClick={handleBackQuestion} />
+        <img src={"/question/back_btn.svg"} alt="回上一題" onClick={handleBackQuestion} />
       </div>
 
       <div className="checkAnswer">
@@ -181,7 +174,7 @@ const Question = () => {
           ></div>
         )}
 
-        <img src={check} alt="確認答案" onClick={handleNextQuestion} />
+        <img src={"/reward/check.png"} alt="確認答案" onClick={handleNextQuestion} />
       </div>
 
       <main className="content">
