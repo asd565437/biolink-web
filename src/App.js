@@ -35,7 +35,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
     const [nickName, setNickName] = useState();
 
     useEffect(() => {
-        document.title = "biolink";
+        document.title = "Biolink";
         if (nickName) return;
 
         const handleFriend = async () => {
