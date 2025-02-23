@@ -56,6 +56,9 @@
   flex-direction: column;
   align-items: flex-start;
   position: relative; /* 用於放置下拉選單 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-login {
@@ -63,9 +66,7 @@
   color: white;
   cursor: pointer;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  
   white-space: nowrap;
   overflow: hidden;
   position: relative;

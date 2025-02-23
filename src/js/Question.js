@@ -50,7 +50,7 @@ const Question = () => {
         console.log("答對題數："+data.totalCorrect)
         console.log("生成日期："+data.createdAt)
         console.log("bioId："+data.bio_id)
-        console.log("培養員名字："+data.nicknames)
+        console.log("培養員名字："+data.nicknames[0]+"/"+data.nicknames[1])
       return () => {
         socket.off("both-answered");
       };

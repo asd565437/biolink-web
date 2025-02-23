@@ -98,7 +98,7 @@ const Header = ({ images }) => {
         <div
           className="header-login-container"
           onMouseEnter={() => setIsDropdownOpen(true)}
-          // onMouseLeave={() => setIsDropdownOpen(false)}
+          onMouseLeave={() => setIsDropdownOpen(false)}
         >
           <h2 className="header-login">
             {isLoggedIn ? "蕭安安安安安" : "LOGIN"}
