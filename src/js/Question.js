@@ -6,7 +6,7 @@ import Header from "./Header.js";
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-let answer={}
+let answer = {}
 const Question = () => {
   const { roomId } = useParams();
   const socket = useContext(SocketContext);
@@ -46,24 +46,19 @@ const Question = () => {
 
     socket.on("both-answered", (status) => {
       if (status) {
-          setBothAnswered(true);
+        setBothAnswered(true);
       }
       return () => {
         socket.off("both-answered");
-    };
-  });
-  useEffect(() => {
-    if (bothAnswered) {
-        navigate("/reward");
-    }
-}, [bothAnswered, navigate]);
+      };
+    });
 
     window.addEventListener("beforeunload", () => {
-      socket.emit("leave-room", roomId , userId.userId);
-  });
-  socket.on("room-left", (roomId) => {
-    console.log(`Successfully left room: ${roomId}`);
-});
+      socket.emit("leave-room", roomId, userId.userId);
+    });
+    socket.on("room-left", (roomId) => {
+      console.log(`Successfully left room: ${roomId}`);
+    });
     // 发送请求获取题目 ID
     socket.emit("get-question-ids", roomId);
 
@@ -71,6 +66,12 @@ const Question = () => {
       socket.off("question-ids");
     };
   }, [socket, roomId]);
+  
+  useEffect(() => {
+    if (bothAnswered) {
+        navigate("/reward");
+    }
+}, [bothAnswered, navigate]);
 
   // ✅ 当 questionIds 更新后，再加载第一道题
   useEffect(() => {
@@ -123,7 +124,7 @@ const Question = () => {
     answer[(progress) * 2 + 1] = buttonStates.P2_A ? "A" : "B";
     console.log(answer)
     if (progress >= questionIds.length - 1) {
-      socket.emit("submit_question", roomId , userId.userId ,answer);
+      socket.emit("submit_question", roomId, userId.userId, answer);
       return;
     }
     const newProgress = progress + 1;
