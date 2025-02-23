@@ -45,9 +45,12 @@ const Question = () => {
       setQuestionIds(ids);
     });
 
-    socket.on("both-answered", (totalCorrect) => {
+    socket.on("both-answered", (data) => {
         setBothAnswered(true);
-        console.log(totalCorrect)
+        console.log("答對題數："+data.totalCorrect)
+        console.log("生成日期："+data.createdAt)
+        console.log("bioId："+data.bio_id)
+        console.log("培養員名字："+data.nicknames)
       return () => {
         socket.off("both-answered");
       };
