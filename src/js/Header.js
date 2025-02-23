@@ -77,7 +77,7 @@ const Header = ({ images }) => {
   
   return (
     <header className="header">
-      <div className="header-logo" onClick={() => handleNavigate(3)}></div>
+      <div className="header-logo" onClick={() => handleNavigate(0)}></div>
       <div className="navList">
         <nav className="nav-menu">
           {images.map((image, index) => (

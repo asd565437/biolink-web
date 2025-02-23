@@ -28,15 +28,21 @@
     top: 10%;
 }
 
-.strain {
-    /* width: 37.5%; */
-    scale: 0.6;
+.strain-box {
+    width: 70%;  /* 設定菌種框的寬度 */
+    height: 70%; /* 設定菌種框的高度 */
+    background-size: contain; /* 讓圖片適應框 */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 12%;
 }
 
 .check {
-    scale: 0.15;
+    /* scale: 0.15; */
+    width: 15%;
     position: absolute;
-    top: 60%;
+    top: 80%;
     cursor: pointer;
 }
 

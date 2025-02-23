@@ -108,4 +108,6 @@ button:disabled {
 
 .button-selected {
     background-image: url('../question/question_push _btn.svg');
+    background-color: #00000050;
+    border-radius: 35px;
 }

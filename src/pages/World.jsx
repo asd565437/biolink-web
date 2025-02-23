@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "../css/World.css";
 import Header from "../js/Header";
@@ -17,26 +17,26 @@ const World = () => {
   const [showIdPopup, setShowIdPopup] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
   const location = useLocation();
-  const popup = location.state?.popup || false ; // 如果沒有數據則給預設值
+  const popup = location.state?.popup || false; // 如果沒有數據則給預設值
   useEffect(() => {
     const fetchUserData = async () => {
-        try {
-            const response = await axios.get(`${apiUrl}/get-cookie`, {
-                withCredentials: true,
-            });
-            console.log("获取到的用户 ID:", response.data.id);
-            if(response.data.id)
-              setUserId(response.data.id);
-            else
-              setUserId(null);
-            if(popup)
-              setShowIdPopup(true);
-        } catch (error) {
-            console.error("获取 Cookie 失败:", error);
-        }
+      try {
+        const response = await axios.get(`${apiUrl}/get-cookie`, {
+          withCredentials: true,
+        });
+        console.log("获取到的用户 ID:", response.data.id);
+        if (response.data.id)
+          setUserId(response.data.id);
+        else
+          setUserId(null);
+        if (popup)
+          setShowIdPopup(true);
+      } catch (error) {
+        console.error("获取 Cookie 失败:", error);
+      }
     };
     fetchUserData();
-}, []);
+  }, []);
 
   // 初始化圖片狀態
   const [images, setImages] = useState(() => {
@@ -55,6 +55,12 @@ const World = () => {
       directionY: getNumber(1),
       rotation: Math.random() * 360,
       rotationSpeed: Math.random() * 2 + 0.5,
+      info: {
+        name: `菌種名稱 ${index + 1}`,
+        keeper: `培養員 ${index + 1}`,
+        birthdate: `2025-0${index + 1}-01`,
+        rank: `排名 ${index + 1}`,
+      },
     }));
   });
 
@@ -115,6 +121,10 @@ const World = () => {
                 x: e.clientX + 15,
                 y: e.clientY + 15,
                 scale: 2, // 調整放大倍數
+                name: "有體溫關係",
+                owner: "蕭安安&袁駱駝",
+                birthday: "2025/02/23",
+                rank: 5,
               });
             }}
             onMouseMove={(e) => {
@@ -126,23 +136,74 @@ const World = () => {
           />
         ))}
 
-        {/* 滑鼠懸停時顯示的圖片 */}
+        {/* 滑鼠懸停時顯示的圖片與資訊 */}
         {hoveredImage && (
-          <img
-            src={hoveredImage.src}
-            alt="hover"
+          <div
             style={{
               position: "absolute",
               left: `${hoveredImage.x}px`,
               top: `${hoveredImage.y}px`,
               transform: `scale(${hoveredImage.scale})`,
-              width: "50px",
-              height: "50px",
               pointerEvents: "none",
-              transition: "transform 0.1s ease-out",
               zIndex: 10000,
             }}
-          />
+          >
+            {/* 外層容器 (包含圖片和資訊) */}
+            <div
+              style={{
+                position: "relative",
+                display: "inline-block",
+              }}
+            >
+              {/* 菌種圖片 */}
+              <img
+                src={hoveredImage.src}
+                alt="hover"
+                style={{
+                  width: "140px",
+                  height: "140px",
+                  transition: "transform 0.1s ease-out",
+                }}
+              />
+
+              {/* 文字資訊 (覆蓋在圖片中央) */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  // color: "rgb(216, 165, 223)",
+                  padding: "20px",
+                  borderRadius: "10px",
+                  width: "150px",
+                }}
+                className="world-bio-text"
+              >
+
+                {/* 菌種名稱 (標題) */}
+                <div
+                  style={{
+                    fontSize: "10px", // 放大字體
+                    fontWeight: "bold",
+                    //letterSpacing: "1px", // 增加字距
+                    marginBottom: "2px", // 與分隔線的間距
+                    paddingBottom: "2px",
+                    borderBottom: "1px solid rgba(255, 255, 255, 0.5)", // 加入分隔線
+                  }}
+                >
+                  {hoveredImage.name}
+                </div>
+
+                {/* 菌種資訊 */}
+                <div style={{ fontSize: "8px", lineHeight: "1.8", textAlign: "left" }}>
+                  <div>培養員：{hoveredImage.owner}</div>
+                  <div>菌種誕生日：{hoveredImage.birthday}</div>
+                  <div>菌種排名：{hoveredImage.rank}</div>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* ID 提示視窗 */}

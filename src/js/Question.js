@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 import Header from "./Header.js";
 import back_icon from "../question/back_btn.svg";
-import check from "../question/check_answer.svg";
+import check from "../reward/check.png";
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;

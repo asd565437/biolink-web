@@ -5,7 +5,7 @@ import Header from "./Header.js";
 import AddFriend from "./AddFriend.js";
 import addFriend_icon from '../friend_list/addFriend_icon.svg';
 import friend_list from '../friend_list/friend_list.svg';
-import friiend_test from '../friend_list/joguman.svg';
+import friend_test from '../friend_list/joguman.svg';
 import axios from 'axios';
 const apiUrl = process.env.REACT_APP_API_URL;
 const Friend = () => {
@@ -57,7 +57,8 @@ const Friend = () => {
     gridContainer: {
       display: 'grid',
       gridTemplateColumns: 'repeat(2, 1fr)', // 每行两列
-      columnGap: '35px',
+      rowGap: '30px',
+      columnGap: '200px',
       justifyContent: 'center', // 水平居中
       alignItems: 'center', // 垂直居中
       position: 'relative',
@@ -74,7 +75,7 @@ const Friend = () => {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      scale: '0.9',
+      // scale: '0.9',
     },
   };
 
@@ -102,6 +103,15 @@ const Friend = () => {
             {friend_images.map((image, index) => (
               <div className="friend" key={index} style={friend_styles.gridItem}>
                 <img src={image} alt={`Bio ${index + 1}`} style={friend_styles.image} />
+
+                {index === 0 && ( // 只在第一個 friend 上顯示 friend-info
+                  <div className="friend-info">
+                    <img src={friend_test} alt="friend_test" className="friend_test" />
+                    <h3 className="friend-info-name">{userName1}</h3>
+                    <p className="friend-info-numabr">菌種數量：{bioNumber1}</p>
+                    <p className="friend-info-date">交友日期：{friendDate1}</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -109,12 +119,12 @@ const Friend = () => {
           <p>加载中...</p> // 显示加载提示
         )}
 
-        <div className='friend-info'>
+        {/* <div className='friend-info'>
           <img src={friiend_test} alt="friend_photo" className='friiend_test' />
           <h3 className='friend-info-name'>{userName1}</h3>
           <p className='friend-info-numabr'>菌種數量：{bioNumber1}</p>
           <p className='friend-info-date'>交友日期：{friendDate1}</p>
-        </div>
+        </div> */}
       </main>
 
       {/* Footer */}

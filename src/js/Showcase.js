@@ -87,12 +87,12 @@ const Showcase = () => {
       width: '100%',
       minWidth: '400px',
       height: '400px',
-      marginTop: '10px',
+      marginTop: '60px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       cursor: 'pointer',
-      borderRadius: "15px",
+      borderRadius: "20px",
     },
     cardImage: {
       width: '100%',
@@ -144,11 +144,11 @@ const Showcase = () => {
       <main className="showcase-content">
         {isImagesLoaded ? ( // 检查是否完成预加载
           <div className='pair_styles.container'>
-            <div className='row g-4' >
+            <div className='row g-0' >
               {images.map((cardImage, index) => (
                 <div
                   key={index}
-                  className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center"
+                  className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center "
                 >
                   <div
                     className='card-container'

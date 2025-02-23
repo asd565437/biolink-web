@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import reward_title from '../reward/reward_title.svg';
 import strain from '../reward/strain.svg';
-import check from '../reward/check.svg';
+import check from '../reward/check.png';
 import strain_name_box from '../reward/strain_name_box.png';
 import strain_name_finish from '../reward/strain_name_finish.png';
 
@@ -11,6 +11,7 @@ const Reward = () => {
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
     const [strainName, setStrainName] = useState("");
+    const [strainImage, setStrainImage] = useState(strain); // 初始圖片
 
     const handleBack = () => {
         setShowPopup(true);
@@ -29,7 +30,7 @@ const Reward = () => {
     return (
         <div className="reward">
             <img src={reward_title} alt="標題" className="reward_title" />
-            <img src={strain} alt="新菌種" className="strain" />
+            <div className="strain-box" style={{ backgroundImage: `url(${strainImage})` }}></div>
             <img src={check} alt="確認按鈕" className="check" onClick={handleBack} />
 
             {showPopup && (

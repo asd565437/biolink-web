@@ -15,7 +15,6 @@ const apiUrl = process.env.REACT_APP_API_URL;
 const Confirm = () => {
     const location = useLocation();
     const friendId = location.state?.friendId || "未知用戶";
-    const [invitations, setInvitations] = useState([]);
     const [photo, setPhoto] = useState(confirm_test);
     const [userName, setuserName] = useState("菌男霉女");
     const navigate = useNavigate();

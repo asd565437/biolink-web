@@ -1,15 +1,15 @@
 import "../css/AddFriend.css"; // 引入样式文件
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ConfirmFriend from "./ConfirmFriend.js";
 import addFriend_back from '../addFriend/addFriend_back.svg';
 import addFriend_box from '../addFriend/addFriend_box.png';
 import addFriend_finish from '../addFriend/addFriend_finish.png';
-
+import { UserContext } from "../App"; // 引入全局 Socket 上下文
 
 const AddFriend = ({ onClose }) => {
     const navigate = useNavigate();
-
+    const userId = useContext(UserContext); // 使用全局 socket
     const [friendId, setFriendId] = useState("");
     const [showConfirmFriend, setShowConfirmFriend] = useState(false);
 
@@ -19,7 +19,10 @@ const AddFriend = ({ onClose }) => {
 
     const handleSubmit = () => {
         if (friendId.trim()) {
-            setShowConfirmFriend(true);// 顯示確認好友介面
+            if (userId.userId == friendId)
+                alert('不可以邀請自己喔！');
+            else
+                setShowConfirmFriend(true);// 顯示確認好友介面
         } else {
             alert('請輸入好友 ID！');
         }
