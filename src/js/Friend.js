@@ -16,11 +16,14 @@ const Friend = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
 
+  const [friendList, setFriendList] = useState([]); // 存放所有好友資訊
+
   // 好友資料測試
   const [userName1, setUserName1] = useState(["蔡第一"]); // 初始化 userName
   const [bioNumber1, setBioNumber1] = useState(["2"]); // 初始化 userName
   const [friendDate1, setFriendDate1] = useState(["02.17.25"]); // 初始化 userName
   const [photoURL, setphotoURL] = useState([friend_test]); // 初始化 userName
+  
   useEffect(() => {
     const fetchUserData = async () => {
       try {

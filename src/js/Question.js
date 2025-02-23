@@ -6,7 +6,8 @@ import Header from "./Header.js";
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-let answer = {}
+let answerP1 = {}
+let answerP2 = {}
 const Question = () => {
   const { roomId } = useParams();
   const socket = useContext(SocketContext);
@@ -44,10 +45,9 @@ const Question = () => {
       setQuestionIds(ids);
     });
 
-    socket.on("both-answered", (status) => {
-      if (status) {
+    socket.on("both-answered", (totalCorrect) => {
         setBothAnswered(true);
-      }
+        console.log(totalCorrect)
       return () => {
         socket.off("both-answered");
       };
@@ -119,12 +119,12 @@ const Question = () => {
   };
 
   const handleNextQuestion = async () => {
-    console.log(progress);
-    answer[(progress) * 2] = buttonStates.P1_A ? "A" : "B";
-    answer[(progress) * 2 + 1] = buttonStates.P2_A ? "A" : "B";
-    console.log(userId.userId)
+
+    answerP1[(progress)] = buttonStates.P1_A ? "A" : "B";
+    answerP2[(progress)] = buttonStates.P2_A ? "A" : "B";
     if (progress >= questionIds.length - 1) {
-      socket.emit("submit_question", { roomId, userId: userId.userId, answer });
+      console.log(userId.userId)
+      socket.emit("submit_question", { roomId, userId: userId.userId, answers:{answerP1,answerP2} });
       return;
     }
     const newProgress = progress + 1;

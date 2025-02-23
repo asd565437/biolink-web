@@ -1,14 +1,15 @@
+/* Header */
 .header {
   position: fixed;
   top: 10px;
   left: 0;
-  width: 100%; /* 去掉引号 */
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 确保左右两边对齐 */
-  padding: 2vh 4vw; /*20 40px*/
+  justify-content: space-between;
+  padding: 2vh 4vw;
   z-index: 100;
-  box-sizing: border-box; /* 确保 padding 不会影响宽度 */
+  box-sizing: border-box;
   overflow: visible;
 }
 
@@ -20,15 +21,18 @@
   background: url('../header/logo_small.svg') no-repeat;
   background-size: contain;
   background-position: center;
+  cursor: pointer;
 }
 
-.navList{
+/* navList Container */
+.navList {
   width: 50vw;
   display: flex;
   justify-content: flex-end;
+  position: relative; /* 使得垂直導覽列能根據這個定位 */
 }
 
-/* Navigation Menu */
+/* Horizontal Navigation Menu */
 .nav-menu {
   display: flex;
   gap: 2vw; /* 每个导航项之间的间距 */
@@ -36,8 +40,8 @@
   align-items: center;
   flex-grow: 0;
   flex-shrink: 0;
-  width: 60%; 
-  margin: 0 2vw 0 0;
+  width: 60%;
+  margin-right: 2vw;
 }
 
 .nav-item {
@@ -47,15 +51,21 @@
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
-  transition: transform 0.3s ease; /* 添加交互效果 */
+  transition: transform 0.3s ease;
 }
 
+/* Vertical Navigation (Dropdown) */
+.header-login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative; /* 用於放置下拉選單 */
+}
 
-
-/* Login */
 .header-login {
+  font-size: 2vw;
   color: white;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
   text-align: center;
   display: flex;
   align-items: center;
@@ -65,26 +75,20 @@
   position: relative;
 }
 
-.header-login h2{
-  cursor: pointer;
+.header-login h2 {
   font-size: 2vw;
-  max-width: 20vw; /* 限制最大寬度 */
+  max-width: 20vw;
 }
 
-.header-login:hover, .login-dropdown h3:hover {
-  opacity: 0.8; /* 鼠标悬停时改变透明度 */
-}
-
-.login-dropdown{
+.login-dropdown {
   /* position: absolute;
   top: 100%;
   left: 0; */
   width: 100%;
   color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 200; 
-  display: flex;
-  flex-direction: column;
+  z-index: 200;
+  /* background-color: #333;  */
 }
 
 .login-dropdown h3 {
@@ -92,5 +96,20 @@
   padding: 10px;
   font-size: 2vw;
   cursor: pointer;
-  text-align: center; 
+  transition: background-color 0.3s ease;
+}
+
+.login-dropdown h3:hover {
+  background-color: #444;
+}
+
+/* Hover Effect */
+.header-login:hover,
+.login-dropdown h3:hover {
+  opacity: 0.8;
+}
+
+/* For the layout when it's not hovering over header-login */
+.header-login-container:hover .login-dropdown {
+  display: block; /* Ensure dropdown appears when hovering */
 }
