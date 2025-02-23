@@ -124,7 +124,7 @@ const Question = () => {
     answer[(progress) * 2 + 1] = buttonStates.P2_A ? "A" : "B";
     console.log(userId.userId)
     if (progress >= questionIds.length - 1) {
-      socket.emit("submit_question", roomId, userId.userId, answer);
+      socket.emit("submit_question", { roomId, userId: userId.userId, answer });
       return;
     }
     const newProgress = progress + 1;
