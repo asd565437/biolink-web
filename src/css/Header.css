@@ -1,4 +1,3 @@
-/* Header */
 .header {
   position: fixed;
   top: 10px;
@@ -51,37 +50,41 @@
   transition: transform 0.3s ease; /* 添加交互效果 */
 }
 
-/* h2{
-  margin: 0 0 0 2vw;
-} */
+
 
 /* Login */
 .header-login {
-  height: auto;
   color: white;
-  cursor: pointer;
   transition: opacity 0.3s ease, transform 0.3s ease;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2vw; /* 文字大小根據畫面縮放 */
   white-space: nowrap;
   overflow: hidden;
-  max-width: 20vw; /* 限制最大寬度 */
   position: relative;
 }
 
+.header-login h2{
+  cursor: pointer;
+  font-size: 2vw;
+  max-width: 20vw; /* 限制最大寬度 */
+}
 
 .header-login:hover, .login-dropdown h3:hover {
   opacity: 0.8; /* 鼠标悬停时改变透明度 */
 }
 
 .login-dropdown{
-  position: absolute;
+  /* position: absolute;
+  top: 100%;
+  left: 0; */
+  width: 100%;
   color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 200; 
+  display: flex;
+  flex-direction: column;
 }
 
 .login-dropdown h3 {
@@ -89,4 +92,5 @@
   padding: 10px;
   font-size: 2vw;
   cursor: pointer;
+  text-align: center; 
 }

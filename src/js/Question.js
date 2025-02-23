@@ -66,7 +66,7 @@ const Question = () => {
       socket.off("question-ids");
     };
   }, [socket, roomId]);
-  
+
   useEffect(() => {
     if (bothAnswered) {
         navigate("/reward");
@@ -122,7 +122,7 @@ const Question = () => {
     console.log(progress);
     answer[(progress) * 2] = buttonStates.P1_A ? "A" : "B";
     answer[(progress) * 2 + 1] = buttonStates.P2_A ? "A" : "B";
-    console.log(answer)
+    console.log(userId.userId)
     if (progress >= questionIds.length - 1) {
       socket.emit("submit_question", roomId, userId.userId, answer);
       return;
