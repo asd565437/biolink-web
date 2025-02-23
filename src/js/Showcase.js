@@ -46,7 +46,7 @@ const Showcase = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.post(`${apiUrl}/api/bio`, { userId });
+        const response = await axios.post(`${apiUrl}/api/bio`, { userId :userId.userId });
         console.log('Fetched data:', response.data);
         return response.data;
       } catch (error) {

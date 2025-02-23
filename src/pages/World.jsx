@@ -49,12 +49,12 @@ const World = () => {
       // src: `bio_${index + 1}.svg`,
       x: Math.random() * screenWidth - screenWidth / 2,
       y: Math.random() * screenHeight - screenHeight,
-      scale: Math.random() * (0.1 - 0.05) + 0.05,
-      speed: Math.random() * 2 + 0.5,
+      scale: Math.random() * (0.13- 0.05) + 0.05, //0.05~0.13
+      speed: Math.random() * 1.5,
       directionX: getNumber(1),
       directionY: getNumber(1),
       rotation: Math.random() * 360,
-      rotationSpeed: Math.random() * 2 + 0.5,
+      rotationSpeed: Math.random() * 0.7,
       info: {
         name: `菌種名稱 ${index + 1}`,
         keeper: `培養員 ${index + 1}`,

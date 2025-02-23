@@ -106,7 +106,7 @@ const Header = ({ images }) => {
 
           {isDropdownOpen && (
             <div className="login-dropdown">
-              <h3 className="logID"># 1234</h3>
+              <h3 className="logID">#{userId?.userId}</h3>
               <h3 className="login-container-logout"
                 onClick={async () => {
                   if (isLoggedIn) {

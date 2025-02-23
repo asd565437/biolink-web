@@ -50,6 +50,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
             }
         };
 
+        
         handleFriend();
     }, [friendId]);
 
@@ -73,7 +74,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
 
 const FriendModal = ({ content, onClose, handleAgree, handleReturn, friendId }) => {
     const [nickName, setNickName] = useState();
-
+    const [photoURL, setPhotoURL] = useState(invite_photo);
     useEffect(() => {
         if (nickName) return;
 
@@ -83,6 +84,7 @@ const FriendModal = ({ content, onClose, handleAgree, handleReturn, friendId }) 
                     id: friendId,
                 });
                 setNickName(response.data.player?.nickName);
+                setPhotoURL(response.data.player?.photoURL);
             } catch (error) {
                 console.error("取得好友資訊失敗:", error);
                 alert("請求失敗：" + (error.response?.data?.error || error.message));
@@ -101,7 +103,7 @@ const FriendModal = ({ content, onClose, handleAgree, handleReturn, friendId }) 
                 <p className="invite_title">{nickName}&emsp;邀請您一起進行培養菌種</p>
                 <div className="invite_photo_area">
                     <img src={invite_photo_box} alt="invite_photo_box" className="invite_photo_box" />
-                    <img src={invite_photo} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
+                    <img src={photoURL} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
                 </div>
                 <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleAgree(); onClose(); }} />
                 <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
