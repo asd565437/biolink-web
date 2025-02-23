@@ -63,6 +63,9 @@ const Friend = () => {
         try {
             console.log("Fetching friends for userId:", userId);
             const response = await axios.post(`${apiUrl}/api/friend`, { userId });
+            setUserName1(response.data.userInfo[0].nickname);
+            setBioNumber1(response.data.userInfo[0].bio_count);
+            setFriendDate1(response.data.friendInfo[0].createdAt);
             console.log("Fetched data:", response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
