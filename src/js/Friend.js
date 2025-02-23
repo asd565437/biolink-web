@@ -14,12 +14,29 @@ const Friend = () => {
   const friend_images = Array.from({ length: 6 }, (_, index) => `/friend_box.png`);
   // const friend_images = Array.from({ length: 6 }, (_, index) => `/friend_${index + 1}.png`);
   const [showPopup, setShowPopup] = useState(false);
-  const userId = useContext(UserContext);
+  const { userId, setUserId } = useContext(UserContext);
+
 
   // 好友資料測試
   const [userName1, setUserName1] = useState("蔡第一"); // 初始化 userName
   const [bioNumber1, setBioNumber1] = useState("2"); // 初始化 userName
   const [friendDate1, setFriendDate1] = useState("02.17.25"); // 初始化 userName
+  useEffect(() => {
+    const fetchUserData = async () => {
+        try {
+            const response = await axios.get(`${apiUrl}/get-cookie`, { withCredentials: true });
+            if (response.data?.id) {
+                setUserId(response.data.id);
+            } else {
+                console.error("未获取到用户 ID");
+            }
+        } catch (error) {
+            console.error("获取 Cookie 失败:", error);
+        }
+    };
+    fetchUserData();
+}, []);
+
 
   useEffect(() => {
     // 预加载图片
@@ -42,18 +59,20 @@ const Friend = () => {
   }, [friend_images]);
 
   useEffect(() => {
-    const loadData = async (userId) => {
-      try {
-        console.log(userId)
-        const response = await axios.post(`${apiUrl}/api/friend`, {userId});
-        console.log('Fetched data:', response.data);
-        return response.data;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+    if (!userId) return; // 🔥 确保 userId 存在才执行 API 请求
+
+    const loadData = async () => {
+        try {
+            console.log("Fetching friends for userId:", userId);
+            const response = await axios.post(`${apiUrl}/api/friend`, { userId });
+            console.log("Fetched data:", response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
     };
-    loadData(userId.userId);
-  }, []);
+    loadData();
+}, [userId]); // 🔥 确保 userId 有值后再执行
+
 
   const friend_styles = {
     gridContainer: {
