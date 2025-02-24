@@ -29,9 +29,9 @@
 }
 
 .connect_title {
-  scale: 0.5;
+  scale: 0.45;
   position: absolute;
-  top: 15%;
+  top: 26%;
 }
 
 .friend-input {
@@ -65,8 +65,8 @@
 }
 
 .connect_finish {
-  scale: 0.3;
+  scale: 0.25;
   position: absolute;
-  bottom: 1%;
+  bottom: 3%;
   cursor: pointer;
 }

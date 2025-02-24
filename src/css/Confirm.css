@@ -23,7 +23,7 @@
 
   .confirm_title {
     position: absolute;
-    top: 7%;
+    top: 25%;
     color: #ffffff;
   }
 
@@ -37,7 +37,7 @@
 
   .confirm_photo_area {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 18vw;  /* 調整圓形大小 */
@@ -107,7 +107,7 @@
   
   .confirm_wait { 
     position: absolute;
-    bottom: 5%;
+    bottom: 6%;
     width: 20%;
   }
   
