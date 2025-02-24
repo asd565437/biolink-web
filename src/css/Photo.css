@@ -1,8 +1,9 @@
-.login_text {
+.photo_title {
     position: absolute;
     top: 8%;
     width: 10%;
 }
+
 .photo-box-register{
     background-image: url("../photo/photo_boxB.svg");
     background-repeat: no-repeat;

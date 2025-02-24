@@ -59,8 +59,8 @@ function Photo() {
                 <img src="/logo_small.svg" alt="Logo" />
             </div></Link>
 
-            <div className="login_text">
-                <img src={photo_title} alt="Logo" />
+            <div className="photo_title">
+                <img src={photo_title} alt="photo_title" />
             </div>
 
             <div className="photo-box-register">
