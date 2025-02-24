@@ -11,9 +11,17 @@ import { UserContext } from "../App"; // 引入全局 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Showcase = () => {
+  // const [data, setData] = useState([]); // 存放後端返回的卡片數據
+  // const [isOriginal, setIsOriginal] = useState([]); // 每張卡片的狀態
   const [isOriginal, setIsOriginal] = useState(Array(8).fill(true));
   const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
   const userId = useContext(UserContext); // 使用全局 socket
+
+  // 動態生成圖片陣列
+  // const images = data.map(() => Card);
+  // const bg_images = data.map(() => Card_bg);
+  // const bio_images = data.map((_, index) => `/bio_${index + 1}.png`);
+  // const bar_images = data.map(() => score_bar);
 
   // 图片数组
   const images = Array.from({ length: 8 }, () => Card);
@@ -56,6 +64,24 @@ const Showcase = () => {
     loadData();
   }, []);
 
+  // 請求後端數據
+  // useEffect(() => {
+  //   const loadData = async () => {
+  //     try {
+  //       const response = await axios.post(`${apiUrl}/api/bio`, { userId: userId.userId });
+  //       console.log('Fetched data:', response.data);
+
+  //       if (response.data && Array.isArray(response.data)) {
+  //         setData(response.data); // 存入 state
+  //         setIsOriginal(Array(response.data.length).fill(true)); // 根據數據長度初始化 isOriginal
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+  //   loadData();
+  // }, []);
+
   // 切换图片状态
   const handleToggle = (index) => {
     setIsOriginal((prev) =>
@@ -87,7 +113,7 @@ const Showcase = () => {
       width: '100%',
       minWidth: '400px',
       height: '380px',
-      marginTop: '70px',
+      marginTop: '65px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -163,7 +189,7 @@ const Showcase = () => {
                           <h6 className='card-info-name'>輸不起工作室</h6>
                         </div>
                         <p className='card-info-owner'>培養員:{userName1} / {userName2}</p>
-                        <p className='card-info-date'>02.17.25</p>
+                        <p className='card-info-date'>02.25.25</p>
                       </div>
                     )}
                     {/* Card 或背景图片 */}

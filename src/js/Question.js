@@ -201,25 +201,18 @@ const Question = () => {
       <div className="checkAnswer">
         {isMaskVisible && (
           <div
-            className="mask"
             style={{
-              backgroundColor:
-                (buttonStates.P1_A || buttonStates.P1_B) &&
-                  (buttonStates.P2_A || buttonStates.P2_B)
-                  ? "rgba(0, 0, 0, 0)"
-                  : "rgba(0, 0, 0, 0.5)",
               cursor:
                 (buttonStates.P1_A || buttonStates.P1_B) &&
                   (buttonStates.P2_A || buttonStates.P2_B)
                   ? "pointer"
                   : "not-allowed",
-              borderRadius: "60px",
             }}
           ></div>
         )}
 
         <img
-          src={progress === 4 ? "/question/birth.png" : "/reward/check.png"}
+          src={isMaskVisible ? "/question/uncheck.png" : (progress === 4 ? "/question/birth.png" : "/question/check1.png")}
           alt="確認答案"
           onClick={handleNextQuestion}
         />

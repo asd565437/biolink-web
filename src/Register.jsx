@@ -176,7 +176,7 @@ function Register() {
                 </div>
 
                 <div className="other-login-register">
-                    <img src="/other_way_login.svg" alt="" />
+                    <img src="/other_way_login.svg" alt="" className="other_way_login"/>
                     <div className="other-login-icons-register">
                         <img src="/google_btn.svg" alt="Google 註冊" onClick={handleGoogleLogin} />
                     </div>

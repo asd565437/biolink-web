@@ -116,14 +116,14 @@ const Header = ({ images }) => {
         <div
           className="header-login-container"
           onMouseEnter={() => setIsDropdownOpen(true)}
-          onMouseLeave={() => setIsDropdownOpen(false)}
         >
           <h2 className="header-login">
             {isLoggedIn ? userName : "LOGIN"}
           </h2>
-
+        </div>
+        <div>
           {isDropdownOpen && (
-            <div className="login-dropdown">
+            <div className="login-dropdown" onMouseLeave={() => setIsDropdownOpen(false)}>
               <h3 className="logID">#{userId?.userId}</h3>
               <h3 className="login-container-logout"
                 onClick={async () => {

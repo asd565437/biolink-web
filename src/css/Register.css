@@ -68,7 +68,7 @@
 /* 其他登入方式 */
 .other-login-register {
     scale: 0.8;
-    margin: -40px 0 0 0; /*和下一步的間距*/
+    margin: -30px 0 0 0; /*和下一步的間距*/
 }
 
 .other-login-icons-register {
