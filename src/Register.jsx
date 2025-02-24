@@ -151,6 +151,7 @@ function Register() {
                         src={isVisible[0] ? "/remove_red_eye_not.svg" : "/remove_red_eye.svg"}
                         alt="檢視密碼"
                         onClick={() => toggleVisibility(0)}
+                        id="RegisterPasswordEye"
                     />
                 </div>
 
@@ -166,6 +167,7 @@ function Register() {
                         src={isVisible[1] ? "/remove_red_eye_not.svg" : "/remove_red_eye.svg"}
                         alt="檢視密碼"
                         onClick={() => toggleVisibility(1)}
+                        id="RegisterPasswordEye2"
                     />
                 </div>
 
