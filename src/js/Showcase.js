@@ -144,7 +144,7 @@ const Showcase = () => {
       <main className="showcase-content">
         {isImagesLoaded ? ( // 检查是否完成预加载
           <div className='pair_styles.container'>
-            <div className='row g-0' >
+            <div className='row row-showcase g-0' >
               {images.map((cardImage, index) => (
                 <div
                   key={index}

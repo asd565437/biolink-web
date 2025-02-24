@@ -201,7 +201,7 @@ const Question = () => {
       </div>
 
       <main className="content">
-        <div className="row mb-4 P1">
+        <div className="row row-question mb-4 P1">
           <h1 className="col-12">Q{progress + 1}: {question}</h1>
           <div className="col-6 P1_A">
             <button
@@ -221,7 +221,7 @@ const Question = () => {
           </div>
         </div>
 
-        <div className="row P2">
+        <div className="row row-question P2">
           <h1
             className="col-12"
             style={{

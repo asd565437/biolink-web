@@ -1,3 +1,8 @@
+.login_text {
+    position: absolute;
+    top: 8%;
+    width: 10%;
+}
 .photo-box-register{
     background-image: url("../photo/photo_boxB.svg");
     background-repeat: no-repeat;
@@ -5,10 +10,12 @@
     background-attachment: fixed;
     background-size: contain;
     height: 840px;
-    width: 2000px;
+    width: 1500px;
     scale: 0.75;
     object-fit: contain;
-    margin-top: 50px;
+    position: relative;
+    top: 30px;
+    /* margin-top: 50px; */
 }
 
 .photo_box{
@@ -17,6 +24,8 @@
     background-position: center;
     background-attachment: fixed;
     background-size: contain;
+    position: relative;
+    top: 15px;
     height: 300px;
     width: 250px;
     scale: 0.75;
@@ -42,6 +51,8 @@
     background-position: center;
     background-attachment: fixed;
     background-size: contain;
+    position: relative;
+    top: -15px;
     height: 150px;
     width: 500px;
 }

@@ -65,7 +65,7 @@ function Photo() {
 
             <div className="photo-box-register">
             {[0, 1].map((rowIndex) => (
-                    <div className='row mt-4 mb-1 pt-1 pb-1 mx-auto' key={rowIndex}>
+                    <div className='row mx-1 my-1' key={rowIndex}>
                         {Array(3).fill(null).map((_, colIndex) => {
                             const photoIndex = rowIndex * 3 + colIndex + 1;
                             return (

@@ -54,9 +54,13 @@
 .row {
     display: flex;
     justify-content: center; /* 使 A 和 B 選項分佈在兩側 */
-    width: 60%;
+    /* width: 60%; */
     margin: 75px 0; 
     align-items: center; /* 保證選項圖片在父容器中垂直居中 */
+}
+
+.row-question{
+    width: 60%;
 }
 
 .col-6 {
