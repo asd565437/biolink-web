@@ -30,9 +30,6 @@ const ConfirmFriend = ({ friendId ,onClose, onBack }) => {
         socket.emit("add_friend", { from: userId.userId, to: toUserId });
     };
 
-    const handleInvite = () => {
-        navigate('/invite');
-    };
     useEffect(() => {
         const handleFriend = async () => {
             try {
@@ -78,7 +75,7 @@ const ConfirmFriend = ({ friendId ,onClose, onBack }) => {
                 </div>
 
                 <img src={confirmFriend_yes} alt="confirmFriend_yes" className="confirmFriend_yes" onClick={() => sendInvite(friendId)} />
-                <img src={confirmFriend_no} alt="confirmFriend_no" className="confirmFriend_no" onClick={handleInvite} />
+                <img src={confirmFriend_no} alt="confirmFriend_no" className="confirmFriend_no" onClick={onClose} />
             </div>
         </div>
     );

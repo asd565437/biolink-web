@@ -23,6 +23,11 @@ import invite_photo from './confirm/confirm_photo.svg';
 import invite_photo_box from "./confirm/confirm_photo_box.png";
 import invite_yes from "./invite/invite_yes.png";
 import invite_no from "./invite/invite_no.png";
+import confirmFriend_back from './confirmFriend/confirmFriend_back.svg';
+import confirmFriend_box from './confirmFriend/confirmFriend_box.png';
+import confirmFriend_photo_box from "./confirm/confirm_photo_box.png";
+import confirmFriend_yes from './confirmFriend/confirmFriend_yes.png';
+import confirmFriend_no from './confirmFriend/confirmFriend_no.png';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -33,6 +38,7 @@ export const FriendModalContext = createContext(null);
 
 const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) => {
     const [nickName, setNickName] = useState();
+    const [photoURL, setPhotoURL] = useState(invite_photo);
 
     useEffect(() => {
         document.title = "Biolink";
@@ -44,13 +50,14 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
                     id: friendId,
                 });
                 setNickName(response.data.player?.nickName);
+                setPhotoURL(response.data.player?.photoURL);
             } catch (error) {
                 console.error("取得好友資訊失敗:", error);
                 alert("請求失敗：" + (error.response?.data?.error || error.message));
             }
         };
 
-        
+
         handleFriend();
     }, [friendId]);
 
@@ -63,7 +70,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
                 <p className="invite_title">{nickName}&emsp;邀請您一起進行培養菌種</p>
                 <div className="invite_photo_area">
                     <img src={invite_photo_box} alt="invite_photo_box" className="invite_photo_box" />
-                    <img src={invite_photo} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
+                    <img src={photoURL} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
                 </div>
                 <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleStart(); onClose(); }} />
                 <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
@@ -97,18 +104,33 @@ const FriendModal = ({ content, onClose, handleAgree, handleReturn, friendId }) 
     if (!content) return null;
 
     return (
-        <div className="invite">
-            <div className="invite-content">
-                <img src={invite_box} alt="invite_box" className="invite_box" />
-                <p className="invite_title">{nickName}&emsp;邀請您一起進行培養菌種</p>
-                <div className="invite_photo_area">
-                    <img src={invite_photo_box} alt="invite_photo_box" className="invite_photo_box" />
-                    <img src={photoURL} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
+        <div className="confirmFriend">
+            <div className="confirmFriend-content">
+                <img src={confirmFriend_box} alt="confirmFriend_box" className="confirmFriend_box" />
+                <p className="confirmFriend_title">&emsp;&emsp;{nickName}&nbsp;發送好友邀請給您</p>
+
+                <div className="confirmFriend_photo_area">
+                    <img src={confirmFriend_photo_box} alt="confirmFriend_photo_box" className="confirmFriend_photo_box" />
+                    <img src={photoURL} alt="confirmFriend_photo" className="confirmFriend_photo" /> {/* 存取玩家的頭像 */}
                 </div>
-                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleAgree(); onClose(); }} />
-                <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
+
+                <img src={confirmFriend_yes} alt="confirmFriend_yes" className="confirmFriend_yes" onClick={() => { handleAgree(); onClose(); }} />
+                <img src={confirmFriend_no} alt="confirmFriend_no" className="confirmFriend_no" onClick={onClose} />
             </div>
         </div>
+
+        // <div className="invite">
+        //     <div className="invite-content">
+        //         <img src={invite_box} alt="invite_box" className="invite_box" />
+        //         <p className="invite_title">{nickName}&emsp;邀請您一起進行培養菌種</p>
+        //         <div className="invite_photo_area">
+        //             <img src={invite_photo_box} alt="invite_photo_box" className="invite_photo_box" />
+        //             <img src={photoURL} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
+        //         </div>
+        //         <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleAgree(); onClose(); }} />
+        //         <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
+        //     </div>
+        // </div>
     );
 };
 
@@ -165,25 +187,25 @@ function App() {
                     <ModalContext.Provider value={{ setModalContent }}>
                         <Router>
                             <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/wall" element={<Showcase />} />
-                            <Route path="/friend" element={<Friend />} />
-                            <Route path="/addFriend" element={<AddFriend />} />
-                            <Route path="/confirmFriend" element={<ConfirmFriend />} />
-                            <Route path="/connect" element={<Connect />} />
-                            <Route path="/confirm" element={<Confirm />} />
-                            <Route path="/invite" element={<Invite />} />
-                            <Route path="/culture" element={<Culture />} />
-                            <Route path="/question" element={<Question />} />
-                            <Route path="/reward" element={<Reward />} />
-                            <Route path="/world" element={<World />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/photo" element={<Photo />} />
-                            <Route path="/question/:roomId" element={<Question />} />
+                                <Route path="/" element={<Home />} />
+                                <Route path="/wall" element={<Showcase />} />
+                                <Route path="/friend" element={<Friend />} />
+                                <Route path="/addFriend" element={<AddFriend />} />
+                                <Route path="/confirmFriend" element={<ConfirmFriend />} />
+                                <Route path="/connect" element={<Connect />} />
+                                <Route path="/confirm" element={<Confirm />} />
+                                <Route path="/invite" element={<Invite />} />
+                                <Route path="/culture" element={<Culture />} />
+                                <Route path="/question" element={<Question />} />
+                                <Route path="/reward" element={<Reward />} />
+                                <Route path="/world" element={<World />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/register" element={<Register />} />
+                                <Route path="/photo" element={<Photo />} />
+                                <Route path="/question/:roomId" element={<Question />} />
                             </Routes>
-                        {modalContent}
-                        {friendModalContent}
+                            {modalContent}
+                            {friendModalContent}
                         </Router>
                     </ModalContext.Provider>
                 </FriendModalContext.Provider>
@@ -227,7 +249,7 @@ const FriendModalWrapper = ({ friendId, onClose }) => {
         onClose();
         console.log("確認好友")
         if (socket) {
-            socket.emit("agree_friend", { userId, friendId});
+            socket.emit("agree_friend", { userId, friendId });
         }
     };
 

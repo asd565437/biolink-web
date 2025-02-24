@@ -28,7 +28,8 @@
 
 .checkAnswer {
     position: fixed;
-    bottom: 50px;
+    bottom: 40px;
+    width: 20%;
     z-index: 5;
 }
 
@@ -48,14 +49,14 @@
 
 .progress-bar {
     position: fixed;
-    top: 100px;
+    top: 105px;
 }
 
 .row {
     display: flex;
     justify-content: center; /* 使 A 和 B 選項分佈在兩側 */
     /* width: 60%; */
-    margin: 75px 0; 
+    margin: 20px 0; 
     align-items: center; /* 保證選項圖片在父容器中垂直居中 */
 }
 
@@ -75,13 +76,14 @@
 .content {
     display: flex;
     flex-direction: column;
-    top: -50px;
+    top: 10px;
 }
 
 .content h1 {
     color: #ffffff;
     font-weight: bold;
     text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 button{
@@ -94,9 +96,8 @@ button{
     border: 0;
     color: #ffffff;
     font-weight: bold;   
-    font-size: 24px;
+    font-size: 32px;
     text-align: center;
-    
 }
 
 button:disabled {
@@ -104,14 +105,69 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.button-default {
+.button-selected {
     background-image: url('../question/question_no\ push_btn.svg');
     background-color: #ffffff10;
     border-radius: 35px;
+    color: #ffffff;
 }
 
-.button-selected {
+.button-default {
     background-image: url('../question/question_push _btn.svg');
     background-color: #00000050;
     border-radius: 35px;
+    color: #ffffff93;
+}
+
+.birth_overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px); /* 模糊效果 */
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 讓圖片以自身中心點對齊畫面中心 */
+    display: flex;
+    flex-direction: column; /* 讓內容垂直排列 */
+    align-items: center; /* 水平置中 */
+    justify-content: center; /* 垂直置中 */
+}
+
+#question_wait {
+    width: 20%; /* 可根據需求調整 */
+    height: auto;
+    margin-bottom: 2.5%;
+}
+
+.dot-container {
+    display: flex;
+    justify-content: center;
+    gap: 3.5%; /* 控制點點間距 */
+    align-items: center;
+    width: 100%; /* 確保容器寬度足夠 */
+    height: 100px; /* 設定容器的高度，根據需要調整 */
+    overflow: visible; /* 讓縮放後的元素超出容器 */
+}
+
+.dot-container img {
+    width: 3.5%; /* 根據需求調整 */
+    height: auto;
+    animation: scaleAnimation 3s infinite ease-in-out;
+    transform-origin: center center; /* 設定縮放的中心為元素的中心 */
+    overflow: hidden; /* 隱藏超出容器的部分 */
+}
+
+@keyframes scaleAnimation {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.5); opacity: 1; }
+}
+
+#dot2 {
+    animation-delay: 0.5s;
+}
+  
+#dot3 {
+    animation-delay: 1s;
 }

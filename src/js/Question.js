@@ -27,6 +27,8 @@ const Question = () => {
   const [isMaskVisible, setIsMaskVisible] = useState(true);
   const [questionIds, setQuestionIds] = useState([]);
   const [bothAnswered, setBothAnswered] = useState(false);
+  const [born, setBorn] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const bar_images = [
     "/question/progress_bar_1.svg",
@@ -46,12 +48,12 @@ const Question = () => {
     });
 
     socket.on("both-answered", (data) => {
-        setBothAnswered(true);
-        console.log("答對題數："+data.totalCorrect)
-        console.log("生成日期："+data.createdAt)
-        console.log("bioId："+data.bio_id)
-        console.log("培養員名字："+data.nicknames[data.players[0]]+"/"+data.nicknames[data.players[1]])
-        console.log("playerIds："+data.players[0]+"/"+data.players[1])
+      setBothAnswered(true);
+      console.log("答對題數：" + data.totalCorrect)
+      console.log("生成日期：" + data.createdAt)
+      console.log("bioId：" + data.bio_id)
+      console.log("培養員名字：" + data.nicknames[data.players[0]] + "/" + data.nicknames[data.players[1]])
+      console.log("playerIds：" + data.players[0] + "/" + data.players[1])
       return () => {
         socket.off("both-answered");
       };
@@ -72,10 +74,14 @@ const Question = () => {
   }, [socket, roomId]);
 
   useEffect(() => {
-    if (bothAnswered) {
+    if (born) {
+      setShowOverlay(true); // 顯示 10 秒
+      setTimeout(() => {
+        setShowOverlay(false); // 10 秒後隱藏
         navigate("/reward");
+      }, 30000);
     }
-}, [bothAnswered, navigate]);
+  }, [born, navigate]);
 
   // ✅ 当 questionIds 更新后，再加载第一道题
   useEffect(() => {
@@ -123,12 +129,16 @@ const Question = () => {
   };
 
   const handleNextQuestion = async () => {
-
     answerP1[progress] = buttonStates.P1_A ? "A" : "B";
     answerP2[progress] = buttonStates.P2_A ? "A" : "B";
+    if(progress===4)
+    {
+      setBorn(true);
+    }
+
     if (progress >= questionIds.length - 1) {
       console.log(userId.userId)
-      socket.emit("submit_question", { roomId, userId: userId.userId, answers:{answerP1,answerP2} });
+      socket.emit("submit_question", { roomId, userId: userId.userId, answers: { answerP1, answerP2 } });
       return;
     }
     const newProgress = progress + 1;
@@ -167,6 +177,17 @@ const Question = () => {
 
   return (
     <div className="question">
+      { showOverlay && 
+      <div className="birth_overlay">
+        <img src={"/question/question_wait.svg"} alt="等待一下" id="question_wait" />
+        <div className="dot-container">
+          <img src={"/question/dot.png"} alt="." id="dot1" />
+          <img src={"/question/dot.png"} alt="." id="dot2" />
+          <img src={"/question/dot.png"} alt="." id="dot3" />
+        </div>
+      </div>
+      }
+
       <Header images={["world_btn.svg", "wall_btn.svg", "culture_ul_btn.svg"]} />
 
       <div className="progress-bar">
@@ -197,7 +218,12 @@ const Question = () => {
           ></div>
         )}
 
-        <img src={"/reward/check.png"} alt="確認答案" onClick={handleNextQuestion} />
+        <img
+          src={progress === 4 ? "/question/birth.png" : "/reward/check.png"}
+          alt="確認答案"
+          onClick={handleNextQuestion}
+        />
+
       </div>
 
       <main className="content">

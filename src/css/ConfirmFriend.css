@@ -26,7 +26,7 @@
 
 .confirmFriend_photo_area {
     position: absolute;
-    top: 55%;
+    top: 53%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 10vw;  /* 調整圓形大小 */
@@ -58,7 +58,7 @@
 
 .confirmFriend_yes {
     position: fixed;
-    top: 70%;
+    top: 68%;
     left: 51%;
     width: 13%;
     height: auto;
@@ -67,7 +67,7 @@
 
 .confirmFriend_no {
     position: fixed;
-    top: 70%;
+    top: 68%;
     left: 36%;
     width: 13%;
     height: auto;

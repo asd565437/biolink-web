@@ -42,7 +42,7 @@ const World = () => {
   const [images, setImages] = useState(() => {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-
+    
     return Array.from({ length: 7 }, (_, index) => ({
       id: `bio00${index + 1}`,
       src: `bio_0${index + 1}.png`,
