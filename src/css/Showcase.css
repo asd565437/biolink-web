@@ -14,22 +14,41 @@
   position: relative;
 }
 
-/* 内容容器 */
 .showcase-content {
-  position: relative;
-  padding-top: 100px;
-  /* 确保内容在 Header 下方 */
-  /* max-height: calc(100vh);/ */
-  /* 保证内容区域不会超出页面 */
-  box-sizing: border-box;
-  /* 包括内边距 */
-  left: 15%;
-  bottom: 5%;
+  position: absolute;
+  right: 27%;
+  width: 100%;
+  height: 85%;
+  max-width: 1200px; /* 避免內容過寬 */
+  margin: 0 auto; /* 讓內容置中 */
 }
 
-.row-showcase{
-  width: 70%;
+
+/* 内容容器 */
+/* .showcase-content {
+  position: relative;
+  padding-top: 100px;
+  /* 确保内容在 Header 下方 
+  /* max-height: calc(100vh);/ 
+  /* 保证内容区域不会超出页面 
+  box-sizing: border-box;
+  /* 包括内边距 
+  left: 15%;
+  bottom: 5%;
+} */
+
+.row-showcase {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* ✅ 靠左對齊 */
+  gap: 60px; /* ✅ 增加左右間距 */
 }
+
+
+/* .row-showcase{
+  width: 70%;
+} */
 
 /* 卡片資訊 */
 .card-info {
@@ -45,7 +64,12 @@
   position: absolute;
   top: 1%;
   left: 20%;
-  font-size: 17px;
+  font-size: 20px;
+}
+
+.card-info-name {
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .name_box {
@@ -66,7 +90,7 @@
   position: absolute;
   top: 90%;
   left: 63.5%;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .overlay-image img {

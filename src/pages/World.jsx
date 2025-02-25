@@ -121,9 +121,9 @@ const World = () => {
                 x: e.clientX + 15,
                 y: e.clientY + 15,
                 scale: 2, // 調整放大倍數
-                name: "有體溫關係",
+                name: "菌男霉女",
                 owner: "蕭安安&袁駱駝",
-                birthday: "2025/02/23",
+                birthday: "2025/02/25",
                 rank: 5,
               });
             }}

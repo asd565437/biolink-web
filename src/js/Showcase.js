@@ -11,23 +11,32 @@ import { UserContext } from "../App"; // 引入全局 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Showcase = () => {
+  // 手動輸入兩筆測試資料
+  const [data, setData] = useState([
+    { id: "0001", name: "有體溫關係", owner: "蕭安安＆袁駱駝", date: "02.23.25" },
+    { id: "0002", name: "Biolink", owner: "Lucky&Evelyn", date: "02.24.25" },
+    { id: "0003", name: "共生菌", owner: "沈羿伶＆陳昱安", date: "02.25.25" },
+  ]);
+
+  const [isOriginal, setIsOriginal] = useState(Array(data.length).fill(true));
+
   // const [data, setData] = useState([]); // 存放後端返回的卡片數據
   // const [isOriginal, setIsOriginal] = useState([]); // 每張卡片的狀態
-  const [isOriginal, setIsOriginal] = useState(Array(8).fill(true));
+  // const [isOriginal, setIsOriginal] = useState(Array(8).fill(true));
   const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
   const userId = useContext(UserContext); // 使用全局 socket
 
   // 動態生成圖片陣列
-  // const images = data.map(() => Card);
-  // const bg_images = data.map(() => Card_bg);
-  // const bio_images = data.map((_, index) => `/bio_${index + 1}.png`);
-  // const bar_images = data.map(() => score_bar);
+  const images = data.map(() => Card);
+  const bg_images = data.map(() => Card_bg);
+  const bio_images = data.map((_, index) => `/bio_${index + 1}.png`);
+  const bar_images = data.map(() => score_bar);
 
   // 图片数组
-  const images = Array.from({ length: 8 }, () => Card);
-  const bg_images = Array.from({ length: 8 }, () => Card_bg);
-  const bio_images = Array.from({ length: 8 }, (_, index) => `/bio_${index + 1}.png`);
-  const bar_images = Array.from({ length: 8 }, () => score_bar);
+  // const images = Array.from({ length: 8 }, () => Card);
+  // const bg_images = Array.from({ length: 8 }, () => Card_bg);
+  // const bio_images = Array.from({ length: 8 }, (_, index) => `/bio_${index + 1}.png`);
+  // const bar_images = Array.from({ length: 8 }, () => score_bar);
 
   // 预加载所有图片
   useEffect(() => {
@@ -51,18 +60,18 @@ const Showcase = () => {
   }, []);
 
   // 加载数据
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const response = await axios.post(`${apiUrl}/api/bio`, { userId :userId.userId });
-        console.log('Fetched data:', response.data);
-        return response.data;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-    loadData();
-  }, []);
+  // useEffect(() => {
+  //   const loadData = async () => {
+  //     try {
+  //       const response = await axios.post(`${apiUrl}/api/bio`, { userId :userId.userId });
+  //       console.log('Fetched data:', response.data);
+  //       return response.data;
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   }
+  //   loadData();
+  // }, []);
 
   // 請求後端數據
   // useEffect(() => {
@@ -103,6 +112,7 @@ const Showcase = () => {
     container: {
       display: 'grid',
       gridTemplateColumns: 'repeat(4, 1fr)',
+      //gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
       rowGap: '10px',
       columnGap: '35px',
       justifyContent: 'center',
@@ -112,7 +122,7 @@ const Showcase = () => {
       position: 'relative',
       width: '100%',
       minWidth: '400px',
-      height: '380px',
+      height: '400px',
       marginTop: '65px',
       display: 'flex',
       justifyContent: 'center',
@@ -168,6 +178,44 @@ const Showcase = () => {
 
       {/* 内容部分 */}
       <main className="showcase-content">
+        {isImagesLoaded ? (
+          <div className="pair_styles.container">
+            <div className="row row-showcase g-0">
+              {data.map((item, index) => (
+                <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                  <div className="card-container" onClick={() => handleToggle(index)} style={pair_styles.card}>
+                    {isOriginal[index] && (
+                      <div className="card-info">
+                        <p className="card-info-id">#{item.id}</p>
+                        <div className="name_box">
+                          <h6 className="card-info-name">{item.name}</h6>
+                        </div>
+                        <p className="card-info-owner">培養員: {item.owner}</p>
+                        <p className="card-info-date">{item.date}</p>
+                      </div>
+                    )}
+                    <img src={isOriginal[index] ? images[index] : bg_images[index]} alt={`Card ${index + 1}`} className="img-fluid" style={pair_styles.cardImage} />
+                    {isOriginal[index] && bio_images[index] && (
+                      <div style={pair_styles.bio}>
+                        <img src={bio_images[index]} alt={`Bio ${index + 1}`} className="img-fluid" style={pair_styles.bioImage} />
+                      </div>
+                    )}
+                    {!isOriginal[index] && bar_images[index] && (
+                      <div className="overlay-image2">
+                        <img src={bar_images[index]} alt={`Bar ${index + 1}`} className="img-fluid" />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p>加载中...</p>
+        )}
+      </main>
+
+      {/* <main className="showcase-content">
         {isImagesLoaded ? ( // 检查是否完成预加载
           <div className='pair_styles.container'>
             <div className='row row-showcase g-0' >
@@ -181,7 +229,7 @@ const Showcase = () => {
                     onClick={() => handleToggle(index)}
                     style={pair_styles.card}
                   >
-                    {/* 卡片資訊 */}
+                    {/* 卡片資訊 }
                     {isOriginal[index] && (
                       <div className="card-info">
                         <p className='card-info-id'>#0001</p>
@@ -192,14 +240,14 @@ const Showcase = () => {
                         <p className='card-info-date'>02.25.25</p>
                       </div>
                     )}
-                    {/* Card 或背景图片 */}
+                    {/* Card 或背景图片 }
                     <img
                       src={isOriginal[index] ? cardImage : bg_images[index]}
                       alt={`Card ${index + 1}`}
                       className='img-fluid'
                       style={pair_styles.cardImage}
                     />
-                    {/* 正面 Bio 圖片 */}
+                    {/* 正面 Bio 圖片 }
                     {isOriginal[index] && bio_images[index] && (
                       <div style={pair_styles.bio}>
                         <img
@@ -210,7 +258,7 @@ const Showcase = () => {
                         />
                       </div>
                     )}
-                    {/* 背面 Bio 圖片 */}
+                    {/* 背面 Bio 圖片 }
                     {!isOriginal[index] && bio_images[index] && (
                       <div className="overlay-image">
                         <img
@@ -220,7 +268,7 @@ const Showcase = () => {
                         />
                       </div>
                     )}
-                    {/* 能量条 */}
+                    {/* 能量条 }
                     {!isOriginal[index] && bar_images[index] && (
                       <div className="overlay-image2">
                         <img
@@ -233,7 +281,7 @@ const Showcase = () => {
                           alt={`Bar ${index + 1}`}
                           className="img-fluid"
                           style={{ marginTop: '11%' }}
-                        /> */}
+                        /> }
                       </div>
                     )}
                   </div>
@@ -244,7 +292,7 @@ const Showcase = () => {
         ) : (
           <p>加载中...</p>
         )}
-      </main>
+      </main> */}
 
       {/* Footer */}
       <div className="footer">
