@@ -41,33 +41,57 @@ const Header = ({ images }) => {
 
   // 設定登入狀態
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // 監聽 userId 變化 & 檢查後端登入狀態
+  
   useEffect(() => {
     const updateLoginStatus = async () => {
       const authStatus = await checkAuthStatus();
       setIsLoggedIn(authStatus);
-      if (isLoggedIn) {
-        const fetchUserData = async () => {
-          try {
-            const response = await axios.get(`${apiUrl}/get-cookie`, {
-              withCredentials: true,
-            });
-            console.log("获取到的用户名:", response.data.userName);
-            if (response.data.userName)
-              setUserName(response.data.userName)
-            else
-              setUserName(null);
-          } catch (error) {
-            console.error("获取 Cookie 失败:", error);
-          }
-        };
-        fetchUserData();
-      }
+  
+      // 直接調用 fetchUserData，避免依賴 isLoggedIn 的更新
+      const fetchUserData = async () => {
+        try {
+          const response = await axios.get(`${apiUrl}/get-cookie`, { withCredentials: true });
+          if (response.data.userName) setUserName(response.data.userName);
+          else setUserName(null);
+        } catch (error) {
+          console.error("获取 Cookie 失败:", error);
+        }
+      };
+  
+      if (authStatus) fetchUserData();
     };
-
+  
     updateLoginStatus();
-  }, [userId]); // 依賴 userId 變化
+  }, [userId]); // 依賴 userId
+  
+  
+
+  // 監聽 userId 變化 & 檢查後端登入狀態
+  // useEffect(() => {
+  //   const updateLoginStatus = async () => {
+  //     const authStatus = await checkAuthStatus();
+  //     setIsLoggedIn(authStatus);
+  //     if (isLoggedIn) {
+  //       const fetchUserData = async () => {
+  //         try {
+  //           const response = await axios.get(`${apiUrl}/get-cookie`, {
+  //             withCredentials: true,
+  //           });
+  //           console.log("获取到的用户名:", response.data.userName);
+  //           if (response.data.userName)
+  //             setUserName(response.data.userName)
+  //           else
+  //             setUserName(null);
+  //         } catch (error) {
+  //           console.error("获取 Cookie 失败:", error);
+  //         }
+  //       };
+  //       fetchUserData();
+  //     }
+  //   };
+
+  //   updateLoginStatus();
+  // }, [userId]); // 依賴 userId 變化
 
   // 監聽 Cookie 變化（每 10 秒檢查一次）
   useEffect(() => {
