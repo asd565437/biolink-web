@@ -37,6 +37,37 @@ const World = () => {
     };
     fetchUserData();
   }, []);
+  const [data, setData] = useState(() => [
+    {
+      name:"輸不起工作室",
+      createdAt: "25.02.25",
+      nicknames: {
+        "0001": "沈羿伶",
+        "0008": "袁萱芳"
+      },
+      players: ["0008", "0001"],
+    }
+  ]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await axios.post(`${apiUrl}/api/bio`, {  userId });
+        console.log('Fetched data:', response.data);
+
+        if (response.data) {
+          setData(response.data.bios); // 存入 state
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    loadData();
+  }, [userId]);
+
+    useEffect(() => {
+      console.log("Data 已更新:", data);
+    }, [data]); // 當 data 更新時觸發
 
   // 初始化圖片狀態
   const [images, setImages] = useState(() => {

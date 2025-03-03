@@ -14,41 +14,41 @@
   position: relative;
 }
 
-.showcase-content {
+/* .showcase-content {
   position: absolute;
   right: 27%;
   width: 100%;
   height: 85%;
-  max-width: 1200px; /* 避免內容過寬 */
-  margin: 0 auto; /* 讓內容置中 */
-}
+  max-width: 1200px; /* 避免內容過寬 
+  margin: 0 auto; /* 讓內容置中 
+} */
 
 
 /* 内容容器 */
-/* .showcase-content {
+.showcase-content {
   position: relative;
   padding-top: 100px;
-  /* 确保内容在 Header 下方 
-  /* max-height: calc(100vh);/ 
-  /* 保证内容区域不会超出页面 
+  /* 确保内容在 Header 下方 */
+  /* max-height: calc(100vh); */ 
+  /* 保证内容区域不会超出页面 */
   box-sizing: border-box;
-  /* 包括内边距 
+  /* 包括内边距 */
   left: 15%;
   bottom: 5%;
-} */
+}
 
-.row-showcase {
+/* .row-showcase {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* ✅ 靠左對齊 */
-  gap: 60px; /* ✅ 增加左右間距 */
-}
-
-
-/* .row-showcase{
-  width: 70%;
+  justify-content: flex-start; /* ✅ 靠左對齊 
+  gap: 60px; /* ✅ 增加左右間距 
 } */
+
+
+.row-showcase{
+  width: 70%;
+}
 
 /* 卡片資訊 */
 .card-info {

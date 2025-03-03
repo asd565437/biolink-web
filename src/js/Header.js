@@ -98,7 +98,7 @@ const Header = ({ images }) => {
     const interval = setInterval(async () => {
       const authStatus = await checkAuthStatus();
       setIsLoggedIn(authStatus);
-    }, 5000); // 每 10 秒檢查一次
+    }, 10000); // 每 10 秒檢查一次
 
     return () => clearInterval(interval); // 清理計時器
   }, []);
@@ -139,10 +139,15 @@ const Header = ({ images }) => {
         {/* 垂直導覽列 */}
         <div
           className="header-login-container"
-          onMouseEnter={() => setIsDropdownOpen(true)}
+          onMouseEnter={() => isLoggedIn ? setIsDropdownOpen(true) : setIsDropdownOpen(false)}
         >
-          <h2 className="header-login">
+          <h2 className="header-login" onClick={ () => {
+                  if (!isLoggedIn) {
+                    handleNavigate(4);
+                  }
+                }}>
             {isLoggedIn ? userName : "LOGIN"}
+            
           </h2>
         </div>
         <div>

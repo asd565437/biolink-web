@@ -9,15 +9,22 @@ import friend_icon from '../showcase/friend_icon.png';
 import score_bar from '../showcase/full_score_bar.png';
 import { UserContext } from "../App"; // 引入全局 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
-
 const Showcase = () => {
   // 手動輸入兩筆測試資料
-  const [data, setData] = useState([
-    { id: "0001", name: "有體溫關係", owner: "蕭安安＆袁駱駝", date: "02.23.25" },
-    { id: "0002", name: "Biolink", owner: "Lucky&Evelyn", date: "02.24.25" },
-    { id: "0003", name: "共生菌", owner: "沈羿伶＆陳昱安", date: "02.25.25" },
+  const [data, setData] = useState(() => [
+    {
+      name:"輸不起工作室",
+      bio_id: "0002",
+      createdAt: "25.02.25",
+      nicknames: {
+        "0001": "沈羿伶",
+        "0008": "袁萱芳"
+      },
+      players: ["0008", "0001"],
+      totalCorrect: 7
+    }
   ]);
-
+  
   const [isOriginal, setIsOriginal] = useState(Array(data.length).fill(true));
 
   // const [data, setData] = useState([]); // 存放後端返回的卡片數據
@@ -32,12 +39,20 @@ const Showcase = () => {
   const bio_images = data.map((_, index) => `/bio_${index + 1}.png`);
   const bar_images = data.map(() => score_bar);
 
+
   // 图片数组
   // const images = Array.from({ length: 8 }, () => Card);
   // const bg_images = Array.from({ length: 8 }, () => Card_bg);
   // const bio_images = Array.from({ length: 8 }, (_, index) => `/bio_${index + 1}.png`);
   // const bar_images = Array.from({ length: 8 }, () => score_bar);
 
+  const addTestData = () => {
+    const newData = { id: "0004", name: "新測試卡片", owner: "測試人員", date: "02.26.25" };
+    setData((prev) => [...prev, newData]);
+    setIsOriginal((prev) => [...prev, true]); // 新增 isOriginal 狀態
+  };
+
+  
   // 预加载所有图片
   useEffect(() => {
     const preloadImages = (imageUrls) => {
@@ -73,23 +88,26 @@ const Showcase = () => {
   //   loadData();
   // }, []);
 
-  // 請求後端數據
-  // useEffect(() => {
-  //   const loadData = async () => {
-  //     try {
-  //       const response = await axios.post(`${apiUrl}/api/bio`, { userId: userId.userId });
-  //       console.log('Fetched data:', response.data);
+ // 請求後端數據
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await axios.post(`${apiUrl}/api/bio`, { userId: userId.userId });
+        console.log('Fetched data:', response.data);
 
-  //       if (response.data && Array.isArray(response.data)) {
-  //         setData(response.data); // 存入 state
-  //         setIsOriginal(Array(response.data.length).fill(true)); // 根據數據長度初始化 isOriginal
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-  //   loadData();
-  // }, []);
+        if (response.data) {
+          setData(response.data.bios); // 存入 state
+          setIsOriginal(Array(response.data.bios.length).fill(true)); // 根據數據長度初始化 isOriginal
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    loadData();
+  }, [userId.userId]);
+  useEffect(() => {
+    console.log("Data 已更新:", data);
+  }, [data]); // 當 data 更新時觸發
 
   // 切换图片状态
   const handleToggle = (index) => {
@@ -103,9 +121,6 @@ const Showcase = () => {
   // 跳转到 Friend 页面
   const handleFriend = () => navigate('/friend');
 
-  // 卡片用戶名稱測試
-  const [userName1, setUserName1] = useState("蕭安安"); // 初始化 userName
-  const [userName2, setUserName2] = useState("袁駱駝"); // 初始化 userName
 
   // 样式保持不变
   const pair_styles = {
@@ -177,7 +192,7 @@ const Showcase = () => {
       />
 
       {/* 内容部分 */}
-      <main className="showcase-content">
+      {/* <main className="showcase-content">
         {isImagesLoaded ? (
           <div className="pair_styles.container">
             <div className="row row-showcase g-0">
@@ -213,41 +228,42 @@ const Showcase = () => {
         ) : (
           <p>加载中...</p>
         )}
-      </main>
+      </main> */}
 
-      {/* <main className="showcase-content">
+      <main className="showcase-content">
         {isImagesLoaded ? ( // 检查是否完成预加载
           <div className='pair_styles.container'>
             <div className='row row-showcase g-0' >
               {images.map((cardImage, index) => (
                 <div
                   key={index}
-                  className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center "
+                  className="col-12 col-sm-6 col-md-4 col-lg-5 d-flex justify-content-center "
                 >
                   <div
                     className='card-container'
                     onClick={() => handleToggle(index)}
                     style={pair_styles.card}
                   >
-                    {/* 卡片資訊 }
+                    {/* 卡片資訊 */}
                     {isOriginal[index] && (
                       <div className="card-info">
-                        <p className='card-info-id'>#0001</p>
+                        <p className='card-info-id'>#{data[index].bio_id}</p>
                         <div className='name_box'>
-                          <h6 className='card-info-name'>輸不起工作室</h6>
+                          <h6 className='card-info-name'>{data[index].name}</h6>
                         </div>
-                        <p className='card-info-owner'>培養員:{userName1} / {userName2}</p>
-                        <p className='card-info-date'>02.25.25</p>
+                        <p className='card-info-owner'>培養員:{data[index].nicknames[data[index].players[0]]}
+                          &{data[index].nicknames[data[index].players[1]]} </p>
+                        <p className='card-info-date'>{data[index].createdAt}</p>
                       </div>
                     )}
-                    {/* Card 或背景图片 }
+                    {/* Card 或背景图片 */}
                     <img
                       src={isOriginal[index] ? cardImage : bg_images[index]}
                       alt={`Card ${index + 1}`}
                       className='img-fluid'
                       style={pair_styles.cardImage}
                     />
-                    {/* 正面 Bio 圖片 }
+                    {/* 正面 Bio 圖片 */}
                     {isOriginal[index] && bio_images[index] && (
                       <div style={pair_styles.bio}>
                         <img
@@ -258,7 +274,7 @@ const Showcase = () => {
                         />
                       </div>
                     )}
-                    {/* 背面 Bio 圖片 }
+                    {/* 背面 Bio 圖片 */}
                     {!isOriginal[index] && bio_images[index] && (
                       <div className="overlay-image">
                         <img
@@ -268,7 +284,7 @@ const Showcase = () => {
                         />
                       </div>
                     )}
-                    {/* 能量条 }
+                    {/* 能量条 */}
                     {!isOriginal[index] && bar_images[index] && (
                       <div className="overlay-image2">
                         <img
@@ -276,12 +292,12 @@ const Showcase = () => {
                           alt={`Bar ${index + 1}`}
                           className="img-fluid"
                         />
-                        {/* <img
+                        {/* <img 
                           src={bar_images[index]}
                           alt={`Bar ${index + 1}`}
                           className="img-fluid"
                           style={{ marginTop: '11%' }}
-                        /> }
+                        /> */}
                       </div>
                     )}
                   </div>
@@ -292,7 +308,7 @@ const Showcase = () => {
         ) : (
           <p>加载中...</p>
         )}
-      </main> */}
+      </main>
 
       {/* Footer */}
       <div className="footer">
