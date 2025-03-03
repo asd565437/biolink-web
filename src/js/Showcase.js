@@ -190,7 +190,7 @@ const Showcase = () => {
         images={['world_btn.svg', 'wall_ul_btn.svg', 'culture_btn.svg']}
       />
 
-      {/* 内容部分 */}
+      {/* 内容部分 固定版本*/}
       {/* <main className="showcase-content">
         {isImagesLoaded ? (
           <div className="pair_styles.container">
@@ -229,6 +229,7 @@ const Showcase = () => {
         )}
       </main> */}
 
+      {/* 内容部分 固定版本*/}
       <main className="showcase-content">
         {isImagesLoaded ? ( // 检查是否完成预加载
           <div className='pair_styles.container'>
