@@ -1,5 +1,5 @@
 import "../css/Reward.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import reward_title from '../reward/reward_title.svg';
 import strain from '../reward/strain.svg';

@@ -234,10 +234,23 @@ const Showcase = () => {
           <div className='pair_styles.container'>
             <div className='row row-showcase g-0' >
               {images.map((cardImage, index) => {
-                <div
-                  key={index}
-                  className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center"
-                >
+                let colClass = "";
+
+                if (index === 0) colClass = "col-12"; // 第一個是 col-12
+                else if (index === 1) colClass = "col-sm-6"; // 第二個是 col-sm-6
+                else if (index === 2) colClass = "col-md-4"; // 第三個是 col-md-4
+                else if (index === 3) colClass = "col-lg-3"; // 第四個是 col-lg-3
+                else colClass = "col-12 col-sm-6 col-md-4 col-lg-3"; // 第五個之後用這個
+            
+                return (
+                  <div key={index} className={`${colClass} d-flex justify-content-center`}>
+                    {/* 你的卡片內容 */}
+                  </div>
+                
+                // <div
+                //   key={index}
+                //   className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center"
+                // >
                   <div
                     className='card-container'
                     onClick={() => handleToggle(index)}
