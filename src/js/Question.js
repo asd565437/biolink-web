@@ -65,6 +65,10 @@ const Question = () => {
     socket.on("room-left", (roomId) => {
       console.log(`Successfully left room: ${roomId}`);
     });
+    socket.on("grenarate_success", (URL) => {
+      setShowOverlay(false); 
+      navigate("/reward", { state: { URL } }); // 30 秒後隱藏
+    });
     // 发送请求获取题目 ID
     socket.emit("get-question-ids", roomId);
 
@@ -75,11 +79,7 @@ const Question = () => {
 
   useEffect(() => {
     if (born) {
-      setShowOverlay(true); // 顯示 10 秒
-      setTimeout(() => {
-        setShowOverlay(false); // 10 秒後隱藏
-        navigate("/reward");
-      }, 30000);
+      setShowOverlay(true);
     }
   }, [born, navigate]);
 
@@ -131,14 +131,11 @@ const Question = () => {
   const handleNextQuestion = async () => {
     answerP1[progress] = buttonStates.P1_A ? "A" : "B";
     answerP2[progress] = buttonStates.P2_A ? "A" : "B";
-    if(progress===4)
-    {
-      setBorn(true);
-    }
 
     if (progress >= questionIds.length - 1) {
       console.log(userId.userId)
       socket.emit("submit_question", { roomId, userId: userId.userId, answers: { answerP1, answerP2 } });
+      setBorn(true);
       return;
     }
     const newProgress = progress + 1;

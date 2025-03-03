@@ -127,7 +127,6 @@ const Showcase = () => {
     container: {
       display: 'grid',
       gridTemplateColumns: 'repeat(4, 1fr)',
-      //gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
       rowGap: '10px',
       columnGap: '35px',
       justifyContent: 'center',
@@ -234,10 +233,10 @@ const Showcase = () => {
         {isImagesLoaded ? ( // 检查是否完成预加载
           <div className='pair_styles.container'>
             <div className='row row-showcase g-0' >
-              {images.map((cardImage, index) => (
+              {images.map((cardImage, index) => {
                 <div
                   key={index}
-                  className="col-12 col-sm-6 col-md-4 col-lg-5 d-flex justify-content-center "
+                  className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center"
                 >
                   <div
                     className='card-container'
@@ -302,7 +301,7 @@ const Showcase = () => {
                     )}
                   </div>
                 </div>
-              ))}
+              })}
             </div>
           </div>
         ) : (

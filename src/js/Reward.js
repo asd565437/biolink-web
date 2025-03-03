@@ -1,6 +1,6 @@
 import "../css/Reward.css";
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import reward_title from '../reward/reward_title.svg';
 import strain from '../reward/strain.svg';
 import test_pic from '../reward/test.jpg';
@@ -13,10 +13,16 @@ const Reward = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [strainName, setStrainName] = useState("");
     const [strainImage, setStrainImage] = useState(test_pic); // 初始圖片
-
+    const location = useLocation();
+    const imageURL = location.state?.URL || false; // 如果沒有數據則給預設值
     const handleBack = () => {
         setShowPopup(true);
     };
+      useEffect(() => {
+        if (imageURL) {
+            setStrainName(imageURL);
+        }
+      }, [imageURL]);
 
     const handleNameSubmit = () => {
         if (strainName.trim() === "") {
