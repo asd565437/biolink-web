@@ -67,7 +67,7 @@ const World = () => {
 
     useEffect(() => {
       console.log("Data 已更新:", data);
-    }, [data]); // 當 data 更新時觸發
+    }, [data]);
 
   // 初始化圖片狀態
   const [images, setImages] = useState(() => {

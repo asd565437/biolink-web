@@ -124,12 +124,27 @@ const Question = () => {
       return newState;
     });
 
-    if (question === "P2") {
-      setIsMaskVisible(false);
-    }
+    // if (question === "P2") {
+    //   setIsMaskVisible(false);
+    // }
+
   };
 
+  useEffect(() => {
+    // 當 P1 和 P2 都至少選擇了一個選項時，顯示遮罩
+    if ((buttonStates.P1_A || buttonStates.P1_B) && (buttonStates.P2_A || buttonStates.P2_B)) {
+      setIsMaskVisible(false);
+    } else {
+      setIsMaskVisible(true);
+    }
+  }, [buttonStates]); // 監聽 buttonStates 的變化
+  
+
   const handleNextQuestion = async () => {
+    if (!(buttonStates.P1_A || buttonStates.P1_B) || !(buttonStates.P2_A || buttonStates.P2_B)) {
+      return;
+    }
+    
     answerP1[progress] = buttonStates.P1_A ? "A" : "B";
     answerP2[progress] = buttonStates.P2_A ? "A" : "B";
 
@@ -206,13 +221,19 @@ const Question = () => {
                   ? "pointer"
                   : "not-allowed",
             }}
-          ></div>
+          >
+          </div>
         )}
 
         <img
           src={isMaskVisible ? "/question/uncheck.png" : (progress === 4 ? "/question/birth.png" : "/question/check1.png")}
           alt="確認答案"
-          onClick={handleNextQuestion}
+          // onClick={handleNextQuestion}
+          onClick={() => {
+            if ((buttonStates.P1_A || buttonStates.P1_B) && (buttonStates.P2_A || buttonStates.P2_B)) {
+              handleNextQuestion();
+            }
+          }}
         />
 
       </div>

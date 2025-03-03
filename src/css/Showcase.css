@@ -27,13 +27,13 @@
 /* 内容容器 */
 .showcase-content {
   position: relative;
-  padding-top: 100px;
+  padding-top: 125px;
   /* 确保内容在 Header 下方 */
-  /* max-height: calc(100vh); */ 
+  /* max-height: calc(100vh);  */
   /* 保证内容区域不会超出页面 */
   box-sizing: border-box;
   /* 包括内边距 */
-  left: 15%;
+  left: 12.5%;
   bottom: 5%;
 }
 
@@ -47,7 +47,7 @@
 
 
 .row-showcase{
-  width: 70%;
+  width: 75%;
 }
 
 /* 卡片資訊 */

@@ -138,7 +138,7 @@ const Showcase = () => {
       width: '100%',
       minWidth: '400px',
       height: '400px',
-      marginTop: '65px',
+      marginTop: '45px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
