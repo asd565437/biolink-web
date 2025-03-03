@@ -13,7 +13,7 @@ const Showcase = () => {
   // 手動輸入兩筆測試資料
   const [data, setData] = useState(() => [
     {
-      imageUrl:"/bio_1.png",
+      imageURL:"/bio_1.png",
       name:"輸不起工作室",
       bio_id: "0002",
       createdAt: "25.02.25",
@@ -265,10 +265,10 @@ const Showcase = () => {
                       style={pair_styles.cardImage}
                     />
                     {/* 正面 Bio 圖片 */}
-                    {isOriginal[index] && data[index].imageUrl && (
+                    {isOriginal[index] && data[index].imageURL && (
                       <div style={pair_styles.bio}>
                         <img
-                          src={data[index].imageUrl}
+                          src={data[index].imageURL}
                           alt={`Bio ${index + 1}`}
                           className="img-fluid"
                           style={pair_styles.bioImage}
@@ -276,10 +276,10 @@ const Showcase = () => {
                       </div>
                     )}
                     {/* 背面 Bio 圖片 */}
-                    {!isOriginal[index] && data[index].imageUrl && (
+                    {!isOriginal[index] && data[index].imageURL && (
                       <div className="overlay-image">
                         <img
-                          src={data[index].imageUrl}
+                          src={data[index].imageURL}
                           alt={`Bio ${index + 1}`}
                           className="img-fluid"
                         />
