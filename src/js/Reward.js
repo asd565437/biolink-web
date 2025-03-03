@@ -20,8 +20,8 @@ const Reward = () => {
     };
       useEffect(() => {
         if (imageURL) {
-            console.log(imageURL)
-            setStrainImage(imageURL);
+            setStrainImage(imageURL.URL);
+            console.log(strainImage)
         }
       }, [imageURL]);
 
