@@ -67,6 +67,7 @@ const Question = () => {
     });
     socket.on("grenarate_success", (URL) => {
       setShowOverlay(false); 
+      console.log(URL)
       navigate("/reward", { state: { URL } }); // 30 秒後隱藏
     });
     // 发送请求获取题目 ID
