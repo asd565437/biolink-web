@@ -21,7 +21,6 @@ const Reward = () => {
       useEffect(() => {
         if (imageURL) {
             setStrainImage(imageURL.URL);
-            console.log(strainImage)
         }
       }, [imageURL]);
 
