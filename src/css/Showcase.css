@@ -37,18 +37,18 @@
   bottom: 5%;
 }
 
-/* .row-showcase {
+.row-showcase {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* ✅ 靠左對齊 
-  gap: 60px; /* ✅ 增加左右間距 
-} */
-
-
-.row-showcase{
-  width: 70%;
+  justify-content: flex-start; /* ✅ 靠左對齊 */
+  gap: 60px; /* ✅ 增加左右間距 */
 }
+
+
+/* .row-showcase{
+  width: 70%;
+} */
 
 /* 卡片資訊 */
 .card-info {
