@@ -1,18 +1,19 @@
 import "../css/Reward.css";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import reward_title from '../reward/reward_title.svg';
-import strain from '../reward/strain.svg';
 import test_pic from '../reward/test.jpg';
 import check from '../reward/check.png';
 import strain_name_box from '../reward/strain_name_box.png';
 import strain_name_finish from '../reward/strain_name_finish.png';
+import { SocketContext } from "../App"; // 引入全域 Socket 上下文
 
 const Reward = () => {
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
     const [strainName, setStrainName] = useState("");
     const [strainImage, setStrainImage] = useState(test_pic); // 初始圖片
+    const socket = useContext(SocketContext);
     const location = useLocation();
     const imageURL = location.state?.URL || false; // 如果沒有數據則給預設值
     const handleBack = () => {
@@ -23,6 +24,21 @@ const Reward = () => {
             setStrainImage(imageURL.URL);
         }
       }, [imageURL]);
+
+      useEffect(() => {
+        socket.on("updateText", (newText) => {
+          setStrainName(newText);
+        });
+    
+        return () => {
+          socket.off("updateText");
+        };
+      }, []);
+      const handleChange = (e) => {
+        const newText = e.target.value;
+        setStrainName(newText);
+        socket.emit("editText", newText);
+      };
 
     const handleNameSubmit = () => {
         if (strainName.trim() === "") {
@@ -48,7 +64,7 @@ const Reward = () => {
                             type="text"
                             placeholder="輸入菌種名稱"
                             value={strainName}
-                            onChange={(e) => setStrainName(e.target.value)}
+                            onChange={handleChange}
                             className="strainName-input"
                         />
                         <img src={strain_name_finish} alt="strain_name_finish" className="strain_name_finish" onClick={handleNameSubmit} />
