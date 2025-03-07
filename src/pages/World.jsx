@@ -52,7 +52,7 @@ const World = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.post(`${apiUrl}/api/bio`, {  userId });
+        const response = await axios.get(`${apiUrl}/api/get_all_bio`);
         console.log('Fetched data:', response.data);
 
         if (response.data) {
