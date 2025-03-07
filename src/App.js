@@ -73,7 +73,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReject, friendId }) 
                     <img src={photoURL} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
                 </div>
                 <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleStart(friendId); onClose(); }} />
-                <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
+                <img src={invite_no} alt="invite_no" className="invite_no" onClick={() => {handleReject(friendId);onClose()}} />
             </div>
         </div>
     );
@@ -115,7 +115,7 @@ const FriendModal = ({ content, onClose, handleAgree, handleReject, friendId }) 
                 </div>
 
                 <img src={confirmFriend_yes} alt="confirmFriend_yes" className="confirmFriend_yes" onClick={() => { handleAgree(); onClose(); }} />
-                <img src={confirmFriend_no} alt="confirmFriend_no" className="confirmFriend_no" onClick={handleReject()} />
+                <img src={confirmFriend_no} alt="confirmFriend_no" className="confirmFriend_no" onClick={() => {handleReject(friendId);onClose()}} />
             </div>
         </div>
 
