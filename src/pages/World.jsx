@@ -37,44 +37,11 @@ const World = () => {
     };
     fetchUserData();
   }, []);
-  const [data, setData] = useState(() => [
-    {
-      name:"輸不起工作室",
-      createdAt: "25.02.25",
-      nicknames: {
-        "0001": "沈羿伶",
-        "0008": "袁萱芳"
-      },
-      players: ["0008", "0001"],
-    }
-  ]);
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/api/get_all_bio`);
-        console.log('Fetched data:', response.data);
-
-        if (response.data) {
-          setData(response.data.bios); // 存入 state
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    loadData();
-  }, [userId]);
-
-    useEffect(() => {
-      console.log("Data 已更新:", data);
-    }, [data]);
-
-  // 初始化圖片狀態
+  const [data, setData] = useState(() => []);
   const [images, setImages] = useState(() => {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    
-    return Array.from({ length: 7 }, (_, index) => ({
+    return Array.from({ length: 8 }, (_, index) => ({
       id: `bio00${index + 1}`,
       src: `bio_0${index + 1}.png`,
       // src: `bio_${index + 1}.svg`,
@@ -93,7 +60,27 @@ const World = () => {
         rank: `排名 ${index + 1}`,
       },
     }));
-  });
+  },[data]);
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/get_all_bio`);
+
+        if (response.data) {
+          setData(response.data.bios); // 存入 state
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    loadData();
+  }, []);
+
+    useEffect(() => {
+      console.log("Data 已更新:", data);
+      setImages(data)
+    }, [data]);
+
 
   useEffect(() => {
     let animationFrameId;
