@@ -1,16 +1,4 @@
-.invite {
-    background-image: url("../showcase/bg.png"); /* 背景图片 ../culture/bg.png */
-    background-size: cover; /* 背景填充模式 */
-    background-color: #0F0F1A;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative; /* 确保子元素的 absolute 生效 */
-    z-index: 0;
-    height: 100vh; /* 确保页面高度与视口一致 */
-    width: 100%; /* 父容器寬度 */
-  }
+
 
   .invite-content {
     position: fixed; /* 固定位置 */
@@ -56,6 +44,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden; /* 確保圖片不超出圓形範圍 */
+    z-index: 1000;
   }
 
   .invite_photo_box {
@@ -64,7 +53,7 @@
     height: 100%;
     border-radius: 50%; /* 保持圓形 */
     object-fit: cover; /* 確保圖片完整顯示 */
-    z-index: 1; /* 確保背景在下層 */
+    z-index: 999; /* 確保背景在下層 */
   }
 
   .invite_photo {
@@ -73,7 +62,7 @@
     height: 75%;
     border-radius: 50%;
     object-fit: cover;
-    z-index: 2; /* 確保頭像在圓形背景上層 */
+    z-index: 1000;
   }
 
   .invite_yes {
@@ -83,6 +72,7 @@
     width: 11%;
     height: auto;
     cursor: pointer;
+    z-index: 1000;
   }
 
   .invite_no {
@@ -92,4 +82,5 @@
     width: 11%;
     height: auto;
     cursor: pointer;
+    z-index: 1000;
   }

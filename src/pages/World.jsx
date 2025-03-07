@@ -110,7 +110,7 @@ const World = () => {
           if (newY < -screenHeight || newY > 0) {
             image.directionY = -image.directionY;
           }
-          if (newZ < 100 || newZ > 1000) { // 限制 Z 軸範圍，防止過遠或過近
+          if (newZ < 100 || newZ > 998) { // 限制 Z 軸範圍，防止過遠或過近
             image.directionZ = -image.directionZ;
           }
 
