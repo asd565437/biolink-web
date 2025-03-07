@@ -20,6 +20,7 @@ const Question = () => {
 
   const handleFriendName = async (friendId) => {
     try {
+      console.log(friendId)
         const response = await axios.post(`${apiUrl}/api/get-friend-name`, {
             id: friendId,
         });
