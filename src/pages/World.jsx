@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext ,useRef } from "react";
 import axios from "axios";
 import "../css/World.css";
 import Header from "../js/Header";
@@ -88,7 +88,7 @@ const World = () => {
     setImages(data)
   }, [data]);
 
-
+  const animationFrameIdRef = useRef(null);
   useEffect(() => {
     let animationFrameId;
 
@@ -107,13 +107,13 @@ const World = () => {
           if (newX < -screenWidth / 2 || newX > screenWidth / 2) {
             image.directionX = -image.directionX;
           }
+          
           if (newY < -screenHeight || newY > 0) {
             image.directionY = -image.directionY;
           }
-          if (newZ < 100 || newZ > 998) { // 限制 Z 軸範圍，防止過遠或過近
+          if (newZ < 2 || newZ > 998) { // 限制 Z 軸範圍，防止過遠或過近
             image.directionZ = -image.directionZ;
           }
-
           // 根據 Z 軸距離計算縮放比例
           let scale = 0.05 + (0.13 - 0.05) * (1 - newZ / 1000)
 
@@ -121,12 +121,12 @@ const World = () => {
         })
       );
 
-      animationFrameId = requestAnimationFrame(updatePositions);
+      animationFrameIdRef.current = requestAnimationFrame(updatePositions);
     };
 
-    animationFrameId = requestAnimationFrame(updatePositions);
+    animationFrameIdRef.current = requestAnimationFrame(updatePositions);
 
-    return () => cancelAnimationFrame(animationFrameId);
+    return () => cancelAnimationFrame(animationFrameIdRef.current);
   }, []);
 
   return (
