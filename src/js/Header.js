@@ -11,7 +11,7 @@ const Header = ({ images }) => {
   const navigate = useNavigate();
   const urls = ['/world', '/wall', '/connect', '/', '/login'];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("LOGIN");
 
   if (!Array.isArray(images)) {
     images = ['world_btn.svg', 'wall_btn.svg', 'culture_btn.svg'];

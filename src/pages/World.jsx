@@ -47,10 +47,14 @@ const World = () => {
       // src: `bio_${index + 1}.svg`,
       x: Math.random() * screenWidth - screenWidth / 2,
       y: Math.random() * screenHeight - screenHeight,
-      scale: Math.random() * (0.13- 0.05) + 0.05, //0.05~0.13
-      speed: Math.random() * 1.5,
+      z: Math.random() * (998 - 1) + 1,
+      scale: Math.random() * (0.13 - 0.05) + 0.05, //0.05~0.13
+      speedX: Math.random() * 1.5,
+      speedY: Math.random() * 1.5,
+      speedZ: Math.random() * 1.5,
       directionX: getNumber(1),
       directionY: getNumber(1),
+      directionZ: getNumber(1),
       rotation: Math.random() * 360,
       rotationSpeed: Math.random() * 0.7,
       info: {
@@ -60,14 +64,15 @@ const World = () => {
         rank: `排名 ${index + 1}`,
       },
     }));
-  },[data]);
+  }, [data]);
   useEffect(() => {
     const loadData = async () => {
       try {
         const response = await axios.post(`${apiUrl}/api/get_all_bio`,
-          {innerWidth:window.innerWidth,
-            innerHeight:window.innerHeight
-        });
+          {
+            innerWidth: window.innerWidth,
+            innerHeight: window.innerHeight
+          });
         if (response.data) {
           setData(response.data.bios); // 存入 state
         }
@@ -78,10 +83,10 @@ const World = () => {
     loadData();
   }, []);
 
-    useEffect(() => {
-      console.log("Data 已更新:", data);
-      setImages(data)
-    }, [data]);
+  useEffect(() => {
+    console.log("Data 已更新:", data);
+    setImages(data)
+  }, [data]);
 
 
   useEffect(() => {
@@ -90,8 +95,9 @@ const World = () => {
     const updatePositions = () => {
       setImages((prevImages) =>
         prevImages.map((image) => {
-          let newX = image.x + image.speed * image.directionX;
-          let newY = image.y + image.speed * image.directionY;
+          let newX = image.x + image.speedX * image.directionX;
+          let newY = image.y + image.speedY * image.directionY;
+          let newZ = image.z + image.speedZ * image.directionZ;
           let newRotation = (image.rotation + image.rotationSpeed) % 360;
 
           const screenWidth = window.innerWidth;
@@ -104,8 +110,14 @@ const World = () => {
           if (newY < -screenHeight || newY > 0) {
             image.directionY = -image.directionY;
           }
+          if (newZ < 100 || newZ > 1000) { // 限制 Z 軸範圍，防止過遠或過近
+            image.directionZ = -image.directionZ;
+          }
 
-          return { ...image, x: newX, y: newY, rotation: newRotation };
+          // 根據 Z 軸距離計算縮放比例
+          let scale = 0.05 + (0.13 - 0.05) * (1 - newZ / 1000)
+
+          return { ...image, x: newX, y: newY, z: newZ, rotation: newRotation, scale };
         })
       );
 
