@@ -72,7 +72,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
                     <img src={invite_photo_box} alt="invite_photo_box" className="invite_photo_box" />
                     <img src={photoURL} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
                 </div>
-                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleStart(); onClose(); }} />
+                <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleStart(friendId); onClose(); }} />
                 <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
             </div>
         </div>
@@ -221,10 +221,10 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
     socket.on("joined-room", ({ users, roomId }) => {
         console.log("以下用戶已加入房間:", users);
         if (users.includes(userId)) {
-            navigate(`/question/${roomId}`);
+            navigate(`/question/${roomId}`,{ state: { friendId } });
         }
     });
-    const handleStart = () => {
+    const handleStart = (friendId) => {
         onClose();
         if (socket) {
             socket.emit("accept-invite", { userId, friendId, roomId });

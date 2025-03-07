@@ -8,11 +8,27 @@ import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 let answerP1 = new Array();
 let answerP2 = new Array();
+
 const Question = () => {
+  const [nickName, setNickName] = useState();
   const { roomId } = useParams();
   const socket = useContext(SocketContext);
   const userId = useContext(UserContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const friendId = location.state?.friendId || "未知用户"; // 避免 state 为空时报错
+
+  const handleFriendName = async (friendId) => {
+    try {
+        const response = await axios.post(`${apiUrl}/api/get-friend-name`, {
+            id: friendId,
+        });
+        setNickName(response.data.player?.nickName);
+    } catch (error) {
+        console.error("取得好友資訊失敗:", error);
+        alert("請求失敗：" + (error.response?.data?.error || error.message));
+    }
+  };
 
   const [buttonStates, setButtonStates] = useState({
     P1_A: false,
@@ -41,7 +57,9 @@ const Question = () => {
   // 监听 socket 事件，获取题目 ID
   useEffect(() => {
     if (!socket || !roomId) return;
-
+    
+    handleFriendName(friendId);
+    
     // 监听服务器返回的题目
     socket.on("question-ids", (ids) => {
       setQuestionIds(ids);
@@ -149,7 +167,7 @@ const Question = () => {
     answerP2[progress] = buttonStates.P2_A ? "A" : "B";
 
     if (progress >= questionIds.length - 1) {
-      console.log(userId.userId)
+
       socket.emit("submit_question", { roomId, userId: userId.userId, answers: { answerP1, answerP2 } });
       setBorn(true);
       return;
@@ -266,7 +284,7 @@ const Question = () => {
               color: buttonStates.P1_A || buttonStates.P1_B ? "#ffffff" : "rgba(255, 255, 255, 0.4)",
             }}
           >
-            Q{progress + 1}: 承上題，您認為另一玩家會如何選擇？
+            Q{progress + 1}: 承上題，您認為{nickName}會如何選擇？
           </h1>
           <div className="col-6 P2_A">
             <button
