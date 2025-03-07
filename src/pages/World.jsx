@@ -142,9 +142,9 @@ const World = () => {
                 y: e.clientY + 15,
                 scale: 2, // 調整放大倍數
                 name: "菌男霉女",
-                owner: "蕭安安&袁駱駝",
-                birthday: "2025/02/25",
-                rank: 5,
+                owner: image.info.keeper,
+                birthday: image.info.createdAt,
+                rank: image.info.id,
               });
             }}
             onMouseMove={(e) => {
