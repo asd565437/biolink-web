@@ -141,6 +141,7 @@ function App() {
     const [modalContent, setModalContent] = useState(null);
     const [friendModalContent, setFriendModalContent] = useState(null);
     const [userName, setUserName] = useState(null);
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchUserData = async () => {
             try {
