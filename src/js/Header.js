@@ -41,12 +41,12 @@ const Header = ({ images }) => {
 
   // 設定登入狀態
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
   useEffect(() => {
     const updateLoginStatus = async () => {
       const authStatus = await checkAuthStatus();
       setIsLoggedIn(authStatus);
-  
+
       // 直接調用 fetchUserData，避免依賴 isLoggedIn 的更新
       const fetchUserData = async () => {
         try {
@@ -57,14 +57,14 @@ const Header = ({ images }) => {
           console.error("获取 Cookie 失败:", error);
         }
       };
-  
+
       if (authStatus) fetchUserData();
     };
-  
+
     updateLoginStatus();
   }, [userId]); // 依賴 userId
-  
-  
+
+
 
   // 監聽 userId 變化 & 檢查後端登入狀態
   // useEffect(() => {
@@ -108,12 +108,15 @@ const Header = ({ images }) => {
   };
   const positionAdjustments = [
     {
+      zIndex: 999,
       width: '27.5%',
     },
     {
+      zIndex: 999,
       width: '17.5%',
     },
     {
+      zIndex: 999,
       width: '27.5%',
     },
   ];
@@ -141,13 +144,13 @@ const Header = ({ images }) => {
           className="header-login-container"
           onMouseEnter={() => isLoggedIn ? setIsDropdownOpen(true) : setIsDropdownOpen(false)}
         >
-          <h2 className="header-login" onClick={ () => {
-                  if (!isLoggedIn) {
-                    handleNavigate(4);
-                  }
-                }}>
+          <h2 className="header-login" onClick={() => {
+            if (!isLoggedIn) {
+              handleNavigate(4);
+            }
+          }}>
             {isLoggedIn ? userName : "LOGIN"}
-            
+
           </h2>
         </div>
         <div>
