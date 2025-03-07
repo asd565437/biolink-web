@@ -63,6 +63,10 @@ const Confirm = () => {
                 return;
             }
             console.log(`發送邀請給 ${toUserId}`);
+            socket.on("reject-invite", () => {
+                alert("對方拒絕邀請");
+                navigate(`/connect`);
+            });
             socket.once("joined-room", ({ users, roomId }) => {
                 console.log("以下用戶已加入房間:", users);
                 if (users.includes(userId.userId)) {

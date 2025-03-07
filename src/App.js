@@ -39,11 +39,9 @@ export const FriendModalContext = createContext(null);
 const GlobalModal = ({ content, onClose, handleStart, handleReject, friendId }) => {
     const [nickName, setNickName] = useState();
     const [photoURL, setPhotoURL] = useState(invite_photo);
-    const socket = useContext(SocketContext);
     useEffect(() => {
         document.title = "Biolink";
         if (nickName) return;
-
         const handleFriend = async () => {
             try {
                 const response = await axios.post(`${apiUrl}/api/get-friend-info`, {
@@ -232,10 +230,7 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
             navigate(`/question/${roomId}`,{ state: { friendId } });
         }
     });
-    socket.on("reject-invite", () => {
-        alert("對方拒絕邀請");
-        navigate(`/connect`);
-    });
+
     const handleStart = (friendId) => {
         onClose();
         if (socket) {
