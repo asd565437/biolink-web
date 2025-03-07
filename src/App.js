@@ -180,13 +180,14 @@ function App() {
             ));
         });
         newSocket.on("success_add_friend", () => {
-            alert("添加好友成功")
+            alert("添加好友成功");
         });
         newSocket.on("reject_friend", () => {
-            alert("對方拒絕加友")
+            alert("對方拒絕加友");
         });
         newSocket.on("reject-invite", () => {
-            alert("對方拒絕邀請")
+            alert("對方拒絕邀請");
+            navigate(`/connect`);
         });
         setSocket(newSocket);
         return () => newSocket.disconnect();
