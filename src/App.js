@@ -36,7 +36,7 @@ export const UserContext = createContext(null);
 export const ModalContext = createContext(null);
 export const FriendModalContext = createContext(null);
 
-const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) => {
+const GlobalModal = ({ content, onClose, handleStart, handleReject, friendId }) => {
     const [nickName, setNickName] = useState();
     const [photoURL, setPhotoURL] = useState(invite_photo);
 
@@ -79,7 +79,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReturn, friendId }) 
     );
 };
 
-const FriendModal = ({ content, onClose, handleAgree, handleReturn, friendId }) => {
+const FriendModal = ({ content, onClose, handleAgree, handleReject, friendId }) => {
     const [nickName, setNickName] = useState();
     const [photoURL, setPhotoURL] = useState(invite_photo);
     useEffect(() => {
@@ -115,7 +115,7 @@ const FriendModal = ({ content, onClose, handleAgree, handleReturn, friendId }) 
                 </div>
 
                 <img src={confirmFriend_yes} alt="confirmFriend_yes" className="confirmFriend_yes" onClick={() => { handleAgree(); onClose(); }} />
-                <img src={confirmFriend_no} alt="confirmFriend_no" className="confirmFriend_no" onClick={onClose} />
+                <img src={confirmFriend_no} alt="confirmFriend_no" className="confirmFriend_no" onClick={handleReject()} />
             </div>
         </div>
 
@@ -173,8 +173,20 @@ function App() {
                 <FriendModalWrapper friendId={data.from} onClose={() => setFriendModalContent(null)} />
             ));
         });
+        newSocket.on("add_friend", (data) => {
+            setUserName(data.from);
+            setFriendModalContent(() => (
+                <FriendModalWrapper friendId={data.from} onClose={() => setFriendModalContent(null)} />
+            ));
+        });
         newSocket.on("success_add_friend", () => {
             alert("添加好友成功")
+        });
+        newSocket.on("reject_friend", () => {
+            alert("對方拒絕加友")
+        });
+        newSocket.on("reject-invite", () => {
+            alert("對方拒絕邀請")
         });
         setSocket(newSocket);
         return () => newSocket.disconnect();
@@ -230,13 +242,19 @@ const ModalWrapper = ({ friendId, onClose, roomId }) => {
             socket.emit("accept-invite", { userId, friendId, roomId });
         }
     };
+    const handleReject = (friendId) => {
+        onClose();
+        if (socket) {
+            socket.emit("reject-invite", { userId, friendId, roomId });
+        }
+    };
 
     return (
         <GlobalModal
             content={userId}
             onClose={onClose}
             handleStart={handleStart}
-            handleReturn={onClose}
+            handleReject={handleReject}
             friendId={friendId}
         />
     );
@@ -252,13 +270,20 @@ const FriendModalWrapper = ({ friendId, onClose }) => {
             socket.emit("agree_friend", { userId, friendId });
         }
     };
+    const handleReject = () => {
+        onClose();
+        console.log("拒絕")
+        if (socket) {
+            socket.emit("reject_friend", {friendId });
+        }
+    };
 
     return (
         <FriendModal
             content={userId}
             onClose={onClose}
             handleAgree={handleAgree}
-            handleReturn={onClose}
+            handleReject={handleReject}
             friendId={friendId}
         />
     );
