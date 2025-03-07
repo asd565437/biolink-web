@@ -1,5 +1,5 @@
 import "../css/Question.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import React, { useEffect, useState, useContext } from "react";
 import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 import Header from "./Header.js";
