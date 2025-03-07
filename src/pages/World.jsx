@@ -64,8 +64,10 @@ const World = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/get_all_bio`);
-
+        const response = await axios.post(`${apiUrl}/api/get_all_bio`,
+          {innerWidth:window.innerWidth,
+            innerHeight:window.innerHeight
+        });
         if (response.data) {
           setData(response.data.bios); // 存入 state
         }
