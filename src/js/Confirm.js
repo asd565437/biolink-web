@@ -63,7 +63,7 @@ const Confirm = () => {
                 return;
             }
             console.log(`發送邀請給 ${toUserId}`);
-            socket.on("reject-invite", () => {
+            socket.once("reject-invite", () => {
                 alert("對方拒絕邀請");
                 navigate(`/connect`);
             });
