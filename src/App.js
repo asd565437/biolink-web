@@ -39,7 +39,8 @@ export const FriendModalContext = createContext(null);
 const GlobalModal = ({ content, onClose, handleStart, handleReject, friendId }) => {
     const [nickName, setNickName] = useState();
     const [photoURL, setPhotoURL] = useState(invite_photo);
-
+    const navigate = useNavigate();
+    const socket = useContext(SocketContext);
     useEffect(() => {
         document.title = "Biolink";
         if (nickName) return;
@@ -56,7 +57,10 @@ const GlobalModal = ({ content, onClose, handleStart, handleReject, friendId }) 
                 alert("請求失敗：" + (error.response?.data?.error || error.message));
             }
         };
-
+        socket.on("reject-invite", () => {
+            alert("對方拒絕邀請");
+            navigate(`/connect`);
+        });
 
         handleFriend();
     }, [friendId]);
@@ -141,7 +145,6 @@ function App() {
     const [modalContent, setModalContent] = useState(null);
     const [friendModalContent, setFriendModalContent] = useState(null);
     const [userName, setUserName] = useState(null);
-    const navigate = useNavigate();
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -185,10 +188,6 @@ function App() {
         });
         newSocket.on("reject_friend", () => {
             alert("對方拒絕加友");
-        });
-        newSocket.on("reject-invite", () => {
-            alert("對方拒絕邀請");
-            navigate(`/connect`);
         });
         setSocket(newSocket);
         return () => newSocket.disconnect();
