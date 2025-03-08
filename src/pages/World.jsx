@@ -13,6 +13,7 @@ function getNumber(number) {
 }
 
 const World = () => {
+  let timestamp = new Date().getTime();
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showIdPopup, setShowIdPopup] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
@@ -128,7 +129,6 @@ const World = () => {
 
     return () => cancelAnimationFrame(animationFrameIdRef.current);
   }, []);
-  const timestamp = new Date().getTime();
   return (
     <div id="world_container">
       <Header images={["world_ul_btn.svg", "wall_btn.svg", "culture_btn.svg"]} />
