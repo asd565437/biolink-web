@@ -84,10 +84,10 @@ const Question = () => {
     socket.on("room-left", (roomId) => {
       console.log(`Successfully left room: ${roomId}`);
     });
-    socket.on("grenarate_success", (URL) => {
+    socket.on("grenarate_success", (URL,bio_id) => {
       setShowOverlay(false); 
       console.log(URL)
-      navigate("/reward", { state: { URL } }); // 30 秒後隱藏
+      navigate("/reward", { state: { URL,bio_id } }); // 30 秒後隱藏
     });
     // 发送请求获取题目 ID
     socket.emit("get-question-ids", roomId);
