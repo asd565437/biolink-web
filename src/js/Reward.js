@@ -18,7 +18,6 @@ const Reward = () => {
     const location = useLocation();
     const imageURL = location.state?.URL || false; // 如果沒有數據則給預設值
     const bio_id = location.state?.bio_id || false; // 如果沒有數據則給預設值
-    console.log(bio_id)
     const handleBack = () => {
         setShowPopup(true);
     };
