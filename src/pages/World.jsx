@@ -128,7 +128,7 @@ const World = () => {
 
     return () => cancelAnimationFrame(animationFrameIdRef.current);
   }, []);
-
+  const timestamp = new Date().getTime();
   return (
     <div id="world_container">
       <Header images={["world_ul_btn.svg", "wall_btn.svg", "culture_btn.svg"]} />
@@ -136,7 +136,7 @@ const World = () => {
         {images.map((image) => (
           <img
             key={image.id}
-            src={image.src}
+            src={`${image.src}?v=${timestamp}`}
             alt="菌種"
             className={image.id}
             style={{
