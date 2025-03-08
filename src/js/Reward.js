@@ -51,7 +51,7 @@ const Reward = () => {
             alert("請輸入菌種名稱");
             return;
         }
-        socket.emit("submit_name", {userId});
+        socket.emit("submit_name", {userId :userId.userId});
     };
 
     return (
