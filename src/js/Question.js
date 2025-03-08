@@ -84,7 +84,7 @@ const Question = () => {
     socket.on("room-left", (roomId) => {
       console.log(`Successfully left room: ${roomId}`);
     });
-    socket.on("grenarate_success", (URL,bio_id) => {
+    socket.on("grenarate_success", ({URL,bio_id}) => {
       setShowOverlay(false); 
       console.log(bio_id)
       navigate("/reward", { state: { URL,bio_id } }); // 30 秒後隱藏
