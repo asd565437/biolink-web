@@ -9,7 +9,7 @@ import strain_name_finish from '../reward/strain_name_finish.png';
 import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 
 const Reward = () => {
-  const timestamp = new Date().getTime();
+  const [timestamp] = useState(new Date().getTime());
     const navigate = useNavigate();
     const userId = useContext(UserContext);
     const [showPopup, setShowPopup] = useState(false);
@@ -59,7 +59,7 @@ const Reward = () => {
     return (
         <div className="reward">
             <img src={reward_title} alt="標題" className="reward_title" />
-            <div className="strain-box" style={{ backgroundImage: `url(${strainImage})` }}></div>
+            <div className="strain-box" style={{ backgroundImage: `url(${strainImage}?t=${timestamp})` }}></div>
             <img src={check} alt="確認按鈕" className="check" onClick={handleBack} />
 
             {showPopup && (
