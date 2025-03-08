@@ -67,7 +67,7 @@
     /* 黑色半透明遮罩 */
     /* backdrop-filter: blur(1px);模糊背景 */
     display: flex;
-    z-index: 1000;
+    z-index: 1999;
     /* 確保遮罩在最上層 */
 }
 
@@ -77,6 +77,7 @@
     left: 30%;
     width: 40%;
     height: auto;
+    z-index: 1999;
 }
 
 .id-popup-content strong {
@@ -85,7 +86,7 @@
     position: absolute;
     top: 38%;
     left: 40.5%;
-    z-index: 1000;
+    z-index: 2000;
 }
 
 .id_close {
@@ -94,7 +95,7 @@
     left: 71%;
     width: 2.5%;
     height: auto;
-
+    z-index: 2000;
     /* width: 60%;
     height: auto; */
 }
