@@ -9,6 +9,7 @@ import strain_name_finish from '../reward/strain_name_finish.png';
 import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 
 const Reward = () => {
+  const timestamp = new Date().getTime();
     const navigate = useNavigate();
     const userId = useContext(UserContext);
     const [showPopup, setShowPopup] = useState(false);
@@ -23,7 +24,7 @@ const Reward = () => {
     };
       useEffect(() => {
         if (imageURL) {
-            setStrainImage(imageURL);
+            setStrainImage(imageURL+"?v="+timestamp);
         }
       }, [imageURL]);
       

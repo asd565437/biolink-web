@@ -10,6 +10,7 @@ import score_bar from '../showcase/full_score_bar.png';
 import { UserContext } from "../App"; // 引入全局 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
 const Showcase = () => {
+  const timestamp = new Date().getTime();
   // 手動輸入兩筆測試資料
   const [data, setData] = useState(() => [
     {
@@ -268,7 +269,7 @@ const Showcase = () => {
                     {isOriginal[index] && data[index].imageURL && (
                       <div style={pair_styles.bio}>
                         <img
-                          src={data[index].imageURL}
+                          src={`${data[index].imageURL}?v=${timestamp}`}
                           alt={`Bio ${index + 1}`}
                           className="img-fluid"
                           style={pair_styles.bioImage}

@@ -13,7 +13,7 @@ function getNumber(number) {
 }
 
 const World = () => {
-  let timestamp = new Date().getTime();
+  const timestamp = new Date().getTime();
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showIdPopup, setShowIdPopup] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
