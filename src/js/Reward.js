@@ -6,10 +6,11 @@ import test_pic from '../reward/test.jpg';
 import check from '../reward/check.png';
 import strain_name_box from '../reward/strain_name_box.png';
 import strain_name_finish from '../reward/strain_name_finish.png';
-import { SocketContext } from "../App"; // 引入全域 Socket 上下文
+import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 
 const Reward = () => {
     const navigate = useNavigate();
+    const userId = useContext(UserContext);
     const [showPopup, setShowPopup] = useState(false);
     const [strainName, setStrainName] = useState("");
     const [strainImage, setStrainImage] = useState(test_pic); // 初始圖片
@@ -29,6 +30,11 @@ const Reward = () => {
         socket.on("updateText", (newText) => {
           setStrainName(newText);
         });
+        socket.once("both-submit", () => {
+          alert(`已成功命名為：${strainName}`);
+          setShowPopup(false);
+          navigate('/world');
+        });
     
         return () => {
           socket.off("updateText");
@@ -45,9 +51,7 @@ const Reward = () => {
             alert("請輸入菌種名稱");
             return;
         }
-        alert(`已成功命名為：${strainName}`);
-        setShowPopup(false);
-        navigate('/world');
+        socket.emit("submit_name", {userId});
     };
 
     return (
