@@ -22,6 +22,7 @@ const Reward = () => {
         setShowPopup(true);
     };
       useEffect(() => {
+        console.log(imageURL)
         if (imageURL) {
             setStrainImage(imageURL.URL);
         }
