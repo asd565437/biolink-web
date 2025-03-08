@@ -153,7 +153,7 @@ const World = () => {
                 x: e.clientX + 15,
                 y: e.clientY + 15,
                 scale: 2, // 調整放大倍數
-                name: "菌男霉女",
+                name: image.info.name,
                 owner: image.info.keeper,
                 birthday: image.info.createdAt,
                 rank: image.info.id,
