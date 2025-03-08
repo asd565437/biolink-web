@@ -22,11 +22,11 @@ const Reward = () => {
         setShowPopup(true);
     };
       useEffect(() => {
-        console.log(imageURL)
         if (imageURL) {
             setStrainImage(imageURL);
         }
       }, [imageURL]);
+      
 
       useEffect(() => {
         socket.on("updateText", (newText) => {
@@ -44,7 +44,6 @@ const Reward = () => {
       }, []);
       const handleChange = (e) => {
         const newText = e.target.value;
-        setStrainName(newText);
         socket.emit("editText", newText);
       };
 
