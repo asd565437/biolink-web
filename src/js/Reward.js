@@ -31,13 +31,9 @@ const Reward = () => {
 
   useEffect(() => {
     socket.on("updateText", (newText) => {
-      setStrainName((prevName) => {
-        console.log(prevName, "=>", newText); // 这里可以看到变化
-        return newText;
-      });
+      setStrainName(newText);
+      console.log(strainName);
     });
-    
-    
     socket.on("both-submit", () => {
       alert(`已成功命名為：${strainName}`);
       setShowPopup(false);
