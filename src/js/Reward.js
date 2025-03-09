@@ -34,7 +34,7 @@ const Reward = () => {
       setStrainName(newText);
       console.log(strainName);
     });
-    socket.once("both-submit", () => {
+    socket.once("both-submit", (strainName) => {
       alert(`已成功命名為：${strainName}`);
       setShowPopup(false);
       navigate('/world');
