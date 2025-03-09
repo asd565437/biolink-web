@@ -32,9 +32,9 @@ const Reward = () => {
   useEffect(() => {
     socket.on("updateText", (newText) => {
       setStrainName(newText);
+      console.log(strainName);
     });
     socket.on("both-submit", () => {
-      console.log(strainName)
       alert(`已成功命名為：${strainName}`);
       setShowPopup(false);
       navigate('/world');
