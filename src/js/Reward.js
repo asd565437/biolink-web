@@ -31,9 +31,13 @@ const Reward = () => {
 
   useEffect(() => {
     socket.on("updateText", (newText) => {
-      setStrainName(newText);
-      console.log(strainName);
+      setStrainName((prevName) => {
+        console.log(prevName, "=>", newText); // 这里可以看到变化
+        return newText;
+      });
     });
+    
+    
     socket.on("both-submit", () => {
       alert(`已成功命名為：${strainName}`);
       setShowPopup(false);
@@ -60,7 +64,7 @@ const Reward = () => {
   return (
     <div className="reward">
       <img src={reward_title} alt="標題" className="reward_title" />
-      <div className="strain-box" style={{ backgroundImage: `url(${strainImage}?t=${timestamp})` }}></div>
+      <div className="strain-box" style={{ backgroundImage: `url(${strainImage}` }}></div>
       <img src={check} alt="確認按鈕" className="check" onClick={handleBack} />
 
       {showPopup && (
