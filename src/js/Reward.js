@@ -19,9 +19,11 @@ const Reward = () => {
   const location = useLocation();
   const imageURL = location.state?.URL || false; // 如果沒有數據則給預設值
   const bio_id = location.state?.bio_id || false; // 如果沒有數據則給預設值
-  const handleBack = () => {
-    setShowPopup(true);
-  };
+
+  // const handleBack = () => {
+  //   setShowPopup(true);
+  // };
+
   useEffect(() => {
     if (imageURL) {
       setStrainImage(imageURL + "?v=" + timestamp);
@@ -44,6 +46,15 @@ const Reward = () => {
       socket.off("updateText");
     };
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleChange = (e) => {
     const newText = e.target.value;
     socket.emit("editText", newText);
@@ -61,7 +72,7 @@ const Reward = () => {
     <div className="reward">
       <img src={reward_title} alt="標題" className="reward_title" />
       <div className="strain-box" style={{ backgroundImage: `url(${strainImage}` }}></div>
-      <img src={check} alt="確認按鈕" className="check" onClick={handleBack} />
+      {/* <img src={check} alt="確認按鈕" className="check" onClick={handleBack} /> */}
 
       {showPopup && (
         <div className="strainName-popup">

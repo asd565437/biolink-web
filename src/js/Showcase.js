@@ -173,7 +173,7 @@ const Showcase = () => {
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -65%)',
-      width: 'auto',
+      width: '90%',
       height: 'auto',
       overflow: 'hidden',
       zIndex: 2,
