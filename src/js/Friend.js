@@ -6,6 +6,7 @@ import AddFriend from "./AddFriend.js";
 import addFriend_icon from '../friend_list/addFriend_icon.svg';
 import friend_list from '../friend_list/friend_list.svg';
 import friend_test from '../confirm/confirm_photo.svg';
+import arrow_icon from '../question/back_btn.svg';
 import axios from 'axios';
 import { UserContext } from "../App"; // 引入全域 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -72,7 +73,7 @@ const Friend = () => {
         const friendData = response.data.userInfo.map((friend, index) => ({
           nickname: friend.nickname,
           bio_count: friend.bio_count,
-          createdAt: response.data.friendInfo[index]?.createdAt || "未知日期",
+          createdAt: response.data.newFInfo[index]?.createdAt || "未知日期",
           photoURL: friend.photoURL || friend_test, // 頭像
         }));
 
@@ -95,7 +96,7 @@ const Friend = () => {
     gridContainer: {
       display: 'grid',
       gridTemplateColumns: 'repeat(2, 1fr)', // 每行两列
-      rowGap: '30px',
+      rowGap: '10px',
       columnGap: '60px',
       justifyContent: 'center', // 水平居中
       alignItems: 'center', // 垂直居中
@@ -135,7 +136,7 @@ const Friend = () => {
       </div>
 
       {/* Content 部分 */}
-      <main className="content">
+      <main className="friend-content">
         {isImagesLoaded ? (
           <div className="friend" style={friend_styles.gridContainer}>
             {friendList.map((friend, index) => (
@@ -180,6 +181,24 @@ const Friend = () => {
           <p>加载中...</p> // 显示加载提示
         )}
       </main> */}
+
+      {/* Back_page */}
+      <div className="back_page">
+        <img
+          src={arrow_icon}
+          alt="切到上一頁"
+        //onClick={() => handleIndex(0)} // 點擊才執行
+        />
+      </div>
+
+      {/* Next_page */}
+      <div className="next_page">
+        <img
+          src={arrow_icon}
+          alt="切到下一頁"
+        //onClick={() => handleIndex(1)}
+        />
+      </div>
 
       {/* Footer */}
       <div className="footer">

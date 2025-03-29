@@ -94,7 +94,7 @@ const Showcase = () => {
       console.log('Fetched data:', response.data);
 
       if (response.data) {
-        setPage(response.data.count);
+        setPage(Math.floor(response.data.count / 8));
         setData(response.data.bios); // 存入 state
         setIsOriginal(Array(response.data.bios.length).fill(true)); // 根據數據長度初始化 isOriginal
       }
@@ -325,24 +325,27 @@ const Showcase = () => {
           <p>加载中...</p>
         )}
       </main>
-
+      
       {/* Back_page */}
+      {index > page && (
       <div className="back_page">
         <img
           src={next_icon}
           alt="切到上一頁"
           onClick={() => handleIndex(0)} // 點擊才執行
         />
-      </div>
+      </div>)}
 
       {/* Next_page */}
-      <div className="next_page">
-        <img
-          src={next_icon}
-          alt="切到下一頁"
-          onClick={() => handleIndex(1)} // 點擊才執行
-        />
-      </div>
+      {index < page && (
+        <div className="next_page">
+          <img
+            src={next_icon}
+            alt="切到下一頁"
+            onClick={() => handleIndex(1)}
+          />
+        </div>
+      )}
 
       {/* Footer */}
       <div className="footer">

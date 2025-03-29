@@ -125,6 +125,7 @@
 .back_page {
   position: absolute;
   left: 4%;
+  top: 49%;
   width: 5%;
   cursor: pointer;
 }

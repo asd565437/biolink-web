@@ -27,8 +27,13 @@
 }
 
 /* 内容容器 */
-.content {
+.friend-content {
   position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* 水平置中（原本就有了） */
+  align-items: center;     /* ✅ 垂直置中 */
   /* margin-top: 150px;
   max-height: calc(100vh-20px); 减去上方 Header 和 friend_list_lab 的高度 */
   box-sizing: border-box; /* 包括内边距 */
@@ -37,6 +42,8 @@
 
 .friend {
   position: relative; /* 讓 .friend-info 能夠絕對定位於 .friend 內 */
+  top: 7.5%;
+  transform: scale(0.82);
 }
 
 .friend-info {
