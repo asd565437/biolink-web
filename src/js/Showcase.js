@@ -14,8 +14,8 @@ const Showcase = () => {
   // 手動輸入兩筆測試資料
   const [data, setData] = useState(() => [
     {
-      imageURL:"/bio_1.png",
-      name:"輸不起工作室",
+      imageURL: "/bio_1.png",
+      name: "輸不起工作室",
       bio_id: "0002",
       createdAt: "25.02.25",
       nicknames: {
@@ -26,7 +26,17 @@ const Showcase = () => {
       totalCorrect: 7
     }
   ]);
-  
+
+  // 目前頁面狀態
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 8; // 每頁顯示的卡片數量
+
+
+  // 計算當前頁面顯示的卡片
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, data.length);
+  const currentItems = data.slice(startIndex, endIndex);
+
   const [isOriginal, setIsOriginal] = useState(Array(data.length).fill(true));
 
   // const [data, setData] = useState([]); // 存放後端返回的卡片數據
@@ -54,7 +64,7 @@ const Showcase = () => {
     setIsOriginal((prev) => [...prev, true]); // 新增 isOriginal 狀態
   };
 
-  
+
   // 预加载所有图片
   useEffect(() => {
     const preloadImages = (imageUrls) => {
@@ -90,7 +100,7 @@ const Showcase = () => {
   //   loadData();
   // }, []);
 
- // 請求後端數據
+  // 請求後端數據
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -129,7 +139,7 @@ const Showcase = () => {
     container: {
       display: 'grid',
       gridTemplateColumns: 'repeat(4, 1fr)',
-      rowGap: '10px',
+      rowGap: '20px',
       columnGap: '35px',
       justifyContent: 'center',
       alignItems: 'center',
@@ -139,7 +149,6 @@ const Showcase = () => {
       width: '100%',
       minWidth: '400px',
       height: '400px',
-      marginTop: '45px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

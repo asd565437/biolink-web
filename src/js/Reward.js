@@ -19,6 +19,7 @@ const Reward = () => {
   const location = useLocation();
   const imageURL = location.state?.URL || false; // 如果沒有數據則給預設值
   const bio_id = location.state?.bio_id || false; // 如果沒有數據則給預設值
+  const [isSubmitted, setIsSubmitted] = useState(false); 
 
   // const handleBack = () => {
   //   setShowPopup(true);
@@ -65,6 +66,12 @@ const Reward = () => {
       alert("請輸入菌種名稱");
       return;
     }
+
+    if (!isSubmitted) {
+      setIsSubmitted(true); // 設定已提交
+      alert("請等待另一名玩家確認");
+    }
+    
     socket.emit("submit_name", { userId: userId.userId, bio_id, strainName });
   };
 

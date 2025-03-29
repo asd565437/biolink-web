@@ -27,7 +27,7 @@
 /* 内容容器 */
 .showcase-content {
   position: relative;
-  padding-top: 120px;
+  padding-top: 180px;
   /* 确保内容在 Header 下方 */
   /* max-height: calc(100vh);  */
   /* 保证内容区域不会超出页面 */
@@ -35,6 +35,8 @@
   /* 包括内边距 */
   left: 12.5%;
   bottom: 5%;
+  width: 100%;
+  height: 100%;
 }
 
 /* .row-showcase {
@@ -47,8 +49,9 @@
 
 
 .row-showcase{
-  width: 75%;
+  width: 80%;
 }
+
 
 /* 卡片資訊 */
 .card-info {
