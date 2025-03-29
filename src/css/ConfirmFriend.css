@@ -1,5 +1,6 @@
 .confirmFriend-content {
-    z-index: 1999 !important; /* 確保遮罩在最上層 */
+    display: flex;
+    z-index: 1999; /* 確保遮罩在最上層 */
 }
 
 .confirmFriend_back {
