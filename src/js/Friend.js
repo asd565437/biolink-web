@@ -18,7 +18,7 @@ const Friend = () => {
   const { userId, setUserId } = useContext(UserContext);
   const [index, setIndex] = useState(0);
   const [friendList, setFriendList] = useState([]); // 存放所有好友資訊
-
+  const [page, setPage] = useState(0);
   // 好友資料測試
   const [userName1, setUserName1] = useState(["蔡第一"]); // 初始化 userName
   const [bioNumber1, setBioNumber1] = useState(["2"]); // 初始化 userName
@@ -61,36 +61,40 @@ const Friend = () => {
     });
   }, [friend_images]);
 
+  const loadData = async () => {
+    try {
+      console.log("Fetching friends for userId:", userId);
+      const response = await axios.post(`${apiUrl}/api/friend`, { userId,index });
+      console.log(response.data)
+      setPage(Math.floor(response.data.count / 8));
+      // 假設 response.data.userInfo 是一個包含多個好友資訊的陣列
+      const friendData = response.data.userInfo.map((friend, index) => ({
+        nickname: friend.nickname,
+        bio_count: friend.bio_count,
+        createdAt: response.data.newFInfo[index]?.createdAt || "未知日期",
+        photoURL: friend.photoURL || friend_test, // 頭像
+      }));
+
+      setFriendList(friendData); // 更新好友列表
+      console.log("Fetched friends:", friendData);
+      // setUserName1(response.data.userInfo[0].nickname);
+      // setBioNumber1(response.data.userInfo[0].bio_count);
+      // setFriendDate1(response.data.friendInfo[0].createdAt);
+      // setphotoURL(response.data.userInfo[0].photoURL)
+      // console.log("Fetched data:", response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  
   useEffect(() => {
     if (!userId) return; // 🔥 确保 userId 存在才执行 API 请求
-
-    const loadData = async () => {
-      try {
-        console.log("Fetching friends for userId:", userId);
-        const response = await axios.post(`${apiUrl}/api/friend`, { userId });
-
-        // 假設 response.data.userInfo 是一個包含多個好友資訊的陣列
-        const friendData = response.data.userInfo.map((friend, index) => ({
-          nickname: friend.nickname,
-          bio_count: friend.bio_count,
-          createdAt: response.data.newFInfo[index]?.createdAt || "未知日期",
-          photoURL: friend.photoURL || friend_test, // 頭像
-        }));
-
-        setFriendList(friendData); // 更新好友列表
-        console.log("Fetched friends:", friendData);
-        // setUserName1(response.data.userInfo[0].nickname);
-        // setBioNumber1(response.data.userInfo[0].bio_count);
-        // setFriendDate1(response.data.friendInfo[0].createdAt);
-        // setphotoURL(response.data.userInfo[0].photoURL)
-        // console.log("Fetched data:", response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
     loadData();
   }, [userId]); // 🔥 确保 userId 有值后再执行
-
+  useEffect(() => {
+    loadData();
+    console.log("index");
+  }, [index]);
 
   const friend_styles = {
     gridContainer: {
@@ -123,7 +127,17 @@ const Friend = () => {
   const handleNavigate = () => {
     setShowPopup(true); // 點擊圖片時顯示彈窗
   };
-
+  const handleIndex = (count) => {
+    if (count === 0) {
+      if (index > 0)
+        setIndex(index - 1);
+    }
+    else {
+      if (index < page)
+        setIndex(index + 1);
+    }
+    console.log(index);
+  };
   return (
     <div className="friend_wall">
       {/* Header 组件 */}
@@ -187,7 +201,7 @@ const Friend = () => {
         <img
           src={arrow_icon}
           alt="切到上一頁"
-        //onClick={() => handleIndex(0)} // 點擊才執行
+        onClick={() => handleIndex(0)} // 點擊才執行
         />
       </div>
 
@@ -196,7 +210,7 @@ const Friend = () => {
         <img
           src={arrow_icon}
           alt="切到下一頁"
-        //onClick={() => handleIndex(1)}
+        onClick={() => handleIndex(1)}
         />
       </div>
 
