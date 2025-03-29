@@ -66,7 +66,7 @@ const Friend = () => {
       console.log("Fetching friends for userId:", userId);
       const response = await axios.post(`${apiUrl}/api/friend`, { userId,index });
       console.log(response.data)
-      setPage(Math.floor(response.data.count / 8));
+      setPage(Math.floor(response.data.count /6));
       // 假設 response.data.userInfo 是一個包含多個好友資訊的陣列
       const friendData = response.data.newUInfo.map((friend, index) => ({
         nickname: friend.nickname,

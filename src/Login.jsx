@@ -48,7 +48,7 @@ function Login() {
             }
         } catch (error) {
             console.error("Google 登入錯誤：", error);
-            alert("Google 登入失敗，請稍後再試！");
+            alert(error);
         }
     };
 
