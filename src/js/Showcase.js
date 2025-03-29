@@ -5,6 +5,7 @@ import Card from '../showcase/card.png';
 import Card_bg from '../showcase/card_bg.png';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState, useContext } from 'react';
+import next_icon from '../question/back_btn.svg';
 import friend_icon from '../showcase/friend_icon.png';
 import score_bar from '../showcase/full_score_bar.png';
 import { UserContext } from "../App"; // 引入全局 Socket 上下文
@@ -36,7 +37,8 @@ const Showcase = () => {
   const startIndex = currentPage * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, data.length);
   const currentItems = data.slice(startIndex, endIndex);
-
+  const [index, setIndex] = useState(0);
+  const [page, setPage] = useState(0);
   const [isOriginal, setIsOriginal] = useState(Array(data.length).fill(true));
 
   // const [data, setData] = useState([]); // 存放後端返回的卡片數據
@@ -86,39 +88,31 @@ const Showcase = () => {
     });
   }, []);
 
-  // 加载数据
-  // useEffect(() => {
-  //   const loadData = async () => {
-  //     try {
-  //       const response = await axios.post(`${apiUrl}/api/bio`, { userId :userId.userId });
-  //       console.log('Fetched data:', response.data);
-  //       return response.data;
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   }
-  //   loadData();
-  // }, []);
+  const loadData = async () => {
+    try {
+      const response = await axios.post(`${apiUrl}/api/bio`, { userId: userId.userId, index });
+      console.log('Fetched data:', response.data);
 
+      if (response.data) {
+        setPage(response.data.count);
+        setData(response.data.bios); // 存入 state
+        setIsOriginal(Array(response.data.bios.length).fill(true)); // 根據數據長度初始化 isOriginal
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
   // 請求後端數據
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const response = await axios.post(`${apiUrl}/api/bio`, { userId: userId.userId });
-        console.log('Fetched data:', response.data);
-
-        if (response.data) {
-          setData(response.data.bios); // 存入 state
-          setIsOriginal(Array(response.data.bios.length).fill(true)); // 根據數據長度初始化 isOriginal
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
     loadData();
   }, [userId.userId]);
   useEffect(() => {
+    loadData();
+    console.log("index");
+  }, [index]);
+  useEffect(() => {
     console.log("Data 已更新:", data);
+
   }, [data]); // 當 data 更新時觸發
 
   // 切换图片状态
@@ -132,6 +126,17 @@ const Showcase = () => {
 
   // 跳转到 Friend 页面
   const handleFriend = () => navigate('/friend');
+  const handleIndex = (count) => {
+    if (count === 0) {
+      if (index > 0)
+        setIndex(index - 1);
+    }
+    else {
+      if (index < page)
+        setIndex(index + 1);
+    }
+    console.log(index);
+  };
 
 
   // 样式保持不变
@@ -244,7 +249,7 @@ const Showcase = () => {
       <main className="showcase-content">
         {isImagesLoaded ? ( // 检查是否完成预加载
           <div className='pair_styles.container'>
-            <div className='row row-showcase g-0' >
+            <div className='row row-showcase g-4' >
               {images.map((cardImage, index) => (
                 <div
                   key={index}
@@ -320,6 +325,24 @@ const Showcase = () => {
           <p>加载中...</p>
         )}
       </main>
+
+      {/* Back_page */}
+      <div className="back_page">
+        <img
+          src={next_icon}
+          alt="切到上一頁"
+          onClick={() => handleIndex(0)} // 點擊才執行
+        />
+      </div>
+
+      {/* Next_page */}
+      <div className="next_page">
+        <img
+          src={next_icon}
+          alt="切到下一頁"
+          onClick={() => handleIndex(1)} // 點擊才執行
+        />
+      </div>
 
       {/* Footer */}
       <div className="footer">

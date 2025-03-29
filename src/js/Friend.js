@@ -15,7 +15,7 @@ const Friend = () => {
   // const friend_images = Array.from({ length: 6 }, (_, index) => `/friend_${index + 1}.png`);
   const [showPopup, setShowPopup] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
-
+  const [index, setIndex] = useState(0);
   const [friendList, setFriendList] = useState([]); // 存放所有好友資訊
 
   // 好友資料測試
