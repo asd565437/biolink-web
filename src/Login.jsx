@@ -2,12 +2,31 @@ import "./css/Login.css";
 import { auth, googleProvider } from './firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 function Login() {
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        const input = inputRef.current;
+        if (input) {
+            const handleKeyDown = (event) => {
+                if (event.key === 'Enter') {
+                    handleLogin();
+                }
+            };
+
+            input.addEventListener('keydown', handleKeyDown);
+
+            // 清除事件監聽（好習慣）
+            return () => {
+                input.removeEventListener('keydown', handleKeyDown);
+            };
+        }
+    }, []);
     const navigate = useNavigate();
     const [account, setAccount] = useState("");  // 修正變數名稱
     const [password, setPassword] = useState("");
@@ -28,7 +47,7 @@ function Login() {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
-            
+
             const response = await axios.post(`${apiUrl}/api/login`, {
                 account: user.email,
                 password: "google_generated_password",
@@ -63,7 +82,7 @@ function Login() {
             const response = await axios.post(`${apiUrl}/api/login`, {
                 account,
                 password
-            }, { withCredentials: true ,validateStatus: status => status < 500});
+            }, { withCredentials: true, validateStatus: status => status < 500 });
 
             if (response.status === 200) {
                 alert("登入成功!");
@@ -72,7 +91,7 @@ function Login() {
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: account
                 }, { withCredentials: true });
-                navigate('/world',{ state: { popup: true } });
+                navigate('/world', { state: { popup: true } });
             } else {
                 console.error("登入失敗：", response.data.error);
                 alert("登入失敗：" + response.data.error);
@@ -83,6 +102,7 @@ function Login() {
             alert("網路錯誤，請稍後再試！");
         }
     };
+
 
     return (
         <div className="login-container">
@@ -113,6 +133,9 @@ function Login() {
                         placeholder="密碼"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleLogin();
+                        }}
                     />
                     <img src="/key_icon.svg" alt="" className="icon" />
                     <img src={eyeIcon} alt="檢視密碼" id="LoginPasswordEye" onClick={toggleVisibility} />

@@ -1,4 +1,4 @@
-import React , { useEffect }from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import '../css/Home.css';
@@ -10,13 +10,26 @@ import Go from '../home/start_btn.svg';
 function Home() {
     const navigate = useNavigate();
     return (
-
         <div id="home_container">
-            {/* <img src={Bg} alt="" className="bg" /> */}
+            {/* 背景影片 */}
+            {/* <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="background-video"
+            >
+                <source src="background.mp4" type="video/mp4" />
+                你的瀏覽器不支援影片播放。
+            </video> */}
+
             <img src={Logo} alt="" className="logo" />
             <img src={Text} alt="" className="text" />
             <Link to="/login"><img src={Login} alt="" className="login" /></Link>
             <img src={Go} alt="" className="go" onClick={() => navigate("/world")} />
+            
+            {/* 黑色遮罩 */}
+            <div className="overlay"></div>
         </div>
     )
 }

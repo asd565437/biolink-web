@@ -44,6 +44,9 @@ const AddFriend = ({ onClose }) => {
                             placeholder="輸入好友ID"
                             className="addFriend_input"
                             onChange={handleInputChange}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') handleSubmit();
+                            }}
                         />
                         <img
                             src={addFriend_finish}

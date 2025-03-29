@@ -1,5 +1,5 @@
 import "./css/Register.css";
-import React, { useState } from 'react';
+import React, { useState,useRef,useEffect } from 'react';
 import { auth, googleProvider } from './firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
@@ -67,6 +67,10 @@ function Register() {
     const handleRegister = async () => {
         // **前端驗證**
         if (!account.trim() || !password || !nickName.trim() || !confirmPassword) {
+            console.log(!account.trim())
+            console.log(!password)
+            console.log(!nickName.trim())
+            console.log(!confirmPassword)
             alert("請填寫所有必填欄位！");
             return;
         }
@@ -161,6 +165,9 @@ function Register() {
                         placeholder="確認密碼"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleRegister();
+                        }}
                     />
                     <img src="/key_icon.svg" alt="Password Icon" />
                     <img

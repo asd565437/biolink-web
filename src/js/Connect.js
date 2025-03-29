@@ -42,6 +42,9 @@ const Connect = () => {
           onChange={handleInputChange}
           // placeholder="輸入好友ID"
           className="friend-input"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') handleSubmit();
+        }}
         />
 
         <img src={connect_finish} alt="connect_finish" className="connect_finish" onClick={handleSubmit} />

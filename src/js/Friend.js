@@ -24,7 +24,7 @@ const Friend = () => {
   const [bioNumber1, setBioNumber1] = useState(["2"]); // 初始化 userName
   const [friendDate1, setFriendDate1] = useState(["02.17.25"]); // 初始化 userName
   const [photoURL, setphotoURL] = useState([friend_test]); // 初始化 userName
-
+  const handleWorld = () => navigate('/world');
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -33,6 +33,8 @@ const Friend = () => {
           setUserId(response.data.id);
         } else {
           console.error("未获取到用户 ID");
+          alert("你還沒登入！！")
+          handleWorld();
         }
       } catch (error) {
         console.error("获取 Cookie 失败:", error);
@@ -212,6 +214,7 @@ const Friend = () => {
             src={next_icon}
             alt="切到下一頁"
             onClick={() => handleIndex(1)}
+            
           />
         </div>
       )}

@@ -6,7 +6,7 @@
 #home_container{
     width: 100%;
     margin: 0 auto;
-    background-image: url("../home/home_bg.svg");
+    background-image: url("../home/home_bg.png");
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -18,11 +18,15 @@
     position: relative;
 }
 
-/* .bg {
-    width: 100vw;
-    height: 100vh;
-} */
-
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
 
 .logo {
     width: 25%;
@@ -51,6 +55,16 @@
     top: 91%;
     left: 86%;
     cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 0;
 }
 
 /*不知道為甚麼辦但目前失敗的RWD*/

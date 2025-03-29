@@ -91,6 +91,9 @@ const Reward = () => {
               value={strainName}
               onChange={handleChange}
               className="strainName-input"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleNameSubmit();
+            }}
             />
             <img src={strain_name_finish} alt="strain_name_finish" className="strain_name_finish" onClick={handleNameSubmit} />
           </div>
