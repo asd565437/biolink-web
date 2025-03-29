@@ -6,7 +6,7 @@ import AddFriend from "./AddFriend.js";
 import addFriend_icon from '../friend_list/addFriend_icon.svg';
 import friend_list from '../friend_list/friend_list.svg';
 import friend_test from '../confirm/confirm_photo.svg';
-import arrow_icon from '../question/back_btn.svg';
+import next_icon from '../question/back_btn.svg';
 import axios from 'axios';
 import { UserContext } from "../App"; // 引入全域 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -68,7 +68,7 @@ const Friend = () => {
       console.log(response.data)
       setPage(Math.floor(response.data.count / 8));
       // 假設 response.data.userInfo 是一個包含多個好友資訊的陣列
-      const friendData = response.data.userInfo.map((friend, index) => ({
+      const friendData = response.data.newUInfo.map((friend, index) => ({
         nickname: friend.nickname,
         bio_count: friend.bio_count,
         createdAt: response.data.newFInfo[index]?.createdAt || "未知日期",
@@ -197,22 +197,25 @@ const Friend = () => {
       </main> */}
 
       {/* Back_page */}
+      {index >= page && (
       <div className="back_page">
         <img
-          src={arrow_icon}
+          src={next_icon}
           alt="切到上一頁"
-        onClick={() => handleIndex(0)} // 點擊才執行
+          onClick={() => handleIndex(0)} // 點擊才執行
         />
-      </div>
-
+      </div>)}
       {/* Next_page */}
-      <div className="next_page">
-        <img
-          src={arrow_icon}
-          alt="切到下一頁"
-        onClick={() => handleIndex(1)}
-        />
-      </div>
+      {index < page && (
+        <div className="next_page">
+          <img
+            src={next_icon}
+            alt="切到下一頁"
+            onClick={() => handleIndex(1)}
+          />
+        </div>
+      )}
+
 
       {/* Footer */}
       <div className="footer">
