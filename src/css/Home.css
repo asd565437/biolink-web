@@ -18,7 +18,7 @@
     position: relative;
 }
 
-.background-video {
+/* .background-video {
     position: fixed;
     top: 0;
     left: 0;
@@ -26,7 +26,7 @@
     min-height: 100vh;
     object-fit: cover;
     z-index: -1;
-}
+} */
 
 .logo {
     width: 25%;
@@ -47,6 +47,7 @@
     position: absolute;
     top: 5%;
     left: 91%;
+    cursor: pointer;
 }
 
 .go {
@@ -55,6 +56,10 @@
     top: 91%;
     left: 86%;
     cursor: pointer;
+}
+
+.logo, .text, .login, .go {
+    z-index: 1;
 }
 
 .overlay {

@@ -23,15 +23,15 @@ function Home() {
                 你的瀏覽器不支援影片播放。
             </video> */}
 
+            {/* 黑色遮罩 */}
+            <div className="overlay"></div>
+
             <img src={Logo} alt="" className="logo" />
             <img src={Text} alt="" className="text" />
             <Link to="/login"><img src={Login} alt="" className="login" /></Link>
             <img src={Go} alt="" className="go" onClick={() => navigate("/world")} />
-            
-            {/* 黑色遮罩 */}
-            <div className="overlay"></div>
         </div>
     )
 }
 
-export default Home
+export default Home;
