@@ -26,8 +26,7 @@
 
 /* 内容容器 */
 .showcase-content {
-  position: relative;
-  padding-top: 190px;
+  position: fixed;
   /* 确保内容在 Header 下方 */
   /* max-height: calc(100vh);  */
   /* 保证内容区域不会超出页面 */
@@ -66,8 +65,8 @@
 .card-info-id {
   position: absolute;
   top: 1%;
-  left: 20%;
-  font-size: 20px;
+  left: 8%;
+  font-size: 21px;
 }
 
 .card-info-name {
@@ -85,20 +84,21 @@
 .card-info-owner {
   position: absolute;
   top: 83%;
-  left: 19%;
+  left: 5%;
   font-size: 16px;
 }
 
 .card-info-date {
   position: absolute;
   top: 90%;
-  left: 63.5%;
+  left: 67%;
   font-size: 17px;
 }
 
 .overlay-image img {
+  width: 100%;
   position: absolute;
-  top: 40%;
+  top: 60%;
   left: 30%;
   /* transform: scale(1.4); */
   transform-origin: center;
@@ -106,13 +106,17 @@
   z-index: 400;
 }
 
-.overlay-image2 img {
+
+.overlay-image2 {
   position: absolute;
-  top: 15.4%;
-  left: 8.3%;
-  transform: scale3d(0.4, 0.66, 1);
-  z-index: 500;
+  top:16%;
+  left: 34%;
+  width: 165px;       /* 線的長度 */
+  height: 8px;        /* 線的粗細 */
+  background-color: #daa7ff; /* 線的顏色 */
+  z-index: 400;
 }
+
 
 /* 标题样式 */
 .title {
@@ -150,23 +154,23 @@
   cursor: pointer;
 }
 
-@media (max-width: 1920px){ 
+@media (max-width: 2560px){ 
   .showcase{
     height: 100vh;
   }
   .showcase-content {
-    max-height: calc(150vh);
+    max-height: calc(112vh);
     zoom: 75%;
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .showcase {
     height: 100vh;
   }
 
   .showcase-content {
-    max-height: calc(100vh);
+    max-height: calc(105vh);
   }
 }
 

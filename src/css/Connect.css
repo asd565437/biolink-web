@@ -16,7 +16,10 @@
   width: 100%;
   /* 父容器寬度 */
 }
-
+img {
+  height: auto;
+  width: 100%;
+}
 .content {
   display: flex;
   justify-content: center;
