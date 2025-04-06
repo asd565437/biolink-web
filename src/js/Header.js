@@ -188,20 +188,20 @@ const Header = ({ images }) => {
         >
           <ul className="icon_table">
             <li className="mb-2">
-              <img src="/world_icon.png"  // 替換為你的圖片路徑
+              <img src="/world_icon.svg"  // 替換為你的圖片路徑
                 onClick={() => handleNavigate(0)}
                 alt="功能圖標1" />
             </li>
             <li className="mb-2">
-              <img src="/wall_icon.png"  // 替換為你的圖片路徑
+              <img src="/wall_icon.svg"  // 替換為你的圖片路徑
                 onClick={() => handleNavigate(1)}
                 alt="功能圖標2" /></li>
             <li className="mb-2">
-              <img src="/connect_icon.png"  // 替換為你的圖片路徑
+              <img src="/connect_icon.svg"  // 替換為你的圖片路徑
                 onClick={() => handleNavigate(2)}
                 alt="功能圖標3" style={{left:'1%'}} /></li>
             <li className="mb-2">
-              <img src="/logout_icon.png"  // 替換為你的圖片路徑
+              <img src="/logout_icon.svg"  // 替換為你的圖片路徑
                 onClick={() => handleNavigate(4)}
                 alt="功能圖標4" /></li>
           </ul>
