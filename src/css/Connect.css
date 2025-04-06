@@ -16,7 +16,7 @@
   width: 100%;
   /* 父容器寬度 */
 }
-img {
+content img {
   height: auto;
   width: 100%;
 }
@@ -32,13 +32,13 @@ img {
 }
 
 .connect_title {
-  scale: 0.45;
   position: absolute;
   top: 26%;
+  width: 70%;
 }
 
 .friend-input {
-  width: 30%;
+  width: 55%;
   font-size: 30px;
   color: white;
   background: transparent;
@@ -68,8 +68,8 @@ img {
 }
 
 .connect_finish {
-  scale: 0.25;
   position: absolute;
-  bottom: 3%;
+  bottom: 17%;
   cursor: pointer;
+  width: 50%;
 }

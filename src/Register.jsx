@@ -1,5 +1,5 @@
 import "./css/Register.css";
-import React, { useState,useRef,useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { auth, googleProvider } from './firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,12 +21,12 @@ function Register() {
     };
 
     // 註冊成功後導向
-    const handleNavigate = (id,account) => {
-        navigate('/photo', { state: { id,account } });
+    const handleNavigate = (id, account) => {
+        navigate('/photo', { state: { id, account } });
     };
 
     const handleSuccess = () => {
-        navigate('/world' ,{ state: { popup: true } });
+        navigate('/world', { state: { popup: true } });
     };
 
     // **處理 Google 註冊**
@@ -100,7 +100,7 @@ function Register() {
 
             if (response.status === 200) {
                 alert("註冊成功!");
-                handleNavigate(response.data.user.id,account.trim());
+                handleNavigate(response.data.user.id, account.trim());
                 console.log(response.data.user.id)
             } else {
                 alert("註冊失敗：" + (response.data.error || "未知錯誤"));
@@ -112,6 +112,9 @@ function Register() {
 
     return (
         <div className="login-container">
+
+            <div className="black-overlay-register"></div> {/* 新增的黑色遮罩層 */}
+
             <Link to="/">
                 <div className="login-logo">
                     <img src="/logo_small.svg" alt="Logo" />
@@ -183,7 +186,7 @@ function Register() {
                 </div>
 
                 <div className="other-login-register">
-                    <img src="/other_way_login.svg" alt="" className="other_way_login"/>
+                    <img src="/other_way_login.svg" alt="" className="other_way_login" />
                     <div className="other-login-icons-register">
                         <img src="/google_btn.svg" alt="Google 註冊" onClick={handleGoogleLogin} />
                     </div>

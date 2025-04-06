@@ -282,7 +282,6 @@ const Showcase = () => {
           />
         </div>
       )}
-
       {/* Footer */}
       <div className="footer">
         <img
@@ -292,6 +291,7 @@ const Showcase = () => {
         />
       </div>
     </div>
+
   );
 };
 

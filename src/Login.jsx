@@ -106,6 +106,8 @@ function Login() {
 
     return (
         <div className="login-container">
+            <div className="black-overlay-login"></div> {/* 新增的黑色遮罩層 */}
+
             <Link to="/">
                 <div className="login-logo">
                     <img src="/logo_small.svg" alt="Logo" />

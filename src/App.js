@@ -115,19 +115,6 @@ const FriendModal = ({ content, onClose, handleAgree, handleReject, friendId }) 
                 <img src={confirmFriend_no} alt="confirmFriend_no" className="confirmFriend_no" onClick={() => {handleReject(friendId);onClose()}} />
             </div>
         </div>
-
-        // <div className="invite">
-        //     <div className="invite-content">
-        //         <img src={invite_box} alt="invite_box" className="invite_box" />
-        //         <p className="invite_title">{nickName}&emsp;邀請您一起進行培養菌種</p>
-        //         <div className="invite_photo_area">
-        //             <img src={invite_photo_box} alt="invite_photo_box" className="invite_photo_box" />
-        //             <img src={photoURL} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
-        //         </div>
-        //         <img src={invite_yes} alt="invite_yes" className="invite_yes" onClick={() => { handleAgree(); onClose(); }} />
-        //         <img src={invite_no} alt="invite_no" className="invite_no" onClick={onClose} />
-        //     </div>
-        // </div>
     );
 };
 

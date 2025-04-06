@@ -3,7 +3,7 @@
     overflow: hidden;
 }
 
-#home_container{
+#home_container {
     width: 100%;
     margin: 0 auto;
     background-image: url("../home/home_bg.png");
@@ -58,7 +58,10 @@
     cursor: pointer;
 }
 
-.logo, .text, .login, .go {
+.logo,
+.text,
+.login,
+.go {
     z-index: 1;
 }
 
@@ -98,3 +101,40 @@
         background-position: center;
     }
 } */
+
+/* 手機版 RWD */
+@media (max-width: 768px) {
+    .logo {
+        width: 40%;
+        top: 32%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .text {
+        content: url("/src/phone/home_text.svg");
+        width: 60%;
+        top: 42%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .login {
+        width: 15%;
+        top: 5%;
+        left: 80%;
+    }
+
+    .go {
+        width: 25%;
+        top: 60%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #home_container {
+        background-image: url("/src/phone/home_bg.png");
+        background-position: center top;
+        background-size: cover;
+    }
+}

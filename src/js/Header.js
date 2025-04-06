@@ -7,12 +7,17 @@ import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const Header = ({ images }) => {
+  const [isOpen, setIsOpen] = useState(false); // 控制功能列是否顯示
+  const [show, setShow] = useState(window.innerWidth >= 768);
   const userId = useContext(UserContext);
   const navigate = useNavigate();
   const urls = ['/world', '/wall', '/connect', '/', '/login'];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userName, setUserName] = useState("LOGIN");
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen); // 切換功能列顯示與隱藏
+  };
   if (!Array.isArray(images)) {
     images = ['world_btn.svg', 'wall_btn.svg', 'culture_btn.svg'];
   }
@@ -43,6 +48,14 @@ const Header = ({ images }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    const handleResize = () => {
+      setShow(window.innerWidth >= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     const updateLoginStatus = async () => {
       const authStatus = await checkAuthStatus();
       setIsLoggedIn(authStatus);
@@ -63,35 +76,6 @@ const Header = ({ images }) => {
 
     updateLoginStatus();
   }, [userId]); // 依賴 userId
-
-
-
-  // 監聽 userId 變化 & 檢查後端登入狀態
-  // useEffect(() => {
-  //   const updateLoginStatus = async () => {
-  //     const authStatus = await checkAuthStatus();
-  //     setIsLoggedIn(authStatus);
-  //     if (isLoggedIn) {
-  //       const fetchUserData = async () => {
-  //         try {
-  //           const response = await axios.get(`${apiUrl}/get-cookie`, {
-  //             withCredentials: true,
-  //           });
-  //           console.log("获取到的用户名:", response.data.userName);
-  //           if (response.data.userName)
-  //             setUserName(response.data.userName)
-  //           else
-  //             setUserName(null);
-  //         } catch (error) {
-  //           console.error("获取 Cookie 失败:", error);
-  //         }
-  //       };
-  //       fetchUserData();
-  //     }
-  //   };
-
-  //   updateLoginStatus();
-  // }, [userId]); // 依賴 userId 變化
 
   // 監聽 Cookie 變化（每 10 秒檢查一次）
   useEffect(() => {
@@ -122,57 +106,108 @@ const Header = ({ images }) => {
   ];
 
   return (
-    <header className="header">
-      <div className="header-logo" onClick={() => handleNavigate(0)}></div>
-      <div className="navList">
-        {/* 水平導覽列 */}
-        <nav className="nav-menu">
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={`/${image}`}
-              alt={`Header Image ${index + 1}`}
-              style={{ ...positionAdjustments[index] }}
-              onClick={() => handleNavigate(index)}
-              className="nav-item"
-            />
-          ))}
-        </nav>
+    <>
+      <header className="header">
+        <div className="header-logo" onClick={() => handleNavigate(0)}></div>
+        {show && (
+          <div className="navList">
+            <nav className="nav-menu">
+              {images.map((image, index) => (
+                <img
+                  key={index}
+                  src={`/${image}`}
+                  alt={`Header Image ${index + 1}`}
+                  style={{ ...positionAdjustments[index] }}
+                  onClick={() => handleNavigate(index)}
+                  className="nav-item"
+                />
+              ))}
+            </nav>
 
-        {/* 垂直導覽列 */}
-        <div
-          className="header-login-container"
-          onMouseEnter={() => isLoggedIn ? setIsDropdownOpen(true) : setIsDropdownOpen(false)}
-        >
-          <h2 className="header-login" onClick={() => {
-            if (!isLoggedIn) {
-              handleNavigate(4);
-            }
-          }}>
-            {isLoggedIn ? userName : "LOGIN"}
-
-          </h2>
-        </div>
-        <div>
-          {isDropdownOpen && (
-            <div className="login-dropdown" onMouseLeave={() => setIsDropdownOpen(false)}>
-              <h3 className="logID">#{userId?.userId}</h3>
-              <h3 className="login-container-logout"
-                onClick={async () => {
-                  if (isLoggedIn) {
-                    await clearCookie();
+            {/* 垂直導覽列 */}
+            <div
+              className="header-login-container"
+              onMouseEnter={() =>
+                isLoggedIn ? setIsDropdownOpen(true) : setIsDropdownOpen(false)
+              }
+            >
+              <h2
+                className="header-login"
+                onClick={() => {
+                  if (!isLoggedIn) {
                     handleNavigate(4);
                   }
                 }}
-                style={{ cursor: "pointer" }}
               >
-                LOGOUT
-              </h3>
+                {isLoggedIn ? userName : "LOGIN"}
+              </h2>
             </div>
-          )}
+
+            {/* 下拉選單 */}
+            <div>
+              {isDropdownOpen && (
+                <div
+                  className="login-dropdown"
+                  onMouseLeave={() => setIsDropdownOpen(false)}
+                >
+                  <h3 className="logID">#{userId?.userId}</h3>
+                  <h3
+                    className="login-container-logout"
+                    onClick={async () => {
+                      if (isLoggedIn) {
+                        await clearCookie();
+                        handleNavigate(4);
+                      }
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    LOGOUT
+                  </h3>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {!show && (
+          <button
+            className={`menubtn ${isOpen ? 'open' : ''}`}
+            onClick={toggleMenu}
+          >
+            <img
+              src="/menu.png"  // 替換為你的圖片路徑
+              alt="功能圖標"
+            />
+          </button>
+        )}
+        {/* 功能列：點擊按鈕後顯示或隱藏 */}
+      </header>
+      {!show && isOpen && (
+        <div
+          className="menu w-16 h-full text-white shadow-lg p-4"
+        >
+          <ul className="icon_table">
+            <li className="mb-2">
+              <img src="/world_icon.png"  // 替換為你的圖片路徑
+                onClick={() => handleNavigate(0)}
+                alt="功能圖標1" />
+            </li>
+            <li className="mb-2">
+              <img src="/wall_icon.png"  // 替換為你的圖片路徑
+                onClick={() => handleNavigate(1)}
+                alt="功能圖標2" /></li>
+            <li className="mb-2">
+              <img src="/connect_icon.png"  // 替換為你的圖片路徑
+                onClick={() => handleNavigate(2)}
+                alt="功能圖標3" style={{left:'1%'}} /></li>
+            <li className="mb-2">
+              <img src="/logout_icon.png"  // 替換為你的圖片路徑
+                onClick={() => handleNavigate(4)}
+                alt="功能圖標4" /></li>
+          </ul>
         </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 };
 

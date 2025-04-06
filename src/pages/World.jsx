@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext ,useRef } from "react";
 import axios from "axios";
 import "../css/World.css";
 import Header from "../js/Header";
+import FunctionMenu from '../js/FunctionMenu';
 import id_close from "../world/id_close.svg";
 import id_notice from "../world/id_notice.png";
 import { useLocation } from "react-router-dom";
@@ -167,7 +168,7 @@ const World = () => {
             }}
           />
         ))}
-
+    
         {/* 滑鼠懸停時顯示的圖片與資訊 */}
         {hoveredImage && (
           <div
