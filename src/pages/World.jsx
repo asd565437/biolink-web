@@ -50,7 +50,7 @@ const World = () => {
       x: Math.random() * screenWidth,
       y: Math.random() * screenHeight,
       z: Math.random() * (998 - 1) + 1,
-      scale: Math.random() * (0.2 - 0.1) + 0.1, //0.05~0.13
+      scale: Math.random() * (0.2 - 0.05) + 0.05, //0.05~0.13
       speedX: Math.random() * 1.5,
       speedY: Math.random() * 1.5,
       speedZ: Math.random() * 1.5,
@@ -115,7 +115,7 @@ const World = () => {
             image.directionZ = -image.directionZ;
           }
           // 根據 Z 軸距離計算縮放比例
-          let scale = 0.1 + (0.2 - 0.1) * (1 - newZ / 1000)
+          let scale = 0.1 + (0.2 - 0.05) * (1 - newZ / 1000)
 
           return { ...image, x: newX, y: newY, z: newZ, rotation: newRotation, scale };
         })
