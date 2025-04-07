@@ -115,7 +115,7 @@ const World = () => {
             image.directionZ = -image.directionZ;
           }
           // 根據 Z 軸距離計算縮放比例
-          let scale = 0.1 + (0.2 - 0.05) * (1 - newZ / 1000)
+          let scale = 0.05 + (0.2 - 0.05) * (1 - newZ / 1000)
 
           return { ...image, x: newX, y: newY, z: newZ, rotation: newRotation, scale };
         })
