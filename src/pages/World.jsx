@@ -47,10 +47,10 @@ const World = () => {
       id: `bio00${index + 1}`,
       src: `bio_0${index + 1}.png`,
       // src: `bio_${index + 1}.svg`,
-      x: Math.random() * screenWidth - screenWidth / 2,
-      y: Math.random() * screenHeight - screenHeight,
+      x: Math.random() * screenWidth,
+      y: Math.random() * screenHeight,
       z: Math.random() * (998 - 1) + 1,
-      scale: Math.random() * (0.13 - 0.05) + 0.05, //0.05~0.13
+      scale: Math.random() * (0.25 - 0.1) + 0.1, //0.05~0.13
       speedX: Math.random() * 1.5,
       speedY: Math.random() * 1.5,
       speedZ: Math.random() * 1.5,
@@ -101,23 +101,21 @@ const World = () => {
           let newY = image.y + image.speedY * image.directionY;
           let newZ = image.z + image.speedZ * image.directionZ;
           let newRotation = (image.rotation + image.rotationSpeed) % 360;
-
           const screenWidth = window.innerWidth;
           const screenHeight = window.innerHeight;
-
           // 邊界檢測，避免圖片超出視窗範圍
-          if (newX < -screenWidth / 2 || newX > screenWidth / 2) {
+          if (newX > screenWidth || newX < 0) {
             image.directionX = -image.directionX;
           }
           
-          if (newY < -screenHeight || newY > 0) {
+          if (newY > screenHeight || newY < 0) {
             image.directionY = -image.directionY;
           }
           if (newZ < 2 || newZ > 998) { // 限制 Z 軸範圍，防止過遠或過近
             image.directionZ = -image.directionZ;
           }
           // 根據 Z 軸距離計算縮放比例
-          let scale = 0.05 + (0.13 - 0.05) * (1 - newZ / 1000)
+          let scale = 0.1 + (0.25 - 0.1) * (1 - newZ / 1000)
 
           return { ...image, x: newX, y: newY, z: newZ, rotation: newRotation, scale };
         })
@@ -144,9 +142,9 @@ const World = () => {
               position: "absolute",
               left: `${image.x}px`,
               top: `${image.y}px`,
-              transform: `scale(${image.scale}) rotate(${image.rotation}deg)`,
-              transition: "none",
-              zIndex: Math.floor(image.scale * 10000),
+              transform: `rotate(${image.rotation}deg)`,
+              width:`${image.scale *100}%`,
+              zIndex: Math.floor(image.scale * 1000),
             }}
             onMouseEnter={(e) => {
               setHoveredImage({

@@ -259,7 +259,7 @@ const Question = () => {
 
       <main className="content">
         <div className="row row-question mb-4 P1">
-          <h1 className="col-12">Q{progress + 1}: {question}</h1>
+          <h1 className="col-16">Q{progress + 1}: {question}</h1>
           <div className="col-6 P1_A">
             <button
               className={buttonStates.P1_A ? "button-selected" : "button-default"}
