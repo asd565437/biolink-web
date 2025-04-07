@@ -33,7 +33,7 @@
   box-sizing: border-box;
   /* 包括内边距 */
   left: 10%;
-  bottom: 5%;
+  bottom: 10%;
   width: 100%;
   height: 100%;
 }
@@ -156,7 +156,7 @@
     height: 100vh;
   }
   .showcase-content {
-    max-height: calc(112vh);
+    max-height: calc(100vh);
     zoom: 75%;
   }
 }
@@ -167,7 +167,7 @@
   }
 
   .showcase-content {
-    max-height: calc(105vh);
+    max-height: calc(110vh);
   }
 }
 
