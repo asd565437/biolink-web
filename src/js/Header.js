@@ -202,7 +202,12 @@ const Header = ({ images }) => {
                 alt="功能圖標3" style={{left:'1%'}} /></li>
             <li className="mb-2">
               <img src={imageSrc}  // 替換為你的圖片路徑
-                onClick={() => handleNavigate(4)}
+                onClick={async () => {
+                  if (isLoggedIn) {
+                    await clearCookie();
+                  }
+                  handleNavigate(4);
+                }}
                 alt="功能圖標4" /></li>
           </ul>
         </div>
