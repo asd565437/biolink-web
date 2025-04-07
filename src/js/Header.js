@@ -14,7 +14,6 @@ const Header = ({ images }) => {
   const urls = ['/world', '/wall', '/connect', '/', '/login'];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userName, setUserName] = useState("LOGIN");
-  const imageSrc = isLoggedIn ? '/logout_icon.svg' : '/login_icon.svg';
   const toggleMenu = () => {
     setIsOpen(!isOpen); // 切換功能列顯示與隱藏
   };
@@ -46,7 +45,7 @@ const Header = ({ images }) => {
 
   // 設定登入狀態
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const imageSrc = isLoggedIn ? '/logout_icon.svg' : '/login_icon.svg';
   useEffect(() => {
     const handleResize = () => {
       setShow(window.innerWidth >= 768);
