@@ -169,7 +169,6 @@
 .content {
     display: flex;
     flex-direction: column;
-    top: 5%;
 }
 
 .content h1 {
