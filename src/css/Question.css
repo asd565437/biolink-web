@@ -19,25 +19,24 @@
 
 .back {
     position: fixed;
-    top: 150px;
-    left: 50px;
-    width: 3%;
+    top: 20%;
+    left: 5%;
+    width: 5%;
     cursor: pointer;
     z-index: 5;
 }
 
 .checkAnswer {
     position: fixed;
-    bottom: 75px;
-    width: 25%;
+    bottom: 5%;
     z-index: 5;
 }
 
-.checkAnswer img{
+.checkAnswer img {
     z-index: 10;
 }
 
-.mask{
+.mask {
     position: absolute;
     top: 0;
     left: 0;
@@ -49,59 +48,153 @@
 
 .progress-bar {
     position: fixed;
-    top: 150px;
+    top: 15%;
+}
+
+@media (min-width: 0px) {
+    .progress-bar {
+        width: 90%;
+    }
+    .checkAnswer img{
+        width: 35%;
+    }
+    .row-question {
+        width: 80%;
+    }
+}
+
+@media (min-width: 320px) {
+    .progress-bar {
+        width: 85%;
+    }
+    .checkAnswer img{
+        width: 40%;
+    }
+    .row-question {
+        width: 70%;
+    }
+}
+
+@media (min-width: 375px) {
+    .progress-bar {
+        width: 80%;
+    }
+    .checkAnswer img{
+        width: 45%;
+    }
+    .row-question {
+        width: 60%;
+    }
+}
+
+@media (min-width: 400px) {
+    .progress-bar {
+        width: 75%;
+    }
+
+    .checkAnswer img {
+        width: 50%;
+    }
+    .row-question {
+        width: 60%;
+    }
+}
+
+@media (min-width: 470px) {
+    .progress-bar {
+        width: 70%;
+    }
+
+    .checkAnswer img {
+        width: 60%;
+    }
+    .row-question {
+        width: 60%;
+    }
+}
+
+@media (min-width: 545px) {
+    .progress-bar {
+        width: 60%;
+    }
+
+    .checkAnswer img {
+        width: 70%;
+    }
+    .row-question {
+        width: 60%;
+    }
+}
+
+@media (min-width: 768px) {
+    .progress-bar {
+        width: 50%;
+    }
+
+    .checkAnswer img {
+        width: 80%;
+    }
+    .row-question {
+        width: 60%;
+    }
+}
+@media (min-width: 1440px) {
+    .row-question {
+        width: 55%;
+    }
 }
 
 .row {
     display: flex;
-    align-items: center; /* 保證選項圖片在父容器中垂直居中 */
+    align-items: center;
+    /* 保證選項圖片在父容器中垂直居中 */
 }
 
-.row-question{
-    margin: 20px 0; 
-    justify-content: center; /* 使 A 和 B 選項分佈在兩側 */
-    width: 60%;
-}
 
 .col-6 {
-    flex: 1; /* 使 A 和 B 在每一列中有相同的寬度 */
-    max-width: 100%; /* 限制最大寬度 */
-    padding: 5px; /* 使內部內容不會粘邊 */
-    display: flex; /* 使用 flexbox 來確保垂直居中 */
-    justify-content: center; /* 保證圖片在水平方向居中 */
-    min-height: 100px; /* 保證每個選項區域的高度一致，這裡可以根據需要調整 */
+    flex: 1;
+    /* 使 A 和 B 在每一列中有相同的寬度 */
+    max-width: 100%;
+    /* 限制最大寬度 */
+    padding: 5px;
+    /* 使內部內容不會粘邊 */
+    display: flex;
+    /* 使用 flexbox 來確保垂直居中 */
+    justify-content: center;
+    /* 保證圖片在水平方向居中 */
+    min-height: 100px;
+    /* 保證每個選項區域的高度一致，這裡可以根據需要調整 */
 }
 
 .content {
     display: flex;
     flex-direction: column;
-    top: 10px;
+    top: 5%;
 }
 
 .content h1 {
     color: #ffffff;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-.content button{
+.content button {
     background-color: transparent;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    width: 320px;
-    height: 100px;
+    width: 65%;
     border: 0;
     color: #ffffff;
-    font-weight: bold;   
+    font-weight: bold;
     font-size: 32px;
     text-align: center;
 }
 
 button:disabled {
-  color: rgba(255, 255, 255, 0.5);
-  cursor: not-allowed;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
 }
 
 .button-selected {
@@ -123,19 +216,25 @@ button:disabled {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px); /* 模糊效果 */
+    backdrop-filter: blur(8px);
+    /* 模糊效果 */
     z-index: 1000;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* 讓圖片以自身中心點對齊畫面中心 */
+    transform: translate(-50%, -50%);
+    /* 讓圖片以自身中心點對齊畫面中心 */
     display: flex;
-    flex-direction: column; /* 讓內容垂直排列 */
-    align-items: center; /* 水平置中 */
-    justify-content: center; /* 垂直置中 */
+    flex-direction: column;
+    /* 讓內容垂直排列 */
+    align-items: center;
+    /* 水平置中 */
+    justify-content: center;
+    /* 垂直置中 */
 }
 
 #question_wait {
-    width: 20%; /* 可根據需求調整 */
+    width: 20%;
+    /* 可根據需求調整 */
     height: auto;
     margin-bottom: 2.5%;
 }
@@ -143,30 +242,46 @@ button:disabled {
 .dot-container {
     display: flex;
     justify-content: center;
-    gap: 3.5%; /* 控制點點間距 */
+    gap: 3.5%;
+    /* 控制點點間距 */
     align-items: center;
-    width: 100%; /* 確保容器寬度足夠 */
-    height: 100px; /* 設定容器的高度，根據需要調整 */
-    overflow: visible; /* 讓縮放後的元素超出容器 */
+    width: 100%;
+    /* 確保容器寬度足夠 */
+    height: 100px;
+    /* 設定容器的高度，根據需要調整 */
+    overflow: visible;
+    /* 讓縮放後的元素超出容器 */
 }
 
 .dot-container img {
-    width: 3.5%; /* 根據需求調整 */
+    width: 3.5%;
+    /* 根據需求調整 */
     height: auto;
     animation: scaleAnimation 3s infinite ease-in-out;
-    transform-origin: center center; /* 設定縮放的中心為元素的中心 */
-    overflow: hidden; /* 隱藏超出容器的部分 */
+    transform-origin: center center;
+    /* 設定縮放的中心為元素的中心 */
+    overflow: hidden;
+    /* 隱藏超出容器的部分 */
 }
 
 @keyframes scaleAnimation {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.5); opacity: 1; }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
 }
 
 #dot2 {
     animation-delay: 0.5s;
 }
-  
+
 #dot3 {
     animation-delay: 1s;
 }

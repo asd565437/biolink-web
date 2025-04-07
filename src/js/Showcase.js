@@ -263,7 +263,7 @@ const Showcase = () => {
       </main>
 
       {/* Back_page */}
-      {index >= page && (
+      {index > page && (
         <div className="back_page">
           <img
             src={next_icon}

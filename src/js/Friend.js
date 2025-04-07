@@ -19,11 +19,7 @@ const Friend = () => {
   const [index, setIndex] = useState(0);
   const [friendList, setFriendList] = useState([]); // 存放所有好友資訊
   const [page, setPage] = useState(0);
-  // 好友資料測試
-  const [userName1, setUserName1] = useState(["蔡第一"]); // 初始化 userName
-  const [bioNumber1, setBioNumber1] = useState(["2"]); // 初始化 userName
-  const [friendDate1, setFriendDate1] = useState(["02.17.25"]); // 初始化 userName
-  const [photoURL, setphotoURL] = useState([friend_test]); // 初始化 userName
+  const itemsPerPage = 6; // 每頁顯示的卡片數量
   const handleWorld = () => navigate('/world');
   useEffect(() => {
     const fetchUserData = async () => {
@@ -68,8 +64,8 @@ const Friend = () => {
       console.log("Fetching friends for userId:", userId);
       const response = await axios.post(`${apiUrl}/api/friend`, { userId,index });
       console.log(response.data)
-      setPage(Math.floor(response.data.count /6));
-      // 假設 response.data.userInfo 是一個包含多個好友資訊的陣列
+      setPage(Math.floor((response.data.count) /itemsPerPage));
+      console.log(page)
       const friendData = response.data.newUInfo.map((friend, index) => ({
         nickname: friend.nickname,
         bio_count: friend.bio_count,
@@ -79,11 +75,6 @@ const Friend = () => {
 
       setFriendList(friendData); // 更新好友列表
       console.log("Fetched friends:", friendData);
-      // setUserName1(response.data.userInfo[0].nickname);
-      // setBioNumber1(response.data.userInfo[0].bio_count);
-      // setFriendDate1(response.data.friendInfo[0].createdAt);
-      // setphotoURL(response.data.userInfo[0].photoURL)
-      // console.log("Fetched data:", response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -175,31 +166,8 @@ const Friend = () => {
         )}
       </main>
 
-      {/* <main className="content">
-        {isImagesLoaded ? ( // 检查图片是否预加载完成
-          <div className="friend" style={friend_styles.gridContainer}>
-            {friend_images.map((image, index) => (
-              <div className="friend" key={index} style={friend_styles.gridItem}>
-                <img src={image} alt={`Bio ${index + 1}`} style={friend_styles.image} />
-
-                {index === 0 && ( // 只在第一個 friend 上顯示 friend-info
-                  <div className="friend-info">
-                    <img src={photoURL} alt="friend_test" className="friend_test" />
-                    <h3 className="friend-info-name">{userName1}</h3>
-                    <p className="friend-info-numabr">菌種數量：{bioNumber1}</p>
-                    <p className="friend-info-date">交友日期：{friendDate1}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>加载中...</p> // 显示加载提示
-        )}
-      </main> */}
-
       {/* Back_page */}
-      {index >= page && (
+      {index > page && (
       <div className="back_page">
         <img
           src={next_icon}
