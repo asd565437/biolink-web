@@ -23,6 +23,10 @@
     overflow: visible;
 }
 
+.register_title {
+    top: 13%;
+}
+
 .login-box-register img{
     height: 100%;
     width: 100%;
@@ -33,7 +37,7 @@
 .input-container-register {
     position: relative;
     width: 100%; 
-    top: 2.5vw; /*第一個和邊框的間距*/
+    top: 3vw; /*第一個和邊框的間距*/
 }
 
 .input-container-register img {
@@ -70,10 +74,9 @@
 /* 下一步按鈕 */
 .button-register {
     /* width: 100%; */
-    scale: 0.7;
-    padding: 1vw 1vw;
+    scale: 0.67;
     cursor: pointer;
-    margin-top: 15px; /*和input的間距*/
+    margin-top: 35px; /*和input的間距*/
 }
 
 /* 其他登入方式 */

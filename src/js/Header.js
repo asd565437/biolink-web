@@ -14,7 +14,7 @@ const Header = ({ images }) => {
   const urls = ['/world', '/wall', '/connect', '/', '/login'];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userName, setUserName] = useState("LOGIN");
-
+  const imageSrc = isLoggedIn ? '/logout_icon.svg' : '/login_icon.svg';
   const toggleMenu = () => {
     setIsOpen(!isOpen); // 切換功能列顯示與隱藏
   };
@@ -201,7 +201,7 @@ const Header = ({ images }) => {
                 onClick={() => handleNavigate(2)}
                 alt="功能圖標3" style={{left:'1%'}} /></li>
             <li className="mb-2">
-              <img src="/logout_icon.svg"  // 替換為你的圖片路徑
+              <img src={imageSrc}  // 替換為你的圖片路徑
                 onClick={() => handleNavigate(4)}
                 alt="功能圖標4" /></li>
           </ul>

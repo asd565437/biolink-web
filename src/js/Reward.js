@@ -51,7 +51,7 @@ const Reward = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowPopup(true);
-    }, 10000);
+    }, 15000);
 
     return () => clearTimeout(timer);
   }, []);

@@ -1,7 +1,7 @@
 .photo_title {
     position: absolute;
     top: 8%;
-    width: 10%;
+    width: 100%;
 }
 
 .photo-box-register{
@@ -26,12 +26,20 @@
     background-attachment: fixed;
     background-size: contain;
     position: relative;
-    top: 15px;
+    top: 12px;
     height: 300px;
     width: 250px;
     scale: 0.75;
     object-fit: contain;
 }
+
+.photo-box-register .row {
+    position: relative;
+    top: 40px;
+    transform: translateX(370px); /* 可調整位移量 */
+}
+
+
 
 .photo_box.selected {
     box-shadow: 0 0 10px rgb(255, 255, 255) inset, 0 0 30px rgb(255, 255, 255);
@@ -53,7 +61,8 @@
     background-attachment: fixed;
     background-size: contain;
     position: relative;
-    top: -15px;
+    top: 5px;
+    left: 130px;
     height: 150px;
     width: 500px;
 }

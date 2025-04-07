@@ -25,14 +25,14 @@
     font-weight: bold;
     color: white;
     position: absolute;
-    top: 35%;
+    top: 33%;
     left: 36%;
     z-index: 2000;
   }
 
   .invite_photo_area {
     position: absolute;
-    top: 53%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 10vw;  /* 調整圓形大小 */
@@ -65,7 +65,7 @@
 
   .invite_yes {
     position: fixed;
-    top: 68%;
+    top: 60%;
     left: 51%;
     width: 11%;
     height: auto;
@@ -75,7 +75,7 @@
 
   .invite_no {
     position: fixed;
-    top: 68%;
+    top: 60%;
     left: 37%;
     width: 11%;
     height: auto;

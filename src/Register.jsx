@@ -122,14 +122,15 @@ function Register() {
             </Link>
 
             <div className="login_text">
-                <img src="/register_title.svg" alt="Logo" />
+                <img src="/register_title.svg" alt="Logo" className="register_title"/>
             </div>
 
             <div className="login-box-register">
                 <div className="input-container-register">
                     <input
                         type="text"
-                        placeholder="暱稱"
+                        placeholder="暱稱(最多3個字)"
+                        maxLength={10}
                         value={nickName}
                         onChange={(e) => setNickName(e.target.value)}
                     />
@@ -186,7 +187,7 @@ function Register() {
                 </div>
 
                 <div className="other-login-register">
-                    <img src="/other_way_login.svg" alt="" className="other_way_login" />
+                    <img src="/other_way_register.svg" alt="" className="other_way_login" />
                     <div className="other-login-icons-register">
                         <img src="/google_btn.svg" alt="Google 註冊" onClick={handleGoogleLogin} />
                     </div>

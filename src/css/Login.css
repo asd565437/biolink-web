@@ -38,10 +38,11 @@
     height: 20%;
 }
 
-.login_text{
-    position: absolute;
-    height: auto;
-    top: 7.5vh;
+
+.login_text img{
+  position: fixed;
+  right: 47.5%;
+  width: 5%;
 }
 
 /* 白色遮罩 */

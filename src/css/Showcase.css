@@ -33,7 +33,7 @@
   box-sizing: border-box;
   /* 包括内边距 */
   left: 10%;
-  bottom: 8%;
+  bottom: 3%;
   width: 100%;
   height: 100%;
 }
@@ -66,12 +66,12 @@
   position: absolute;
   top: 1%;
   left: 8%;
-  font-size: 21px;
+  font-size: 22px;
 }
 
 .card-info-name {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 500;
 }
 
 .name_box {
@@ -83,16 +83,16 @@
 
 .card-info-owner {
   position: absolute;
-  top: 83%;
-  left: 5%;
-  font-size: 16px;
+  top: 84%;
+  left: 6%;
+  font-size: 18px;
 }
 
 .card-info-date {
   position: absolute;
   top: 90%;
   left: 67%;
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .overlay-image img {
@@ -129,7 +129,7 @@
 .back_page {
   position: absolute;
   left: 4%;
-  top: 49%;
+  top: 51%;
   width: 5%;
   cursor: pointer;
 }
@@ -156,7 +156,7 @@
     height: 100vh;
   }
   .showcase-content {
-    max-height: calc(100vh);
+    max-height: calc(105vh);
     zoom: 75%;
   }
 }

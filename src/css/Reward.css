@@ -61,7 +61,7 @@
 
 .strain_name_box {
     position: fixed;
-    top: 18%;
+    top: 23%;
     left: 30%;
     width: 40%;
     height: auto;
@@ -71,7 +71,7 @@
 
 .strainName-input {
     position: absolute;
-    top: 43%;
+    top: 45%;
     /* 根據需要微調 */
     left: 50%;
     transform: translate(-50%, -50%);
@@ -93,7 +93,7 @@
 
 .strain_name_finish {
     position: absolute;
-    top: 60%;
+    top: 58%;
     left: 50%;
     transform: translate(-50%, 0);
     width: 12%;
