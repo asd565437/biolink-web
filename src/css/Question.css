@@ -19,7 +19,7 @@
 
 .back {
     position: fixed;
-    top: 20%;
+    top: 18%;
     left: 5%;
     width: 5%;
     cursor: pointer;
@@ -28,7 +28,7 @@
 
 .checkAnswer {
     position: fixed;
-    bottom: 5%;
+    bottom: 15%;
     z-index: 5;
 }
 
@@ -48,7 +48,7 @@
 
 .progress-bar {
     position: fixed;
-    top: 15%;
+    top: 18%;
 }
 
 @media (min-width: 0px) {

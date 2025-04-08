@@ -29,8 +29,8 @@
 }
 
 .strain-box {
-    width: 400px;  /* 設定菌種框的寬度 */
-    height: 400px; /* 設定菌種框的高度 */
+    width: 450px;  /* 設定菌種框的寬度 */
+    height: 450px; /* 設定菌種框的高度 */
     background-size: contain; /* 讓圖片適應框 */
     background-position: center;
     background-repeat: no-repeat;

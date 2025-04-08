@@ -13,7 +13,7 @@
 }
 .friend_list_lab {
   position: absolute; /* 使用绝对定位 */
-  top: 2%; /* 靠近页面顶部 */
+  top: 5%; /* 靠近页面顶部 */
   left: 5%; /* 靠近页面左侧 */
   z-index: 2; /* 确保图片在其他元素之上 */
 }
@@ -42,7 +42,7 @@
 .friend {
   position: relative; /* 讓 .friend-info 能夠絕對定位於 .friend 內 */
   top: 7.5%;
-  transform: scale(0.82);
+  transform: scale(0.85);
 }
 
 .friend-info {

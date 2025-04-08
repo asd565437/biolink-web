@@ -32,14 +32,14 @@
     font-weight: bold;
     color: white;
     position: absolute;
-    top: 35%;
+    top: 32%;
     left: 37%;
     z-index: 1000;
 }
 
 .confirmFriend_photo_area {
     position: absolute;
-    top: 53%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 10vw;
@@ -78,7 +78,7 @@
 
 .confirmFriend_yes {
     position: fixed;
-    top: 68%;
+    top: 60%;
     left: 51%;
     width: 13%;
     height: auto;
@@ -87,7 +87,7 @@
 
 .confirmFriend_no {
     position: fixed;
-    top: 68%;
+    top: 60%;
     left: 36%;
     width: 13%;
     height: auto;
