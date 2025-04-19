@@ -6,6 +6,7 @@ import FunctionMenu from '../js/FunctionMenu';
 import id_close from "../world/id_close.svg";
 import id_notice from "../world/id_notice.png";
 import { useLocation } from "react-router-dom";
+import Showcase from "../js/Showcase";
 import { UserContext } from "../App"; // 引入全局 Socket 上下文
 const apiUrl = process.env.REACT_APP_API_URL;
 // 取得隨機方向
@@ -18,8 +19,30 @@ const World = () => {
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showIdPopup, setShowIdPopup] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
+    const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
   const location = useLocation();
   const popup = location.state?.popup || false; // 如果沒有數據則給預設值
+
+    useEffect(() => {
+      const preloadImages = (imageUrls) => {
+        const promises = imageUrls.map((url) => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.src = url;
+            img.onload = resolve;
+            img.onerror = resolve; // 忽略加载失败的情况
+          });
+        });
+        return Promise.all(promises);
+      };
+  
+      const allImages = [...images];
+      preloadImages(allImages).then(() => {
+        setIsImagesLoaded(true); // 所有图片加载完成
+        console.log('所有图片预加载完成');
+      });
+    }, []);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -132,7 +155,7 @@ const World = () => {
     <div id="world_container">
       <Header images={["world_ul_btn.svg", "wall_btn.svg", "culture_btn.svg"]} />
       <div className="world_bio">
-        {images.map((image) => (
+        {isImagesLoaded && images.map((image) => (
           <img
             key={image.id}
             src={`${image.src}?v=${timestamp}`}

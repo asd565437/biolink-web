@@ -1,7 +1,5 @@
   .invite-content {
     position: fixed; /* 固定位置 */
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5); /* 黑色半透明遮罩 */
@@ -16,7 +14,6 @@
     top: 18%;
     left: 27%;
     width: 45%;
-    height: auto;
     z-index: 1999;
   }
 
@@ -24,14 +21,14 @@
     font-size: 1.7vw;
     font-weight: bold;
     color: white;
-    position: absolute;
+    position: fixed;
     top: 33%;
     left: 36%;
     z-index: 2000;
   }
 
   .invite_photo_area {
-    position: absolute;
+    position: fixed;
     top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -46,7 +43,7 @@
   }
 
   .invite_photo_box {
-    position: absolute;
+    position: fixed;
     width: 100%; 
     height: 100%;
     border-radius: 50%; /* 保持圓形 */
@@ -55,7 +52,7 @@
   }
 
   .invite_photo {
-    position: absolute;
+    position: fixed;
     width: 75%;
     height: 75%;
     border-radius: 50%;
@@ -68,7 +65,6 @@
     top: 60%;
     left: 51%;
     width: 11%;
-    height: auto;
     cursor: pointer;
     z-index: 2001;
   }
@@ -82,3 +78,250 @@
     cursor: pointer;
     z-index: 2001;
   }
+  @media (min-width: 0px) {
+    .progress-bar {
+        width: 90%;
+    }
+    .checkAnswer img{
+        width: 35%;
+    }
+    .row-question {
+        width: 80%;
+    }
+}
+
+@media (min-width: 320px) {
+    .progress-bar {
+        width: 85%;
+    }
+    .checkAnswer img{
+        width: 40%;
+    }
+    .row-question {
+        width: 70%;
+    }
+}
+
+@media (min-width: 375px) {
+    .progress-bar {
+        width: 80%;
+    }
+    .checkAnswer img{
+        width: 45%;
+    }
+    .row-question {
+        width: 60%;
+    }
+}
+
+@media (min-width: 400px) {
+    .progress-bar {
+        width: 75%;
+    }
+
+    .checkAnswer img {
+        width: 50%;
+    }
+    .row-question {
+        width: 60%;
+    }
+}
+
+@media (min-width: 470px) {
+    .progress-bar {
+        width: 70%;
+    }
+
+    .checkAnswer img {
+        width: 60%;
+    }
+    .row-question {
+        width: 60%;
+    }
+}
+
+@media (min-width: 545px) {
+  .invite-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .invite_box {
+    top: 18%;
+    left: 12.5%;
+    width: 72%;
+    height: 65%;
+  }
+
+  .invite_title {
+    font-size: 3.1vw;
+    top: 32%;
+    left: 23%;
+  }
+
+  .invite_photo_area {
+    top: 48%;
+    left: 50%;
+  }
+
+  .invite_photo_box {
+    width: 100%; 
+    height: 100%;
+  }
+
+  .invite_photo {
+    width: 75%;
+    height: 75%;
+  }
+
+  .invite_yes {
+    top: 65%;
+    left: 53%;
+    width: 20%;
+  }
+
+  .invite_no {
+    top: 65%;
+    left: 25%;
+    width: 20%;
+  }
+}
+
+@media (min-width: 768px) {
+  .invite-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .invite_box {
+    top: 18%;
+    left: 22%;
+    width: 55%;
+    height: 55%;
+  }
+
+  .invite_title {
+    font-size: 2.2vw;
+    top: 33%;
+    left: 31%;
+  }
+
+  .invite_photo_area {
+    top: 48%;
+    left: 50%;
+  }
+
+  .invite_photo_box {
+    width: 100%; 
+    height: 100%;
+  }
+
+  .invite_photo {
+    width: 75%;
+    height: 75%;
+  }
+
+  .invite_yes {
+    top: 60%;
+    left: 52%;
+    width: 14%;
+  }
+
+  .invite_no {
+    top: 60%;
+    left: 33%;
+    width: 14%;
+  }
+}
+@media (min-width: 900px) {
+  .invite-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .invite_box {
+    top: 18%;
+    left: 27%;
+    width: 45%;
+    height: 60%;
+  }
+
+  .invite_title {
+    font-size: 1.75vw;
+    top: 31%;
+    left: 35%;
+  }
+
+  .invite_photo_area {
+    top: 49%;
+    left: 49.5%;
+  }
+
+  .invite_photo_box {
+    width: 100%; 
+    height: 100%;
+  }
+
+  .invite_photo {
+    width: 75%;
+    height: 75%;
+  }
+
+  .invite_yes {
+    top: 62%;
+    left: 51%;
+    width: 11%;
+  }
+
+  .invite_no {
+    top: 62%;
+    left: 37%;
+    width: 11%;
+  }
+}
+@media (min-width: 1200px) {
+  .invite-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .invite_box {
+    top: 18%;
+    left: 27%;
+    width: 40%;
+    height: 60%;
+  }
+
+  .invite_title {
+    font-size: 1.7vw;
+    top: 31%;
+    left: 33.5%;
+  }
+
+  .invite_photo_area {
+    top: 48%;
+    left: 47%;
+  }
+
+  .invite_photo_box {
+    width: 100%; 
+    height: 100%;
+  }
+
+  .invite_photo {
+    width: 75%;
+    height: 75%;
+  }
+
+  .invite_yes {
+    top: 62%;
+    left: 48%;
+    width: 11%;
+  }
+
+  .invite_no {
+    top: 62%;
+    left: 35%;
+    width: 11%;
+  }
+}

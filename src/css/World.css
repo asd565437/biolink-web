@@ -2,7 +2,9 @@
     margin: 0;
     overflow: hidden;
 }
-
+.world_bio img {
+    mix-blend-mode :screen
+    } 
 #world_container {
     width: 100vw;
     margin: 0 auto;
