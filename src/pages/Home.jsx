@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import '../css/Home.css';
-import Logo from '../home/logo_big.png';
+import Logo from '../home/logo_big.svg';
 import Text from '../home/introduce.svg';
 import Login from '../home/login.svg';
 import Go from '../home/start_btn.svg';

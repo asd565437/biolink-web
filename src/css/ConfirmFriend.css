@@ -1,7 +1,5 @@
 .confirmFriend-content {
     position: fixed; /* 固定位置 */
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5); /* 黑色半透明遮罩 */
@@ -24,56 +22,48 @@
     top: 18%;
     left: 27%;
     width: 45%;
-    height: auto;
 }
 
 .confirmFriend_title {
     font-size: 1.7vw;
     font-weight: bold;
     color: white;
-    position: absolute;
+    position: fixed;
     top: 32%;
     left: 37%;
     z-index: 1000;
 }
 
 .confirmFriend_photo_area {
-    position: absolute;
+    position: fixed;
     top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 10vw;
-    /* 調整圓形大小 */
-    height: 10vw;
     border-radius: 50%;
     /* 讓整個區塊變圓形 */
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    /* 確保圖片不超出圓形範圍 */
+    z-index: 2000;
 }
 
 .confirmFriend_photo_box {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    /* 保持圓形 */
     object-fit: cover;
-    /* 確保圖片完整顯示 */
-    z-index: 1;
-    /* 確保背景在下層 */
+    z-index: 2000; 
 }
 
 .confirmFriend_photo {
-    position: absolute;
+    position: fixed;
     width: 75%;
     height: 75%;
     border-radius: 50%;
     object-fit: cover;
-    z-index: 2;
-    /* 確保頭像在圓形背景上層 */
+    z-index: 2001;
 }
 
 .confirmFriend_yes {
@@ -81,8 +71,8 @@
     top: 60%;
     left: 51%;
     width: 13%;
-    height: auto;
     cursor: pointer;
+    z-index: 2001;
 }
 
 .confirmFriend_no {
@@ -92,4 +82,296 @@
     width: 13%;
     height: auto;
     cursor: pointer;
+    z-index: 2001;
 }
+@media (min-width: 0px) {
+    .confirmFriend-content {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .confirmFriend_box {
+      top: 25%;
+      left: 7.5%;
+      width: 82%;
+      height: 50%;
+    }
+  
+    .confirmFriend_title {
+      font-size: 3.5vw;
+      top: 37%;
+      left: 20%;
+    }
+  
+    .confirmFriend_photo_area {
+      top: 53%;
+      left: 50%;
+      width: 15vw;  /* 調整圓形大小 */
+      height: 15vw;
+    }
+  
+    .confirmFriend_photo_box {
+      width: 100%; 
+      height: 100%;
+    }
+  
+    .confirmFriend_photo {
+      width: 75%;
+      height: 75%;
+    }
+  
+    .confirmFriend_yes {
+      top: 65%;
+      left: 53%;
+      width: 20%;
+    }
+  
+    .confirmFriend_no {
+      top: 65%;
+      left: 25%;
+      width: 20%;
+    }
+  }
+  
+  @media (min-width: 470px) {
+    .confirmFriend-content {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .confirmFriend_box {
+      top: 25%;
+      left: 7.5%;
+      width: 82%;
+      height: 50%;
+    }
+  
+    .confirmFriend_title {
+      font-size: 3.5vw;
+      top: 37%;
+      left: 20%;
+    }
+  
+    .confirmFriend_photo_area {
+      top: 53%;
+      left: 50%;
+      width: 15vw;  /* 調整圓形大小 */
+      height: 15vw;
+    }
+  
+    .confirmFriend_photo_box {
+      width: 100%; 
+      height: 100%;
+    }
+  
+    .confirmFriend_photo {
+      width: 75%;
+      height: 75%;
+    }
+  
+    .confirmFriend_yes {
+      top: 65%;
+      left: 53%;
+      width: 20%;
+    }
+  
+    .confirmFriend_no {
+      top: 65%;
+      left: 25%;
+      width: 20%;
+    }
+  }
+  
+  @media (min-width: 600px) {
+    .confirmFriend-content {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .confirmFriend_box {
+      top: 18%;
+      left: 12.5%;
+      width: 72%;
+      height: 65%;
+    }
+  
+    .confirmFriend_title {
+      font-size: 3.1vw;
+      top: 32%;
+      left: 23%;
+    }
+  
+    .confirmFriend_photo_area {
+      top: 51%;
+      left: 50%;
+      width: 15vw;  /* 調整圓形大小 */
+      height: 15vw;
+    }
+  
+    .confirmFriend_photo_box {
+      width: 100%; 
+      height: 100%;
+    }
+  
+    .confirmFriend_photo {
+      width: 75%;
+      height: 75%;
+    }
+  
+    .confirmFriend_yes {
+      top: 65%;
+      left: 53%;
+      width: 20%;
+    }
+  
+    .confirmFriend_no {
+      top: 65%;
+      left: 25%;
+      width: 20%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .confirmFriend-content {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .confirmFriend_box {
+      top: 18%;
+      left: 22%;
+      width: 55%;
+      height: 55%;
+    }
+  
+    .confirmFriend_title {
+      font-size: 2.2vw;
+      top: 33%;
+      left: 31%;
+    }
+  
+    .confirmFriend_photo_area {
+      top: 48%;
+      left: 50%;
+      width: 10vw;  /* 調整圓形大小 */
+      height: 10vw;
+    }
+  
+    .confirmFriend_photo_box {
+      width: 100%; 
+      height: 100%;
+    }
+  
+    .confirmFriend_photo {
+      width: 75%;
+      height: 75%;
+    }
+  
+    .confirmFriend_yes {
+      top: 60%;
+      left: 52%;
+      width: 14%;
+    }
+  
+    .confirmFriend_no {
+      top: 60%;
+      left: 33%;
+      width: 14%;
+    }
+  }
+  @media (min-width: 900px) {
+    .confirmFriend-content {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .confirmFriend_box {
+      top: 18%;
+      left: 27%;
+      width: 45%;
+      height: 60%;
+    }
+  
+    .confirmFriend_title {
+      font-size: 1.75vw;
+      top: 31%;
+      left: 35%;
+    }
+  
+    .confirmFriend_photo_area {
+      top: 49%;
+      left: 49.5%;
+      width: 10vw;  /* 調整圓形大小 */
+      height: 10vw;
+    }
+  
+    .confirmFriend_photo_box {
+      width: 100%; 
+      height: 100%;
+    }
+  
+    .confirmFriend_photo {
+      width: 75%;
+      height: 75%;
+    }
+  
+    .confirmFriend_yes {
+      top: 62%;
+      left: 51%;
+      width: 11%;
+    }
+  
+    .confirmFriend_no {
+      top: 62%;
+      left: 37%;
+      width: 11%;
+    }
+  }
+  @media (min-width: 1200px) {
+    .confirmFriend-content {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .confirmFriend_box {
+      top: 18%;
+      left: 27%;
+      width: 40%;
+      height: 60%;
+    }
+  
+    .confirmFriend_title {
+      font-size: 1.7vw;
+      top: 31%;
+      left: 33.5%;
+    }
+  
+    .confirmFriend_photo_area {
+      top: 48%;
+      left: 47%;
+      width: 10vw;  /* 調整圓形大小 */
+      height: 10vw;
+    }
+  
+    .confirmFriend_photo_box {
+      width: 100%; 
+      height: 100%;
+    }
+  
+    .confirmFriend_photo {
+      width: 75%;
+      height: 75%;
+    }
+  
+    .confirmFriend_yes {
+      top: 62%;
+      left: 48%;
+      width: 11%;
+    }
+  
+    .confirmFriend_no {
+      top: 62%;
+      left: 35%;
+      width: 11%;
+    }
+  }

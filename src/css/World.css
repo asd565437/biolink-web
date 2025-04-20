@@ -3,7 +3,7 @@
     overflow: hidden;
 }
 .world_bio img {
-    mix-blend-mode :screen
+    mix-blend-mode:screen
     } 
 #world_container {
     width: 100vw;

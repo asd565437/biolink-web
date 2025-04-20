@@ -32,8 +32,6 @@
     top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 10vw;  /* 調整圓形大小 */
-    height: 10vw;
     border-radius: 50%; /* 讓整個區塊變圓形 */
     display: flex;
     justify-content: center;
@@ -78,69 +76,106 @@
     cursor: pointer;
     z-index: 2001;
   }
-  @media (min-width: 0px) {
-    .progress-bar {
-        width: 90%;
-    }
-    .checkAnswer img{
-        width: 35%;
-    }
-    .row-question {
-        width: 80%;
-    }
-}
 
-@media (min-width: 320px) {
-    .progress-bar {
-        width: 85%;
-    }
-    .checkAnswer img{
-        width: 40%;
-    }
-    .row-question {
-        width: 70%;
-    }
-}
+@media (min-width: 0px) {
+  .invite-content {
+    width: 100%;
+    height: 100%;
+  }
 
-@media (min-width: 375px) {
-    .progress-bar {
-        width: 80%;
-    }
-    .checkAnswer img{
-        width: 45%;
-    }
-    .row-question {
-        width: 60%;
-    }
-}
+  .invite_box {
+    top: 25%;
+    left: 7.5%;
+    width: 82%;
+    height: 50%;
+  }
 
-@media (min-width: 400px) {
-    .progress-bar {
-        width: 75%;
-    }
+  .invite_title {
+    font-size: 3.5vw;
+    top: 37%;
+    left: 20%;
+  }
 
-    .checkAnswer img {
-        width: 50%;
-    }
-    .row-question {
-        width: 60%;
-    }
+  .invite_photo_area {
+    top: 53%;
+    left: 50%;
+    width: 15vw;  /* 調整圓形大小 */
+    height: 15vw;
+  }
+
+  .invite_photo_box {
+    width: 100%; 
+    height: 100%;
+  }
+
+  .invite_photo {
+    width: 75%;
+    height: 75%;
+  }
+
+  .invite_yes {
+    top: 65%;
+    left: 53%;
+    width: 20%;
+  }
+
+  .invite_no {
+    top: 65%;
+    left: 25%;
+    width: 20%;
+  }
 }
 
 @media (min-width: 470px) {
-    .progress-bar {
-        width: 70%;
-    }
+  .invite-content {
+    width: 100%;
+    height: 100%;
+  }
 
-    .checkAnswer img {
-        width: 60%;
-    }
-    .row-question {
-        width: 60%;
-    }
+  .invite_box {
+    top: 25%;
+    left: 7.5%;
+    width: 82%;
+    height: 50%;
+  }
+
+  .invite_title {
+    font-size: 3.5vw;
+    top: 37%;
+    left: 20%;
+  }
+
+  .invite_photo_area {
+    top: 53%;
+    left: 50%;
+    width: 15vw;  /* 調整圓形大小 */
+    height: 15vw;
+  }
+
+  .invite_photo_box {
+    width: 100%; 
+    height: 100%;
+  }
+
+  .invite_photo {
+    width: 75%;
+    height: 75%;
+  }
+
+  .invite_yes {
+    top: 65%;
+    left: 53%;
+    width: 20%;
+  }
+
+  .invite_no {
+    top: 65%;
+    left: 25%;
+    width: 20%;
+  }
 }
 
-@media (min-width: 545px) {
+@media (min-width: 600px) {
   .invite-content {
     width: 100%;
     height: 100%;
@@ -160,8 +195,10 @@
   }
 
   .invite_photo_area {
-    top: 48%;
+    top: 51%;
     left: 50%;
+    width: 15vw;  /* 調整圓形大小 */
+    height: 15vw;
   }
 
   .invite_photo_box {
@@ -209,6 +246,8 @@
   .invite_photo_area {
     top: 48%;
     left: 50%;
+    width: 10vw;  /* 調整圓形大小 */
+    height: 10vw;
   }
 
   .invite_photo_box {
@@ -255,6 +294,8 @@
   .invite_photo_area {
     top: 49%;
     left: 49.5%;
+    width: 10vw;  /* 調整圓形大小 */
+    height: 10vw;
   }
 
   .invite_photo_box {
@@ -301,6 +342,8 @@
   .invite_photo_area {
     top: 48%;
     left: 47%;
+    width: 10vw;  /* 調整圓形大小 */
+    height: 10vw;
   }
 
   .invite_photo_box {
