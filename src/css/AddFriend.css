@@ -39,7 +39,7 @@
   border: none;
   outline: none;
   text-align: center;
-  position: absolute;
+  position: fixed;
   top: 40%;
   left: 35%;
 
@@ -58,4 +58,159 @@
   width: 13%;
   height: auto;
   cursor: pointer;
+}
+@media (min-width: 0px) {
+
+  .addFriend_box {
+    top: 25%;
+    left: 7%;
+    width: 85%;
+    height: 50%;
+  }
+
+  .addFriend_input {
+    width: 45%;
+    font-size: 30px;
+    top: 43%;
+    left: 27%;
+  
+    /* 設定底線 */
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .addFriend_finish {
+    top: 60%;
+    left: 36%;
+    width: 25%;
+  }
+}
+
+@media (min-width: 470px) {
+
+  .addFriend_box {
+    top: 18%;
+    left: 9%;
+    width: 80%;
+    height: 55%;
+  }
+  .addFriend_input {
+    width: 45%;
+    font-size: 30px;
+    top: 41%;
+    left: 27%;
+  
+    /* 設定底線 */
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .addFriend_finish {
+    top: 60%;
+    left: 36%;
+    width: 25%;
+  }
+
+}
+
+@media (min-width: 600px) {
+
+  .addFriend_box {
+    top: 18%;
+    left: 12.5%;
+    width: 72%;
+    height: 60%;
+  }
+  .addFriend_input {
+    width: 42%;
+    font-size: 30px;
+    top: 41%;
+    left: 27.5%;
+  
+    /* 設定底線 */
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .addFriend_finish {
+    top: 60%;
+    left: 36%;
+    width: 25%;
+  }
+
+}
+
+@media (min-width: 768px) {
+
+  .addFriend_box {
+    top: 18%;
+    left: 22%;
+    width: 55%;
+    height: 55%;
+  }
+
+  .addFriend_input {
+    width: 30%;
+    font-size: 30px;
+    top: 40%;
+    left: 34.4%;
+  
+    /* 設定底線 */
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+
+
+  .addFriend_finish {
+    top: 58%;
+    left: 42%;
+    width: 15%;
+  }
+
+}
+@media (min-width: 1000px) {
+
+  .addFriend_box {
+    top: 18%;
+    left: 27%;
+    width: 45%;
+    height: 60%;
+  }
+
+  .addFriend_input {
+    width: 30%;
+    font-size: 30px;
+    top: 40%;
+    left: 34.4%;
+  
+    /* 設定底線 */
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .addFriend_finish {
+    top: 58%;
+    left: 42.2%;
+    width: 14%;
+  }
+
+}
+@media (min-width: 1200px) {
+
+  .addFriend_box {
+    top: 18%;
+    left: 27%;
+    width: 40%;
+    height: 60%;
+  }
+  .addFriend_input {
+    width: 30%;
+    font-size: 30px;
+    top: 40%;
+    left: 32%;
+  
+    /* 設定底線 */
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .addFriend_finish {
+    top: 58%;
+    left: 40.3%;
+    width: 13%;
+  }
 }

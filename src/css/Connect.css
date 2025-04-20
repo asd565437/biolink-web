@@ -30,14 +30,14 @@ content img {
   /* 占滿父容器高度 */
   position: relative;
 }
-
 .connect_title {
-  position: absolute;
-  top: 26%;
-  width: 70%;
+  position: fixed;
+  color: white;
+  font-weight: bold;
 }
 
 .friend-input {
+  position: fixed;
   width: 55%;
   font-size: 30px;
   color: white;
@@ -68,8 +68,155 @@ content img {
 }
 
 .connect_finish {
-  position: absolute;
+  position: fixed;
   bottom: 17%;
   cursor: pointer;
   width: 50%;
+}
+@media (min-width: 0px) {
+  .connect_title {
+    position: fixed;
+    top: 20%;
+    width: 60%;
+    font-size: 30px;
+  }
+  .connect_finish {
+    position: fixed;
+    bottom: 17%;
+    cursor: pointer;
+    width: 50%;
+  }
+  .friend-input {
+    top:43%;
+    width: 55%;
+    font-size: 30px;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+  .connect_finish {
+    bottom: 30%;
+    cursor: pointer;
+    width: 40%;
+  }
+}
+
+@media (min-width: 525px) {
+  .connect_title {
+    position: fixed;
+    top: 22%;
+    width: 60%;
+    font-size: 35px;
+  }
+  .friend-input {
+    top:45%;
+    width: 55%;
+    font-size: 30px;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+  .connect_finish {
+    bottom: 28%;
+    cursor: pointer;
+    width: 40%;
+  }
+}
+
+@media (min-width: 600px) {
+  .connect_title {
+    position: fixed;
+    top: 26%;
+    width: 60%;
+    font-size: 35px;
+  }
+  .connect_finish {
+    position: fixed;
+    bottom: 17%;
+    cursor: pointer;
+    width: 50%;
+  }
+  .friend-input {
+    top:50%;
+    width: 55%;
+    font-size: 30px;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+  .connect_finish {
+    bottom: 19%;
+    cursor: pointer;
+    width: 40%;
+  }
+}
+
+@media (min-width: 768px) {
+  .connect_title {
+    position: fixed;
+    top: 26%;
+    width: 60%;
+    font-size: 38px;
+  }
+  .connect_finish {
+    position: fixed;
+    bottom: 17%;
+    cursor: pointer;
+    width: 50%;
+  }
+  .friend-input {
+    top:50%;
+    width: 55%;
+    font-size: 30px;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+  .connect_finish {
+    bottom: 17%;
+    cursor: pointer;
+    width: 30%;
+  }
+}
+@media (min-width: 1000px) {
+  .connect_title {
+    position: fixed;
+    top: 26%;
+    width: 60%;
+    font-size: 40px;
+  }
+  .connect_finish {
+    position: fixed;
+    bottom: 17%;
+    cursor: pointer;
+    width: 50%;
+  }
+  .friend-input {
+    top:50%;
+    width: 50%;
+    font-size: 30px;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+  .connect_finish {
+    bottom: 17%;
+    cursor: pointer;
+    width: 30%;
+  }
+}
+@media (min-width: 1200px) {
+  .connect_title {
+    position: fixed;
+    top: 26%;
+    width: 60%;
+    font-size: 57px;
+  }
+  .connect_finish {
+    position: fixed;
+    bottom: 17%;
+    cursor: pointer;
+    width: 50%;
+  }
+  .friend-input {
+    top:50%;
+    width: 52%;
+    font-size: 30px;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+  }
+  .connect_finish {
+    bottom: 17%;
+    cursor: pointer;
+    width: 30%;
+  }
 }
