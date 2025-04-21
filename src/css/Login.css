@@ -31,7 +31,7 @@
 
 /* Logo */
 .login-logo img{
-    position: absolute;
+    position: fixed;
     top: 2%;
     left: 3%;
     width: 20%;
@@ -39,10 +39,9 @@
 }
 
 
-.login_text img{
+.login_text p{
   position: fixed;
-  right: 47.5%;
-  width: 5%;
+  font-weight: bold;
 }
 
 /* 白色遮罩 */
@@ -53,9 +52,6 @@
     background-attachment: fixed;
     background-size: contain; /*maybe cover?*/
     box-sizing: content-box;
-    height: auto;
-    width: 50vw;
-    transform: scale(0.75);
     /* position: absolute;
     top: 4vh; */
     /* margin: 1vh; */
@@ -139,67 +135,72 @@ input::placeholder{
     scale: 0.25; 
     margin: -4.5vw 0 0 0;
 }
-
-@media (max-width: 768px) {
-    .login-logo img {
-      width: 25%;
-      height: auto;
-      top: 3%;
-      left: 5%;
-    }
-  
-    .login_text {
-      top: 12%;
-      width: 100%;
-    }
-  
-    .login-box-login {
-      width: 85vw;
-      transform: scale(1);
-      background-size: 100% auto;
-    }
-  
-    .input-container-login input {
-      font-size: 4vw !important;
-      height: 10vw;
-      width: 65vw;
-      margin: 3vw auto;
-      padding-left: 14vw;
-    }
-  
-    .input-container-login img {
-      left: 10vw;
-      transform: translateY(-50%) scale(0.9);
-      width: 15vw;
-    }
-  
-    #LoginPasswordEye {
-      position: absolute;
-      top: 30%;
-      left: 60vw;
-      transform: translateY(-50%);
-    }
-  
-    .button-login {
-      scale: 0.75;
-      margin-top: 5vh;
-    }
-  
-    .other-login-login {
-      scale: 1;
-      margin-top: 4vw; /* 原本是 5vw，你可以減少它 */
-      padding-top: 0; /* 確保沒有額外間距 */
-    }
-      
-    .other-login-icons-login img {
-        width: 8vw;
-        margin-top: 0vw;
-        margin-bottom: 2vw; /*保留底部距離*/
-    }
-  
-    .register {
-      scale: 0.4;
-      margin-top: -8vw;
-    }
+@media (min-width: 0px) {
+  .login_text p{
+    right: 45%;
+    top:15%;
+    font-size: 35px;
   }
+  
+  /* 白色遮罩 */
+  .login-box-login {
+      width: 50vw;
+      transform: scale(1.4) translateY(10%);
+  }
+}
+@media (min-width: 1024px) {
+
+}
+@media (min-width: 600px) {
+  .login_text p{
+    right: 45%;
+    top:15%;
+    font-size: 35px;
+  }
+  
+  /* 白色遮罩 */
+  .login-box-login {
+      width: 50vw;
+      transform: scale(1.4) translateY(10%);
+  }
+}
+@media (min-width: 700px) {
+  .login_text p{
+    right: 47.5%;
+    top:15%;
+    font-size: 35px;
+  }
+  
+  /* 白色遮罩 */
+  .login-box-login {
+      width: 50vw;
+      transform: scale(1.1) translateY(15%);
+  }
+}
+@media (min-width: 900px) {
+  .login_text p{
+    right: 47.5%;
+    top:15%;
+    font-size: 35px;
+  }
+  
+  /* 白色遮罩 */
+  .login-box-login {
+      width: 50vw;
+      transform: scale(0.9) translateY(10%);
+  }
+}
+@media (min-width: 1024px) {
+  .login_text p{
+    right: 47.5%;
+    top:10%;
+    font-size: 40px;
+  }
+  
+  /* 白色遮罩 */
+  .login-box-login {
+      width: 50vw;
+      transform: scale(0.85) translateY(10%);
+  }
+}
   

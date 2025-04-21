@@ -115,7 +115,7 @@ function Login() {
             </Link>
 
             <div className="login_text">
-                <img src="/login_title.svg" alt="登入" />
+                <p>登入</p>
             </div>
 
             <div className="login-box-login">

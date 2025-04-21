@@ -2,6 +2,7 @@ import "../css/Photo.css";
 import React, { useState } from 'react';
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import photo_title from '../photo/photo_title.svg';
+import photo_check from '../photo/photo_check.svg';
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -55,7 +56,7 @@ function Photo() {
 
     return (
         <div className="login-container">
-            <div className="black-overlay-login"></div> {/* 新增的黑色遮罩層 */}
+            <div className="black-overlay-photo"></div> {/* 新增的黑色遮罩層 */}
             
             <Link to="/"><div className="login-logo">
                 <img src="/logo_small.svg" alt="Logo" />
@@ -67,12 +68,12 @@ function Photo() {
 
             <div className="photo-box-register">
             {[0, 1].map((rowIndex) => (
-                    <div className='row mx-1 my-1' key={rowIndex}>
+                    <div className='rows' key={rowIndex}>
                         {Array(3).fill(null).map((_, colIndex) => {
                             const photoIndex = rowIndex * 3 + colIndex + 1;
                             return (
                                 <div
-                                    className={`col-4 photo_box ${selectedPhoto === photoIndex ? 'selected' : ''}`}
+                                    className={`photo_box ${selectedPhoto === photoIndex ? 'selected' : ''}`}
                                     key={photoIndex}
                                     onClick={() => handlePhotoClick(photoIndex)} // 點擊事件
                                 >
@@ -82,11 +83,12 @@ function Photo() {
                         })}
                     </div>
                 ))}
-                <div className='row mt-1 mb-1 pt-1 pb-1 mx-auto'>
+                <div>
                     <div
-                        className='col-12 mt-1 mb-1 pt-1 pb-1 checkPhoto'
+                        className='checkPhoto'
                         onClick={handlePhoto}
                     >
+                        <img src={photo_check}></img>
                     </div>
                 </div>
             </div>
