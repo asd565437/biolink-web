@@ -1,7 +1,6 @@
 import "../css/Photo.css";
 import React, { useState } from 'react';
 import { Link, useNavigate,useLocation } from 'react-router-dom';
-import photo_title from '../photo/photo_title.svg';
 import photo_check from '../photo/photo_check.svg';
 import axios from "axios";
 
@@ -63,7 +62,7 @@ function Photo() {
             </div></Link>
 
             <div className="photo_title">
-                <img src={photo_title} alt="photo_title" />
+                <p>請選擇頭像</p>
             </div>
 
             <div className="photo-box-register">

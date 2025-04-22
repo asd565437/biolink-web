@@ -1,7 +1,9 @@
 .photo_title {
-    position: absolute;
-    top: 8%;
-    width: 100%;
+    position: fixed;
+}
+.photo_title p{
+    font-size: 5vh;
+    font-weight: bold;
 }
 .black-overlay-photo {
     position: fixed;
@@ -16,7 +18,6 @@
     position: fixed;
     box-shadow: 0 0 30px rgb(255, 255, 255) inset;
     border-radius: 25px;
-    margin-top: 3%;
 }
 
 .photo_box{
@@ -30,9 +31,6 @@
     display: flex;
     text-align: center;
     position: relative;
-    top: 5%;
-    width: 50%;
-    margin: 10px;
     object-fit: contain;
 }
 
@@ -46,7 +44,7 @@
 .photo_box img{
     object-fit: cover; 
     position: relative;
-    margin: 0 auto;
+    top: 16%;
 }
 
 .checkPhoto{
@@ -60,3 +58,75 @@
 .rows{
     display:flex;
 }
+@media (min-width: 0px) {
+    .photo-box-register{
+        margin-top: 7%;
+        width:90%;
+    }
+    .photo_title {
+        top: 8%;
+        width: 100%;
+    }
+    .photo_box{
+        top: 5%;
+        width: 50%;
+        margin: 10px;
+    }
+    .photo_box img{
+        top: 16%;
+    }
+  }
+@media (min-width: 400px) {
+    .photo-box-register{
+        margin-top: 7%;
+        width:75%;
+    }
+    .photo_title {
+        top: 8%;
+        width: 100%;
+    }
+    .photo_box{
+        top: 5%;
+        width: 50%;
+        margin: 10px;
+    }
+    .photo_box img{
+        top: 16%;
+    }
+  }
+@media (min-width: 768px) {
+    .photo-box-register{
+        margin-top: 7%;
+        width:60%;
+    }
+    .photo_title {
+        top: 8%;
+        width: 100%;
+    }
+    .photo_box{
+        top: 5%;
+        width: 50%;
+        margin: 10px;
+    }
+    .photo_box img{
+        top: 16%;
+    }
+  }
+@media (min-width: 1024px) {
+    .photo-box-register{
+        margin-top: 7%;
+        width:50%;
+    }
+    .photo_title {
+        top: 8%;
+        width: 100%;
+    }
+    .photo_box{
+        top: 5%;
+        width: 50%;
+        margin: 10px;
+    }
+    .photo_box img{
+        top: 16%;
+    }
+  }
