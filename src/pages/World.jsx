@@ -253,7 +253,7 @@ const World = () => {
                 <div style={{ fontSize: "8px", lineHeight: "1.8", textAlign: "left" }}>
                   <div>培養員：{hoveredImage.owner}</div>
                   <div>菌種誕生日：{hoveredImage.birthday}</div>
-                  <div>菌種排名：{hoveredImage.rank}</div>
+                  <div>菌種編號：{hoveredImage.rank}</div>
                 </div>
               </div>
             </div>

@@ -82,13 +82,10 @@
     height: 5.5vw; /*11.56vh*/
     width: 34vw;
     margin: 1.5vw; /*25px*/ /*輸入框的間隔*/
-    background-image: url("/src/assets/訊息的框.png") !important;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    background-color: #ffffff00 !important;
     padding-left: 7vw;
-    color: #ffffff !important;
+    box-shadow: 0 0 50px rgb(255, 255, 255) inset;
+    border-radius: 25px;
+    background-color: transparent;
 }
 
 input::placeholder{
