@@ -206,3 +206,8 @@
         left: 39.5%;
     }
   }
+
+.login_hint_id{
+    font-size: 1vw;
+    transform: scale(1.2);
+}

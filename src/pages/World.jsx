@@ -265,7 +265,7 @@ const World = () => {
         {showIdPopup && (
           <div className="id-popup">
             <div className="id-popup-content">
-              <strong className="fontType">您的專屬 ID：{userId}</strong>
+              <strong className="fontType login_hint_id">您的專屬 ID：#{userId}</strong>
               <img src={id_notice} alt="id_notice" className="id_notice" />
               <img src={id_close} alt="id_close" className="id_close" onClick={() => setShowIdPopup(false)} />
             </div>

@@ -157,9 +157,9 @@ const Header = ({ images }) => {
                 >
                   {isLoggedIn && (
                     <>
-                      <h5 className="dropdown_element_id fontType">
+                      {/* <h5 className="dropdown_element_id fontType">
                         { userName }
-                      </h5>
+                      </h5> */}
 
                       <h5 className="dropdown_element_id fontType">
                         #{userId?.userId}

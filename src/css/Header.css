@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2vh 4vw;
+  padding: 2vh 2.5vw;
   z-index: 1999;
   box-sizing: border-box;
   overflow: visible;
@@ -139,6 +139,11 @@ ul img{
   margin-bottom: 0.5rem; /* 每個項目底部間距（可以根據需要調整） */
 }
 
+.headerNavLogo{
+  width: 80%;
+  height: auto;
+}
+
 .nav-item {
   width: 7vw;
   height: auto;
@@ -176,10 +181,6 @@ ul img{
   opacity: 0.8;
 } */
 
-.dropdown_element:hover{
-  opacity: 0.7;
-}
-
 /*.nav-menu {
   display: flex;
   gap: 2vw; /* 每个导航项之间的间距 
@@ -201,6 +202,7 @@ ul img{
   justify-content: center;
   position: relative;
   width: 7vw;
+  top: 0.25vh;
   /* height: auto; */
 }
 
@@ -220,7 +222,7 @@ ul img{
 .nav-dropdown {
   position: fixed;
   /* top: ; */
-  right: 4vw;
+  right: 2.5vw;
   width: inherit; 
   color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -240,6 +242,10 @@ ul img{
   width: 100%;
   height: auto;
   padding: 1.5vh 0;
+}
+
+.dropdown_element:hover{
+  opacity: 0.7;
 }
 
 .dropdown_line{

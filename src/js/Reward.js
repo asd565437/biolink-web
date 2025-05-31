@@ -2,7 +2,7 @@ import "../css/Reward.css";
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import reward_title from '../reward/reward_title.svg';
-import test_pic from '../reward/test.jpg';
+import test_pic from '../reward/test.png';
 import check from '../reward/check.png';
 import strain_name_box from '../reward/strain_name_box.png';
 import strain_name_finish from '../reward/strain_name_finish.png';
@@ -90,7 +90,7 @@ const Reward = () => {
               placeholder="輸入菌種名稱"
               value={strainName}
               onChange={handleChange}
-              className="strainName-input"
+              className="strainName-input fontType"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') handleNameSubmit();
             }}
