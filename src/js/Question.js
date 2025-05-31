@@ -245,7 +245,7 @@ const Question = () => {
         )}
 
         <img
-          src={isMaskVisible ? "/question/uncheck.png" : (progress === 4 ? "/question/birth.svg" : "/question/check1.png")}
+          src={isMaskVisible ? "/question/uncheck.png" : (progress === 4 ? "/question/birth.png" : "/question/check1.png")}
           alt="確認答案"
           // onClick={handleNextQuestion}
           onClick={() => {
