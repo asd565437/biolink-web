@@ -15,6 +15,14 @@
   /* 確保遮罩在最上層 */
 }
 
+.addFriend_title{
+  position: fixed;
+  top: 19%;
+  left: 43.5%;
+  width: 11%;
+  height: auto;
+}
+
 .addFriend_back {
   position: fixed;
   top: 140px;
@@ -23,13 +31,13 @@
   cursor: pointer;
 }
 
-.addFriend_box {
+/* .addFriend_box {
   position: fixed;
   top: 18%;
   left: 27%;
   width: 45%;
   height: auto;
-}
+} */
 
 .addFriend_input {
   width: 30%;
@@ -200,17 +208,17 @@
   }
   .addFriend_input {
     width: 30%;
-    font-size: 30px;
+    font-size: 24px;
     top: 40%;
-    left: 32%;
+    left: 34%;
   
     /* 設定底線 */
     border-bottom: 4px solid rgba(255, 255, 255, 0.8);
   }
 
   .addFriend_finish {
-    top: 58%;
-    left: 40.3%;
-    width: 13%;
+    top: 75%;
+    left: 37.5%;
+    width: 24%;
   }
 }

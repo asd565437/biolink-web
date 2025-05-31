@@ -335,7 +335,7 @@
   
     .confirmFriend_box {
       top: 18%;
-      left: 27%;
+      left: 28%;
       width: 40%;
       height: 60%;
     }
@@ -343,12 +343,12 @@
     .confirmFriend_title {
       font-size: 1.7vw;
       top: 31%;
-      left: 33.5%;
+      left: 36%;
     }
   
     .confirmFriend_photo_area {
-      top: 48%;
-      left: 47%;
+      top: 50%;
+      left: 48%;
       width: 10vw;  /* 調整圓形大小 */
       height: 10vw;
     }
@@ -364,14 +364,14 @@
     }
   
     .confirmFriend_yes {
-      top: 62%;
-      left: 48%;
+      top: 64%;
+      left: 49%;
       width: 11%;
     }
   
     .confirmFriend_no {
-      top: 62%;
-      left: 35%;
+      top: 64%;
+      left: 36%;
       width: 11%;
     }
   }

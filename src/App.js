@@ -64,7 +64,7 @@ const GlobalModal = ({ content, onClose, handleStart, handleReject, friendId }) 
         <div className="invite">
             <div className="invite-content">
                 <img src={invite_box} alt="invite_box" className="invite_box" />
-                <p className="invite_title">{nickName}&emsp;邀請您一起進行培養菌種</p>
+                <p className="invite_title fontType">{nickName}&emsp;邀請您一起進行培養菌種</p>
                 <div className="invite_photo_area">
                     <img src={invite_photo_box} alt="invite_photo_box" className="invite_photo_box" />
                     <img src={photoURL} alt="invite_photo" className="invite_photo" /> {/* 存取玩家的頭像 */}
@@ -104,7 +104,7 @@ const FriendModal = ({ content, onClose, handleAgree, handleReject, friendId }) 
         <div className="confirmFriend">
             <div className="confirmFriend-content">
                 <img src={confirmFriend_box} alt="confirmFriend_box" className="confirmFriend_box" />
-                <p className="confirmFriend_title">&emsp;&emsp;{nickName}&nbsp;發送好友邀請給您</p>
+                <p className="confirmFriend_title fontType">&emsp;&emsp;{nickName}&nbsp;發送好友邀請給您</p>
 
                 <div className="confirmFriend_photo_area">
                     <img src={confirmFriend_photo_box} alt="confirmFriend_photo_box" className="confirmFriend_photo_box" />

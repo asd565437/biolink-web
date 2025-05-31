@@ -336,11 +336,11 @@
   .invite_title {
     font-size: 1.7vw;
     top: 31%;
-    left: 33.5%;
+    left: 34%;
   }
 
   .invite_photo_area {
-    top: 48%;
+    top: 49%;
     left: 47%;
     width: 10vw;  /* 調整圓形大小 */
     height: 10vw;
@@ -357,13 +357,13 @@
   }
 
   .invite_yes {
-    top: 62%;
+    top: 63%;
     left: 48%;
     width: 11%;
   }
 
   .invite_no {
-    top: 62%;
+    top: 63%;
     left: 35%;
     width: 11%;
   }

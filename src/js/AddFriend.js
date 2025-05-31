@@ -2,9 +2,10 @@ import "../css/AddFriend.css"; // 引入样式文件
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useContext } from 'react';
 import ConfirmFriend from "./ConfirmFriend.js";
+import addFriend_title from '../addFriend/addFriend_title.svg';
 import addFriend_back from '../addFriend/addFriend_back.svg';
-import addFriend_box from '../addFriend/addFriend_box.png';
-import addFriend_finish from '../addFriend/addFriend_finish.png';
+// import addFriend_box from '../addFriend/addFriend_box.png';
+import addFriend_finish from '../addFriend/addFriend_finish.svg';
 import { UserContext } from "../App"; // 引入全局 Socket 上下文
 
 const AddFriend = ({ onClose }) => {
@@ -37,8 +38,9 @@ const AddFriend = ({ onClose }) => {
             <div className="popup-content" onClick={(e) => e.stopPropagation()}>
                 {!showConfirmFriend ? (
                     <>
+                        <img src={addFriend_title} alt="addFriend_title" className="addFriend_title" />
                         <img src={addFriend_back} alt="addFriend_back" className="addFriend_back" onClick={onClose} />
-                        <img src={addFriend_box} alt="addFriend_box" className="addFriend_box" />
+                        {/* <img src={addFriend_box} alt="addFriend_box" className="addFriend_box" /> */}
                         <input
                             type="text"
                             placeholder="輸入好友ID"
