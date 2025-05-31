@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "../css/Friend.css"; // 引入样式文件
 import Header from "./Header.js";
 import AddFriend from "./AddFriend.js";
-import addFriend_icon from '../friend_list/addFriend_icon.svg';
+import addFriend_icon from '../friend_list/addFriend_icon.png';
 import friend_list from '../friend_list/friend_list.svg';
 import friend_test from '../confirm/confirm_photo.svg';
 import next_icon from '../question/back_btn.svg';
@@ -154,9 +154,9 @@ const Friend = () => {
                 {/* 顯示每個好友的資訊 */}
                 <div className="friend-info">
                   <img src={friend.photoURL} alt={`Friend ${index + 1}`} className="friend_test" />
-                  <h3 className="friend-info-name">{friend.nickname}</h3>
-                  <p className="friend-info-numabr">菌種數量：{friend.bio_count}</p>
-                  <p className="friend-info-date">交友日期：{friend.createdAt}</p>
+                  <h3 className="friend-info-name fontType">{friend.nickname}</h3>
+                  <p className="friend-info-numabr fontType">菌種數量：{friend.bio_count}</p>
+                  <p className="friend-info-date fontType">交友日期：{friend.createdAt}</p>
                 </div>
               </div>
             ))}

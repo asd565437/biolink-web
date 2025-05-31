@@ -42,7 +42,7 @@ const AddFriend = ({ onClose }) => {
                         <input
                             type="text"
                             placeholder="輸入好友ID"
-                            className="addFriend_input"
+                            className="addFriend_input fontType"
                             onChange={handleInputChange}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') handleSubmit();

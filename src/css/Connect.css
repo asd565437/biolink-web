@@ -1,5 +1,5 @@
 .connect {
-  background-image: url("../showcase/bg.png");
+  background-image: url("../showcase/showcase_bg.png");
   /* 背景图片 */
   background-size: cover;
   /* 背景填充模式 */
@@ -34,6 +34,20 @@ content img {
   position: fixed;
   color: white;
   font-weight: bold;
+}
+
+.fontType {
+  font-family:  'hwzs', 'Times New Roman', Georgia, serif;
+}
+
+@font-face {
+  font-family: 'hwzs';
+  src: url('font/hwzs.ttf') format('truetype'),
+      url('font/hwzs.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+4E00-9FFF;
 }
 
 .friend-input {

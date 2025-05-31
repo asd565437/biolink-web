@@ -1,6 +1,6 @@
 /* 背景设置 */
 .friend_wall {
-  background-image: url("../showcase/showcase_bg.svg"); /* 背景图片 */
+  background-image: url("../showcase/showcase_bg.png"); /* 背景图片 */
   background-size: cover; /* 背景填充模式 */
   background-position: center; /* 背景居中 */
   height: calc(100vh); /* 占满整个视口高度 */

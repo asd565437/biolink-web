@@ -127,11 +127,7 @@ ul img{
   background-position: center;
   cursor: pointer;
 }
-.navList {
-  width: 50vw;
-  display: flex;
-  justify-content: flex-end;
-}
+
 .icon_table {
   display: flex;
   flex-direction: column; /* 垂直排列 */
@@ -141,16 +137,6 @@ ul img{
 
 .icon_table li {
   margin-bottom: 0.5rem; /* 每個項目底部間距（可以根據需要調整） */
-}
-.nav-menu {
-  display: flex;
-  gap: 2vw; /* 每个导航项之间的间距 */
-  justify-content: flex-end;
-  align-items: center;
-  flex-grow: 0;
-  flex-shrink: 0;
-  width: 60%;
-  /* margin-right: 2vw; */
 }
 
 .nav-item {
@@ -166,7 +152,59 @@ ul img{
   background-color: transparent;
 }
 
-.header-login-container {
+/* .login-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: inherit; 
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1999;
+  padding-right: 2.25vw;
+} */
+
+/* .nav-dropdown h5 {
+  margin: 0;
+  padding: 10px;
+  font-size: 2vw;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+} */
+
+/* .nav-dropdown h5:hover {
+  background-color: #444444c0;
+  opacity: 0.8;
+} */
+
+.dropdown_element:hover{
+  opacity: 0.7;
+}
+
+/*.nav-menu {
+  display: flex;
+  gap: 2vw; /* 每个导航项之间的间距 
+  justify-content: flex-end;
+  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 60%;
+  /* margin-right: 2vw; 
+}*/
+
+.navList {
+  /* width: 50vw;
+  display: flex;
+  justify-content: flex-end; */
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 7vw;
+  /* height: auto; */
+}
+
+/* .header-login-container {
   display: flex;
   flex-direction:column;
   align-items: flex-start;
@@ -177,50 +215,50 @@ ul img{
   min-width: 78px;
   width: 17.5%;
   height: auto;
-}
+} */
 
-.header-login {
-  font-size: 2vw;
-  color: white;
-  cursor: pointer;
-  text-align: right;
-  
-  white-space: nowrap;
-  overflow: hidden;
-  width: 100%;
-  height: auto;
-}
-
-.header-login-container h2 {
-  font-size: 2vw;
-  max-width: 20vw;
-  margin: 0;
-}
-
-.login-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
+.nav-dropdown {
+  position: fixed;
+  /* top: ; */
+  right: 4vw;
   width: inherit; 
   color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1999;
-  padding-right: 2.25vw;
+  /* padding-right: 2.25vw; */
+  margin: 2vh 0 0;
 }
 
-.login-dropdown h3 {
-  margin: 0;
-  padding: 10px;
-  font-size: 2vw;
+.dropdown_element {
+  font-size: 1.5vw;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  text-align: center;
+  
+  white-space: nowrap;
+  /* overflow: hidden; */
+  width: 100%;
+  height: auto;
+  padding: 1.5vh 0;
 }
 
-.login-dropdown h3:hover {
-  background-color: #444444c0;
+.dropdown_line{
+  border-bottom: 1.5px solid #9A6CBE;
 }
 
-.header-login:hover,
-.login-dropdown h3:hover {
-  opacity: 0.8;
+.dropdown_element_id{
+  font-size: 1.5vw;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  
+  width: 100%;
+  height: auto;
+  padding: 0.5vh 0;
+}
+
+.nav-dropdown h2 {
+  font-size: 2vw;
+  max-width: 20vw;
+  margin: 0;
 }

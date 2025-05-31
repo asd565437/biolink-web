@@ -84,7 +84,7 @@ const Confirm = () => {
             <Header images={["world_btn.svg", "wall_btn.svg", "culture_ul_btn.svg"]} />
             <main className="content">
                 <img src={confirm_back} alt="confirm_back" className="confirm_back" onClick={() => navigate(-1)} />
-                <h1 className="confirm_title">您將與&nbsp;{userName}&nbsp;進行闖關</h1>
+                <h1 className="confirm_title fontType">您將與&nbsp;{userName}&nbsp;進行闖關</h1>
                 
                 <div className="confirm_photo_area">
                     <img src={confirm_photo_box} alt="confirm_photo_box" className="confirm_photo_box" />

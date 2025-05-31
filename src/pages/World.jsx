@@ -245,15 +245,16 @@ const World = () => {
                     paddingBottom: "2px",
                     borderBottom: "1px solid rgba(255, 255, 255, 0.5)", // 加入分隔線
                   }}
+                  className="fontType"
                 >
                   {hoveredImage.name}
                 </div>
 
                 {/* 菌種資訊 */}
                 <div style={{ fontSize: "8px", lineHeight: "1.8", textAlign: "left" }}>
-                  <div>培養員：{hoveredImage.owner}</div>
-                  <div>菌種誕生日：{hoveredImage.birthday}</div>
-                  <div>菌種編號：{hoveredImage.rank}</div>
+                  <div className="fontType">培養員：{hoveredImage.owner}</div>
+                  <div className="fontType">菌種誕生日：{hoveredImage.birthday}</div>
+                  <div className="fontType">菌種編號：{hoveredImage.rank}</div>
                 </div>
               </div>
             </div>
@@ -264,7 +265,7 @@ const World = () => {
         {showIdPopup && (
           <div className="id-popup">
             <div className="id-popup-content">
-              <strong>您的專屬 ID：{userId}</strong>
+              <strong className="fontType">您的專屬 ID：{userId}</strong>
               <img src={id_notice} alt="id_notice" className="id_notice" />
               <img src={id_close} alt="id_close" className="id_close" onClick={() => setShowIdPopup(false)} />
             </div>

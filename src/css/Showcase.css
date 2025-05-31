@@ -1,6 +1,6 @@
 /* 背景设置 */
 .showcase {
-  background-image: url("../showcase/showcase_bg.svg");
+  background-image: url("../showcase/bg.png");
   /* 使用相对路径 */
   background-size: cover;
   background-position: center;

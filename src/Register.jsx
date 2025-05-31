@@ -122,13 +122,15 @@ function Register() {
             </Link>
 
             <div className="login_text">
-                <img src="/register_title.svg" alt="Logo" className="register_title"/>
+                <p className="fontType">註冊</p>
+                {/* <img src="/register_title.svg" alt="Logo" className="register_title"/> */}
             </div>
 
             <div className="login-box-register">
                 <div className="input-container-register">
                     <input
                         type="text"
+                        className="fontType"
                         placeholder="暱稱(最多3個字)"
                         maxLength={10}
                         value={nickName}
@@ -140,6 +142,7 @@ function Register() {
                 <div className="input-container-register">
                     <input
                         type="email"
+                        className="fontType"
                         placeholder="電子郵件"
                         value={account}
                         onChange={(e) => setAccount(e.target.value)}
@@ -150,6 +153,7 @@ function Register() {
                 <div className="input-container-register">
                     <input
                         type={isVisible[0] ? 'text' : 'password'}
+                        className="fontType"
                         placeholder="密碼 (至少6字元)"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -166,6 +170,7 @@ function Register() {
                 <div className="input-container-register">
                     <input
                         type={isVisible[1] ? 'text' : 'password'}
+                        className="fontType"
                         placeholder="確認密碼"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}

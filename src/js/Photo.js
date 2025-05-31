@@ -62,7 +62,7 @@ function Photo() {
             </div></Link>
 
             <div className="photo_title">
-                <p>請選擇頭像</p>
+                <p className="fontType">請選擇頭像</p>
             </div>
 
             <div className="photo-box-register">

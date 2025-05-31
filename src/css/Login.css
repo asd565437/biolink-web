@@ -38,6 +38,9 @@
     height: 20%;
 }
 
+.login_text{
+  z-index: 1;
+}
 
 .login_text p{
   position: fixed;

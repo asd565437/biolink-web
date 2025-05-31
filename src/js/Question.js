@@ -259,10 +259,10 @@ const Question = () => {
 
       <main className="content">
         <div className="row row-question mb-4 P1">
-          <h1 className="col-16">Q{progress + 1}: {question}</h1>
+          <h1 className="col-16 fontType">Q{progress + 1}: {question}</h1>
           <div className="col-6 P1_A">
             <button
-              className={buttonStates.P1_A ? "button-selected" : "button-default"}
+              className={`${buttonStates.P1_A ? "button-selected" : "button-default"} fontType`}
               onClick={() => handleClick("P1", "A")}
             >
               {splitSentence[0]}
@@ -270,7 +270,7 @@ const Question = () => {
           </div>
           <div className="col-6 P1_B">
             <button
-              className={buttonStates.P1_B ? "button-selected" : "button-default"}
+              className={`${buttonStates.P1_B ? "button-selected" : "button-default"} fontType`}
               onClick={() => handleClick("P1", "B")}
             >
               {splitSentence[1]}
@@ -280,7 +280,7 @@ const Question = () => {
 
         <div className="row row-question P2">
           <h1
-            className="col-12"
+            className="col-12 fontType"
             style={{
               color: buttonStates.P1_A || buttonStates.P1_B ? "#ffffff" : "rgba(255, 255, 255, 0.4)",
             }}
@@ -289,7 +289,7 @@ const Question = () => {
           </h1>
           <div className="col-6 P2_A">
             <button
-              className={buttonStates.P2_A ? "button-selected" : "button-default"}
+              className={`${buttonStates.P2_A ? "button-selected" : "button-default"} fontType`}
               onClick={() => handleClick("P2", "A")}
               disabled={!buttonStates.P1_A && !buttonStates.P1_B}
             >
@@ -298,7 +298,7 @@ const Question = () => {
           </div>
           <div className="col-6 P2_B">
             <button
-              className={buttonStates.P2_B ? "button-selected" : "button-default"}
+              className={`${buttonStates.P2_B ? "button-selected" : "button-default"} fontType`}
               onClick={() => handleClick("P2", "B")}
               disabled={!buttonStates.P1_A && !buttonStates.P1_B}
             >

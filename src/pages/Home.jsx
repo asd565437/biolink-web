@@ -27,7 +27,7 @@ function Home() {
             <div className="overlay"></div>
 
             <img src={Logo} alt="" className="logo" />
-            <img src={Text} alt="" className="text" />
+            {/* <img src={Text} alt="" className="text" /> */}
             <Link to="/login"><img src={Login} alt="" className="login" /></Link>
             <img src={Go} alt="" className="go" onClick={() => navigate("/world")} />
         </div>

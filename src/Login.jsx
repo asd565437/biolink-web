@@ -115,13 +115,14 @@ function Login() {
             </Link>
 
             <div className="login_text">
-                <p>登入</p>
+                <p className="fontType">登入</p>
             </div>
 
             <div className="login-box-login">
                 <div className="input-container-login">
                     <input
                         type="email"
+                        className="fontType"
                         placeholder="電子郵件"
                         value={account}
                         onChange={(e) => setAccount(e.target.value)} // 修正 setAccount
@@ -132,6 +133,7 @@ function Login() {
                 <div className="input-container-login">
                     <input
                         type={isVisible ? 'text' : 'password'}
+                        className="fontType"
                         placeholder="密碼"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}

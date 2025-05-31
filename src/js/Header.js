@@ -103,14 +103,18 @@ const Header = ({ images }) => {
       width: '27.5%',
     },
   ];
+  const headerLogo = 'header_icon.svg';
 
   return (
     <>
       <header className="header">
         <div className="header-logo" onClick={() => handleNavigate(0)}></div>
         {show && (
-          <div className="navList">
-            <nav className="nav-menu">
+          <div className="navList"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+          // onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            {/* <nav className="nav-menu">
               {images.map((image, index) => (
                 <img
                   key={index}
@@ -121,47 +125,84 @@ const Header = ({ images }) => {
                   className="nav-item"
                 />
               ))}
-            </nav>
+            </nav> */}
+            <img src={headerLogo} alt="" className='headerNavLogo' />
 
             {/* 垂直導覽列 */}
-            <div
+            {/* <div
               className="header-login-container"
               onMouseEnter={() =>
                 isLoggedIn ? setIsDropdownOpen(true) : setIsDropdownOpen(false)
               }
             >
-              <h2
-                className="header-login"
-                onClick={() => {
-                  if (!isLoggedIn) {
-                    handleNavigate(4);
-                  }
-                }}
-              >
-                {isLoggedIn ? userName : "LOGIN"}
-              </h2>
-            </div>
+            <h2
+                    className="header-login"
+                    onClick={() => {
+                      if (!isLoggedIn) {
+                        handleNavigate(4);
+                      }
+                    }}
+                  >
+                    {isLoggedIn ? userName : "LOGIN"}
+                  </h2>
+            </div> */}
 
             {/* 下拉選單 */}
             <div>
               {isDropdownOpen && (
                 <div
-                  className="login-dropdown"
+                  className="nav-dropdown"
+                  // onMouseEnter={() => setIsDropdownOpen(true)}
                   onMouseLeave={() => setIsDropdownOpen(false)}
                 >
-                  <h3 className="logID">#{userId?.userId}</h3>
-                  <h3
-                    className="login-container-logout"
+                  {isLoggedIn && (
+                    <>
+                      <h5 className="dropdown_element_id fontType">
+                        { userName }
+                      </h5>
+
+                      <h5 className="dropdown_element_id fontType">
+                        #{userId?.userId}
+                      </h5>
+                    </>
+                  )}
+
+                  <h5
+                    className="dropdown_element fontType dropdown_line"
+                    onClick={() => handleNavigate(0)}
+                  >
+                    菌種的世界
+                  </h5>
+
+                  <h5
+                    className="dropdown_element fontType dropdown_line"
+                    onClick={() => handleNavigate(1)}
+                  >
+                    展示牆
+                  </h5>
+
+                  <h5
+                    className="dropdown_element fontType dropdown_line"
+                    onClick={() => handleNavigate(2)}
+                  >
+                    菌種培養區
+                  </h5>
+
+                  <h5
+                    className="dropdown_element fontType"
                     onClick={async () => {
                       if (isLoggedIn) {
                         await clearCookie();
-                        handleNavigate(4);
                       }
+                      handleNavigate(4);
                     }}
                     style={{ cursor: "pointer" }}
                   >
-                    LOGOUT
-                  </h3>
+
+                    {isLoggedIn ? "登出" : "登入"}
+                  </h5>
+
+
                 </div>
               )}
             </div>
@@ -198,7 +239,7 @@ const Header = ({ images }) => {
             <li className="mb-2">
               <img src="/connect_icon.svg"  // 替換為你的圖片路徑
                 onClick={() => handleNavigate(2)}
-                alt="功能圖標3" style={{left:'1%'}} /></li>
+                alt="功能圖標3" style={{ left: '1%' }} /></li>
             <li className="mb-2">
               <img src={imageSrc}  // 替換為你的圖片路徑
                 onClick={async () => {

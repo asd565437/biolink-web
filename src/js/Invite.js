@@ -26,7 +26,7 @@ const Invite = () => {
             {/* Content 部分 */}
             <div className="invite-content">
                 <img src={invite_box} alt="invite_box" className="invite_box" />
-                <p className="invite_title">{userName}&emsp;邀請您一起進行培養菌種</p>
+                <p className="invite_title fontType">{userName}&emsp;邀請您一起進行培養菌種</p>
 
                 <div className="invite_photo_area">
                     <img src={invite_photo_box} alt="invite_photo_box" className="invite_photo_box" />

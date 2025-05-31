@@ -206,13 +206,13 @@ const Showcase = () => {
                     {/* 卡片資訊 */}
                     {isOriginal[index] && (
                       <div className="card-info">
-                        <p className='card-info-id'>#{data[index].bio_id}</p>
+                        <p className='card-info-id fontType'>#{data[index].bio_id}</p>
                         <div className='name_box'>
-                          <h6 className='card-info-name'>{data[index].name}</h6>
+                          <h6 className='card-info-name fontType'>{data[index].name}</h6>
                         </div>
-                        <p className='card-info-owner'>培養員:{data[index].nicknames[data[index].players[0]]}
+                        <p className='card-info-owner fontType'>培養員:{data[index].nicknames[data[index].players[0]]}
                           &{data[index].nicknames[data[index].players[1]]} </p>
-                        <p className='card-info-date'>{data[index].createdAt}</p>
+                        <p className='card-info-date fontType'>{data[index].createdAt}</p>
                       </div>
                     )}
                     {/* Card 或背景图片 */}

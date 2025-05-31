@@ -51,14 +51,14 @@ const Connect = () => {
       <Header images={['world_btn.svg', 'wall_btn.svg', 'culture_ul_btn.svg']} />
       {/* Content 部分 */}
       <main className="content">
-        <p className="connect_title">請輸入想要共同完成關卡的好友ID</p>
+        <p className="connect_title fontType">請輸入想要共同完成關卡的好友ID</p>
 
         <input
           type="text"
           value={friendId}
           onChange={handleInputChange}
           // placeholder="輸入好友ID"
-          className="friend-input"
+          className="friend-input fontType"
           onKeyDown={(e) => {
             if (e.key === 'Enter') handleSubmit();
         }}

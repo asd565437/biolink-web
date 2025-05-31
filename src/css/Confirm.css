@@ -1,5 +1,5 @@
 .confirm {
-    background-image: url("../showcase/bg.png"); /* 背景图片 ../culture/bg.png */
+    background-image: url("../showcase/showcase_bg.png"); /* 背景图片 ../culture/bg.png */
     background-size: cover; /* 背景填充模式 */
     background-color: #0F0F1A;
     display: flex;

@@ -67,7 +67,7 @@ const ConfirmFriend = ({ friendId ,onClose, onBack }) => {
             <div className="confirmFriend-content">
                 <img src={confirmFriend_back} alt="confirmFriend_back" className="confirmFriend_back" onClick={onBack} />
                 <img src={confirmFriend_box} alt="confirmFriend_box" className="confirmFriend_box" />
-                <p className="confirmFriend_title">您確認將&nbsp;{userName}&nbsp;加入為好友嗎？</p>
+                <p className="confirmFriend_title fontType">您確認將&nbsp;{userName}&nbsp;加入為好友嗎？</p>
 
                 <div className="confirmFriend_photo_area">
                     <img src={confirmFriend_photo_box} alt="confirmFriend_photo_box" className="confirmFriend_photo_box" />
