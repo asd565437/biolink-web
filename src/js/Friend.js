@@ -62,9 +62,9 @@ const Friend = () => {
   const loadData = async () => {
     try {
       console.log("Fetching friends for userId:", userId);
-      const response = await axios.post(`${apiUrl}/api/friend`, { userId,index });
+      const response = await axios.post(`${apiUrl}/api/friend`, { userId, index });
       console.log(response.data)
-      setPage(Math.floor((response.data.count) /itemsPerPage));
+      setPage(Math.floor((response.data.count) / itemsPerPage));
       console.log(page)
       const friendData = response.data.newUInfo.map((friend, index) => ({
         nickname: friend.nickname,
@@ -79,7 +79,7 @@ const Friend = () => {
       console.error("Error fetching data:", error);
     }
   };
-  
+
   useEffect(() => {
     if (!userId) return; // 🔥 确保 userId 存在才执行 API 请求
     loadData();
@@ -168,13 +168,13 @@ const Friend = () => {
 
       {/* Back_page */}
       {index > page && (
-      <div className="back_page">
-        <img
-          src={next_icon}
-          alt="切到上一頁"
-          onClick={() => handleIndex(0)} // 點擊才執行
-        />
-      </div>)}
+        <div className="back_page">
+          <img
+            src={next_icon}
+            alt="切到上一頁"
+            onClick={() => handleIndex(0)} // 點擊才執行
+          />
+        </div>)}
       {/* Next_page */}
       {index < page && (
         <div className="next_page">
@@ -182,7 +182,7 @@ const Friend = () => {
             src={next_icon}
             alt="切到下一頁"
             onClick={() => handleIndex(1)}
-            
+
           />
         </div>
       )}

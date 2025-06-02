@@ -54,7 +54,7 @@ function Login() {
                 googleLogin: true
             });
             if (response.status === 200) {
-                alert("登入成功!");
+                alert("登入成功！");
                 setIsLogin(true);
                 // 設置 Cookie
                 await axios.post(`${apiUrl}/set-cookie`, {
