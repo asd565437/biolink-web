@@ -258,7 +258,11 @@
     }
     
     .checkAnswer {
-        bottom: 12%;
+        bottom: 14%;
+    }
+
+    .checkAnswer img {
+        width: 90%;
     }
 
     .row-question {

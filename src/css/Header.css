@@ -18,27 +18,29 @@
 }
 .menubtn img{
   position: fixed;
-  width:24px;
-  height: 16px;
+  width: 60px;
+  /* width: 24px;
+  height: 16px; */
 }
 ul{
   padding-left: 0rem;
 }
 @media (min-width: 0px) {
-  .menu{
+  /* .menu{
     width: 55%;
-  }
+  } */
   .header-logo {
     width: 40%;
   }
-  .menubtn.open{
+  /* .menubtn.open{
     right: 65%;
-  }
+  } */
   .menubtn{
-    right: 17%;
+    top: 2.5%;
+    right: 18%;
   }
 }
-@media (min-width: 320px) {
+/* @media (min-width: 320px) {
   .menu{
     width: 50%;
   }
@@ -65,8 +67,12 @@ ul{
   .menubtn{
     right: 12%;
   }
-}
+} */
 @media (min-width: 400px) {
+  .menubtn {
+    top: 2%;
+    right: 16%;
+  }
   .menu{
     width: 40%;
   }
@@ -76,9 +82,9 @@ ul{
   .menubtn.open{
     right: 50%;
   }
-  .menubtn{
+  /* .menubtn{
     right: 10%;
-  }
+  } */
 }
 @media (min-width: 470px) {
   .menu{

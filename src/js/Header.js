@@ -226,7 +226,7 @@ const Header = ({ images }) => {
             onClick={toggleMenu}
           >
             <img
-              src="/menu.png"  // 替換為你的圖片路徑
+              src="/header_icon.svg"  // 替換為你的圖片路徑
               alt="功能圖標"
             />
           </button>
