@@ -1,5 +1,5 @@
 import "../css/Header.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../App"; // 引入全域 Socket 上下文
 import axios from "axios";
@@ -104,6 +104,8 @@ const Header = ({ images }) => {
     },
   ];
   const headerLogo = 'header_icon.svg';
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   return (
     <>
@@ -168,21 +170,30 @@ const Header = ({ images }) => {
                   )}
 
                   <h5
-                    className="dropdown_element fontType dropdown_line"
+                    // className="dropdown_element fontType dropdown_line"
+                    className={`dropdown_element fontType dropdown_line ${
+                      currentPath === '/world' ? 'neonText' : ''
+                    }`}                    
                     onClick={() => handleNavigate(0)}
                   >
                     菌種的世界
                   </h5>
 
                   <h5
-                    className="dropdown_element fontType dropdown_line"
+                    // className="dropdown_element fontType dropdown_line"
+                    className={`dropdown_element fontType dropdown_line ${
+                      ['/wall', '/friend'].includes(currentPath) ? 'neonText' : ''
+                    }`}
                     onClick={() => handleNavigate(1)}
                   >
                     展示牆
                   </h5>
 
                   <h5
-                    className="dropdown_element fontType dropdown_line"
+                    // className="dropdown_element fontType dropdown_line"
+                    className={`dropdown_element fontType dropdown_line ${
+                      ['/connect', '/confirm'].includes(currentPath) ? 'neonText' : ''
+                    }`} 
                     onClick={() => handleNavigate(2)}
                   >
                     菌種培養區

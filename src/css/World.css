@@ -3,8 +3,9 @@
     overflow: hidden;
 }
 .world_bio img {
-    mix-blend-mode:lighten
-    } 
+    mix-blend-mode:lighten;
+} 
+
 #world_container {
     width: 100vw;
     margin: 0 auto;
@@ -94,6 +95,8 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+
 @media (min-width: 0px) {
     .id_close {
         top: 23%;
@@ -211,3 +214,11 @@
     font-size: 1vw;
     transform: scale(1.2);
 }
+
+.emoji {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  color: inherit !important;
+}
+

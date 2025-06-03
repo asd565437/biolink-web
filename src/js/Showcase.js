@@ -83,7 +83,8 @@ const Showcase = () => {
       const response = await axios.post(`${apiUrl}/api/bio`, { userId: userId.userId, index });
       console.log('Fetched data:', response.data);
       if (response.data) {
-        setPage(Math.floor(response.data.count / itemsPerPage));
+        setPage(Math.ceil(response.data.count / itemsPerPage));
+        // setPage(Math.ceil(response.data.bios.length / itemsPerPage));
         setData(response.data.bios); // 存入 state
         setIsOriginal(Array(response.data.bios.length).fill(true)); // 根據數據長度初始化 isOriginal
       } else {
@@ -101,8 +102,9 @@ const Showcase = () => {
   }, [userId.userId]);
   useEffect(() => {
     loadData();
-    console.log("index");
-  }, [index]);
+    console.log("index " + index);
+    console.log("page " + page);
+  }, [index, page]);
   useEffect(() => {
     console.log("Data 已更新:", data);
 
@@ -124,7 +126,7 @@ const Showcase = () => {
         setIndex(index - 1);
     }
     else {
-      if (index < page)
+      if (index < page - 1)
         setIndex(index + 1);
     }
     console.log(index);
@@ -205,14 +207,14 @@ const Showcase = () => {
                   >
                     {/* 卡片資訊 */}
                     {isOriginal[index] && (
-                      <div className="card-info">
-                        <p className='card-info-id fontType'>#{data[index].bio_id}</p>
+                      <div className="card-info fontType">
+                        <p className='card-info-id'>#{data[index].bio_id}</p>
                         <div className='name_box'>
-                          <h6 className='card-info-name fontType'>{data[index].name}</h6>
+                          <h6 className='card-info-name'>{data[index].name}</h6>
                         </div>
-                        <p className='card-info-owner fontType'>培養員:{data[index].nicknames[data[index].players[0]]}
+                        <p className='card-info-owner'>培養員:{data[index].nicknames[data[index].players[0]]}
                           &{data[index].nicknames[data[index].players[1]]} </p>
-                        <p className='card-info-date fontType'>{data[index].createdAt}</p>
+                        <p className='card-info-date'>{data[index].createdAt}</p>
                       </div>
                     )}
                     {/* Card 或背景图片 */}
@@ -263,7 +265,7 @@ const Showcase = () => {
       </main>
 
       {/* Back_page */}
-      {index > page && (
+      {index > 0  && (
         <div className="back_page">
           <img
             src={next_icon}
@@ -273,7 +275,7 @@ const Showcase = () => {
         </div>)}
 
       {/* Next_page */}
-      {index < page && (
+      {index < page-1 && (
         <div className="next_page">
           <img
             src={next_icon}

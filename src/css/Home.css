@@ -105,8 +105,8 @@
 /* 手機版 RWD */
 @media (max-width: 768px) {
     .logo {
-        width: 40%;
-        top: 32%;
+        width: 55%;
+        top: 33%;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -120,14 +120,14 @@
     }
 
     .login {
-        width: 15%;
+        width: 18%;
         top: 5%;
-        left: 80%;
+        left: 75%;
     }
 
     .go {
-        width: 25%;
-        top: 60%;
+        width: 35%;
+        top: 55%;
         left: 50%;
         transform: translateX(-50%);
     }

@@ -19,16 +19,14 @@
 
 .back {
     position: fixed;
-    top: 18%;
-    left: 5%;
-    width: 5%;
+    left: 2.5%;
     cursor: pointer;
     z-index: 5;
 }
 
 .checkAnswer {
     position: fixed;
-    bottom: 15%;
+    bottom: 14%;
     z-index: 5;
 }
 
@@ -52,11 +50,21 @@
 }
 
 @media (min-width: 0px) {
+    .back {
+        position: fixed;
+        top: 17%;
+    }
+    .back img {
+        width: 50%;
+    }
     .progress-bar {
-        width: 90%;
+        width: 65%;
+    }
+    .checkAnswer {
+        bottom: 12%;
     }
     .checkAnswer img{
-        width: 35%;
+        width: 45%;
     }
     .row-question {
         width: 80%;
@@ -64,11 +72,21 @@
 }
 
 @media (min-width: 320px) {
+    .back {
+        position: fixed;
+        top: 17%;
+    }
+    .back img {
+        width: 50%;
+    }
     .progress-bar {
-        width: 85%;
+        width: 65%;
+    }
+    .checkAnswer {
+        bottom: 12%;
     }
     .checkAnswer img{
-        width: 40%;
+        width: 45%;
     }
     .row-question {
         width: 70%;
@@ -76,23 +94,21 @@
 }
 
 @media (min-width: 375px) {
+    .back {
+        position: fixed;
+        top: 17%;
+        left: 1.5%;
+    }
+    .back img {
+        width: 55%;
+    }
     .progress-bar {
-        width: 80%;
+        width: 62%;
+    }
+    .checkAnswer {
+        bottom: 6%;
     }
     .checkAnswer img{
-        width: 45%;
-    }
-    .row-question {
-        width: 60%;
-    }
-}
-
-@media (min-width: 400px) {
-    .progress-bar {
-        width: 75%;
-    }
-
-    .checkAnswer img {
         width: 50%;
     }
     .row-question {
@@ -100,9 +116,48 @@
     }
 }
 
-@media (min-width: 470px) {
+@media (min-width: 400px) {
+    .back {
+        position: fixed;
+        top: 17%;
+    }
+
+    .back img {
+        width: 60%;
+    }
+
     .progress-bar {
-        width: 70%;
+        width: 65%;
+    }
+
+    .checkAnswer {
+        bottom: 9%;
+    }
+
+    .checkAnswer img {
+        width: 55%;
+    }
+    .row-question {
+        width: 60%;
+    }
+}
+
+@media (min-width: 470px) {
+    .back {
+        position: fixed;
+        top: 17%;
+    }
+
+    .back img {
+        width: 60%;
+    }
+
+    .progress-bar {
+        width: 60%;
+    }
+
+    .checkAnswer {
+        bottom: 10%;
     }
 
     .checkAnswer img {
@@ -114,31 +169,98 @@
 }
 
 @media (min-width: 545px) {
+    .back {
+        position: fixed;
+        top: 17%;
+    }
+
+    .back img {
+        width: 70%;
+    }
+
     .progress-bar {
         width: 60%;
     }
 
-    .checkAnswer img {
-        width: 70%;
+    .checkAnswer {
+        bottom: 10%;
     }
+
+    .checkAnswer img {
+        width: 65%;
+    }
+
     .row-question {
         width: 60%;
     }
 }
 
 @media (min-width: 768px) {
+    .back {
+        position: fixed;
+        top: 17%;
+    }
+
+    .back img {
+        width: 90%;
+    }
+    
     .progress-bar {
-        width: 50%;
+        width: 60%;
+    }
+
+    .checkAnswer {
+        bottom: 10%;
+    }
+
+    .checkAnswer img {
+        width: 70%;
+    }
+    
+    .row-question {
+        width: 60%;
+    }
+}
+@media (min-width: 1000px) {
+    .back {
+        position: fixed;
+        top: 17%;
+    }
+
+    .back img {
+        width: 100%;
+    }
+
+    .progress-bar {
+        width: 60%;
+    }
+
+    .checkAnswer {
+        bottom: 9%;
     }
 
     .checkAnswer img {
         width: 80%;
     }
+    
     .row-question {
-        width: 60%;
+        width: 65%;
     }
 }
 @media (min-width: 1440px) {
+    .back {
+        position: fixed;
+        top: 18%;
+    }
+
+    .back img {
+        width: 100%;
+    }
+    
+    .checkAnswer {
+        bottom: 12%;
+    }
+
     .row-question {
         width: 55%;
     }
@@ -183,11 +305,11 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    width: 65%;
+    width: 70%;
     border: 0;
     color: #ffffff;
     font-weight: bold;
-    font-size: 32px;
+    font-size: 26px;
     text-align: center;
 }
 

@@ -259,13 +259,14 @@ const Question = () => {
 
       <main className="content">
         <div className="row row-question mb-4 P1">
-          <h1 className="col-16 fontType">Q{progress + 1}: {question}</h1>
+          <h1 className="col-16 fontType">Q{progress + 1}: 不理不理佐衛門{question}</h1>
           <div className="col-6 P1_A">
             <button
               className={`${buttonStates.P1_A ? "button-selected" : "button-default"} fontType`}
               onClick={() => handleClick("P1", "A")}
             >
               {splitSentence[0]}
+              火龍果
             </button>
           </div>
           <div className="col-6 P1_B">
@@ -274,6 +275,7 @@ const Question = () => {
               onClick={() => handleClick("P1", "B")}
             >
               {splitSentence[1]}
+              勇敢馬鈴薯
             </button>
           </div>
         </div>
@@ -294,6 +296,7 @@ const Question = () => {
               disabled={!buttonStates.P1_A && !buttonStates.P1_B}
             >
               {splitSentence[0]}
+              火龍果
             </button>
           </div>
           <div className="col-6 P2_B">
@@ -303,6 +306,7 @@ const Question = () => {
               disabled={!buttonStates.P1_A && !buttonStates.P1_B}
             >
               {splitSentence[1]}
+              勇敢馬鈴薯
             </button>
           </div>
         </div>

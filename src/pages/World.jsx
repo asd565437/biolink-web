@@ -14,6 +14,18 @@ function getNumber(number) {
   return Math.random() < 0.5 ? -number : number; // 50% 概率为负数
 }
 
+function renderWithEmojis(text) {
+  if (typeof text !== 'string') return null;
+  const parts = text.split(/(\p{Extended_Pictographic})/gu);
+  return parts.map((part, i) =>
+    /\p{Extended_Pictographic}/u.test(part) ? (
+      <span key={i} className="emoji">{part}</span>
+    ) : (
+      part
+    )
+  );
+}
+
 const World = () => {
   const [timestamp] = useState(new Date().getTime());
   const [hoveredImage, setHoveredImage] = useState(null);
@@ -232,7 +244,7 @@ const World = () => {
                   borderRadius: "10px",
                   width: "150px",
                 }}
-                className="world-bio-text"
+                className="world-bio-text fontType"
               >
 
                 {/* 菌種名稱 (標題) */}
@@ -245,16 +257,15 @@ const World = () => {
                     paddingBottom: "2px",
                     borderBottom: "1px solid rgba(255, 255, 255, 0.5)", // 加入分隔線
                   }}
-                  className="fontType"
                 >
-                  {hoveredImage.name}
+                  {renderWithEmojis(hoveredImage.name)}
                 </div>
 
                 {/* 菌種資訊 */}
                 <div style={{ fontSize: "8px", lineHeight: "1.8", textAlign: "left" }}>
-                  <div className="fontType">培養員：{hoveredImage.owner}</div>
-                  <div className="fontType">菌種誕生日：{hoveredImage.birthday}</div>
-                  <div className="fontType">菌種編號：{hoveredImage.rank}</div>
+                  <div>培養員：{renderWithEmojis(hoveredImage.owner)}</div>
+                  <div>菌種誕生日：{hoveredImage.birthday}</div>
+                  <div>菌種編號：{hoveredImage.rank}</div>
                 </div>
               </div>
             </div>

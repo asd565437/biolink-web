@@ -131,16 +131,22 @@ input::placeholder{
 }
 @media (min-width: 0px) {
   .login_text p{
-    right: 45%;
+    right: 42%;
     top:15%;
-    font-size: 35px;
+    font-size: 30px;
   }
   
   /* 白色遮罩 */
   .login-box-login {
       width: 50vw;
-      transform: scale(1.4) translateY(10%);
+      transform: scale(1.6) translateY(-10%);
+      box-shadow: 0 0 30px rgb(255, 255, 255) inset;
   }
+
+  .input-container-login {
+    top: 3vh;
+}
+
 }
 @media (min-width: 1024px) {
 

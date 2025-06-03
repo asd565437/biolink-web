@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2vh 2.5vw;
+  padding: 2vh 2vw 2vh 2.5vw; 
   z-index: 1999;
   box-sizing: border-box;
   overflow: visible;
@@ -139,12 +139,7 @@ ul img{
   margin-bottom: 0.5rem; /* 每個項目底部間距（可以根據需要調整） */
 }
 
-.headerNavLogo{
-  width: 80%;
-  height: auto;
-}
-
-.nav-item {
+/* .nav-item {
   width: 7vw;
   height: auto;
   aspect-ratio: 100 / 40;
@@ -152,7 +147,7 @@ ul img{
   background-repeat: no-repeat;
   cursor: pointer;
   transition: transform 0.3s ease;
-}
+} */
 .header button{
   background-color: transparent;
 }
@@ -201,9 +196,14 @@ ul img{
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 7vw;
+  width: 8.5vw;
   top: 0.25vh;
   /* height: auto; */
+}
+
+.headerNavLogo{
+  width: 60%;
+  height: auto;
 }
 
 /* .header-login-container {
@@ -222,8 +222,9 @@ ul img{
 .nav-dropdown {
   position: fixed;
   /* top: ; */
-  right: 2.5vw;
-  width: inherit; 
+  right: 2vw;
+  /* width: inherit; */
+  width: 8.5vw;
   color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1999;
@@ -267,4 +268,12 @@ ul img{
   font-size: 2vw;
   max-width: 20vw;
   margin: 0;
+}
+
+.neonText {
+    text-shadow:
+        0 0 0.5rem #fff,
+        /* 0 0 80px #d6aaff, */
+        0 0 1rem #d6aaff;
+    font-weight: 500;
 }

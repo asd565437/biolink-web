@@ -69,6 +69,7 @@
 }
 
 @media (min-width: 0px) {
+
   .addFriend_back {
     top: 128px;
   }
@@ -218,7 +219,6 @@
   .addFriend_input:focus {
     border-bottom: 3px solid rgba(255, 255, 255, 1);
   }
-
 
   .addFriend_finish {
     top: 75%;
