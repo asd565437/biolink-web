@@ -162,8 +162,8 @@ const Showcase = () => {
       cursor: 'pointer',
     },
     bioImage: {
-      width: '100%',
-      height: '100%',
+      width: '80%',
+      height: '80%',
       objectFit: 'contain',
     },
     bar: {
@@ -182,6 +182,13 @@ const Showcase = () => {
       height: 'auto',
     },
   };
+
+  function getBorderClass(totalCorrect) {
+    const score = Math.floor(totalCorrect / 2); // 0~5 中的一個
+    if (score <= 1) return 'bioBorder-blue';
+    if (score <= 3) return 'bioBorder-green';
+    return 'bioBorder-red';
+  }
 
   return (
     <div className="showcase">
@@ -230,7 +237,8 @@ const Showcase = () => {
                         <img
                           src={`${data[index].imageURL}?v=${timestamp}`}
                           alt={`Bio ${index + 1}`}
-                          className="img-fluid"
+                          // className="img-fluid bioBorder"
+                          className={`img-fluid bioBorder ${getBorderClass(data[index].totalCorrect)}`}
                           style={pair_styles.bioImage}
                         />
                       </div>

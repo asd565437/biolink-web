@@ -176,3 +176,27 @@
     overflow-y: scroll;
   }
 } */
+
+.bioBorder-blue{
+  /* border: greenyellow 1px solid; */
+  border-radius: 100%;
+  background-color: black;
+  box-shadow: 0 0 10px #2c8bf7, 0 0 20px 5px #2c8bf7;
+  margin: 20px;
+}
+
+.bioBorder-green{
+  /* border: greenyellow 1px solid; */
+  border-radius: 100%;
+  background-color: black;
+  box-shadow: 0 0 10px #f6f958, 0 0 20px 5px #f6f958;
+  margin: 20px;
+}
+
+.bioBorder-red{
+  /* border: greenyellow 1px solid; */
+  border-radius: 100%;
+  background-color: black;
+  box-shadow: 0 0 10px #ff9faf, 0 0 20px 5px #ff9faf;
+  margin: 20px;
+}
