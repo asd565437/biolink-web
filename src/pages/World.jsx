@@ -36,11 +36,28 @@ const World = () => {
   const location = useLocation();
   const popup = location.state?.popup || false; // 如果沒有數據則給預設值
 
+  const preloadBatch = async (imageUrls, batchSize = 5) => {
+    for (let i = 0; i < imageUrls.length; i += batchSize) {
+      const batch = imageUrls.slice(i, i + batchSize);
+      await Promise.all(
+        batch.map((url) => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.src = url;
+            img.onload = resolve;
+            img.onerror = resolve;
+          });
+        })
+      );
+    }
+  };
+
     useEffect(() => {
       const preloadImages = (imageUrls) => {
         const promises = imageUrls.map((url) => {
           return new Promise((resolve) => {
             const img = new Image();
+            img.decoding = "async";
             img.src = url;
             img.onload = resolve;
             img.onerror = resolve; // 忽略加载失败的情况
@@ -50,11 +67,12 @@ const World = () => {
       };
   
       const allImages = [...images];
-      preloadImages(allImages).then(() => {
+      preloadBatch(allImages).then(() => {
         setIsImagesLoaded(true); // 所有图片加载完成
         console.log('所有图片预加载完成');
       });
     }, []);
+  
 
   useEffect(() => {
     const fetchUserData = async () => {
