@@ -59,7 +59,6 @@ const World = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem("jwtToken");
-      console.log(token);
       try {
         const response = await axios.get(`${apiUrl}/get-cookie`, {
           headers: {

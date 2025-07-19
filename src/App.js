@@ -127,11 +127,14 @@ function App() {
     const [userName, setUserName] = useState(null);
     useEffect(() => {
         const fetchUserData = async () => {
+            const token = localStorage.getItem("jwtToken");
             try {
-                const response = await axios.get(`${apiUrl}/get-cookie`, {
-                    withCredentials: true,
-                });
-                setUserId(response.data.id);
+              const response = await axios.get(`${apiUrl}/get-cookie`, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+                setUserId(response.data.userId);
             } catch (error) {
                 console.error("获取 Cookie 失败:", error);
             }

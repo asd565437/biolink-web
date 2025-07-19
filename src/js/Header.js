@@ -40,7 +40,7 @@ const Header = ({ images }) => {
   // 清除 Cookie
   const clearCookie = async () => {
     try {
-      await axios.get(`${apiUrl}/clear_cookie`, { withCredentials: true });
+      await axios.get(`${apiUrl}/clear_cookie`);
       console.log("Cookie 清除成功");
       setIsLoggedIn(false);
     } catch (error) {
@@ -66,8 +66,13 @@ const Header = ({ images }) => {
 
       // 直接調用 fetchUserData，避免依賴 isLoggedIn 的更新
       const fetchUserData = async () => {
+        const token = localStorage.getItem("jwtToken");
         try {
-          const response = await axios.get(`${apiUrl}/get-cookie`, { withCredentials: true });
+          const response = await axios.get(`${apiUrl}/get-cookie`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           if (response.data.userName) setUserName(response.data.userName);
           else setUserName(null);
         } catch (error) {
