@@ -57,10 +57,10 @@ function Login() {
                 alert("登入成功！");
                 setIsLogin(true);
                 // 設置 Cookie
-                await axios.post(`${apiUrl}/set-cookie`, {
+                const cookieRes = await axios.post(`${apiUrl}/set-cookie`, {
                     account: user.email,
                 });
-                const token = response.data.token;
+                const token = cookieRes.data.token;
                 localStorage.setItem("jwtToken", token);
                 navigate('/world', { state: { popup: true } });
             } else {
@@ -90,9 +90,11 @@ function Login() {
                 alert("登入成功!");
                 setIsLogin(true);
                 // 設置 Cookie
-                await axios.post(`${apiUrl}/set-cookie`, {
-                    account: account
-                }, { withCredentials: true });
+                const cookieRes = await axios.post(`${apiUrl}/set-cookie`, {
+                    account: account,
+                });
+                const token = cookieRes.data.token;
+                localStorage.setItem("jwtToken", token);
                 navigate('/world', { state: { popup: true } });
             } else {
                 console.error("登入失敗：", response.data.error);

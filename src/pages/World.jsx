@@ -28,7 +28,6 @@ function renderWithEmojis(text) {
 }
 
 const World = () => {
-  Cookies.set('token', '123abc', { expires: 7 }); // 有效期 7 天
   
   const [timestamp] = useState(new Date().getTime());
   const [hoveredImage, setHoveredImage] = useState(null);
