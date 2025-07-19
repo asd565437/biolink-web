@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext ,useRef } from "react";
 import axios from "axios";
-import Cookies from 'js-cookie';
 import "../css/World.css";
 import Header from "../js/Header";
 import FunctionMenu from '../js/FunctionMenu';
@@ -33,7 +32,7 @@ const World = () => {
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showIdPopup, setShowIdPopup] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
-    const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
+  const [isImagesLoaded, setIsImagesLoaded] = useState(false); // 图片加载状态
   const location = useLocation();
   const popup = location.state?.popup || false; // 如果沒有數據則給預設值
 
@@ -67,9 +66,9 @@ const World = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("获取到的用户 ID:", response.data.id);
-        if (response.data.id)
-          setUserId(response.data.id);
+        console.log("获取到的用户 ID:", response.data.userId);
+        if (response.data.userId)
+          setUserId(response.data.userId);
         else
           setUserId(null);
         if (popup)
