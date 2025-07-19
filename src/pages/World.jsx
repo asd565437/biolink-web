@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext ,useRef } from "react";
 import axios from "axios";
+import Cookies from 'js-cookie';
 import "../css/World.css";
 import Header from "../js/Header";
 import FunctionMenu from '../js/FunctionMenu';
@@ -27,6 +28,8 @@ function renderWithEmojis(text) {
 }
 
 const World = () => {
+  Cookies.set('token', '123abc', { expires: 7 }); // 有效期 7 天
+  
   const [timestamp] = useState(new Date().getTime());
   const [hoveredImage, setHoveredImage] = useState(null);
   const [showIdPopup, setShowIdPopup] = useState(false);
@@ -57,9 +60,12 @@ const World = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      const token = localStorage.getItem("jwtToken");
       try {
         const response = await axios.get(`${apiUrl}/get-cookie`, {
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
         console.log("获取到的用户 ID:", response.data.id);
         if (response.data.id)

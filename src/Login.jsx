@@ -59,7 +59,9 @@ function Login() {
                 // 設置 Cookie
                 await axios.post(`${apiUrl}/set-cookie`, {
                     account: user.email,
-                }, { withCredentials: true });
+                });
+                const token = response.data.token;
+                localStorage.setItem("jwtToken", token);
                 navigate('/world', { state: { popup: true } });
             } else {
                 console.error("登入失敗：", response.data.error);
