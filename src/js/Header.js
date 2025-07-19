@@ -24,7 +24,12 @@ const Header = ({ images }) => {
   // 檢查後端是否有有效的 userAccount Cookie
   const checkAuthStatus = async () => {
     try {
-      const res = await axios.get(`${apiUrl}/check_auth`, { withCredentials: true });
+      const token = localStorage.getItem("jwtToken");
+      const res = await axios.get(`${apiUrl}/check_auth`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return res.data.isAuthenticated; // 假設後端返回 { isAuthenticated: true/false }
     } catch (error) {
       console.error("檢查登入狀態失敗：", error);
