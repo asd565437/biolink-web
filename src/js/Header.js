@@ -40,8 +40,7 @@ const Header = ({ images }) => {
   // 清除 Cookie
   const clearCookie = async () => {
     try {
-      await axios.get(`${apiUrl}/clear_cookie`);
-      console.log("Cookie 清除成功");
+      localStorage.removeItem("jwtToken"); // 或 sessionStorage
       setIsLoggedIn(false);
     } catch (error) {
       console.error("清空 Cookie 失敗：", error);
