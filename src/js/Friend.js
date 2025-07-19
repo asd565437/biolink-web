@@ -23,10 +23,15 @@ const Friend = () => {
   const handleWorld = () => navigate('/world');
   useEffect(() => {
     const fetchUserData = async () => {
+      const token = localStorage.getItem("jwtToken");
       try {
-        const response = await axios.get(`${apiUrl}/get-cookie`, { withCredentials: true });
-        if (response.data?.id) {
-          setUserId(response.data.id);
+        const response = await axios.get(`${apiUrl}/get-cookie`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.data?.userId) {
+          setUserId(response.data.userId);
         } else {
           console.error("未获取到用户 ID");
           alert("你還沒登入！！")
