@@ -184,13 +184,12 @@
     /* padding-bottom: 120px; 避免底部被擋 */
   }
 
-  .showcase {
+  /* .showcase {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* ✅ 從上往下排 */
-    /* padding-top: 60px;           ✅ 加點 padding */
-  }
+    justify-content: flex-start; /* ✅ 從上往下排 
+  } */
 
   .row-showcase {
     flex-direction: column;
