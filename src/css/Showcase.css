@@ -177,7 +177,7 @@
   } */
   .showcase-content {
     /* max-height: none; */
-    padding-top: 300px;
+    padding-top: 400px;
     /* padding-bottom: 80px; */
     height: auto;
     overflow-y: scroll; /* ✅ 小螢幕可以垂直滾動 */
