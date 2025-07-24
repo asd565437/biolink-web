@@ -1,6 +1,6 @@
 import "../css/Header.css";
 import { useNavigate, useLocation } from 'react-router-dom';
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { UserContext } from "../App"; // 引入全域 Socket 上下文
 import axios from "axios";
 
@@ -116,6 +116,24 @@ const Header = ({ images }) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
+  const menuRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isOpen && // 只有在 menu 打開時才檢查
+        menuRef.current &&
+        !menuRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <>
       <header className="header">
@@ -180,9 +198,8 @@ const Header = ({ images }) => {
 
                   <h5
                     // className="dropdown_element fontType dropdown_line"
-                    className={`dropdown_element fontType dropdown_line ${
-                      currentPath === '/world' ? 'neonText' : ''
-                    }`}                    
+                    className={`dropdown_element fontType dropdown_line ${currentPath === '/world' ? 'neonText' : ''
+                      }`}
                     onClick={() => handleNavigate(0)}
                   >
                     菌種的世界
@@ -190,9 +207,8 @@ const Header = ({ images }) => {
 
                   <h5
                     // className="dropdown_element fontType dropdown_line"
-                    className={`dropdown_element fontType dropdown_line ${
-                      ['/wall', '/friend'].includes(currentPath) ? 'neonText' : ''
-                    }`}
+                    className={`dropdown_element fontType dropdown_line ${['/wall', '/friend'].includes(currentPath) ? 'neonText' : ''
+                      }`}
                     onClick={() => handleNavigate(1)}
                   >
                     展示牆
@@ -200,9 +216,8 @@ const Header = ({ images }) => {
 
                   <h5
                     // className="dropdown_element fontType dropdown_line"
-                    className={`dropdown_element fontType dropdown_line ${
-                      ['/connect', '/confirm'].includes(currentPath) ? 'neonText' : ''
-                    }`} 
+                    className={`dropdown_element fontType dropdown_line ${['/connect', '/confirm'].includes(currentPath) ? 'neonText' : ''
+                      }`}
                     onClick={() => handleNavigate(2)}
                   >
                     菌種培養區
@@ -244,7 +259,7 @@ const Header = ({ images }) => {
       </header>
       {!show && isOpen && (
         <div
-          className="menu w-16 h-full text-white shadow-lg p-4"
+          className="menu w-16 h-full text-white shadow-lg p-4" ref={menuRef}
         >
           <ul className="icon_table">
             <li className="mb-2">

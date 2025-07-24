@@ -61,43 +61,145 @@
 
 .strain_name_box {
     position: fixed;
-    top: 22%;
-    left: 30%;
-    width: 40%;
-    height: auto;
-    z-index: 1;
+    z-index: 1999;
     /* 設定較低層級 */
 }
 
 .strainName-input {
-    position: absolute;
-    top: 45%;
-    /* 根據需要微調 */
-    left: 50%;
+    position: fixed;
     transform: translate(-50%, -50%);
-    z-index: 2;
-    width: 28%;
-    font-size: 24px;
+    z-index: 2000;
     color: white;
     background: transparent;
     border: none;
     outline: none;
     text-align: center;
     border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+}.strain_name_finish {
+    position: fixed;
+    transform: translate(-50%, 0);
+    z-index: 2001;
 }
-
 .strainName-input:focus {
     border-bottom: 4px solid rgba(255, 255, 255, 1);
     /* box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5); */
 }
 
-.strain_name_finish {
-    position: absolute;
-    top: 60%;
-    left: 50.5%;
-    transform: translate(-50%, 0);
-    width: 12%;
-    z-index: 3;
-    cursor: pointer;
-}
 
+@media (min-width: 0px) {
+    .strain_name_box {
+        top: 23%;
+        left: 11%;
+        width: 77%;
+    }
+    .strainName-input {
+        top: 39%;
+        /* 根據需要微調 */
+        left: 50%;
+        width: 45%;
+        font-size: 27px;
+    }
+    .strain_name_finish {
+        top: 50%;
+        left: 50.5%;
+        width: 24%;
+    }
+  }
+  
+  @media (min-width: 470px) {
+    .strain_name_box {
+        top: 23%;
+        left: 11%;
+        width: 77%;
+    }
+    .strainName-input {
+        top: 39%;
+        /* 根據需要微調 */
+        left: 50%;
+        width: 45%;
+        font-size: 27px;
+    }
+    .strain_name_finish {
+        top: 50%;
+        left: 50.5%;
+        width: 24%;
+    }
+  }
+  
+  @media (min-width: 600px) {
+    .strain_name_box {
+        top: 22%;
+        left: 15%;
+        width: 70%;
+    }
+    .strainName-input {
+        top: 41%;
+        /* 根據需要微調 */
+        left: 50%;
+        width: 42%;
+        font-size: 27px;
+    }
+    .strain_name_finish {
+        top: 53%;
+        left: 50.5%;
+        width: 22%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .strain_name_box {
+        top: 22%;
+        left: 21%;
+        width: 57%;
+    }
+    .strainName-input {
+        top: 43%;
+        /* 根據需要微調 */
+        left: 50%;
+        width: 38%;
+        font-size: 27px;
+    }
+    .strain_name_finish {
+        top: 55%;
+        left: 50.5%;
+        width: 18%;
+    }
+  }
+  @media (min-width: 1000px) {
+    .strain_name_box {
+        top: 22%;
+        left: 25%;
+        width: 50%;
+    }
+    .strainName-input {
+        top: 45%;
+        /* 根據需要微調 */
+        left: 50%;
+        width: 28%;
+        font-size: 24px;
+    }
+    .strain_name_finish {
+        top: 57%;
+        left: 50.5%;
+        width: 15%;
+    }
+  }
+  @media (min-width: 1200px) {
+    .strain_name_box {
+        top: 22%;
+        left: 30%;
+        width: 40%;
+    }
+    .strainName-input {
+        top: 45%;
+        /* 根據需要微調 */
+        left: 50%;
+        width: 28%;
+        font-size: 24px;
+    }
+    .strain_name_finish {
+        top: 60%;
+        left: 50.5%;
+        width: 12%;
+    }
+  }

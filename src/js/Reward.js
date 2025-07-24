@@ -9,6 +9,7 @@ import strain_name_finish from '../reward/strain_name_finish.png';
 import { SocketContext, UserContext } from "../App"; // 引入全域 Socket 上下文
 
 const Reward = () => {
+  const [isComposing, setIsComposing] = useState(false); // 是否在輸入中文
   const [timestamp] = useState(new Date().getTime());
   const navigate = useNavigate();
   const userId = useContext(UserContext);
@@ -19,7 +20,7 @@ const Reward = () => {
   const location = useLocation();
   const imageURL = location.state?.URL || false; // 如果沒有數據則給預設值
   const bio_id = location.state?.bio_id || false; // 如果沒有數據則給預設值
-  const [isSubmitted, setIsSubmitted] = useState(false); 
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // const handleBack = () => {
   //   setShowPopup(true);
@@ -58,7 +59,10 @@ const Reward = () => {
 
   const handleChange = (e) => {
     const newText = e.target.value;
-    socket.emit("editText", newText);
+    setStrainName(newText);
+    if (!isComposing) {
+      socket.emit("editText", newText);
+    }
   };
 
   const handleNameSubmit = () => {
@@ -71,7 +75,7 @@ const Reward = () => {
       setIsSubmitted(true); // 設定已提交
       alert("請等待另一名玩家確認");
     }
-    
+
     socket.emit("submit_name", { userId: userId.userId, bio_id, strainName });
   };
 
@@ -90,10 +94,22 @@ const Reward = () => {
               placeholder="輸入菌種名稱"
               value={strainName}
               onChange={handleChange}
+              onCompositionStart={() => setIsComposing(true)}  // 開始輸入中文
+              onCompositionEnd={(e) => {
+                setIsComposing(false);
+                socket.emit("editText", e.target.value);       // 中文完成後再送出
+              }}
               className="strainName-input fontType"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') handleNameSubmit();
-            }}
+              }}
+            />
+            <input
+              type="text"
+              placeholder="輸入菌種名稱"
+              value={strainName}
+              onChange={handleChange}
+              className="strainName-input fontType"
             />
             <img src={strain_name_finish} alt="strain_name_finish" className="strain_name_finish" onClick={handleNameSubmit} />
           </div>
