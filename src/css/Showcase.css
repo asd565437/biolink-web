@@ -212,6 +212,7 @@
 
 .bioBorder-red{
   /* border: greenyellow 1px solid; */
+  /**/
   border-radius: 100%;
   background-color: black;
   box-shadow: 0 0 10px #ff9faf, 0 0 20px 5px #ff9faf;
