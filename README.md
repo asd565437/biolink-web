@@ -77,4 +77,5 @@ npm start
 
 本專案採前後端分離架構。
 
-Backend：
+Backend： 
+https://github.com/asd565437/biolink-service
