@@ -1,62 +1,80 @@
-# BioLink
-
-> 一個結合互動體驗、社交配對與即時通訊的全端網站。
+# BioLink Frontend
 
 ## 專案介紹
 
-BioLink為大學畢業專題，透過互動式體驗讓使用者認識彼此，並結合好友系統、即時通訊及雲端資料管理，打造完整的線上互動平台。
+BioLink Frontend 為 BioLink 平台的前端應用程式，採用 React 開發，負責使用者介面、互動流程及前後端資料串接，提供流暢的使用者體驗。
 
-## 功能特色
+## 功能
 
-- 使用者註冊與登入
-- 好友系統
+- 使用者登入 / 註冊
+- 個人資料管理
+- 好友互動
 - 即時互動功能
-- 問答系統
-- 圖片上傳
-- 雲端資料同步
-- 響應式網頁介面
+- 響應式介面
 
-## 使用技術
+---
 
-### 前端
+## 技術
+
+### Frontend
+
 - React
 - React Router
 - Axios
 
-### 後端
-- Node.js
-- Express
+### UI
 
-### 資料庫
-- Firebase Firestore
+- HTML5
+- CSS3
+- JavaScript
 
-### 即時通訊
-- Socket.IO
+### API
 
-### 身分驗證
-- JWT
-- bcrypt
+- RESTful API 串接
 
-### 雲端服務
-- AWS S3
+---
 
 ## 我的負責內容
 
 - React 前端介面開發
-- Node.js API 開發
-- Firebase 資料庫設計
-- Socket.IO 即時互動功能
-- AWS S3 圖片上傳
-- 前後端整合
-- 系統部署
+- 元件(Component)設計
+- 頁面路由管理
+- 前後端 API 串接
+- 使用者互動流程設計
+- Socket.IO 前端整合
+
+---
+
+## 專案結構
+
+```
+src/
+ ├── components/
+ ├── pages/
+ ├── assets/
+ ├── hooks/
+ ├── utils/
+ └── ...
+```
+
+---
 
 ## 系統畫面
 
 
+---
 
-## Demo
+## 安裝方式
 
-網站：
-影片：
+```bash
+npm install
+npm start
+```
 
-## 專案架構
+---
+
+## Backend Repository
+
+本專案採前後端分離架構。
+
+Backend：
